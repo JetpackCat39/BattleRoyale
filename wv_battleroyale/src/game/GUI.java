@@ -3,6 +3,7 @@ package game;
 import java.awt.*;
 
 public class GUI {
+	
 	public static void createButton(int x, int y, int height, int width, Color color) {
 		
 	}
