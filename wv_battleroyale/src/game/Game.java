@@ -3,7 +3,6 @@ package game;
 import java.awt.*;
 import java.awt.image.*;
 import javax.swing.*;
-import Menu.MainMenu;
 
 import java.io.IOException;
 
@@ -26,9 +25,8 @@ public class Game extends Canvas implements Runnable
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private static BufferedImage background = null;
 
-	// Game pieces
-	private static MainMenu menu;
-
+	private MainMenu menu;
+	
 	enum STATE
 	{
 		MENU,
@@ -51,7 +49,7 @@ public class Game extends Canvas implements Runnable
 		}
 
 		this.addMouseListener(new MouseInput());
-		menu = new MainMenu(background);
+		menu = new MainMenu();
 	}
 
 	private synchronized void start()
