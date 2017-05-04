@@ -1,6 +1,6 @@
 package game;
 
-import java.awt.Cursor;
+//import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -25,28 +25,15 @@ public class MouseInput implements MouseListener
 		
 		while (Game.State == Game.STATE.MENU)
 		{
-			// Play button
 			if (MainMenu.play.contains(myX, myY))
 			{
 				Game.State = Game.STATE.GAME;
 			}
-			// Help button
-			if (MainMenu.help.contains(myX, myY))
-			{
-				Game.State = Game.STATE.HELP;
-			}
-			// Controls button
 			if (MainMenu.controls.contains(myX, myY))
 			{
 				Game.State = Game.STATE.CONTROLS;
 			}
-			// About button
-			if (MainMenu.about.contains(myX, myY))
-			{
-				Game.State = Game.STATE.ABOUT;
-			}
-			// Quit button
-			if (MainMenu.quit.contains(myX, myY))
+			if (MainMenu.exit.contains(myX, myY))
 			{
 				System.exit(1);
 			}

@@ -49,7 +49,6 @@ public class Game extends Canvas implements Runnable
 		}
 
 		this.addMouseListener(new MouseInput());
-		menu = new MainMenu();
 	}
 
 	private synchronized void start()
@@ -133,9 +132,9 @@ public class Game extends Canvas implements Runnable
 		}
 
 		Graphics g = strat.getDrawGraphics();
+		menu = new MainMenu(g, background);
 		// This is where we draw shit /////////////
-		g.drawImage(image, 0, 0, getWidth(), getHeight(), this); //test
-		menu.render(g);
+//		menu.render(g);
 		///////////////////////////////////////////
 		g.dispose();
 		strat.show();
