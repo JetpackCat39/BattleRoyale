@@ -133,6 +133,7 @@ public class Game extends Canvas implements Runnable
 
 		Graphics g = strat.getDrawGraphics();
 		menu = new MainMenu(g, background);
+		menu.initialize();
 		// This is where we draw shit /////////////
 //		menu.render(g);
 		///////////////////////////////////////////
