@@ -13,7 +13,6 @@ public class GUIUtils {
 	
 	public RoundRectangle2D createButton(int x, int y, int width, int height) {
 		RoundRectangle2D rect = new RoundRectangle2D.Double(x - (width/2), y - (width/2), width, height, 50, 50);
-		
 		return rect;
 	}
 	
@@ -40,7 +39,7 @@ public class GUIUtils {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.draw(rect);
 		g2d.fill(rect);
-		drawText((int) rect.getX() - (text.length() * 11), (int) rect.getY() - ((int) rect.getHeight() * 145 / 100), tColor, text, fontSize, g);
+		drawText((int) rect.getX() + (140 / (text.length() - 2)), (int) rect.getY() + ((int) rect.getHeight() * 7 / 9), tColor, text, fontSize, g);
 	}
 	
 }
