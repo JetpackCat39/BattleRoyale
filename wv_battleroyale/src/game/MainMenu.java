@@ -17,7 +17,7 @@ public class MainMenu {
 	
 	public MainMenu(Graphics newG, BufferedImage background) {
 		g = newG;
-		drawBG(background);
+		drawImg(background, 0, 0, width, height);
 		createText(width / 9, height * 2 / 9, Color.white, "WESTVIEW BATTLE ROYALE",  72);
 		play = createButton(width / 3, height * 3 / 5, 220, 50, Color.white, Color.decode("#4d4d4d"), "PLAY", 32);
 		controls = createButton(width / 3, height * 4 / 5, 220, 50, Color.white, Color.decode("#4d4d4d"), "CONTROLS", 32);
@@ -46,8 +46,8 @@ public class MainMenu {
 		return rect;
 	}
 	
-	public void drawBG(BufferedImage bg) {
+	public void drawImg(BufferedImage bg, int x, int y, int w, int h) {
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawImage(bg, 0, 0, width, height, null);
+		g2d.drawImage(bg, x, y, w, h, null);
 	}
 }
