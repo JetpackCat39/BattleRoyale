@@ -14,9 +14,9 @@ public class MainGame extends Screen {
 	}
 	
 	public void draw(Graphics g) {
-		gui = new GUIUtils(g);
-		super.draw();
-		gui.drawImg(p1, 100, height - 300, p1.getWidth(), p1.getHeight());
-		gui.drawImg(p2, width - 200, height - 300, p2.getWidth(), p2.getHeight());
+		gui = new GUIUtils();
+		super.draw(g);
+		gui.drawImg(p1, 100, height - 300, p1.getWidth(), p1.getHeight(), g);
+		gui.drawImg(p2, width - 200, height - 300, p2.getWidth(), p2.getHeight(), g);
 	}
 }
