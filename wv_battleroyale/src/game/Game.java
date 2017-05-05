@@ -29,11 +29,9 @@ public class Game extends Canvas implements Runnable
 	
 	enum STATE
 	{
-		MENU,
-		HELP,
+		GAME,
 		CONTROLS,
-		ABOUT,
-		GAME
+		MENU
 	};
 	public static STATE State = STATE.MENU;
 
@@ -42,7 +40,7 @@ public class Game extends Canvas implements Runnable
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try
 		{
-			background = loader.loadImage("background.jpg");
+			background = loader.loadImage("menuBG.jpg");
 		} catch(IOException e)
 		{
 			e.printStackTrace();
@@ -133,7 +131,7 @@ public class Game extends Canvas implements Runnable
 
 		Graphics g = strat.getDrawGraphics();
 		menu = new MainMenu(g, background);
-		menu.initialize();
+		menu.draw();
 		// This is where we draw shit /////////////
 //		menu.render(g);
 		///////////////////////////////////////////

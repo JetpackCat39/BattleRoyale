@@ -23,7 +23,7 @@ public class MainMenu {
 		bg = background;
 	}
 	
-	public void initialize() {
+	public void draw() {
 		gui.drawImg(bg, 0, 0, width, height);
 		gui.createText(width / 9, height * 2 / 9, Color.white, "WESTVIEW BATTLE ROYALE",  72);
 		play = gui.createButton(width / 3, height * 3 / 5, 220, 50, Color.white, Color.decode("#4d4d4d"), "PLAY", 32);
