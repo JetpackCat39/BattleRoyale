@@ -6,6 +6,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 
+import game.Game.*;
+
 public class MouseInput implements MouseListener
 {
 
@@ -23,15 +25,15 @@ public class MouseInput implements MouseListener
 		int myX = e.getX();
 		int myY = e.getY();
 		
-		while (Game.State == Game.STATE.MENU)
+		while (Game.State == STATE.MENU)
 		{
 			if (MainMenu.play.contains(myX, myY))
 			{
-				Game.State = Game.STATE.GAME;
+				Game.State = STATE.GAME;
 			}
 			if (MainMenu.controls.contains(myX, myY))
 			{
-				Game.State = Game.STATE.CONTROLS;
+				Game.State = STATE.CONTROLS;
 			}
 			if (MainMenu.exit.contains(myX, myY))
 			{
