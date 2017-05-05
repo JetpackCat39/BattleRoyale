@@ -15,12 +15,8 @@ public class GUIUtils {
 		g = newG;
 	}
 	
-	public RoundRectangle2D createButton(int x, int y, int width, int height, Color color) {
+	public RoundRectangle2D createButton(int x, int y, int width, int height) {
 		RoundRectangle2D rect = new RoundRectangle2D.Double(x - (width/2), y - (width/2), width, height, 50, 50);
-		g.setColor(color);
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.draw(rect);
-		g2d.fill(rect);
 		
 		return rect;
 	}
@@ -31,15 +27,24 @@ public class GUIUtils {
 		g.drawString(text, x, y);
 	}
 	
-	public RoundRectangle2D createButton(int x, int y, int width, int height, Color color, Color tColor,String text, int fontSize) {
-		RoundRectangle2D rect = createButton(x, y, width, height, color);
-		createText(x - (text.length() * 11), y - (height * 145 / 100), tColor, text, fontSize);
-		return rect;
-	}
-	
 	public void drawImg(BufferedImage bg, int x, int y, int w, int h) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(bg, x, y, w, h, null);
+	}
+	
+	public void drawButton(RoundRectangle2D rect, Color color) {
+		g.setColor(color);
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.draw(rect);
+		g2d.fill(rect);
+	}
+	
+	public void drawButton(RoundRectangle2D rect, Color color, Color tColor,String text, int fontSize) {
+		g.setColor(color);
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.draw(rect);
+		g2d.fill(rect);
+		createText((int) rect.getX() - (text.length() * 11), (int) rect.getY() - ((int) rect.getHeight() * 145 / 100), tColor, text, fontSize);
 	}
 	
 }

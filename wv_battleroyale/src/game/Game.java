@@ -22,7 +22,7 @@ public class Game extends Canvas implements Runnable
 	private Thread thread;
 
 	// buffer the window to reduce lag
-	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+	//private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private static BufferedImage background = null;
 	private static BufferedImage tammy = null;
 
@@ -42,6 +42,8 @@ public class Game extends Canvas implements Runnable
 	private void initialize()
 	{
 		BufferedImageLoader loader = new BufferedImageLoader();
+		game = new MainGame(background, tammy, tammy);
+		menu = new MainMenu(background);
 		try
 		{
 			background = loader.loadImage("menuBG.jpg");
@@ -51,7 +53,7 @@ public class Game extends Canvas implements Runnable
 			e.printStackTrace();
 		}
 
-		this.addMouseListener(new MouseInput());
+		this.addMouseListener(new MouseInput(menu));
 	}
 
 	private synchronized void start()
@@ -102,6 +104,7 @@ public class Game extends Canvas implements Runnable
 				updates++; 
 				delta--;
 			}
+			
 			render();
 			frames++;
 
@@ -118,11 +121,7 @@ public class Game extends Canvas implements Runnable
 
 	private void tick()
 	{
-		if (State == STATE.GAME)
-		{
-			game = new MainGame(g, background, tammy, tammy);
-			game.draw();
-		}
+		
 	}
 
 	private void render()
@@ -136,8 +135,13 @@ public class Game extends Canvas implements Runnable
 		}
 
 		g = strat.getDrawGraphics();
-		menu = new MainMenu(g, background);
-		menu.draw();
+		if (State == STATE.MENU) {
+			menu.draw(g);
+		}
+		if (State == STATE.GAME)
+		{
+			game.draw(g);
+		}
 		// This is where we draw shit /////////////
 //		menu.render(g);
 		///////////////////////////////////////////

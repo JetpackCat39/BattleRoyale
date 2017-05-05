@@ -4,14 +4,17 @@ package game;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JFrame;
-
 import game.Game.*;
 
 public class MouseInput implements MouseListener
 {
 
-	JFrame myFrame;
+	MainMenu menu;
+	
+	public MouseInput(MainMenu m)
+	{
+		menu = m;
+	}
 	
 	public void mouseClicked(MouseEvent e) 
 	{
@@ -25,17 +28,17 @@ public class MouseInput implements MouseListener
 		int myX = e.getX();
 		int myY = e.getY();
 		
-		while (Game.State == STATE.MENU)
+		if (Game.State == STATE.MENU)
 		{
-			if (MainMenu.play.contains(myX, myY))
+			if (menu.getPlay().contains(myX, myY))
 			{
 				Game.State = STATE.GAME;
 			}
-			if (MainMenu.controls.contains(myX, myY))
+			if (menu.getControls().contains(myX, myY))
 			{
 				Game.State = STATE.CONTROLS;
 			}
-			if (MainMenu.exit.contains(myX, myY))
+			if (menu.getExit().contains(myX, myY))
 			{
 				System.exit(1);
 			}
