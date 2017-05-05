@@ -24,8 +24,12 @@ public class Game extends Canvas implements Runnable
 	// buffer the window to reduce lag
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private static BufferedImage background = null;
+	private static BufferedImage tammy = null;
 
+	private Graphics g;
+	
 	private MainMenu menu;
+	private MainGame game;
 	
 	enum STATE
 	{
@@ -41,6 +45,7 @@ public class Game extends Canvas implements Runnable
 		try
 		{
 			background = loader.loadImage("menuBG.jpg");
+			tammy = loader.loadImage("tammy.png");
 		} catch(IOException e)
 		{
 			e.printStackTrace();
@@ -115,7 +120,8 @@ public class Game extends Canvas implements Runnable
 	{
 		if (State == STATE.GAME)
 		{
-
+			game = new MainGame(g, background, tammy, tammy);
+			game.draw();
 		}
 	}
 
@@ -129,7 +135,7 @@ public class Game extends Canvas implements Runnable
 			return;
 		}
 
-		Graphics g = strat.getDrawGraphics();
+		g = strat.getDrawGraphics();
 		menu = new MainMenu(g, background);
 		menu.draw();
 		// This is where we draw shit /////////////
