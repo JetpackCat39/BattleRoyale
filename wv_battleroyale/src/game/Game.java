@@ -23,7 +23,9 @@ public class Game extends Canvas implements Runnable
 
 	// buffer the window to reduce lag
 	//private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-	private static BufferedImage background = null;
+	private static BufferedImage menuBG = null;
+	private static BufferedImage arena1 = null;
+	private static BufferedImage arena2 = null;
 	private static BufferedImage tammy = null;
 
 	private Graphics g;
@@ -42,11 +44,17 @@ public class Game extends Canvas implements Runnable
 	private void initialize()
 	{
 		BufferedImageLoader loader = new BufferedImageLoader();
-		game = new MainGame(background, tammy, tammy);
-		menu = new MainMenu(background);
+		menu = new MainMenu(menuBG);
+		if(Math.random() > .5) {
+			game = new MainGame(arena1, tammy, tammy);
+		} else {
+			game = new MainGame(arena2, tammy, tammy);
+		}
 		try
 		{
-			background = loader.loadImage("menuBG.jpg");
+			menuBG = loader.loadImage("menuBG.jpg");
+			arena1 = loader.loadImage("arena1.jpg");
+			arena2 = loader.loadImage("arena2.jpg");
 			tammy = loader.loadImage("tammy.png");
 		} catch(IOException e)
 		{
@@ -121,7 +129,6 @@ public class Game extends Canvas implements Runnable
 
 	private void tick()
 	{
-		
 	}
 
 	private void render()
