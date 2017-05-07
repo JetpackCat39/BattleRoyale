@@ -14,7 +14,6 @@ public class Game extends Canvas implements Runnable
 	private static final long serialVersionUID = 1L;
 	public static final int HEIGHT = 720;
 	public static final int WIDTH = HEIGHT * 16 / 9;
-	public static final int SCALE = 1;
 	public final String TITLE = "Westview Battle Royale";
 
 	// variables to make the game work
@@ -27,6 +26,8 @@ public class Game extends Canvas implements Runnable
 	private static BufferedImage arena1 = null;
 	private static BufferedImage arena2 = null;
 	private static BufferedImage tammy = null;
+	
+	private Fighter p1, p2;
 
 	private Graphics g;
 	
@@ -44,12 +45,6 @@ public class Game extends Canvas implements Runnable
 	private void initialize()
 	{
 		BufferedImageLoader loader = new BufferedImageLoader();
-		menu = new MainMenu(menuBG);
-		if(Math.random() > .5) {
-			game = new MainGame(arena1, tammy, tammy);
-		} else {
-			game = new MainGame(arena2, tammy, tammy);
-		}
 		try
 		{
 			menuBG = loader.loadImage("menuBG.jpg");
@@ -60,8 +55,20 @@ public class Game extends Canvas implements Runnable
 		{
 			e.printStackTrace();
 		}
+		
+		menu = new MainMenu(menuBG);
+		p1 = new Fighter(300, tammy.getHeight() + 90);
+		p2 = new Fighter(WIDTH - 300 - tammy.getWidth(), tammy.getHeight() + 90);
+		
+		if(Math.random() > .5) {
+			game = new MainGame(arena1, p1, p2);
+		} else {
+			game = new MainGame(arena2, p1, p2);
+		}
 
 		this.addMouseListener(new MouseInput(menu));
+		this.addKeyListener(new KeyInputP1(p1));
+		this.addKeyListener(new KeyInputP2(p2));
 	}
 
 	private synchronized void start()
@@ -148,6 +155,8 @@ public class Game extends Canvas implements Runnable
 		if (State == STATE.GAME)
 		{
 			game.draw(g);
+			p1.draw(g);
+			p2.draw(g);
 		}
 		// This is where we draw shit /////////////
 //		menu.render(g);
@@ -159,9 +168,9 @@ public class Game extends Canvas implements Runnable
 	public static void main(String  args[])
 	{
 		Game game = new Game();
-		game.setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
-		game.setMaximumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
-		game.setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+		game.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		game.setMaximumSize(new Dimension(WIDTH, HEIGHT));
+		game.setMinimumSize(new Dimension(WIDTH, HEIGHT));
 		game.initialize();
 		
 		JFrame frame = new JFrame(game.TITLE);
@@ -171,6 +180,7 @@ public class Game extends Canvas implements Runnable
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);	
+		frame.setFocusable(true);
 
 		game.start();
 	}
