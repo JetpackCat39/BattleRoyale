@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Fighter {
 	
-	private int x, y;
+	private int x, y, xSpeed;
 	BufferedImage tammy;
 	int height = Game.HEIGHT;
 	int width = Game.WIDTH;
@@ -23,12 +23,30 @@ public class Fighter {
 		}
 	}
 	
-	public void moveHoriz(int howMuch) {
-		x += howMuch;
+	public void incrementSpeed(int howMuch) {
+		int temp = xSpeed + howMuch;
+		if(temp > 10) {
+			temp = 10;
+		}
+		if(temp < -10) {
+			temp = -10;
+		}
+		xSpeed = temp;
+	}
+	public void setSpeed(int newSpeed) {
+		xSpeed = newSpeed;
+	}
+	
+	public void move() {
+		x += xSpeed;
 	}
 	
 	public int getX() {
 		return x;
+	}
+	
+	public int getSpeed() {
+		return xSpeed;
 	}
 	
 	public void draw(Graphics g) {

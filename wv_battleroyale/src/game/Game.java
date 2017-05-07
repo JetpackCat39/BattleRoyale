@@ -34,6 +34,9 @@ public class Game extends Canvas implements Runnable
 	private MainMenu menu;
 	private MainGame game;
 	
+	private KeyInputP1 input1;
+	private KeyInputP2 input2;
+	
 	enum STATE
 	{
 		GAME,
@@ -66,9 +69,12 @@ public class Game extends Canvas implements Runnable
 			game = new MainGame(arena2, p1, p2);
 		}
 
+		input1 = new KeyInputP1(p1);
+		input2 = new KeyInputP2(p2);
+		
 		this.addMouseListener(new MouseInput(menu));
-		this.addKeyListener(new KeyInputP1(p1));
-		this.addKeyListener(new KeyInputP2(p2));
+		this.addKeyListener(input1);
+		this.addKeyListener(input2);
 	}
 
 	private synchronized void start()
@@ -136,6 +142,10 @@ public class Game extends Canvas implements Runnable
 
 	private void tick()
 	{
+		p1.move();
+		p2.move();
+//		input1.timerDown();
+//		input2.timerDown();
 	}
 
 	private void render()
