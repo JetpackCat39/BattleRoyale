@@ -17,9 +17,11 @@ public class Fighter {
 	public Fighter(int newX, int newY) {
 		x = newX;
 		y = newY;
+		xSpeed = 0;
 		ySpeed= 0;
 		BASE = newY;
 		jumpCount = 0;
+		opponent = null;
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try {
 			image = loader.loadImage("tammy.png");
@@ -29,7 +31,7 @@ public class Fighter {
 		}
 	}
 	
-	public void incrementSpeed(int howMuch) {
+	public void incrementXSpeed(int howMuch) {
 		int temp = xSpeed + howMuch;
 		if(temp > 15) {
 			temp = 15;
@@ -39,8 +41,25 @@ public class Fighter {
 		}
 		xSpeed = temp;
 	}
-	public void setSpeed(int newSpeed) {
+	
+	public void incrementYSpeed(int howMuch)
+	{
+		int temp = xSpeed + howMuch;
+		if(temp > 15) {
+			temp = 15;
+		}
+		if(temp < -15) {
+			temp = -15;
+		}
+		ySpeed = temp;
+	}
+	public void setXSpeed(int newSpeed) {
 		xSpeed = newSpeed;
+	}
+	
+	public void setYSpeed(int newSpeed)
+	{
+		ySpeed = newSpeed;
 	}
 	
 	public void move() {
@@ -61,18 +80,62 @@ public class Fighter {
 			y = height;
 			ySpeed *= -1;
 		}
-//		if(x < (opponent.getX() + opponent.getWidth()) && getY() <= opponent.getY() + opponent.getHeight() && x > opponent.getX()) {
-//			x = opponent.getX() + opponent.getWidth();
-//		}
-//		if(x + getWidth() > opponent.getX() && getY() <= opponent.getY() + opponent.getHeight() && opponent.getX() > x) {
-//			x = opponent.getX() - opponent.getWidth();
-//		}
-//		if(getY() < opponent.getY() + opponent.getHeight() && x < opponent.getX() + opponent.getWidth() && x > opponent.getX() && getY() > opponent.getY()) {
-//			y = opponent.getY() + opponent.getHeight();
-//		}
-		if(x < opponent.getX() + opponent.getWidth() && x > opponent.getX()) {
-			
+		moveCollisionChecker();
+	}
+	
+	public void moveCollisionChecker()
+	{
+		if(compareXPosition() != 0)
+		{
+			if(compareYPosition() > 0)
+			{
+				ySpeed = 0;
+			}
+			else if(compareYPosition() < 0)
+			{
+				opponent.setYSpeed(0);
+			}
+			else if((y <= BASE + getHeight() && opponent.getY() <= BASE + opponent.getHeight()) || (y > BASE && opponent.getY() > BASE))
+			{
+				if(compareXPosition() > 0)
+				{
+					x = opponent.getX() + opponent.getWidth();
+				}
+				else
+				{
+					x = opponent.getX() - opponent.getWidth();
+				}
+			}
 		}
+	}
+	public int compareXPosition()
+	{
+		//if you're to the right of them and touching them
+		if(x < opponent.getX() + opponent.getWidth() && x > opponent.getX())
+		{
+			return 1;
+		}
+		//if you're to the left of them and touching them
+		else if(x + getWidth() > opponent.getX() && opponent.getX() > x)
+		{
+			return -1;
+		}
+		return 0;
+	}
+	
+	public int compareYPosition()
+	{
+		//if you're above them and touching them
+		if((y < opponent.getY() + opponent.getHeight()) && (y > (opponent.getY() + opponent.getHeight() - 5)))
+		{
+			return 1;
+		}
+		//if you're below them and touching them
+		else if((y + getHeight() > opponent.getY()) && (opponent.getY() > (y + getHeight() - 5)))
+		{
+			return -1;
+		}
+		return 0;
 	}
 	
 	public int getX() {
@@ -91,8 +154,13 @@ public class Fighter {
 		return image.getHeight();
 	}
 	
-	public int getSpeed() {
+	public int getXSpeed() {
 		return xSpeed;
+	}
+	
+	public int getYSpeed()
+	{
+		return ySpeed;
 	}
 	
 	public void jump() {
