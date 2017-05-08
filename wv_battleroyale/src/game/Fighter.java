@@ -31,11 +31,11 @@ public class Fighter {
 	
 	public void incrementSpeed(int howMuch) {
 		int temp = xSpeed + howMuch;
-		if(temp > 15) {
-			temp = 15;
+		if(temp > 20) {
+			temp = 20;
 		}
-		if(temp < -15) {
-			temp = -15;
+		if(temp < -20) {
+			temp = -20;
 		}
 		xSpeed = temp;
 	}
@@ -60,18 +60,6 @@ public class Fighter {
 		if(height - y < 0) {
 			y = height;
 			ySpeed *= -1;
-		}
-//		if(x < (opponent.getX() + opponent.getWidth()) && getY() <= opponent.getY() + opponent.getHeight() && x > opponent.getX()) {
-//			x = opponent.getX() + opponent.getWidth();
-//		}
-//		if(x + getWidth() > opponent.getX() && getY() <= opponent.getY() + opponent.getHeight() && opponent.getX() > x) {
-//			x = opponent.getX() - opponent.getWidth();
-//		}
-//		if(getY() < opponent.getY() + opponent.getHeight() && x < opponent.getX() + opponent.getWidth() && x > opponent.getX() && getY() > opponent.getY()) {
-//			y = opponent.getY() + opponent.getHeight();
-//		}
-		if(x < opponent.getX() + opponent.getWidth() && x > opponent.getX()) {
-			
 		}
 	}
 	
