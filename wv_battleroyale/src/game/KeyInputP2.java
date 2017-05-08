@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 public class KeyInputP2 extends KeyInput {
 
 	public KeyInputP2(Fighter player) {
-		super(player, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT);
+		super(player, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP);
 	}
 
 }
