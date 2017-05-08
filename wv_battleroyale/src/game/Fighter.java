@@ -7,11 +7,12 @@ import java.io.IOException;
 public class Fighter {
 	
 	private int x, y, xSpeed, ySpeed;
-	private BufferedImage tammy;
+	private BufferedImage image;
 	private int height = Game.HEIGHT;
 	private int width = Game.WIDTH;
 	private final int BASE;
 	private int jumpCount;
+	private Fighter opponent;
 	
 	public Fighter(int newX, int newY) {
 		x = newX;
@@ -21,7 +22,7 @@ public class Fighter {
 		jumpCount = 0;
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try {
-			tammy = loader.loadImage("tammy.png");
+			image = loader.loadImage("tammy.png");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -44,8 +45,8 @@ public class Fighter {
 	
 	public void move() {
 		x += xSpeed;
-		if(x > width - tammy.getWidth())
-			x = width - tammy.getWidth();
+		if(x > width - image.getWidth())
+			x = width - image.getWidth();
 		if(x < 0)
 			x = 0;
 		y += ySpeed;
@@ -60,10 +61,34 @@ public class Fighter {
 			y = height;
 			ySpeed *= -1;
 		}
+//		if(x < (opponent.getX() + opponent.getWidth()) && getY() <= opponent.getY() + opponent.getHeight() && x > opponent.getX()) {
+//			x = opponent.getX() + opponent.getWidth();
+//		}
+//		if(x + getWidth() > opponent.getX() && getY() <= opponent.getY() + opponent.getHeight() && opponent.getX() > x) {
+//			x = opponent.getX() - opponent.getWidth();
+//		}
+//		if(getY() < opponent.getY() + opponent.getHeight() && x < opponent.getX() + opponent.getWidth() && x > opponent.getX() && getY() > opponent.getY()) {
+//			y = opponent.getY() + opponent.getHeight();
+//		}
+		if(x < opponent.getX() + opponent.getWidth() && x > opponent.getX()) {
+			
+		}
 	}
 	
 	public int getX() {
 		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
+	
+	public int getWidth() {
+		return image.getWidth();
+	}
+	
+	public int getHeight() {
+		return image.getHeight();
 	}
 	
 	public int getSpeed() {
@@ -78,6 +103,10 @@ public class Fighter {
 	
 	public void draw(Graphics g) {
 		GUIUtils gui = new GUIUtils();
-		gui.drawImg(tammy, x, height - y, tammy.getWidth(), tammy.getHeight(), g);
+		gui.drawImg(image, x, height - y, image.getWidth(), image.getHeight(), g);
+	}
+	
+	public void setOpponent(Fighter fighter) {
+		opponent = fighter;
 	}
 }

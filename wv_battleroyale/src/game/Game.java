@@ -62,6 +62,8 @@ public class Game extends Canvas implements Runnable
 		menu = new MainMenu(menuBG);
 		p1 = new Fighter(300, tammy.getHeight() + 90);
 		p2 = new Fighter(WIDTH - 300 - tammy.getWidth(), tammy.getHeight() + 90);
+		p1.setOpponent(p2);
+		p2.setOpponent(p1);
 		
 		if(Math.random() > .5) {
 			game = new MainGame(arena1, p1, p2);
