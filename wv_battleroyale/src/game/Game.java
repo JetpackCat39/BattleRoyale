@@ -60,13 +60,8 @@ public class Game extends Canvas implements Runnable
 		}
 		
 		menu = new MainMenu(menuBG);
-
-		input1 = new KeyInputP1(p1);
-		input2 = new KeyInputP2(p2);
 		
 		this.addMouseListener(new MouseInput(menu, this));
-		this.addKeyListener(input1);
-		this.addKeyListener(input2);
 	}
 	
 	public void setState(STATE newState) {
@@ -153,6 +148,12 @@ public class Game extends Canvas implements Runnable
 			} else {
 				game = new MainGame(arena2, p1, p2);
 			}
+
+			input1 = new KeyInputP1(p1);
+			input2 = new KeyInputP2(p2);
+
+			this.addKeyListener(input1);
+			this.addKeyListener(input2);
 		}
 		if(game != null) {
 			p1.move();
@@ -174,7 +175,7 @@ public class Game extends Canvas implements Runnable
 		if (State == STATE.MENU) {
 			menu.draw(g);
 		}
-		if (State == STATE.GAME)
+		if (State == STATE.GAME && game != null)
 		{
 			game.draw(g);
 			p1.draw(g);
