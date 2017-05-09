@@ -40,15 +40,15 @@ public class KeyInput implements KeyListener {
 	    else if (keyCode == keyCodeJump) {
 	    	p.jump();
 	    }
-	    else if(keyCode == keyCodePunch)
-	    {
-	    	System.out.println("Punch");
-	    	p.punch();
-	    }
-	    else if(keyCode == keyCodeKick)
-	    {
-	    	p.kick();
-	    }
+//	    else if(keyCode == keyCodePunch)
+//	    {
+//	    	System.out.println("Punch");
+//	    	p.punch();
+//	    }
+//	    else if(keyCode == keyCodeKick)
+//	    {
+//	    	p.kick();
+//	    }
 	}
 
 	@Override

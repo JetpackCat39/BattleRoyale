@@ -28,6 +28,7 @@ public class Game extends Canvas implements Runnable
 	private static BufferedImage tammy = null;
 	
 	private Fighter p1, p2;
+	private CollisionChecker colCheck;
 
 	private Graphics g;
 	
@@ -62,8 +63,10 @@ public class Game extends Canvas implements Runnable
 		menu = new MainMenu(menuBG);
 		p1 = new Fighter(300, tammy.getHeight() + 90);
 		p2 = new Fighter(WIDTH - 300 - tammy.getWidth(), tammy.getHeight() + 90);
-		p1.setOpponent(p2);
-		p2.setOpponent(p1);
+		colCheck = new CollisionChecker(p1, p2);
+		
+//		p1.setOpponent(p2);
+//		p2.setOpponent(p1);
 		
 		if(Math.random() > .5) {
 			game = new MainGame(arena1, p1, p2);
@@ -146,6 +149,7 @@ public class Game extends Canvas implements Runnable
 	{
 		p1.move();
 		p2.move();
+		colCheck.fixCollisions();
 //		input1.timerDown();
 //		input2.timerDown();
 	}

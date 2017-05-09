@@ -13,7 +13,7 @@ public class Fighter {
 	private final int BASE;
 	private int jumpCount;
 	private int health;
-	private Fighter opponent;
+//	private Fighter opponent;
 	
 	public Fighter(int newX, int newY) {
 		x = newX;
@@ -22,7 +22,7 @@ public class Fighter {
 		ySpeed= 0;
 		BASE = newY;
 		jumpCount = 0;
-		opponent = null;
+//		opponent = null;
 		health = 20;
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try {
@@ -91,65 +91,72 @@ public class Fighter {
 			y = height;
 			ySpeed *= -1;
 		}
-		moveCollisionChecker();
+//		moveCollisionChecker();
 	}
 	
-	public void moveCollisionChecker()
-	{
-		if(compareXPosition() != 0)
-		{
-			if(compareYPosition() > 0 && ySpeed <= 0)
-			{
-				jumpCount = 0;
-				ySpeed = 0;
-			}
-			else if(compareYPosition() < 0 && opponent.getYSpeed() <=0)
-			{
-				opponent.setJumpCount(0);
-				opponent.setYSpeed(0);
-			}
-			else if((y <= BASE + getHeight() && opponent.getY() <= BASE + opponent.getHeight()) || (y > BASE && opponent.getY() > BASE))
-			{
-				if(compareXPosition() > 0)
-				{
-					x = opponent.getX() + opponent.getWidth();
-				}
-				else
-				{
-					x = opponent.getX() - opponent.getWidth();
-				}
-			}
-		}
+//	public void moveCollisionChecker()
+//	{
+//		if(collisionX())
+//		{
+////			if(compareYPosition() > 0 && ySpeed <= 0)
+////			{
+////				jumpCount = 0;
+////				ySpeed = 0;
+////			}
+////			else if(compareYPosition() < 0 && opponent.getYSpeed() <=0)
+////			{
+////				opponent.setJumpCount(0);
+////				opponent.setYSpeed(0);
+////			}
+////			else if((y <= BASE + getHeight() && opponent.getY() <= BASE + opponent.getHeight()) || (y > BASE && opponent.getY() > BASE))
+////			{
+////				if(collisionX())
+////				{
+////					x = opponent.getX() + opponent.getWidth();
+////				}
+////				else
+////				{
+////					x = opponent.getX() - opponent.getWidth();
+////				}
+////			}
+//			if(collisionY()) {
+//				if(x - xSpeed < opponent.getX())
+//					x = opponent.getX() - getWidth();
+//				else
+//					x = opponent.getX() + opponent.getWidth();
+//			}
+//			else if (ySpeed < 0) {
+//				ySpeed = 0;
+//			}
+//		}
+//	}
+//	//will only return true if fighters are touching
+//	public boolean collisionX()
+//	{
+//		return (x < opponent.getX() + opponent.getWidth() && x > opponent.getX());
+//	}
+//	//will only return non-0 values if fighters are touching
+//	public boolean collisionY()
+//	{
+//		//if you're above them
+//		return y < opponent.getY() + opponent.getHeight() && y > opponent.getY();
+////		{
+////			return 1;
+////		}
+////		//if you're below them
+////		else if((y + getHeight() > opponent.getY()) && (opponent.getY() > (y + getHeight() - 5)))
+////		{
+////			return -1;
+////		}
+////		return 0;
+//	}
+	
+	public void setX(int newX) {
+		x = newX;
 	}
-	//will only return non-0 values if fighters are touching
-	public int compareXPosition()
-	{
-		//if you're to the right of them
-		if(x < opponent.getX() + opponent.getWidth() && x > opponent.getX())
-		{
-			return 1;
-		}
-		//if you're to the left of them
-		else if(x + getWidth() > opponent.getX() && opponent.getX() > x)
-		{
-			return -1;
-		}
-		return 0;
-	}
-	//will only return non-0 values if fighters are touching
-	public int compareYPosition()
-	{
-		//if you're above them
-		if((y < opponent.getY() + opponent.getHeight()) && (y > (opponent.getY() + opponent.getHeight() - 5)))
-		{
-			return 1;
-		}
-		//if you're below them
-		else if((y + getHeight() > opponent.getY()) && (opponent.getY() > (y + getHeight() - 5)))
-		{
-			return -1;
-		}
-		return 0;
+	
+	public void setY(int newY) {
+		y = newY;
 	}
 	
 	public int getX() {
@@ -183,21 +190,21 @@ public class Fighter {
 		jumpCount++;
 	}
 	
-	public void punch()
-	{
-		if(compareXPosition() != 0)
-		{
-			opponent.incrementHealth(20);
-		}
-	}
-	
-	public void kick()
-	{
-		if(compareXPosition() != 0)
-		{
-			opponent.incrementHealth(2);
-		}
-	}
+//	public void punch()
+//	{
+//		if(compareXPosition() != 0)
+//		{
+//			opponent.incrementHealth(20);
+//		}
+//	}
+//	
+//	public void kick()
+//	{
+//		if(compareXPosition() != 0)
+//		{
+//			opponent.incrementHealth(2);
+//		}
+//	}
 	
 	public int getHealth()
 	{
@@ -230,7 +237,7 @@ public class Fighter {
 		gui.drawImg(image, x, height - y, image.getWidth(), image.getHeight(), g);
 	}
 	
-	public void setOpponent(Fighter fighter) {
-		opponent = fighter;
-	}
+//	public void setOpponent(Fighter fighter) {
+//		opponent = fighter;
+//	}
 }
