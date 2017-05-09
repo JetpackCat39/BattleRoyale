@@ -14,7 +14,7 @@ public class Game extends Canvas implements Runnable
 	private static final long serialVersionUID = 1L;
 	public static final int HEIGHT = 720;
 	public static final int WIDTH = HEIGHT * 16 / 9;
-	public final String TITLE = "Westview Battle Royale";
+	public static final String TITLE = "WESTVIEW BATTLE ROYALE";
 
 	// variables to make the game work
 	private boolean running = false;
@@ -43,7 +43,7 @@ public class Game extends Canvas implements Runnable
 		CONTROLS,
 		MENU
 	};
-	public static STATE State = STATE.MENU;
+	private STATE State = STATE.MENU;
 
 	private void initialize()
 	{
@@ -60,23 +60,21 @@ public class Game extends Canvas implements Runnable
 		}
 		
 		menu = new MainMenu(menuBG);
-		p1 = new Fighter(300, tammy.getHeight() + 90);
-		p2 = new Fighter(WIDTH - 300 - tammy.getWidth(), tammy.getHeight() + 90);
-		p1.setOpponent(p2);
-		p2.setOpponent(p1);
-		
-		if(Math.random() > .5) {
-			game = new MainGame(arena1, p1, p2);
-		} else {
-			game = new MainGame(arena2, p1, p2);
-		}
 
 		input1 = new KeyInputP1(p1);
 		input2 = new KeyInputP2(p2);
 		
-		this.addMouseListener(new MouseInput(menu));
+		this.addMouseListener(new MouseInput(menu, this));
 		this.addKeyListener(input1);
 		this.addKeyListener(input2);
+	}
+	
+	public void setState(STATE newState) {
+		State = newState;
+	}
+	
+	public STATE getState() {
+		return State;
 	}
 
 	private synchronized void start()
@@ -106,7 +104,7 @@ public class Game extends Canvas implements Runnable
 	public void run()
 	{
 		long lastTime = System.nanoTime(); 
-		final double fps = 10.0;
+		final double fps = 60.0;
 		double ns = 1000000000 / fps;
 		double delta = 0; // time passed
 
@@ -144,10 +142,22 @@ public class Game extends Canvas implements Runnable
 
 	private void tick()
 	{
-		p1.move();
-		p2.move();
-//		input1.timerDown();
-//		input2.timerDown();
+		if(game == null) {
+			p1 = new Fighter(300, tammy.getHeight() + 90);
+			p2 = new Fighter(WIDTH - 300 - tammy.getWidth(), tammy.getHeight() + 90);
+			p1.setOpponent(p2);
+			p2.setOpponent(p1);
+			
+			if(Math.random() > .5) {
+				game = new MainGame(arena1, p1, p2);
+			} else {
+				game = new MainGame(arena2, p1, p2);
+			}
+		}
+		if(game != null) {
+			p1.move();
+			p2.move();
+		}
 	}
 
 	private void render()
@@ -185,7 +195,7 @@ public class Game extends Canvas implements Runnable
 		game.setMinimumSize(new Dimension(WIDTH, HEIGHT));
 		game.initialize();
 		
-		JFrame frame = new JFrame(game.TITLE);
+		JFrame frame = new JFrame(Game.TITLE);
 		frame.add(game);
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
