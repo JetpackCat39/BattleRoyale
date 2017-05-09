@@ -30,10 +30,13 @@ public class KeyInput implements KeyListener {
 //	            break;
 //	     }
 	    if(keyCode == keyCodeLeft) {
-	    	p.incrementXSpeed(-15);
-	    } else if (keyCode == keyCodeRight) {
-	    	p.incrementXSpeed(15);
-	    } else if (keyCode == keyCodeJump) {
+	    	p.incrementXSpeed(-20);
+	    } 
+	    else if (keyCode == keyCodeRight) {
+	    	p.incrementXSpeed(20);
+
+	    } 
+	    else if (keyCode == keyCodeJump) {
 	    	p.jump();
 	    }
 		
@@ -54,9 +57,10 @@ public class KeyInput implements KeyListener {
 //	            break;
 //	     }
 	    if(keyCode == keyCodeLeft) {
-	    	p.incrementXSpeed(15);
-	    } else if (keyCode == keyCodeRight) {
-	    	p.incrementXSpeed(-15);
+	    	p.incrementXSpeed(20);
+	    } 
+	    else if (keyCode == keyCodeRight) {
+	    	p.incrementXSpeed(-20);
 	    } 
 		
 	}

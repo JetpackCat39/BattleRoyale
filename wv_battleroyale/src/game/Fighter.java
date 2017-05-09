@@ -33,11 +33,11 @@ public class Fighter {
 	
 	public void incrementXSpeed(int howMuch) {
 		int temp = xSpeed + howMuch;
-		if(temp > 15) {
-			temp = 15;
+		if(temp > 20) {
+			temp = 20;
 		}
-		if(temp < -15) {
-			temp = -15;
+		if(temp < -20) {
+			temp = -20;
 		}
 		xSpeed = temp;
 	}
@@ -45,11 +45,11 @@ public class Fighter {
 	public void incrementYSpeed(int howMuch)
 	{
 		int temp = xSpeed + howMuch;
-		if(temp > 15) {
-			temp = 15;
+		if(temp > 20) {
+			temp = 20;
 		}
-		if(temp < -15) {
-			temp = -15;
+		if(temp < -20) {
+			temp = -20;
 		}
 		ySpeed = temp;
 	}
