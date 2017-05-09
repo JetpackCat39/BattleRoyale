@@ -19,6 +19,6 @@ public class Screen {
 	}
 	
 	public void draw(Graphics g) {
-		gui.drawImg(bg, 0, 0, (width + 10), (height + 10), g);
+		gui.drawImg(bg, 0, 0, (width + 15), (height + 15), g);
 	}
 }
