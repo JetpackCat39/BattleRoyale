@@ -35,11 +35,11 @@ public class Fighter {
 	
 	public void incrementXSpeed(int howMuch) {
 		int temp = xSpeed + howMuch;
-		if(temp > 20) {
-			temp = 20;
+		if(temp > 15) {
+			temp = 15;
 		}
-		if(temp < -20) {
-			temp = -20;
+		if(temp < -15) {
+			temp = -15;
 		}
 		xSpeed = temp;
 	}
@@ -98,27 +98,26 @@ public class Fighter {
 	{
 		if(compareXPosition() != 0)
 		{
-			if(compareYPosition() > 0)
+			if(compareYPosition() > 0 && y - ySpeed > opponent.getY() + opponent.getHeight())
 			{
 				ySpeed = 0;
 				jumpCount = 0;
 				y = opponent.getY() + opponent.getHeight();
 			}
-			else if(compareYPosition() < 0)
-			{
+			else if(compareYPosition() < 0) {
 				ySpeed = -1;
 				jumpCount = 2;
 			}
 			else if((y < BASE + getHeight() && opponent.getY() < BASE + opponent.getHeight()) || ((y > BASE && opponent.getY() > BASE) && compareYPosition() != 0))
 			{
-				if(compareXPosition() > 0)
-				{
-					x = opponent.getX() + opponent.getWidth();
-				}
-				else
-				{
-					x = opponent.getX() - opponent.getWidth();
-				}
+				x = x - xSpeed;
+				opponent.setX(opponent.getX() - opponent.getXSpeed());
+//				if(compareXPosition() > 0)
+//					x = x - xSpeed;
+////					x = opponent.getX() + opponent.getWidth();
+//				else
+//					x = x + xSpeed;
+////					x = opponent.getX() - opponent.getWidth();
 			}
 		}
 	}
@@ -127,14 +126,10 @@ public class Fighter {
 	{
 		//if you're to the right of them
 		if(x < opponent.getX() + opponent.getWidth() && x > opponent.getX())
-		{
 			return 1;
-		}
 		//if you're to the left of them
 		else if(x + getWidth() > opponent.getX() && opponent.getX() > x)
-		{
 			return -1;
-		}
 		return 0;
 	}
 	//will only return non-0 values if fighters are touching
@@ -142,15 +137,15 @@ public class Fighter {
 	{
 		//if you're above them
 		if((y <= opponent.getY() + opponent.getHeight()) && (y > (opponent.getY())))
-		{
 			return 1;
-		}
 		//if you're below them
-		else if((y + getHeight() >= opponent.getY()) && (opponent.getY() > (y)))
-		{
+		else if(y + getHeight() >= opponent.getY() && opponent.getY() > y)
 			return -1;
-		}
 		return 0;
+	}
+	
+	public void setX(int val) {
+		x = val;
 	}
 	
 	public int getX() {

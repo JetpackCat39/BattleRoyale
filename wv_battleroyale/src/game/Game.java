@@ -106,7 +106,7 @@ public class Game extends Canvas implements Runnable
 	public void run()
 	{
 		long lastTime = System.nanoTime(); 
-		final double fps = 60.0;
+		final double fps = 10.0;
 		double ns = 1000000000 / fps;
 		double delta = 0; // time passed
 
