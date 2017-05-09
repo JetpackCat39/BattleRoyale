@@ -42,7 +42,6 @@ public class KeyInput implements KeyListener {
 	    }
 	    else if(keyCode == keyCodePunch)
 	    {
-	    	System.out.println("Punch");
 	    	p.punch();
 	    }
 	    else if(keyCode == keyCodeKick)

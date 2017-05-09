@@ -98,17 +98,18 @@ public class Fighter {
 	{
 		if(compareXPosition() != 0)
 		{
-			if(compareYPosition() > 0 && ySpeed <= 0)
+			if(compareYPosition() > 0)
 			{
-				jumpCount = 0;
 				ySpeed = 0;
+				jumpCount = 0;
+				y = opponent.getY() + opponent.getHeight();
 			}
-			else if(compareYPosition() < 0 && opponent.getYSpeed() <=0)
+			else if(compareYPosition() < 0)
 			{
-				opponent.setJumpCount(0);
-				opponent.setYSpeed(0);
+				ySpeed = -1;
+				jumpCount = 2;
 			}
-			else if((y <= BASE + getHeight() && opponent.getY() <= BASE + opponent.getHeight()) || (y > BASE && opponent.getY() > BASE))
+			else if((y < BASE + getHeight() && opponent.getY() < BASE + opponent.getHeight()) || ((y > BASE && opponent.getY() > BASE) && compareYPosition() != 0))
 			{
 				if(compareXPosition() > 0)
 				{
@@ -140,12 +141,12 @@ public class Fighter {
 	public int compareYPosition()
 	{
 		//if you're above them
-		if((y < opponent.getY() + opponent.getHeight()) && (y > (opponent.getY() + opponent.getHeight() - 5)))
+		if((y <= opponent.getY() + opponent.getHeight()) && (y > (opponent.getY())))
 		{
 			return 1;
 		}
 		//if you're below them
-		else if((y + getHeight() > opponent.getY()) && (opponent.getY() > (y + getHeight() - 5)))
+		else if((y + getHeight() >= opponent.getY()) && (opponent.getY() > (y)))
 		{
 			return -1;
 		}
