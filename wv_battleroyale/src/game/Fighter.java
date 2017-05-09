@@ -89,10 +89,12 @@ public class Fighter {
 		{
 			if(compareYPosition() > 0 && ySpeed <= 0)
 			{
+				jumpCount = 0;
 				ySpeed = 0;
 			}
 			else if(compareYPosition() < 0 && opponent.getYSpeed() <=0)
 			{
+				opponent.setJumpCount(0);
 				opponent.setYSpeed(0);
 			}
 			else if((y <= BASE + getHeight() && opponent.getY() <= BASE + opponent.getHeight()) || (y > BASE && opponent.getY() > BASE))
@@ -164,6 +166,15 @@ public class Fighter {
 		return ySpeed;
 	}
 	
+	public int getJumpCount()
+	{
+		return jumpCount;
+	}
+	
+	public void setJumpCount(int count)
+	{
+		jumpCount = count;
+	}
 	public void jump() {
 		if(jumpCount < 2)
 			ySpeed = 20;
