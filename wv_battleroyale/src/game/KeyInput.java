@@ -6,13 +6,15 @@ import java.awt.event.KeyListener;
 public class KeyInput implements KeyListener {
 	
 	protected Fighter p;
-	protected int keyCodeLeft, keyCodeRight, keyCodeJump;
+	protected int keyCodeLeft, keyCodeRight, keyCodeJump, keyCodePunch, keyCodeKick;
 	
-	public KeyInput(Fighter player, int left, int right, int jump) {
+	public KeyInput(Fighter player, int left, int right, int jump, int punch, int kick) {
 		p = player;
 		keyCodeLeft = left;
 		keyCodeRight = right;
 		keyCodeJump = jump;
+		keyCodePunch = punch;
+		keyCodeKick = kick;
 	}
 
 	@Override
@@ -34,12 +36,19 @@ public class KeyInput implements KeyListener {
 	    } 
 	    else if (keyCode == keyCodeRight) {
 	    	p.incrementXSpeed(20);
-
 	    } 
 	    else if (keyCode == keyCodeJump) {
 	    	p.jump();
 	    }
-		
+	    else if(keyCode == keyCodePunch)
+	    {
+	    	System.out.println("Punch");
+	    	p.punch();
+	    }
+	    else if(keyCode == keyCodeKick)
+	    {
+	    	p.kick();
+	    }
 	}
 
 	@Override

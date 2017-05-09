@@ -12,6 +12,7 @@ public class Fighter {
 	private int width = Game.WIDTH;
 	private final int BASE;
 	private int jumpCount;
+	private int health;
 	private Fighter opponent;
 	
 	public Fighter(int newX, int newY) {
@@ -22,6 +23,7 @@ public class Fighter {
 		BASE = newY;
 		jumpCount = 0;
 		opponent = null;
+		health = 20;
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try {
 			image = loader.loadImage("tammy.png");
@@ -60,6 +62,15 @@ public class Fighter {
 	public void setYSpeed(int newSpeed)
 	{
 		ySpeed = newSpeed;
+	}
+	
+	public int getXSpeed() {
+		return xSpeed;
+	}
+	
+	public int getYSpeed()
+	{
+		return ySpeed;
 	}
 	
 	public void move() {
@@ -157,15 +168,6 @@ public class Fighter {
 		return image.getHeight();
 	}
 	
-	public int getXSpeed() {
-		return xSpeed;
-	}
-	
-	public int getYSpeed()
-	{
-		return ySpeed;
-	}
-	
 	public int getJumpCount()
 	{
 		return jumpCount;
@@ -181,6 +183,48 @@ public class Fighter {
 		jumpCount++;
 	}
 	
+	public void punch()
+	{
+		if(compareXPosition() != 0)
+		{
+			opponent.incrementHealth(20);
+		}
+	}
+	
+	public void kick()
+	{
+		if(compareXPosition() != 0)
+		{
+			opponent.incrementHealth(2);
+		}
+	}
+	
+	public int getHealth()
+	{
+		return health;
+	}
+	
+	public void setHealth(int newHealth)
+	{
+		health = newHealth;
+	}
+	
+	public void incrementHealth(int damage)
+	{
+		health -= damage;
+		if(health < 0)
+		{
+			setHealth(0);
+		}
+		if(health > 20)
+		{
+			setHealth(20);
+		}
+		if(health == 0)
+		{
+			
+		}
+	}
 	public void draw(Graphics g) {
 		GUIUtils gui = new GUIUtils();
 		gui.drawImg(image, x, height - y, image.getWidth(), image.getHeight(), g);
