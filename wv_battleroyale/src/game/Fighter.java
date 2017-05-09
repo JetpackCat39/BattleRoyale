@@ -87,11 +87,11 @@ public class Fighter {
 	{
 		if(compareXPosition() != 0)
 		{
-			if(compareYPosition() > 0)
+			if(compareYPosition() > 0 && ySpeed <= 0)
 			{
 				ySpeed = 0;
 			}
-			else if(compareYPosition() < 0)
+			else if(compareYPosition() < 0 && opponent.getYSpeed() <=0)
 			{
 				opponent.setYSpeed(0);
 			}
@@ -108,29 +108,30 @@ public class Fighter {
 			}
 		}
 	}
+	//will only return non-0 values if fighters are touching
 	public int compareXPosition()
 	{
-		//if you're to the right of them and touching them
+		//if you're to the right of them
 		if(x < opponent.getX() + opponent.getWidth() && x > opponent.getX())
 		{
 			return 1;
 		}
-		//if you're to the left of them and touching them
+		//if you're to the left of them
 		else if(x + getWidth() > opponent.getX() && opponent.getX() > x)
 		{
 			return -1;
 		}
 		return 0;
 	}
-	
+	//will only return non-0 values if fighters are touching
 	public int compareYPosition()
 	{
-		//if you're above them and touching them
+		//if you're above them
 		if((y < opponent.getY() + opponent.getHeight()) && (y > (opponent.getY() + opponent.getHeight() - 5)))
 		{
 			return 1;
 		}
-		//if you're below them and touching them
+		//if you're below them
 		else if((y + getHeight() > opponent.getY()) && (opponent.getY() > (y + getHeight() - 5)))
 		{
 			return -1;
