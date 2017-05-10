@@ -4,8 +4,14 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Fighter {
-	
+public class Fighter implements IOpponent, IDrawable
+{
+
+	private static final int KICK = 2;
+	private static final int MAX_Y_SPEED = 20;
+	private static final int MAX_X_SPEED = 15;
+	private static final int STARTHEALTH = 20;
+	private static final int PUNCH = 3;
 	private int x, y, xSpeed, ySpeed;
 	private BufferedImage image;
 	private int height = Game.HEIGHT;
@@ -13,220 +19,292 @@ public class Fighter {
 	private final int BASE;
 	private int jumpCount;
 	private int health;
-	private Fighter opponent;
-	
-	public Fighter(int newX, int newY) {
+	private IOpponent opponent;
+
+	public Fighter(int newX, int newY)
+	{
 		x = newX;
 		y = newY;
 		xSpeed = 0;
-		ySpeed= 0;
+		ySpeed = 0;
 		BASE = newY;
 		jumpCount = 0;
 		opponent = null;
-		health = 20;
+		health = STARTHEALTH;
 		BufferedImageLoader loader = new BufferedImageLoader();
-		try {
+		try
+		{
 			image = loader.loadImage("tammy.png");
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	public void incrementXSpeed(int howMuch) {
+
+	public void incrementXSpeed(int howMuch)
+	{
 		int temp = xSpeed + howMuch;
-		if(temp > 15) {
-			temp = 15;
+		if (temp > MAX_X_SPEED)
+		{
+			temp = MAX_X_SPEED;
 		}
-		if(temp < -15) {
-			temp = -15;
+		if (temp < -MAX_X_SPEED)
+		{
+			temp = -MAX_X_SPEED;
 		}
 		xSpeed = temp;
 	}
-	
+
 	public void incrementYSpeed(int howMuch)
 	{
 		int temp = xSpeed + howMuch;
-		if(temp > 20) {
-			temp = 20;
+		if (temp > MAX_Y_SPEED)
+		{
+			temp = MAX_Y_SPEED;
 		}
-		if(temp < -20) {
-			temp = -20;
+		if (temp < -MAX_Y_SPEED)
+		{
+			temp = -MAX_Y_SPEED;
 		}
 		ySpeed = temp;
 	}
-	public void setXSpeed(int newSpeed) {
+
+	public void setXSpeed(int newSpeed)
+	{
 		xSpeed = newSpeed;
 	}
-	
+
 	public void setYSpeed(int newSpeed)
 	{
 		ySpeed = newSpeed;
 	}
-	
-	public int getXSpeed() {
+
+	/* (non-Javadoc)
+	 * @see game.iOpponent#getXSpeed()
+	 */
+	@Override
+	public int getXSpeed()
+	{
 		return xSpeed;
 	}
-	
+
+	/* (non-Javadoc)
+	 * @see game.iOpponent#getYSpeed()
+	 */
+	@Override
 	public int getYSpeed()
 	{
 		return ySpeed;
 	}
-	
-	public void move() {
+
+	public void move()
+	{
 		x += xSpeed;
-		if(x > width - image.getWidth())
+		if (x > width - image.getWidth())
+		{
 			x = width - image.getWidth();
-		if(x < 0)
+		}
+		if (x < 0)
+		{
 			x = 0;
+		}
 		y += ySpeed;
-		if(height - y > height - BASE) {
+		if (height - y > height - BASE)
+		{
 			y = BASE;
 			jumpCount = 0;
 		}
-		if(height - y < height - BASE) {
+		if (height - y < height - BASE)
+		{
 			ySpeed -= 1;
 		}
-		if(height - y < 0) {
+		if (height - y < 0)
+		{
 			y = height;
 			ySpeed *= -1;
 		}
 		moveCollisionChecker();
 	}
-	
+
 	public void moveCollisionChecker()
 	{
-		if(compareXPosition() != 0)
+		if (compareXPosition() != 0)
 		{
-			if((compareYPosition() > 0) && ((y - ySpeed) >= (opponent.getY() + opponent.getHeight())))
+			if ((compareYPosition() > 0) && ((y - ySpeed) >= (opponent.getY() + opponent.getHeight())))
 			{
 				ySpeed = 0;
 				jumpCount = 0;
 				y = opponent.getY() + opponent.getHeight();
 			}
-			else if(compareYPosition() < 0) {
+			else if (compareYPosition() < 0)
+			{
 				ySpeed = -1;
 				jumpCount = 2;
 			}
-			else if((y < (BASE + getHeight()) && opponent.getY() < (BASE + opponent.getHeight())) || ((y > BASE && opponent.getY() > BASE) && (compareYPosition() != 0 || ySpeed <= 0)))
+			else if ((y < (BASE + getHeight()) && opponent.getY() < (BASE + opponent.getHeight()))
+					|| ((y > BASE && opponent.getY() > BASE) && (compareYPosition() != 0 || ySpeed <= 0)))
 			{
 				x = x - xSpeed;
 				opponent.setX(opponent.getX() - opponent.getXSpeed());
-//				if(compareXPosition() > 0)
-//					x = x - xSpeed;
-////					x = opponent.getX() + opponent.getWidth();
-//				else
-//					x = x + xSpeed;
-////					x = opponent.getX() - opponent.getWidth();
+				// if(compareXPosition() > 0)
+				// x = x - xSpeed;
+				//// x = opponent.getX() + opponent.getWidth();
+				// else
+				// x = x + xSpeed;
+				//// x = opponent.getX() - opponent.getWidth();
 			}
 		}
 	}
-	//will only return non-0 values if fighters are touching
+
+	// will only return non-0 values if fighters are touching
 	public int compareXPosition()
 	{
-		//if you're to the right of them
-		if(x < opponent.getX() + opponent.getWidth() && x >= opponent.getX())
+		// if you're to the right of them
+		if (x < opponent.getX() + opponent.getWidth() && x >= opponent.getX())
+		{
 			return 1;
-		//if you're to the left of them
-		else if(x + getWidth() > opponent.getX() && opponent.getX() >= x)
+		}
+		// if you're to the left of them
+		else if (x + getWidth() > opponent.getX() && opponent.getX() >= x)
+		{
 			return -1;
+		}
 		return 0;
 	}
-	//will only return non-0 values if fighters are touching
+
+	// will only return non-0 values if fighters are touching
 	public int compareYPosition()
 	{
-		//if you're above them
-		if((y <= opponent.getY() + opponent.getHeight()) && (y >= (opponent.getY())))
+		// if you're above them
+		if ((y <= opponent.getY() + opponent.getHeight()) && (y >= (opponent.getY())))
+		{
 			return 1;
-		//if you're below them
-		else if(y + getHeight() >= opponent.getY() && opponent.getY() >= y)
+		}
+		// if you're below them
+		else if (y + getHeight() >= opponent.getY() && opponent.getY() >= y)
+		{
 			return -1;
+		}
 		return 0;
 	}
-	
-	public void setX(int val) {
+
+	@Override
+	public void setX(int val)
+	{
 		x = val;
 	}
-	
-	public int getX() {
+
+	/* (non-Javadoc)
+	 * @see game.iOpponent#getX()
+	 */
+	@Override
+	public int getX()
+	{
 		return x;
 	}
-	
-	public int getY() {
+
+	/* (non-Javadoc)
+	 * @see game.iOpponent#getY()
+	 */
+	@Override
+	public int getY()
+	{
 		return y;
 	}
-	
-	public int getWidth() {
+
+	/* (non-Javadoc)
+	 * @see game.iOpponent#getWidth()
+	 */
+	@Override
+	public int getWidth()
+	{
 		return image.getWidth();
 	}
-	
-	public int getHeight() {
+
+	/* (non-Javadoc)
+	 * @see game.iOpponent#getHeight()
+	 */
+	@Override
+	public int getHeight()
+	{
 		return image.getHeight();
 	}
-	
+
 	public int getJumpCount()
 	{
 		return jumpCount;
 	}
-	
+
 	public void setJumpCount(int count)
 	{
 		jumpCount = count;
 	}
-	public void jump() {
-		if(jumpCount < 2)
-			ySpeed = 20;
+
+	public void jump()
+	{
+		if (jumpCount < 2)
+		{
+			ySpeed = MAX_Y_SPEED;
+		}
 		jumpCount++;
 	}
-	
+
 	public void punch()
 	{
-		if(compareXPosition() != 0)
+		if (compareXPosition() != 0)
 		{
-			opponent.incrementHealth(20);
+			opponent.damage(PUNCH);
 		}
 	}
-	
+
 	public void kick()
 	{
-		if(compareXPosition() != 0)
+		if (compareXPosition() != 0)
 		{
-			opponent.incrementHealth(2);
+			opponent.damage(KICK);
 		}
 	}
-	
+
 	public int getHealth()
 	{
 		return health;
 	}
-	
+
 	public void setHealth(int newHealth)
 	{
 		health = newHealth;
 	}
-	
-	public void incrementHealth(int damage)
+
+	/* (non-Javadoc)
+	 * @see game.iOpponent#damage(int)
+	 */
+	@Override
+	public void damage(int damage)
 	{
 		health -= damage;
-		if(health < 0)
+		if (health < 0)
 		{
 			setHealth(0);
 		}
-		if(health > 20)
+		if (health > STARTHEALTH)
 		{
-			setHealth(20);
+			setHealth(STARTHEALTH);
 		}
-		if(health == 0)
+		if (health == 0)
 		{
-			
+
 		}
 	}
-	public void draw(Graphics g) {
-		GUIUtils gui = new GUIUtils();
-		gui.drawImg(image, x, height - y, image.getWidth(), image.getHeight(), g);
+
+	public void draw(Graphics g)
+	{
+		GUIUtils.self().drawImg(image, x, height - y, image.getWidth(), image.getHeight(), g);
 	}
-	
-	public void setOpponent(Fighter fighter) {
+
+	public void setOpponent(IOpponent fighter)
+	{
 		opponent = fighter;
 	}
 }

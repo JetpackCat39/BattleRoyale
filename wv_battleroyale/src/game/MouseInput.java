@@ -42,7 +42,7 @@ public class MouseInput implements MouseListener
 			}
 			if (menu.getExit().contains(myX, myY))
 			{
-				System.exit(1);
+				game.stop();
 			}
 		}
 	}
