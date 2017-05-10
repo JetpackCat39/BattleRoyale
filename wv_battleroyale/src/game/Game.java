@@ -29,6 +29,7 @@ public class Game extends Canvas implements Runnable
 	private static BufferedImage arena1 = null;
 	private static BufferedImage arena2 = null;
 	private static BufferedImage tammy = null;
+	public static BufferedImage controlsBG = null;
 
 	private Fighter p1, p2;
 
@@ -36,6 +37,7 @@ public class Game extends Canvas implements Runnable
 
 	private MainMenu menu;
 	private MainGame game;
+	private ControlsMenu controls;
 
 	private KeyInputP1 input1;
 	private KeyInputP2 input2;
@@ -56,6 +58,7 @@ public class Game extends Canvas implements Runnable
 			arena1 = loader.loadImage("arena1.jpg");
 			arena2 = loader.loadImage("arena2.jpg");
 			tammy = loader.loadImage("tammy.png");
+			controlsBG = loader.loadImage("menuBG.jpg");
 		}
 		catch (IOException e)
 		{
@@ -64,8 +67,9 @@ public class Game extends Canvas implements Runnable
 
 		menu = new MainMenu(menuBG);
 		game = createGame();
+		controls = createControls();
 
-		this.addMouseListener(new MouseInput(menu, this));
+		this.addMouseListener(new MouseInput(menu, this,controls));
 	}
 
 	public void setState(STATE newState)
@@ -152,6 +156,11 @@ public class Game extends Canvas implements Runnable
 		
 	}
 
+	private ControlsMenu createControls(){
+		ControlsMenu controls;
+		controls = new ControlsMenu(controlsBG);
+		return controls;
+	}
 	private MainGame createGame()
 	{
 		MainGame tempGame;
@@ -197,6 +206,8 @@ public class Game extends Canvas implements Runnable
 		case GAME:
 			game.draw(g);
 			break;
+		case CONTROLS:
+			controls.draw(g);
 		default:
 			break;
 		}

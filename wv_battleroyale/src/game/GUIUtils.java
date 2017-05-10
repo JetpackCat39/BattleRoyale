@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.RoundRectangle2D;
+
 import java.awt.image.BufferedImage;
 
 public class GUIUtils
@@ -20,9 +20,9 @@ public class GUIUtils
 	{
 	}
 
-	public void drawText(int x, int y, Color color, String text, int fontSize, Graphics g)
+	public void drawText(int x, int y, Color color, String text, int fontSize, Graphics g, int fontStyle)
 	{
-		g.setFont(new Font("arial", Font.BOLD, fontSize));
+		g.setFont(new Font("arial", fontStyle, fontSize));
 		g.setColor(color);
 		g.drawString(text, x, y);
 	}
@@ -33,17 +33,7 @@ public class GUIUtils
 		g2d.drawImage(bg, x, y, w, h, null);
 	}
 
-	public void drawButton(RoundRectangle2D rect, Color color, Graphics g)
-	{
-		g.setColor(color);
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.draw(rect);
-		g2d.fill(rect);
-	}
-
-	public void drawButton(RoundRectangle2D rect, Color color, Color tColor, String text, int fontSize, Graphics g)
-	{
-		
-	}
+	
+	
 
 }

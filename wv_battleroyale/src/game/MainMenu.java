@@ -1,7 +1,6 @@
 package game;
 
 import java.awt.*;
-import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 
 public class MainMenu extends Screen implements IDrawable
@@ -12,17 +11,17 @@ public class MainMenu extends Screen implements IDrawable
 		super(background);
 
 		// play button
-		buttonList.add(new Button(width / 3, height * 3 / 5, "PLAY"));
+		buttonList.add(new Button(width / 3, height * 3 / 5, "PLAY",32,Font.BOLD));
 		// controls button
-		buttonList.add(new Button(width / 3, height * 4 / 5, "CONTROLS"));
+		buttonList.add(new Button(width / 3, height * 4 / 5, "CONTROLS",32,Font.BOLD));
 		// exit button
-		buttonList.add(new Button(width / 3, height * 5 / 5, "EXIT"));
+		buttonList.add(new Button(width / 3, height * 5 / 5, "EXIT",32,Font.BOLD));
 	}
 
 	public void draw(Graphics g)
 	{
 		super.draw(g);
-		GUIUtils.self().drawText(width / 9, height * 2 / 9, Color.white, Game.TITLE, 72, g);
+		GUIUtils.self().drawText(width / 9, height * 2 / 9, Color.white, Game.TITLE, 72, g,Font.BOLD);
 		getPlay().draw(g);
 		getControls().draw(g);
 		getExit().draw(g);

@@ -155,6 +155,7 @@ public class Fighter implements IOpponent, IDrawable
 				// x = x + xSpeed;
 				//// x = opponent.getX() - opponent.getWidth();
 			}
+			
 		}
 	}
 

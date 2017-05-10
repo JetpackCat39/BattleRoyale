@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -13,6 +14,7 @@ public class MainGame extends Screen implements IDrawable
 		super(background);
 		p1 = player1;
 		p2 = player2;
+		buttonList.add(new Button(width *5/6, height * 2/9, "BACK",32,Font.BOLD));
 	}
 
 	public void draw(Graphics g)

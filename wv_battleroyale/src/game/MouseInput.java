@@ -11,11 +11,12 @@ public class MouseInput implements MouseListener
 
 	MainMenu menu;
 	Game game;
-	
-	public MouseInput(MainMenu m, Game g)
+	ControlsMenu controls;
+	public MouseInput(MainMenu m, Game g, ControlsMenu c)
 	{
 		menu = m;
 		game = g;
+		controls = c;
 	}
 	
 	public void mouseClicked(MouseEvent e) 
@@ -43,6 +44,11 @@ public class MouseInput implements MouseListener
 			if (menu.getExit().contains(myX, myY))
 			{
 				game.stop();
+			}
+		}
+		if(game.getState()==STATE.CONTROLS){
+			if(controls.getBack().contains(myX,myY)){
+				game.setState(STATE.MENU);
 			}
 		}
 	}
