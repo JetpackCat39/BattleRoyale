@@ -131,33 +131,33 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 
 	public void moveCollisionChecker()
 	{
-//		if (compareXPosition() != 0)
-//		{
-//			if ((compareYPosition() > 0) && ((y - ySpeed) >= (opponent.getY() + opponent.getHeight())))
-//			{
-//				ySpeed = 0;
-//				jumpCount = 0;
-//				y = opponent.getY() + opponent.getHeight();
-//			}
-//			else if (compareYPosition() < 0)
-//			{
-//				ySpeed = -1;
-//				jumpCount = 2;
-//			}
-//			else if ((y < (BASE + getHeight()) && opponent.getY() < (BASE + opponent.getHeight()))
-//					|| ((y > BASE && opponent.getY() > BASE) && (compareYPosition() != 0 || ySpeed <= 0)))
-//			{
-//				x = x - xSpeed;
-//				opponent.setX(opponent.getX() - opponent.getXSpeed());
-//				// if(compareXPosition() > 0)
-//				// x = x - xSpeed;
-//				//// x = opponent.getX() + opponent.getWidth();
-//				// else
-//				// x = x + xSpeed;
-//				//// x = opponent.getX() - opponent.getWidth();
-//			}
-//			
-//		}
+		if (compareXPosition() != 0)
+		{
+			if ((compareYPosition() > 0) && ((y - ySpeed) >= (opponent.getY() + opponent.getHeight())))
+			{
+				ySpeed = 0;
+				jumpCount = 0;
+				y = opponent.getY() + opponent.getHeight();
+			}
+			else if (compareYPosition() < 0)
+			{
+				ySpeed = -1;
+				jumpCount = 2;
+			}
+			else if ((y < (BASE + getHeight()) && opponent.getY() < (BASE + opponent.getHeight()))
+					|| ((y > BASE && opponent.getY() > BASE)))
+			{
+				x -= xSpeed;
+				opponent.setX(opponent.getX() - opponent.getXSpeed());
+				// if(compareXPosition() > 0)
+				// x = x - xSpeed;
+				//// x = opponent.getX() + opponent.getWidth();
+				// else
+				// x = x + xSpeed;
+				//// x = opponent.getX() - opponent.getWidth();
+			}
+			
+		}
 	}
 
 	// will only return non-0 values if fighters are touching
@@ -196,6 +196,11 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 	public void setX(int val)
 	{
 		x = val;
+	}
+	
+	public void setY(int val)
+	{
+		y = val;
 	}
 
 	/* (non-Javadoc)
