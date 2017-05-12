@@ -60,7 +60,7 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 
 	public void incrementYSpeed(int howMuch)
 	{
-		int temp = xSpeed + howMuch;
+		int temp = ySpeed + howMuch;
 		if (temp > MAX_Y_SPEED)
 		{
 			temp = MAX_Y_SPEED;
@@ -119,7 +119,7 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 		}
 		if (height - y < height - BASE)
 		{
-			ySpeed -= 1;
+			incrementYSpeed(-1);
 		}
 		if (height - y < 0)
 		{
@@ -131,11 +131,14 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 
 	public void moveCollisionChecker()
 	{
-		if (compareXPosition() != 0)
+		if (compareXPosition() != 0 && compareYPosition() != 0)
 		{
-			if ((compareYPosition() > 0) && ((y - ySpeed) >= (opponent.getY() + opponent.getHeight())))
+			if ((compareYPosition() > 0) && (y >= (opponent.getY() + opponent.getHeight() - 50)))
 			{
-				ySpeed = 0;
+				if(ySpeed < 0)
+				{
+					ySpeed = 0;
+				}
 				jumpCount = 0;
 				y = opponent.getY() + opponent.getHeight();
 			}
@@ -149,6 +152,11 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 			{
 				x -= xSpeed;
 				opponent.setX(opponent.getX() - opponent.getXSpeed());
+				if(ySpeed <= 0)
+				{
+					xSpeed = 0;
+					opponent.setXSpeed(0);
+				}
 				// if(compareXPosition() > 0)
 				// x = x - xSpeed;
 				//// x = opponent.getX() + opponent.getWidth();
