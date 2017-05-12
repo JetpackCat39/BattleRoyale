@@ -14,10 +14,10 @@ public class ControlsMenu extends Screen implements IDrawable {
 		
 		
 		buttonList.add(new Button(width *1/6, height * 2/9, "BACK",32,Font.BOLD));
-		buttonList.add(new Button(width*9/30, height * 5/9, 80,80, "W",32,Font.BOLD));
-		buttonList.add(new Button(width*9/30, height * 2/3, 80,80, "S",32,Font.BOLD));
-		buttonList.add(new Button(width*57/240, height * 2/3, 80,80, "A",32,Font.BOLD));
-		buttonList.add(new Button(width*87/240, height * 2/3, 80,80, "D",32,Font.BOLD));
+		buttonList.add(new Button(width*9/30, height * 5/9, 80,80, "W",32,Font.PLAIN));
+		buttonList.add(new Button(width*9/30, height * 2/3, 80,80, "S",32,Font.PLAIN));
+		buttonList.add(new Button(width*57/240, height * 2/3, 80,80, "A",32,Font.PLAIN));
+		buttonList.add(new Button(width*87/240, height * 2/3, 80,80, "D",32,Font.PLAIN));
 		buttonList.add(new Button(width*31/48, height * 5/9, 80,80, "\u2191",32,Font.BOLD));
 		buttonList.add(new Button(width*31/48, height * 2/3, 80,80, "\u2193",32,Font.BOLD));
 		buttonList.add(new Button(width*28/48, height * 2/3, 80,80, "\u2195",32,Font.BOLD));

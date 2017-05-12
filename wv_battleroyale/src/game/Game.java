@@ -57,7 +57,7 @@ public class Game extends Canvas implements Runnable
 			menuBG = loader.loadImage("menuBG.jpg");
 			arena1 = loader.loadImage("arena1.jpg");
 			arena2 = loader.loadImage("arena2.jpg");
-			tammy = loader.loadImage("photo.jpg");
+			tammy = loader.loadImage("tammy.png");
 			controlsBG = loader.loadImage("menuBG.jpg");
 		}
 		catch (IOException e)

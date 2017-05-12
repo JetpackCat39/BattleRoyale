@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/game/photo.jpg</name>
-			<type>1</type>
-			<location>C:/Users/justi/Pictures/Carmen/photo.jpg</location>
-		</link>
-	</linkedResources>
 </projectDescription>
