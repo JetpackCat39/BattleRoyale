@@ -133,7 +133,7 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 	{
 		if (compareXPosition() != 0 && compareYPosition() != 0)
 		{
-			if ((compareYPosition() > 0) && (y >= (opponent.getY() + opponent.getHeight() - 50)))
+			if ((y >= (opponent.getY() + opponent.getHeight() - 50)))
 			{
 				if(ySpeed < 0)
 				{
@@ -147,7 +147,7 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 				ySpeed = -1;
 				jumpCount = 2;
 			}
-			else if (isCollision())
+			else
 			{
 				x -= xSpeed;
 				opponent.setX(opponent.getX() - opponent.getXSpeed());
@@ -156,14 +156,7 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 					xSpeed = 0;
 					opponent.setXSpeed(0);
 				}
-				// if(compareXPosition() > 0)
-				// x = x - xSpeed;
-				//// x = opponent.getX() + opponent.getWidth();
-				// else
-				// x = x + xSpeed;
-				//// x = opponent.getX() - opponent.getWidth();
 			}
-			
 		}
 	} 
 
