@@ -25,12 +25,12 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 	
 	public Button(int x, int y, String text, int size, int style)
 	{
-		this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, text,size, style);
+		this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, text,size, style,ARC_WIDTH);
 	}
 	
-	public Button(int x, int y, int width, int height, String text,int size, int style)
+	public Button(int x, int y, int width, int height, String text,int size, int style, int arcWidth)
 	{
-		super(x - (width / 2), y - (width / 2), width, height, ARC_WIDTH, ARC_WIDTH);
+		super(x, y, width, height, arcWidth, arcWidth);
 		buttonText = text;
 		fontStyle = style;
 		fontSize = size;
