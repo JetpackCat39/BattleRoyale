@@ -18,5 +18,7 @@ public interface IOpponent extends IDrawable
 	void damage(int damage);
 
 	void setX(int val);
+	
+	void setY(int val);
 
 }

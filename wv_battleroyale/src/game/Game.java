@@ -57,7 +57,7 @@ public class Game extends Canvas implements Runnable
 			menuBG = loader.loadImage("menuBG.jpg");
 			arena1 = loader.loadImage("arena1.jpg");
 			arena2 = loader.loadImage("arena2.jpg");
-			tammy = loader.loadImage("tammy.png");
+			tammy = loader.loadImage("photo.jpg");
 			controlsBG = loader.loadImage("menuBG.jpg");
 		}
 		catch (IOException e)
@@ -164,8 +164,8 @@ public class Game extends Canvas implements Runnable
 	private MainGame createGame()
 	{
 		MainGame tempGame;
-		p1 = new Fighter(PLAYERX, tammy.getHeight() + PLAYERY);
-		p2 = new Fighter(WIDTH - PLAYERX - tammy.getWidth(), tammy.getHeight() + PLAYERY);
+		p1 = new Fighter(PLAYERX, tammy.getHeight() + PLAYERY, tammy);
+		p2 = new Fighter(WIDTH - PLAYERX - tammy.getWidth(), tammy.getHeight() + PLAYERY, tammy);
 		p1.setOpponent(p2);
 		p2.setOpponent(p1);
 

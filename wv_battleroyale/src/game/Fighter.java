@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Fighter implements IOpponent, IDrawable
+public class Fighter extends Hitbox implements IOpponent, IDrawable
 {
 
 	private static final int KICK = 2;
@@ -21,8 +21,8 @@ public class Fighter implements IOpponent, IDrawable
 	private int health;
 	private IOpponent opponent;
 
-	public Fighter(int newX, int newY)
-	{
+	public Fighter(int newX, int newY, BufferedImage img) {
+		super(newX, newY, img.getWidth(), img.getHeight());
 		x = newX;
 		y = newY;
 		xSpeed = 0;
@@ -31,16 +31,17 @@ public class Fighter implements IOpponent, IDrawable
 		jumpCount = 0;
 		opponent = null;
 		health = STARTHEALTH;
-		BufferedImageLoader loader = new BufferedImageLoader();
-		try
-		{
-			image = loader.loadImage("tammy.png");
-		}
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		image = img;
+//		BufferedImageLoader loader = new BufferedImageLoader();
+//		try
+//		{
+//			image = loader.loadImage("tammy.png");
+//		}
+//		catch (IOException e)
+//		{
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	public void incrementXSpeed(int howMuch)
@@ -144,9 +145,9 @@ public class Fighter implements IOpponent, IDrawable
 				jumpCount = 2;
 			}
 			else if ((y < (BASE + getHeight()) && opponent.getY() < (BASE + opponent.getHeight()))
-					|| ((y > BASE && opponent.getY() > BASE) && (compareYPosition() != 0 || ySpeed <= 0)))
+					|| ((y > BASE && opponent.getY() > BASE)))
 			{
-				x = x - xSpeed;
+				x -= xSpeed;
 				opponent.setX(opponent.getX() - opponent.getXSpeed());
 				// if(compareXPosition() > 0)
 				// x = x - xSpeed;
@@ -195,6 +196,11 @@ public class Fighter implements IOpponent, IDrawable
 	public void setX(int val)
 	{
 		x = val;
+	}
+	
+	public void setY(int val)
+	{
+		y = val;
 	}
 
 	/* (non-Javadoc)
