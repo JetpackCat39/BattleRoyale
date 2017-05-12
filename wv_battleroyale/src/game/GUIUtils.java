@@ -9,7 +9,8 @@ import java.awt.image.BufferedImage;
 
 public class GUIUtils
 {
-	static GUIUtils s_self = new GUIUtils();
+	//dont declare an instance variable?
+	private static GUIUtils s_self = new GUIUtils();
 	
 	public static GUIUtils self()
 	{

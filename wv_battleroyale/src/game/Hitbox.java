@@ -2,7 +2,7 @@ package game;
 
 public class Hitbox {
 	
-	int leftBound, rightBound, topBound, bottomBound;
+	private int leftBound, rightBound, topBound, bottomBound;
 	
 	public Hitbox(int x, int y, int width, int height) {
 		leftBound = x;

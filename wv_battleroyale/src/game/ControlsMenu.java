@@ -6,8 +6,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 public class ControlsMenu extends Screen implements IDrawable {
-	BufferedImage arrows;
-	BufferedImage wasd;
+	private BufferedImage arrows;
+	private BufferedImage wasd;
 	public ControlsMenu(BufferedImage background){
 		super(background);
 		

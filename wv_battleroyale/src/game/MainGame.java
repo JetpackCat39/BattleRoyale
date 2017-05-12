@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 public class MainGame extends Screen implements IDrawable
 {
 
-	IOpponent p1, p2;
+	private IOpponent p1, p2;
 
 	public MainGame(BufferedImage background, IOpponent player1, IOpponent player2)
 	{

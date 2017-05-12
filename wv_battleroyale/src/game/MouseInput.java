@@ -9,9 +9,9 @@ import game.Game.*;
 public class MouseInput implements MouseListener
 {
 
-	MainMenu menu;
-	Game game;
-	ControlsMenu controls;
+	private MainMenu menu;
+	private Game game;
+	private ControlsMenu controls;
 	public MouseInput(MainMenu m, Game g, ControlsMenu c)
 	{
 		menu = m;
