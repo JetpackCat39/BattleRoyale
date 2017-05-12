@@ -12,21 +12,16 @@ public class ControlsMenu extends Screen implements IDrawable {
 	public ControlsMenu(BufferedImage background){
 		super(background);
 		
-		BufferedImageLoader loader = new BufferedImageLoader();
-		try {
-			arrows = loader.loadImage("arrows.png");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			wasd = loader.loadImage("wasd.png");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		buttonList.add(new Button(width *1/6, height * 2/9, "BACK",32,Font.BOLD));
+		buttonList.add(new Button(width*9/30, height * 5/9, 80,80, "W",32,Font.BOLD));
+		buttonList.add(new Button(width*9/30, height * 2/3, 80,80, "S",32,Font.BOLD));
+		buttonList.add(new Button(width*57/240, height * 2/3, 80,80, "A",32,Font.BOLD));
+		buttonList.add(new Button(width*87/240, height * 2/3, 80,80, "D",32,Font.BOLD));
+		buttonList.add(new Button(width*31/48, height * 5/9, 80,80, "\u2191",32,Font.BOLD));
+		buttonList.add(new Button(width*31/48, height * 2/3, 80,80, "\u2193",32,Font.BOLD));
+		buttonList.add(new Button(width*28/48, height * 2/3, 80,80, "\u2190",32,Font.BOLD));
+		buttonList.add(new Button(width*34/48, height * 2/3, 80,80, "\u2192",32,Font.BOLD));
 	}
 	
 	public void draw(Graphics g) {
@@ -37,13 +32,21 @@ public class ControlsMenu extends Screen implements IDrawable {
 		GUIUtils.self().drawText(width/5,height*4/9,Color.white,"PLAYER 1",54,g,Font.PLAIN);
 		GUIUtils.self().drawText(width*5/9,height*4/9,Color.white,"PLAYER 2",54,g,Font.PLAIN);
 		
-		GUIUtils.self().drawImg(wasd, width/5, height/2, wasd.getWidth()*2/3, wasd.getHeight()*2/3, g);
-		GUIUtils.self().drawImg(arrows, width*5/9, height/2, arrows.getWidth()*2/3, arrows.getHeight()*2/3, g);
 		
 		getBack().draw(g);
+		for(int i = 1; i < 9; i ++){
+			getKey(i).draw(g);
+		}
+		
 	}
 	
 	public Button getBack() {
 		return buttonList.get(0);
 	}
+	
+	public Button getKey(int num){
+		return buttonList.get(num);
+	}
+	
+
 }

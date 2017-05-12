@@ -157,7 +157,7 @@ public class Fighter implements IOpponent, IDrawable
 			}
 			
 		}
-	}
+	} 
 
 	// will only return non-0 values if fighters are touching
 	public int compareXPosition()

@@ -1,8 +1,11 @@
 package game;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.RoundRectangle2D;
 
 public class Button extends RoundRectangle2D.Double implements IDrawable
@@ -14,6 +17,7 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 	private String buttonText;
 	private int fontStyle;
 	private int fontSize;
+	
 	/**
 	 * 
 	 */
@@ -58,8 +62,15 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.draw(this);
 		g2d.fill(this);
-		GUIUtils.self().drawText((int) this.getX() + (140 / (text.length() - 2)), (int) this.getY() + ((int) this.getHeight() * 7 / 9),
+		AffineTransform affinetransform = new AffineTransform();     
+		FontRenderContext frc = new FontRenderContext(affinetransform,true,true); 
+		Font font = new Font(text, style, fontSize);
+		int width = (int)(font.getStringBounds(text, frc).getWidth());
+		
+		GUIUtils.self().drawText((int) this.getX() + ((int)this.getWidth()-width)/2, (int) this.getY() + (int) this.getHeight() -((int)this.getHeight()-fontSize)/2,
 				tColor, text, fontSize, g,style);
+		
+	
 	}
 	
 }

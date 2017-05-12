@@ -15,7 +15,7 @@ public class MainMenu extends Screen implements IDrawable
 		// controls button
 		buttonList.add(new Button(width / 3, height * 4 / 5, "CONTROLS",32,Font.BOLD));
 		// exit button
-		buttonList.add(new Button(width / 3, height * 5 / 5, "EXIT",32,Font.BOLD));
+		buttonList.add(new Button(width / 3, height, "EXIT",32,Font.BOLD));
 	}
 
 	public void draw(Graphics g)
