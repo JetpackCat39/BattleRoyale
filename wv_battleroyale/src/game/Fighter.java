@@ -147,8 +147,7 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 				ySpeed = -1;
 				jumpCount = 2;
 			}
-			else if ((y < (BASE + getHeight()) && opponent.getY() < (BASE + opponent.getHeight()))
-					|| ((y > BASE && opponent.getY() > BASE)))
+			else if (isCollision())
 			{
 				x -= xSpeed;
 				opponent.setX(opponent.getX() - opponent.getXSpeed());
@@ -168,6 +167,11 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 		}
 	} 
 
+	public boolean isCollision()
+	{
+		return ((y < (BASE + getHeight()) && opponent.getY() < (BASE + opponent.getHeight()))
+				|| ((y > BASE && opponent.getY() > BASE)));
+	}
 	// will only return non-0 values if fighters are touching
 	public int compareXPosition()
 	{

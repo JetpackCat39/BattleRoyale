@@ -73,11 +73,13 @@ public class KeyInput implements KeyListener
 		// }
 		if (keyCode == keyCodeLeft)
 		{
-			p.incrementXSpeed(15);
+			if(p.getXSpeed() != 0)
+				p.incrementXSpeed(15);
 		}
 		else if (keyCode == keyCodeRight)
 		{
-			p.incrementXSpeed(-15);
+			if(p.getXSpeed() != 0)
+				p.incrementXSpeed(-15);
 		}
 
 	}
