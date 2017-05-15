@@ -21,9 +21,9 @@ public class ControlsMenu extends Screen implements IDrawable
 		buttonList.add(new Button(width * 46 / 240, height * 25 / 36, SIDE, SIDE, 0, "A"));
 		buttonList.add(new Button(width * 82 / 240, height * 25 / 36, SIDE, SIDE, 0, "D"));
 		// player 1 punch
-		buttonList.add(new Button(width * 46 / 240, height * 15 / 18, SIDE, SIDE, 0, "G"));
+		buttonList.add(new Button(width * 46 / 240, height * 15 / 18, SIDE, SIDE, 0, "T"));
 		// player 1 kick
-		buttonList.add(new Button(width * 82 / 240, height * 15 / 18, SIDE, SIDE, 0, "H"));
+		buttonList.add(new Button(width * 82 / 240, height * 15 / 18, SIDE, SIDE, 0, "Y"));
 		
 		// player 2 movement controls
 		buttonList.add(new Button(width * 30 / 48, height * 5 / 9, SIDE, SIDE, 0, "\u2191")); // up arrow key
@@ -31,9 +31,9 @@ public class ControlsMenu extends Screen implements IDrawable
 		buttonList.add(new Button(width * 26 / 48, height * 25 / 36, SIDE, SIDE, 0, "\u2190")); // left arrow key
 		buttonList.add(new Button(width * 34 / 48, height * 25 / 36, SIDE, SIDE, 0, "\u2192")); // right arrow key
 		// player 2 punch
-		buttonList.add(new Button(width * 26 / 48, height * 15 / 18, SIDE, SIDE, 0, "1"));
+		buttonList.add(new Button(width * 26 / 48, height * 15 / 18, SIDE, SIDE, 0, "N"));
 		// player 2 kick
-		buttonList.add(new Button(width * 34 / 48, height * 15 / 18, SIDE, SIDE, 0, "2"));
+		buttonList.add(new Button(width * 34 / 48, height * 15 / 18, SIDE, SIDE, 0, "M"));
 	}
 
 	public void draw(Graphics g)
@@ -67,6 +67,13 @@ public class ControlsMenu extends Screen implements IDrawable
 	public int getNumButtons()
 	{
 		return buttonList.size();
+	}
+
+	public void rebind(int keyToRebind, char key)
+	{
+		Button b = buttonList.remove(keyToRebind);
+		b.setText(String.valueOf(key));
+		buttonList.add(b);
 	}
 
 }

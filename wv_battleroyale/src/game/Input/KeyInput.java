@@ -9,19 +9,19 @@ public class KeyInput implements KeyListener
 {
 
 	protected Fighter p;
-	protected int keyCodeLeft, keyCodeRight, keyCodeJump, keyCodePunch, keyCodeKick;
+	protected int keyCodeLeft, keyCodeRight, keyCodeJump, keyCodeCrouch, keyCodePunch, keyCodeKick;
 
-	public KeyInput(Fighter player, int left, int right, int jump, int punch, int kick)
+	public KeyInput(Fighter player, int left, int right, int jump, int crouch, int punch, int kick)
 	{
 		p = player;
 		keyCodeLeft = left;
 		keyCodeRight = right;
 		keyCodeJump = jump;
+		keyCodeCrouch = crouch;
 		keyCodePunch = punch;
 		keyCodeKick = kick;
 	}
 
-	@Override
 	public void keyPressed(KeyEvent e)
 	{
 		// TODO Auto-generated method stub
@@ -58,7 +58,6 @@ public class KeyInput implements KeyListener
 		}
 	}
 
-	@Override
 	public void keyReleased(KeyEvent e)
 	{
 		// TODO Auto-generated method stub
@@ -86,11 +85,8 @@ public class KeyInput implements KeyListener
 
 	}
 
-	@Override
 	public void keyTyped(KeyEvent e)
 	{
-		// TODO Auto-generated method stub
-
 	}
 
 	// public void timerDown() {

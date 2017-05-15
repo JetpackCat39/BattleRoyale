@@ -8,6 +8,7 @@ import game.Input.KeyInputP1;
 import game.Input.KeyInputP2;
 import game.Input.MouseInput;
 import game.Menus.ChampMenu;
+import game.Menus.ControlChange;
 import game.Menus.ControlsMenu;
 import game.Menus.MainMenu;
 import game.Menus.PauseMenu;
@@ -25,7 +26,7 @@ public class BattleRoyale extends Canvas implements Runnable
 	 */
 	private static final long serialVersionUID = 1L;
 	public static final int HEIGHT = 720;
-	public static final int WIDTH = HEIGHT * 16 / 9;
+	public static final int WIDTH = HEIGHT * 16 / 9; // 1280
 	public static final String TITLE = "Westview Battle Royale";
 
 	// variables to make the game work
@@ -52,6 +53,7 @@ public class BattleRoyale extends Canvas implements Runnable
 	private PauseMenu pause;
 	private StageMenu stage;
 	private ChampMenu champ;
+	private ControlChange change;
 
 	private KeyInputP1 input1;
 	private KeyInputP2 input2;
@@ -60,7 +62,7 @@ public class BattleRoyale extends Canvas implements Runnable
 
 	public enum STATE
 	{
-		GAME, CONTROLS, MENU, PAUSE, STAGESELECT, CHAMPSELECT
+		GAME, CONTROLS, MENU, PAUSE, STAGESELECT, CHAMPSELECT, CONTROLCHANGE
 	};
 
 	private STATE State, prevState;
@@ -88,11 +90,14 @@ public class BattleRoyale extends Canvas implements Runnable
 		drawables.put(STATE.STAGESELECT, stage);
 		champ = new ChampMenu(menuBG);
 		drawables.put(STATE.CHAMPSELECT, champ);
+		change = new ControlChange(this, controls, pauseBG);
+		drawables.put(STATE.CONTROLCHANGE, change);
 
 		setState(STATE.MENU);
 		setPreviousState(null);
 		
-		this.addMouseListener(new MouseInput(this, menu, controls, pause, stage, champ));
+		this.addMouseListener(new MouseInput(this, menu, controls, pause, stage, champ, change));
+		this.addKeyListener(change);
 	}
 
 	private void imageLoader() throws IOException
