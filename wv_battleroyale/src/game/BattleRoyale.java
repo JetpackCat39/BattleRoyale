@@ -2,6 +2,7 @@ package game;
 
 import java.awt.*;
 import java.awt.image.*;
+
 import javax.swing.*;
 
 import game.Input.KeyInputP1;
@@ -40,6 +41,7 @@ public class BattleRoyale extends Canvas implements Runnable
 	private static BufferedImage menuBG = null;
 	private static BufferedImage arena = null;
 	private static BufferedImage tammy = null;
+	private static BufferedImage fire = null;
 	public static BufferedImage controlsBG = null;
 	public static BufferedImage pauseBG = null;
 
@@ -80,7 +82,7 @@ public class BattleRoyale extends Canvas implements Runnable
 
 		game = createGame();
 		drawables.put(STATE.GAME, game);
-		menu = new MainMenu(menuBG);
+		menu = new MainMenu(menuBG, fire);
 		drawables.put(STATE.MENU, menu);
 		controls = new ControlsMenu(controlsBG);
 		drawables.put(STATE.CONTROLS, controls);
@@ -107,6 +109,8 @@ public class BattleRoyale extends Canvas implements Runnable
 		tammy = GUIUtils.self().loadImage("Images/tammy.png");
 		controlsBG = GUIUtils.self().loadImage("Images/controlsBG.jpg");
 		pauseBG = GUIUtils.self().createOverlay(WIDTH, HEIGHT, 0.85f);
+		//fire image: http://dreamicus.com/data/fire/fire-04.jpg
+		fire = GUIUtils.self().loadImage("Images/fire.png");
 	}
 
 	public void setState(STATE newState)

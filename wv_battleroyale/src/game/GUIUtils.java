@@ -29,17 +29,17 @@ public class GUIUtils
 		
 		Graphics2D g2d = (Graphics2D) g;
 		
-		g2d.setFont(new Font(DEFAULT_FONT, DEFAULT_FONT_STYLE, fontSize));
+		g2d.setFont(new Font("impact", DEFAULT_FONT_STYLE, fontSize));
 		FontMetrics fontMetrics = new JFrame().getFontMetrics(new Font(DEFAULT_FONT, DEFAULT_FONT_STYLE, fontSize));
 		g2d.setColor(DEFAULT_COLOR);
 
 	    GradientPaint gp = new GradientPaint(
-	                            x + (fontMetrics.stringWidth("BATTLE ROYALE")/2), 
+	                            x + (fontMetrics.stringWidth("B A T T L E  R O Y A L E")/2), 
 	                            y + fontMetrics.getHeight(),
-	                            Color.decode("#4d4d4d"),
-	                            x + (fontMetrics.stringWidth("BATTLE ROYALE")/2),
+	                            Color.decode("#010101"),
+	                            x + (fontMetrics.stringWidth("B A T T L E  R O Y A L E")/2),
 	                            y,
-	                            Color.LIGHT_GRAY,
+	                            Color.decode("#5d5d5d"),
 	                            true);  
 	    
 	    g2d.setPaint(gp);
