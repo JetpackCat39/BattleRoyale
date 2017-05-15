@@ -20,7 +20,8 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 	private int health;
 	private IOpponent opponent;
 
-	public Fighter(int newX, int newY, BufferedImage img) {
+	public Fighter(int newX, int newY, BufferedImage img)
+	{
 		super(newX, newY, img.getWidth(), img.getHeight());
 		x = newX;
 		y = newY;
@@ -31,16 +32,16 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 		opponent = null;
 		health = STARTHEALTH;
 		image = img;
-//		BufferedImageLoader loader = new BufferedImageLoader();
-//		try
-//		{
-//			image = loader.loadImage("tammy.png");
-//		}
-//		catch (IOException e)
-//		{
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		// BufferedImageLoader loader = new BufferedImageLoader();
+		// try
+		// {
+		// image = loader.loadImage("tammy.png");
+		// }
+		// catch (IOException e)
+		// {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 	}
 
 	public void incrementXSpeed(int howMuch)
@@ -81,7 +82,9 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 		ySpeed = newSpeed;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see game.iOpponent#getXSpeed()
 	 */
 	@Override
@@ -90,7 +93,9 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 		return xSpeed;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see game.iOpponent#getYSpeed()
 	 */
 	@Override
@@ -134,7 +139,7 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 		{
 			if (y >= (opponent.getY() + opponent.getHeight() - 50))
 			{
-				if(ySpeed < 0)
+				if (ySpeed < 0)
 				{
 					ySpeed = 0;
 				}
@@ -150,19 +155,21 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 			{
 				x -= xSpeed;
 				opponent.setX(opponent.getX() - opponent.getXSpeed());
-				if(ySpeed <= 0)
+				if (ySpeed <= 0)
 				{
 					xSpeed = 0;
 					opponent.setXSpeed(0);
 				}
 			}
 		}
-	} 
+	}
 
 	public boolean isCollision()
 	{
-		return (compareXPosition() != 0 && compareYPosition() != 0) && !(y >= (opponent.getY() + opponent.getHeight() - 50)) && !(compareYPosition() < 0);
+		return (compareXPosition() != 0 && compareYPosition() != 0)
+				&& !(y >= (opponent.getY() + opponent.getHeight() - 50)) && !(compareYPosition() < 0);
 	}
+
 	// will only return non-0 values if fighters are touching
 	public int compareXPosition()
 	{
@@ -200,13 +207,15 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 	{
 		x = val;
 	}
-	
+
 	public void setY(int val)
 	{
 		y = val;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see game.iOpponent#getX()
 	 */
 	@Override
@@ -215,7 +224,9 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 		return x;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see game.iOpponent#getY()
 	 */
 	@Override
@@ -224,7 +235,9 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 		return y;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see game.iOpponent#getWidth()
 	 */
 	@Override
@@ -233,7 +246,9 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 		return image.getWidth();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see game.iOpponent#getHeight()
 	 */
 	@Override
@@ -287,7 +302,9 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 		health = newHealth;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see game.iOpponent#damage(int)
 	 */
 	@Override

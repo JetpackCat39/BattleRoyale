@@ -16,17 +16,17 @@ public class MainMenu extends Screen implements IDrawable
 		super(background);
 
 		// play button
-		buttonList.add(new Button(width / 3, height * 2 / 5, "PLAY",32,Font.BOLD));
+		buttonList.add(new Button(width / 3, height * 2 / 5, "PLAY", 32, Font.BOLD));
 		// controls button
-		buttonList.add(new Button(width / 3, height * 3 / 5, "CONTROLS",32,Font.BOLD));
+		buttonList.add(new Button(width / 3, height * 3 / 5, "CONTROLS", 32, Font.BOLD));
 		// exit button
-		buttonList.add(new Button(width / 3, height * 4/5, "EXIT",32,Font.BOLD));
+		buttonList.add(new Button(width / 3, height * 4 / 5, "EXIT", 32, Font.BOLD));
 	}
 
 	public void draw(Graphics g)
 	{
 		super.draw(g);
-		GUIUtils.self().drawText(width / 9, height * 2 / 9, Color.white, BattleRoyale.TITLE, 72, g,Font.BOLD);
+		GUIUtils.self().drawText(width / 9, height * 2 / 9, Color.white, BattleRoyale.TITLE, 72, g, Font.BOLD);
 		getPlay().draw(g);
 		getControls().draw(g);
 		getExit().draw(g);

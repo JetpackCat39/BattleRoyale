@@ -9,14 +9,14 @@ import java.awt.image.BufferedImage;
 
 public class GUIUtils
 {
-	//dont declare an instance variable?
+	// dont declare an instance variable?
 	private static GUIUtils s_self = new GUIUtils();
-	
+
 	public static GUIUtils self()
 	{
 		return s_self;
 	}
-	
+
 	private GUIUtils()
 	{
 	}
@@ -33,8 +33,5 @@ public class GUIUtils
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(bg, x, y, w, h, null);
 	}
-
-	
-	
 
 }

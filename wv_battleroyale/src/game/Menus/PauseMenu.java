@@ -10,7 +10,7 @@ public class PauseMenu extends Screen implements IDrawable
 	public PauseMenu(BufferedImage background)
 	{
 		super(background);
-		
+
 	}
 
 }

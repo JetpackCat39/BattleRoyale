@@ -16,7 +16,7 @@ public class MainGame extends Screen implements IDrawable
 		super(background);
 		p1 = player1;
 		p2 = player2;
-		buttonList.add(new Button(width * 5/6, height * 2/9, "BACK", 32, Font.BOLD));
+		buttonList.add(new Button(width * 5 / 6, height * 2 / 9, "BACK", 32, Font.BOLD));
 	}
 
 	public void draw(Graphics g)

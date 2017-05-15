@@ -75,7 +75,7 @@ public class BattleRoyale extends Canvas implements Runnable
 		game = createGame();
 		controls = createControls();
 
-		this.addMouseListener(new MouseInput(menu, this,controls));
+		this.addMouseListener(new MouseInput(menu, this, controls));
 	}
 
 	public void setState(STATE newState)
@@ -159,14 +159,16 @@ public class BattleRoyale extends Canvas implements Runnable
 	{
 		p1.move();
 		p2.move();
-		
+
 	}
 
-	private ControlsMenu createControls(){
+	private ControlsMenu createControls()
+	{
 		ControlsMenu controls;
 		controls = new ControlsMenu(controlsBG);
 		return controls;
 	}
+
 	private MainGame createGame()
 	{
 		MainGame tempGame;

@@ -21,23 +21,24 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 	private int fontSize;
 	private Color backColor;
 	private Color textColor;
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	public Button(int x, int y, String text, int size, int style)
 	{
 		this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, text, size, style, ARC_WIDTH, DEFAULT_BACKGROUND, DEFAULT_TCOLOR);
 	}
-	
+
 	public Button(int x, int y, int width, int height, String text, int size, int style, int arcWidth)
 	{
 		this(x, y, width, height, text, size, style, arcWidth, DEFAULT_BACKGROUND, DEFAULT_TCOLOR);
 	}
-	
-	public Button(int x, int y, int width, int height, String text, int size, int style, int arcWidth, Color background, Color tcolor)
+
+	public Button(int x, int y, int width, int height, String text, int size, int style, int arcWidth, Color background,
+			Color tcolor)
 	{
 		super(x, y, width, height, arcWidth, arcWidth);
 		buttonText = text;
@@ -46,42 +47,42 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 		backColor = background;
 		textColor = tcolor;
 	}
-	
+
 	public String getText()
 	{
 		return buttonText;
 	}
-	
+
 	public void setText(String text)
 	{
 		buttonText = text;
 	}
-	
+
 	public int getTextSize()
 	{
 		return fontSize;
 	}
-	
+
 	public void setTextSize(int size)
 	{
 		fontSize = size;
 	}
-	
+
 	public Color getBackgroundColor()
 	{
 		return backColor;
 	}
-	
+
 	public void setBackgroundColor(Color color)
 	{
 		backColor = color;
 	}
-	
+
 	public Color getTextColor()
 	{
 		return textColor;
 	}
-	
+
 	public void setTextColor(Color color)
 	{
 		textColor = color;
@@ -93,14 +94,14 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.draw(this);
 		g2d.fill(this);
-		AffineTransform affinetransform = new AffineTransform();     
-		FontRenderContext frc = new FontRenderContext(affinetransform,true,true); 
+		AffineTransform affinetransform = new AffineTransform();
+		FontRenderContext frc = new FontRenderContext(affinetransform, true, true);
 		Font font = new Font(buttonText, fontStyle, fontSize);
-		int width = (int)(font.getStringBounds(buttonText, frc).getWidth());
-		
-		GUIUtils.self().drawText((int) this.getX() + ((int)this.getWidth()-width)/2, (int) this.getY() + (int) this.getHeight() - 
-				((int)this.getHeight()-fontSize)/2, textColor, buttonText, fontSize, g, fontStyle);
+		int width = (int) (font.getStringBounds(buttonText, frc).getWidth());
+
+		GUIUtils.self().drawText((int) this.getX() + ((int) this.getWidth() - width) / 2,
+				(int) this.getY() + (int) this.getHeight() - ((int) this.getHeight() - fontSize) / 2, textColor,
+				buttonText, fontSize, g, fontStyle);
 	}
 
-	
 }

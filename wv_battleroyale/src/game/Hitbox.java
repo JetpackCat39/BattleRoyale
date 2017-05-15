@@ -1,45 +1,55 @@
 package game;
 
-public class Hitbox {
-	
+public class Hitbox
+{
+
 	private int leftBound, rightBound, topBound, bottomBound;
-	
-	public Hitbox(int x, int y, int width, int height) {
+
+	public Hitbox(int x, int y, int width, int height)
+	{
 		leftBound = x;
 		rightBound = x + width;
 		topBound = y + height;
 		bottomBound = y;
 	}
-	
-	public int getLeftBound() {
+
+	public int getLeftBound()
+	{
 		return leftBound;
 	}
-	
-	public int getRightBound() {
+
+	public int getRightBound()
+	{
 		return rightBound;
 	}
-	
-	public int getTopBound() {
+
+	public int getTopBound()
+	{
 		return topBound;
 	}
-	
-	public int getBottomBound() {
+
+	public int getBottomBound()
+	{
 		return bottomBound;
 	}
-	
-	public int compareLeftBound(Hitbox other) {
+
+	public int compareLeftBound(Hitbox other)
+	{
 		return other.getLeftBound() - leftBound;
 	}
 
-	public int compareRightBound(Hitbox other) {
+	public int compareRightBound(Hitbox other)
+	{
 		return other.getRightBound() - rightBound;
 	}
 
-	public int compareTopBound(Hitbox other) {
+	public int compareTopBound(Hitbox other)
+	{
 		return other.getTopBound() - topBound;
 	}
 
-	public int compareBottomBound(Hitbox other) {
+	public int compareBottomBound(Hitbox other)
+	{
 		return other.getBottomBound() - bottomBound;
 	}
 }
