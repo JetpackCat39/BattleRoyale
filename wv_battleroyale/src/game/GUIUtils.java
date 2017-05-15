@@ -1,14 +1,11 @@
 package game;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 
 public class GUIUtils
 {
@@ -29,9 +26,24 @@ public class GUIUtils
 
 	public void drawText(int x, int y, String text, int fontSize, Graphics g)
 	{
-		g.setFont(new Font(DEFAULT_FONT, DEFAULT_FONT_STYLE, fontSize));
-		g.setColor(DEFAULT_COLOR);
-		g.drawString(text, x, y);
+		
+		Graphics2D g2d = (Graphics2D) g;
+		
+		g2d.setFont(new Font(DEFAULT_FONT, DEFAULT_FONT_STYLE, fontSize));
+		FontMetrics fontMetrics = new JFrame().getFontMetrics(new Font(DEFAULT_FONT, DEFAULT_FONT_STYLE, fontSize));
+		g2d.setColor(DEFAULT_COLOR);
+
+	    GradientPaint gp = new GradientPaint(
+	                            x + (fontMetrics.stringWidth("BATTLE ROYALE")/2), 
+	                            y + fontMetrics.getHeight(),
+	                            Color.decode("#4d4d4d"),
+	                            x + (fontMetrics.stringWidth("BATTLE ROYALE")/2),
+	                            y,
+	                            Color.LIGHT_GRAY,
+	                            true);  
+	    
+	    g2d.setPaint(gp);
+		g2d.drawString(text, x, y);
 	}
 	
 	public void drawText(int x, int y, Color color, String text, int fontSize, Graphics g, int fontStyle)
