@@ -13,7 +13,8 @@ public class MainGame extends Screen implements IDrawable, KeyListener
 {
 
 	private BattleRoyale game;
-	private int  minVal, offset, maxVal;
+	private int midpoint;
+	private final int MIDDLE = 592;
 	private IOpponent p1, p2;
 
 	public MainGame(BufferedImage background, BattleRoyale g, IOpponent player1, IOpponent player2)
@@ -22,14 +23,13 @@ public class MainGame extends Screen implements IDrawable, KeyListener
 		game = g;
 		p1 = player1;
 		p2 = player2;
-		minVal = -(background.getWidth() - width);
-		offset = minVal/2;
-		maxVal = 0;
+		midpoint = MIDDLE;
 	}
 
 	public void draw(Graphics g)
 	{
-		GUIUtils.self().drawImg(bg, offset, 0, bg.getWidth(), bg.getHeight(), g);
+		midpoint = (p1.getX() + p2.getX()) / 2;
+		GUIUtils.self().drawImg(bg,  (bg.getWidth()/2) - MIDDLE * 8 / 3 - midpoint, 0, bg.getWidth(), bg.getHeight(), g);
 		p1.draw(g);
 		p2.draw(g);
 	}

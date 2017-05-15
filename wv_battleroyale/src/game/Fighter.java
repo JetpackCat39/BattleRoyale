@@ -7,8 +7,8 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 {
 
 	private static final int KICK = 2;
-	private static final int MAX_Y_SPEED = 20;
-	private static final int MAX_X_SPEED = 15;
+	private static final int MAX_Y_SPEED = 15;
+	private static final int MAX_X_SPEED = 5;
 	private static final int STARTHEALTH = 20;
 	private static final int PUNCH = 3;
 	private int x, y, xSpeed, ySpeed;
@@ -17,6 +17,7 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 	private int width = BattleRoyale.WIDTH;
 	private final int BASE;
 	private int jumpCount;
+	private final int JUMPS = 1;
 	private int health;
 	private IOpponent opponent;
 
@@ -269,7 +270,7 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 
 	public void jump()
 	{
-		if (jumpCount < 2)
+		if (jumpCount < JUMPS)
 		{
 			ySpeed = MAX_Y_SPEED;
 		}

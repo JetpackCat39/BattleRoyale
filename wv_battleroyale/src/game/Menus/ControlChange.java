@@ -27,7 +27,7 @@ public class ControlChange extends Screen implements IDrawable, KeyListener
 	{
 		itemToOverlay.draw(g);
 		super.draw(g);
-		GUIUtils.self().drawText(width/4, height/3, "Press any key to rebind...", 50, g);
+		GUIUtils.self().drawText(width/4, height/3, "Press any key to rebind...", 50, g, false);
 	}
 
 	public void keyTyped(KeyEvent e)

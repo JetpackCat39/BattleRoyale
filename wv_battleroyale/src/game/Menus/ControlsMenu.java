@@ -40,13 +40,13 @@ public class ControlsMenu extends Screen implements IDrawable
 	{
 		super.draw(g);
 
-		GUIUtils.self().drawText(width / 3, height * 2 / 9, "CONTROLS", 72, g);
-		GUIUtils.self().drawText(width / 5, height * 17 / 36, "PLAYER 1", 54, g);
-		GUIUtils.self().drawText(width * 5 / 9, height * 17 / 36, "PLAYER 2", 54, g);
-		GUIUtils.self().drawText(width * 47 / 240, height * 39 / 40, "PUNCH", 20, g);
-		GUIUtils.self().drawText(width * 85 / 240, height * 39 / 40, "KICK", 20, g);
-		GUIUtils.self().drawText(width * 105 / 192, height * 39 / 40, "PUNCH", 20, g);
-		GUIUtils.self().drawText(width * 69 / 96, height * 39 / 40, "KICK", 20, g);
+		GUIUtils.self().drawText(width / 3, height * 2 / 9, "CONTROLS", 72, g, false);
+		GUIUtils.self().drawText(width / 5, height * 17 / 36, "PLAYER 1", 54, g, false);
+		GUIUtils.self().drawText(width * 5 / 9, height * 17 / 36, "PLAYER 2", 54, g, false);
+		GUIUtils.self().drawText(width * 47 / 240, height * 39 / 40, "PUNCH", 20, g, false);
+		GUIUtils.self().drawText(width * 85 / 240, height * 39 / 40, "KICK", 20, g, false);
+		GUIUtils.self().drawText(width * 105 / 192, height * 39 / 40, "PUNCH", 20, g, false);
+		GUIUtils.self().drawText(width * 69 / 96, height * 39 / 40, "KICK", 20, g, false);
 		for (int i = 0; i < buttonList.size(); i++)
 		{
 			getKey(i).draw(g);
