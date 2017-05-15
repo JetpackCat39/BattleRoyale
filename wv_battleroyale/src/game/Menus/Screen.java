@@ -1,14 +1,18 @@
-package game;
+package game.Menus;
 
 import java.awt.Graphics;
-import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import game.BattleRoyale;
+import game.Button;
+import game.GUIUtils;
+import game.IDrawable;
+
 public class Screen implements IDrawable
 {
-	protected int height = Game.HEIGHT;
-	protected int width = Game.WIDTH;
+	protected int height = BattleRoyale.HEIGHT;
+	protected int width = BattleRoyale.WIDTH;
 
 	protected ArrayList<Button> buttonList;
 	protected BufferedImage bg;

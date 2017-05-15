@@ -1,6 +1,8 @@
-package game;
+package game.Input;
 
 import java.awt.event.KeyEvent;
+
+import game.Fighter;
 
 public class KeyInputP2 extends KeyInput
 {

@@ -2,7 +2,6 @@ package game;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public class Fighter extends Hitbox implements IOpponent, IDrawable
 {
@@ -14,8 +13,8 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 	private static final int PUNCH = 3;
 	private int x, y, xSpeed, ySpeed;
 	private BufferedImage image;
-	private int height = Game.HEIGHT;
-	private int width = Game.WIDTH;
+	private int height = BattleRoyale.HEIGHT;
+	private int width = BattleRoyale.WIDTH;
 	private final int BASE;
 	private int jumpCount;
 	private int health;

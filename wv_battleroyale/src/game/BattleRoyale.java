@@ -4,9 +4,15 @@ import java.awt.*;
 import java.awt.image.*;
 import javax.swing.*;
 
+import game.Input.KeyInputP1;
+import game.Input.KeyInputP2;
+import game.Input.MouseInput;
+import game.Menus.ControlsMenu;
+import game.Menus.MainMenu;
+
 import java.io.IOException;
 
-public class Game extends Canvas implements Runnable
+public class BattleRoyale extends Canvas implements Runnable
 {
 	private static final int PLAYERY = 90;
 	private static final int PLAYERX = 300;
@@ -42,9 +48,9 @@ public class Game extends Canvas implements Runnable
 	private KeyInputP1 input1;
 	private KeyInputP2 input2;
 
-	enum STATE
+	public enum STATE
 	{
-		GAME, CONTROLS, MENU, PAUSE
+		GAME, CONTROLS, MENU, PAUSE, STAGESELECT
 	};
 
 	private STATE State = STATE.MENU;
@@ -54,11 +60,11 @@ public class Game extends Canvas implements Runnable
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try
 		{
-			menuBG = loader.loadImage("menuBG.jpg");
-			arena1 = loader.loadImage("arena1.jpg");
-			arena2 = loader.loadImage("arena2.jpg");
-			tammy = loader.loadImage("tammy.png");
-			controlsBG = loader.loadImage("menuBG.jpg");
+			menuBG = loader.loadImage("Images/menuBG.jpg");
+			arena1 = loader.loadImage("Images/arena1.jpg");
+			arena2 = loader.loadImage("Images/arena2.jpg");
+			tammy = loader.loadImage("Images/tammy.png");
+			controlsBG = loader.loadImage("Images/menuBG.jpg");
 		}
 		catch (IOException e)
 		{
@@ -217,13 +223,13 @@ public class Game extends Canvas implements Runnable
 
 	public static void main(String args[])
 	{
-		Game game = new Game();
+		BattleRoyale game = new BattleRoyale();
 		game.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		game.setMaximumSize(new Dimension(WIDTH, HEIGHT));
 		game.setMinimumSize(new Dimension(WIDTH, HEIGHT));
 		game.initialize();
 
-		JFrame frame = new JFrame(Game.TITLE);
+		JFrame frame = new JFrame(BattleRoyale.TITLE);
 		frame.add(game);
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

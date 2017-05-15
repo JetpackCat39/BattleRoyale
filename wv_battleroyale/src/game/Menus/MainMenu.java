@@ -1,7 +1,12 @@
-package game;
+package game.Menus;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+
+import game.Button;
+import game.GUIUtils;
+import game.BattleRoyale;
+import game.IDrawable;
 
 public class MainMenu extends Screen implements IDrawable
 {
@@ -21,7 +26,7 @@ public class MainMenu extends Screen implements IDrawable
 	public void draw(Graphics g)
 	{
 		super.draw(g);
-		GUIUtils.self().drawText(width / 9, height * 2 / 9, Color.white, Game.TITLE, 72, g,Font.BOLD);
+		GUIUtils.self().drawText(width / 9, height * 2 / 9, Color.white, BattleRoyale.TITLE, 72, g,Font.BOLD);
 		getPlay().draw(g);
 		getControls().draw(g);
 		getExit().draw(g);

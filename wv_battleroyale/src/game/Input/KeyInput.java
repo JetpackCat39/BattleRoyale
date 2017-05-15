@@ -1,7 +1,9 @@
-package game;
+package game.Input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import game.Fighter;
 
 public class KeyInput implements KeyListener
 {
