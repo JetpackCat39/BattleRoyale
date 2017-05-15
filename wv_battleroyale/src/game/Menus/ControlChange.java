@@ -4,30 +4,28 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-
 import game.BattleRoyale;
 import game.BattleRoyale.STATE;
-import game.Button;
 import game.GUIUtils;
 import game.IDrawable;
 
 public class ControlChange extends Screen implements IDrawable, KeyListener
 {
 	private BattleRoyale game;
-	private ControlsMenu c;
+	IDrawable itemToOverlay;
 	private int newKey;
 	public int keyToRebind;
 
-	public ControlChange(BattleRoyale br, ControlsMenu ctrl, BufferedImage background)
+	public ControlChange(BattleRoyale br, IDrawable d, BufferedImage background)
 	{
 		super(background);
 		game = br;
-		c = ctrl;
+		itemToOverlay = d;
 	}
 	
 	public void draw(Graphics g)
 	{
-		c.draw(g);
+		itemToOverlay.draw(g);
 		super.draw(g);
 		GUIUtils.self().drawText(width/4, height/3, "Press any key to rebind...", 50, g);
 	}
@@ -38,7 +36,6 @@ public class ControlChange extends Screen implements IDrawable, KeyListener
 
 	public void keyPressed(KeyEvent e)
 	{		
-		c.rebind(keyToRebind, e.getKeyChar());
 		game.setState(STATE.CONTROLS);
 	}
 

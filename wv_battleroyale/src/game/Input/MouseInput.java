@@ -36,8 +36,6 @@ public class MouseInput implements MouseListener
 
 	public void mouseClicked(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -71,14 +69,20 @@ public class MouseInput implements MouseListener
 	{
 		if (controls.getBack().contains(myX, myY))
 		{
-			game.setState(game.getPreviousState());
+			if (game.getPreviousState() != STATE.CONTROLCHANGE)
+			{
+				game.setState(game.getPreviousState());
+			}
+			else
+			{
+			}
 		}
 		for (int i = 1; i < controls.getNumButtons(); i++)
 		{
 			if (controls.getKey(i).contains(myX, myY))
 			{
-				change.setKeyToRebind(i);
-				game.setState(STATE.CONTROLCHANGE);
+				//change.setKeyToRebind(i);
+				//game.setState(STATE.CONTROLCHANGE);
 			}
 		}
 	}
@@ -115,23 +119,16 @@ public class MouseInput implements MouseListener
 		}
 	}
 
-	@Override
 	public void mouseReleased(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
-
 	}
 
 	public void mouseEntered(MouseEvent e)
 	{
-
 	}
 
-	@Override
 	public void mouseExited(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
-
 	}
 
 }

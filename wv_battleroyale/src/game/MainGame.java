@@ -22,7 +22,6 @@ public class MainGame extends Screen implements IDrawable, KeyListener
 		game = g;
 		p1 = player1;
 		p2 = player2;
-		buttonList.add(new Button(width * 5 / 6, height * 2 / 9, "BACK", 32, Font.BOLD));
 		minVal = -(background.getWidth() - width);
 		offset = minVal/2;
 		maxVal = 0;
