@@ -15,7 +15,6 @@ public class GUIUtils
 	private static final String DEFAULT_FONT = "arial";
 	private static final Color DEFAULT_COLOR = Color.white;
 	private static final int DEFAULT_FONT_STYLE = Font.BOLD; 
-	private BufferedImage image;
 	// Making GUIUtils a singleton
 	private static GUIUtils s_self = new GUIUtils();
 
@@ -50,8 +49,17 @@ public class GUIUtils
 	
 	public BufferedImage loadImage(String path) throws IOException
 	{
-		image = ImageIO.read(getClass().getResource(path));
+		BufferedImage image = ImageIO.read(getClass().getResource(path));
 		return image;
+	}
+	
+	public BufferedImage createOverlay(int width, int height, float alpha)
+	{
+		BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		Graphics g = img.getGraphics();
+		g.setColor(new Color(0f, 0f, 0f, alpha));
+		g.fillRect(0, 0, width, height);
+		return img;
 	}
 
 }

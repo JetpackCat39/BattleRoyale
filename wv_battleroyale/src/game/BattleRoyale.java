@@ -14,6 +14,7 @@ import game.Menus.PauseMenu;
 import game.Menus.StageMenu;
 
 import java.io.IOException;
+import java.util.Hashtable;
 
 public class BattleRoyale extends Canvas implements Runnable
 {
@@ -36,10 +37,10 @@ public class BattleRoyale extends Canvas implements Runnable
 	// private BufferedImage image = new BufferedImage(WIDTH, HEIGHT,
 	// BufferedImage.TYPE_INT_RGB);
 	private static BufferedImage menuBG = null;
-	private static BufferedImage arena1 = null;
-	private static BufferedImage arena2 = null;
+	private static BufferedImage arena = null;
 	private static BufferedImage tammy = null;
 	public static BufferedImage controlsBG = null;
+	public static BufferedImage pauseBG = null;
 
 	private Fighter p1, p2;
 
@@ -54,6 +55,8 @@ public class BattleRoyale extends Canvas implements Runnable
 
 	private KeyInputP1 input1;
 	private KeyInputP2 input2;
+	
+	private Hashtable<STATE,IDrawable> drawables = new Hashtable<STATE,IDrawable>();
 
 	public enum STATE
 	{
@@ -74,11 +77,17 @@ public class BattleRoyale extends Canvas implements Runnable
 		}
 
 		game = createGame();
+		drawables.put(STATE.GAME, game);
 		menu = new MainMenu(menuBG);
+		drawables.put(STATE.MENU, menu);
 		controls = new ControlsMenu(controlsBG);
-		pause = createPause();
+		drawables.put(STATE.CONTROLS, controls);
+		pause = new PauseMenu(game, pauseBG);
+		drawables.put(STATE.PAUSE, pause);
 		stage = new StageMenu(menuBG);
+		drawables.put(STATE.STAGESELECT, stage);
 		champ = new ChampMenu(menuBG);
+		drawables.put(STATE.CHAMPSELECT, champ);
 
 		setState(STATE.MENU);
 		
@@ -88,38 +97,16 @@ public class BattleRoyale extends Canvas implements Runnable
 	private void imageLoader() throws IOException
 	{
 		menuBG = GUIUtils.self().loadImage("Images/menuBG.jpg");
-		arena1 = GUIUtils.self().loadImage("Images/arena1.jpg");
-		arena2 = GUIUtils.self().loadImage("Images/arena2.jpg");
+		arena = GUIUtils.self().loadImage("Images/arena1.jpg");
 		tammy = GUIUtils.self().loadImage("Images/tammy.png");
 		controlsBG = GUIUtils.self().loadImage("Images/controlsBG.jpg");
+		pauseBG = GUIUtils.self().createOverlay(WIDTH, HEIGHT, 0.85f);
 	}
 
 	public void setState(STATE newState)
 	{
 		State = newState;
-		switch(State)
-		{
-		case GAME:
-			currentDrawable = game;
-			break;
-		case CONTROLS:
-			currentDrawable = controls;
-			break;
-		case MENU:
-			currentDrawable = menu;
-			break;
-		case PAUSE:
-			currentDrawable = pause;
-			break;
-		case STAGESELECT:
-			currentDrawable = stage;
-			break;
-		case CHAMPSELECT:
-			currentDrawable = champ;
-			break;
-		default:
-			throw new IllegalArgumentException();
-		}
+		currentDrawable = drawables.get(newState);
 	}
 
 	public STATE getState()
@@ -198,13 +185,6 @@ public class BattleRoyale extends Canvas implements Runnable
 	{
 		p1.move();
 		p2.move();
-
-	}
-
-	private PauseMenu createPause()
-	{
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	private MainGame createGame()
@@ -215,18 +195,12 @@ public class BattleRoyale extends Canvas implements Runnable
 		p1.setOpponent(p2);
 		p2.setOpponent(p1);
 
-		if (Math.random() > .5)
-		{
-			tempGame = new MainGame(arena1, p1, p2);
-		}
-		else
-		{
-			tempGame = new MainGame(arena2, p1, p2);
-		}
+		tempGame = new MainGame(arena, this, p1, p2);
 
 		input1 = new KeyInputP1(p1);
 		input2 = new KeyInputP2(p2);
 
+		this.addKeyListener(tempGame);
 		this.addKeyListener(input1);
 		this.addKeyListener(input2);
 		return tempGame;
@@ -242,7 +216,6 @@ public class BattleRoyale extends Canvas implements Runnable
 										// thinks 2 steps ahead
 			return;
 		}
-
 		g = strat.getDrawGraphics();
 		currentDrawable.draw(g);
 		g.dispose();
