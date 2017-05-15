@@ -1,7 +1,5 @@
 package game.Menus;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -64,6 +62,11 @@ public class ControlsMenu extends Screen implements IDrawable
 	public Button getKey(int num)
 	{
 		return buttonList.get(num);
+	}
+	
+	public int getNumButtons()
+	{
+		return buttonList.size();
 	}
 
 }

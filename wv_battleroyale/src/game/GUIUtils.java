@@ -6,12 +6,16 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class GUIUtils
 {
 	private static final String DEFAULT_FONT = "arial";
 	private static final Color DEFAULT_COLOR = Color.white;
 	private static final int DEFAULT_FONT_STYLE = Font.BOLD; 
+	private BufferedImage image;
 	// Making GUIUtils a singleton
 	private static GUIUtils s_self = new GUIUtils();
 
@@ -42,6 +46,12 @@ public class GUIUtils
 	{
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(bg, x, y, w, h, null);
+	}
+	
+	public BufferedImage loadImage(String path) throws IOException
+	{
+		image = ImageIO.read(getClass().getResource(path));
+		return image;
 	}
 
 }

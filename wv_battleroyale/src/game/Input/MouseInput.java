@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 
 import game.BattleRoyale;
 import game.BattleRoyale.STATE;
+import game.Menus.ChampMenu;
 import game.Menus.ControlsMenu;
 import game.Menus.MainMenu;
 import game.Menus.PauseMenu;
@@ -19,14 +20,16 @@ public class MouseInput implements MouseListener
 	private ControlsMenu controls;
 	private PauseMenu pause;
 	private StageMenu stage;
+	private ChampMenu champ;
 
-	public MouseInput(BattleRoyale g, MainMenu m, ControlsMenu c, PauseMenu p, StageMenu s)
+	public MouseInput(BattleRoyale g, MainMenu m, ControlsMenu c, PauseMenu p, StageMenu s, ChampMenu ch)
 	{	
 		game = g;
 		menu = m;
 		controls = c;
 		pause = p;
 		stage = s;
+		champ = ch;
 	}
 
 	public void mouseClicked(MouseEvent e)
@@ -45,7 +48,7 @@ public class MouseInput implements MouseListener
 		{
 			if (menu.getPlay().contains(myX, myY))
 			{
-				game.setState(STATE.GAME);
+				game.setState(STATE.STAGESELECT);
 			}
 			if (menu.getControls().contains(myX, myY))
 			{
@@ -62,6 +65,21 @@ public class MouseInput implements MouseListener
 			{
 				game.setState(STATE.MENU);
 			}
+			for (int i = 1; i < controls.getNumButtons(); i++)
+			{
+				if (controls.getKey(i).contains(myX, myY))
+				{
+					
+				}
+			}
+		}
+		if (game.getState() == STATE.STAGESELECT)
+		{
+			game.setState(STATE.CHAMPSELECT);
+		}
+		if (game.getState() == STATE.CHAMPSELECT)
+		{
+			game.setState(STATE.GAME);
 		}
 	}
 
