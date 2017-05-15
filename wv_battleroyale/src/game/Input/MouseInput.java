@@ -8,19 +8,25 @@ import game.BattleRoyale;
 import game.BattleRoyale.STATE;
 import game.Menus.ControlsMenu;
 import game.Menus.MainMenu;
+import game.Menus.PauseMenu;
+import game.Menus.StageMenu;
 
 public class MouseInput implements MouseListener
 {
 
-	private MainMenu menu;
 	private BattleRoyale game;
+	private MainMenu menu;
 	private ControlsMenu controls;
+	private PauseMenu pause;
+	private StageMenu stage;
 
-	public MouseInput(MainMenu m, BattleRoyale g, ControlsMenu c)
-	{
-		menu = m;
+	public MouseInput(BattleRoyale g, MainMenu m, ControlsMenu c, PauseMenu p, StageMenu s)
+	{	
 		game = g;
+		menu = m;
 		controls = c;
+		pause = p;
+		stage = s;
 	}
 
 	public void mouseClicked(MouseEvent e)

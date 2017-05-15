@@ -9,6 +9,8 @@ import game.Input.KeyInputP2;
 import game.Input.MouseInput;
 import game.Menus.ControlsMenu;
 import game.Menus.MainMenu;
+import game.Menus.PauseMenu;
+import game.Menus.StageMenu;
 
 import java.io.IOException;
 
@@ -41,9 +43,11 @@ public class BattleRoyale extends Canvas implements Runnable
 
 	private Graphics g;
 
-	private MainMenu menu;
 	private MainGame game;
+	private MainMenu menu;
 	private ControlsMenu controls;
+	private PauseMenu pause;
+	private StageMenu stage;
 
 	private KeyInputP1 input1;
 	private KeyInputP2 input2;
@@ -60,22 +64,29 @@ public class BattleRoyale extends Canvas implements Runnable
 		BufferedImageLoader loader = new BufferedImageLoader();
 		try
 		{
-			menuBG = loader.loadImage("Images/menuBG.jpg");
-			arena1 = loader.loadImage("Images/arena1.jpg");
-			arena2 = loader.loadImage("Images/arena2.jpg");
-			tammy = loader.loadImage("Images/tammy.png");
-			controlsBG = loader.loadImage("Images/menuBG.jpg");
+			imageLoader(loader);
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
 
-		menu = new MainMenu(menuBG);
 		game = createGame();
-		controls = createControls();
+		menu = new MainMenu(menuBG);
+		controls = new ControlsMenu(controlsBG);
+		pause = createPause();
+		stage = new StageMenu(menuBG);
 
-		this.addMouseListener(new MouseInput(menu, this, controls));
+		this.addMouseListener(new MouseInput(this, menu, controls, pause, stage));
+	}
+
+	private void imageLoader(BufferedImageLoader loader) throws IOException
+	{
+		menuBG = loader.loadImage("Images/menuBG.jpg");
+		arena1 = loader.loadImage("Images/arena1.jpg");
+		arena2 = loader.loadImage("Images/arena2.jpg");
+		tammy = loader.loadImage("Images/tammy.png");
+		controlsBG = loader.loadImage("Images/controlsBG.jpg");
 	}
 
 	public void setState(STATE newState)
@@ -162,11 +173,10 @@ public class BattleRoyale extends Canvas implements Runnable
 
 	}
 
-	private ControlsMenu createControls()
+	private PauseMenu createPause()
 	{
-		ControlsMenu controls;
-		controls = new ControlsMenu(controlsBG);
-		return controls;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private MainGame createGame()

@@ -17,17 +17,24 @@ public class ControlsMenu extends Screen implements IDrawable
 	{
 		super(background);
 		buttonList.add(new Button(width * 1 / 13, height * 3 / 19, "BACK"));
+		// player 1 movement controls
 		buttonList.add(new Button(width * 8 / 30, height * 5 / 9, SIDE, SIDE, 0, "W"));
 		buttonList.add(new Button(width * 8 / 30, height * 25 / 36, SIDE, SIDE, 0, "S"));
 		buttonList.add(new Button(width * 46 / 240, height * 25 / 36, SIDE, SIDE, 0, "A"));
 		buttonList.add(new Button(width * 82 / 240, height * 25 / 36, SIDE, SIDE, 0, "D"));
-		buttonList.add(new Button(width * 30 / 48, height * 5 / 9, SIDE, SIDE, 0, "\u2191"));
-		buttonList.add(new Button(width * 30 / 48, height * 25 / 36, SIDE, SIDE, 0, "\u2193"));
-		buttonList.add(new Button(width * 26 / 48, height * 25 / 36, SIDE, SIDE, 0, "\u2190"));
-		buttonList.add(new Button(width * 34 / 48, height * 25 / 36, SIDE, SIDE, 0, "\u2192"));
+		// player 1 punch
 		buttonList.add(new Button(width * 46 / 240, height * 15 / 18, SIDE, SIDE, 0, "G"));
+		// player 1 kick
 		buttonList.add(new Button(width * 82 / 240, height * 15 / 18, SIDE, SIDE, 0, "H"));
+		
+		// player 2 movement controls
+		buttonList.add(new Button(width * 30 / 48, height * 5 / 9, SIDE, SIDE, 0, "\u2191")); // up arrow key
+		buttonList.add(new Button(width * 30 / 48, height * 25 / 36, SIDE, SIDE, 0, "\u2193")); // down arrow key
+		buttonList.add(new Button(width * 26 / 48, height * 25 / 36, SIDE, SIDE, 0, "\u2190")); // left arrow key
+		buttonList.add(new Button(width * 34 / 48, height * 25 / 36, SIDE, SIDE, 0, "\u2192")); // right arrow key
+		// player 2 punch
 		buttonList.add(new Button(width * 26 / 48, height * 15 / 18, SIDE, SIDE, 0, "1"));
+		// player 2 kick
 		buttonList.add(new Button(width * 34 / 48, height * 15 / 18, SIDE, SIDE, 0, "2"));
 	}
 
