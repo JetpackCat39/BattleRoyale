@@ -9,7 +9,10 @@ import java.awt.image.BufferedImage;
 
 public class GUIUtils
 {
-	// dont declare an instance variable?
+	private static final String DEFAULT_FONT = "arial";
+	private static final Color DEFAULT_COLOR = Color.white;
+	private static final int DEFAULT_FONT_STYLE = Font.BOLD; 
+	// Making GUIUtils a singleton
 	private static GUIUtils s_self = new GUIUtils();
 
 	public static GUIUtils self()
@@ -21,9 +24,16 @@ public class GUIUtils
 	{
 	}
 
+	public void drawText(int x, int y, String text, int fontSize, Graphics g)
+	{
+		g.setFont(new Font(DEFAULT_FONT, DEFAULT_FONT_STYLE, fontSize));
+		g.setColor(DEFAULT_COLOR);
+		g.drawString(text, x, y);
+	}
+	
 	public void drawText(int x, int y, Color color, String text, int fontSize, Graphics g, int fontStyle)
 	{
-		g.setFont(new Font("arial", fontStyle, fontSize));
+		g.setFont(new Font(DEFAULT_FONT, fontStyle, fontSize));
 		g.setColor(color);
 		g.drawString(text, x, y);
 	}

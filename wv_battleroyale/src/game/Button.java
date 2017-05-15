@@ -16,6 +16,8 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 	private static final int DEFAULT_HEIGHT = 50;
 	private static final int DEFAULT_WIDTH = 220;
 	private static final int ARC_WIDTH = 50;
+	private static final int DEFAULT_FONT_SIZE = 32;
+	private static final int DEFAULT_FONT_STYLE = Font.BOLD;
 	private String buttonText;
 	private int fontStyle;
 	private int fontSize;
@@ -26,17 +28,27 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	// Simple button
+	public Button(int x, int y, String text)
+	{
+		this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, text, DEFAULT_FONT_SIZE, DEFAULT_FONT_STYLE, 
+				ARC_WIDTH, DEFAULT_BACKGROUND, DEFAULT_TCOLOR);
+	}
 
+	// Button with customized font size and font style
 	public Button(int x, int y, String text, int size, int style)
 	{
 		this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, text, size, style, ARC_WIDTH, DEFAULT_BACKGROUND, DEFAULT_TCOLOR);
 	}
 
-	public Button(int x, int y, int width, int height, String text, int size, int style, int arcWidth)
+	// Button with custom dimensions
+	public Button(int x, int y, int width, int height, int arcWidth, String text)
 	{
-		this(x, y, width, height, text, size, style, arcWidth, DEFAULT_BACKGROUND, DEFAULT_TCOLOR);
+		this(x, y, width, height, text, DEFAULT_FONT_SIZE, DEFAULT_FONT_STYLE, arcWidth, DEFAULT_BACKGROUND, DEFAULT_TCOLOR);
 	}
 
+	// Button input options
 	public Button(int x, int y, int width, int height, String text, int size, int style, int arcWidth, Color background,
 			Color tcolor)
 	{
