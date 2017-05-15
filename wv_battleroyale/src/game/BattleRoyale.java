@@ -63,7 +63,7 @@ public class BattleRoyale extends Canvas implements Runnable
 		GAME, CONTROLS, MENU, PAUSE, STAGESELECT, CHAMPSELECT
 	};
 
-	private STATE State;
+	private STATE State, prevState;
 
 	private void initialize()
 	{
@@ -90,14 +90,15 @@ public class BattleRoyale extends Canvas implements Runnable
 		drawables.put(STATE.CHAMPSELECT, champ);
 
 		setState(STATE.MENU);
+		setPreviousState(null);
 		
 		this.addMouseListener(new MouseInput(this, menu, controls, pause, stage, champ));
 	}
 
 	private void imageLoader() throws IOException
 	{
-		menuBG = GUIUtils.self().loadImage("Images/menuBG.jpg");
-		arena = GUIUtils.self().loadImage("Images/arena1.jpg");
+		menuBG = GUIUtils.self().loadImage("Images/menuBG.png");
+		arena = GUIUtils.self().loadImage("Images/ampitheater.png");
 		tammy = GUIUtils.self().loadImage("Images/tammy.png");
 		controlsBG = GUIUtils.self().loadImage("Images/controlsBG.jpg");
 		pauseBG = GUIUtils.self().createOverlay(WIDTH, HEIGHT, 0.85f);
@@ -105,13 +106,24 @@ public class BattleRoyale extends Canvas implements Runnable
 
 	public void setState(STATE newState)
 	{
-		State = newState;
+		setPreviousState(State);
 		currentDrawable = drawables.get(newState);
+		State = newState;
 	}
 
 	public STATE getState()
 	{
 		return State;
+	}
+	
+	private void setPreviousState(STATE oldState)
+	{
+		prevState = oldState;
+	}
+	
+	public STATE getPreviousState()
+	{
+		return prevState;
 	}
 
 	private synchronized void start()

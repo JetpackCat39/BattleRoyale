@@ -13,6 +13,7 @@ public class Screen implements IDrawable
 {
 	protected int height = BattleRoyale.HEIGHT;
 	protected int width = BattleRoyale.WIDTH;
+	protected static final int BUTTON_CENTER = 530;
 
 	protected ArrayList<Button> buttonList;
 	protected BufferedImage bg;

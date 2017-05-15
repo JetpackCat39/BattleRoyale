@@ -63,7 +63,7 @@ public class MouseInput implements MouseListener
 		{
 			if (controls.getBack().contains(myX, myY))
 			{
-				game.setState(STATE.MENU);
+				game.setState(game.getPreviousState());
 			}
 			for (int i = 1; i < controls.getNumButtons(); i++)
 			{
@@ -80,6 +80,21 @@ public class MouseInput implements MouseListener
 		if (game.getState() == STATE.CHAMPSELECT)
 		{
 			game.setState(STATE.GAME);
+		}
+		if (game.getState() == STATE.PAUSE)
+		{
+			if (pause.getResume().contains(myX, myY))
+			{
+				game.setState(STATE.GAME);
+			}
+			if (pause.getControls().contains(myX, myY))
+			{
+				game.setState(STATE.CONTROLS);
+			}
+			if (pause.getTitle().contains(myX, myY))
+			{
+				game.setState(STATE.MENU);
+			}
 		}
 	}
 

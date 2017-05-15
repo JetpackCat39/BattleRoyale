@@ -13,6 +13,7 @@ public class MainGame extends Screen implements IDrawable, KeyListener
 {
 
 	private BattleRoyale game;
+	private int  minVal, offset, maxVal;
 	private IOpponent p1, p2;
 
 	public MainGame(BufferedImage background, BattleRoyale g, IOpponent player1, IOpponent player2)
@@ -22,11 +23,14 @@ public class MainGame extends Screen implements IDrawable, KeyListener
 		p1 = player1;
 		p2 = player2;
 		buttonList.add(new Button(width * 5 / 6, height * 2 / 9, "BACK", 32, Font.BOLD));
+		minVal = -(background.getWidth() - width);
+		offset = minVal/2;
+		maxVal = 0;
 	}
 
 	public void draw(Graphics g)
 	{
-		super.draw(g);
+		GUIUtils.self().drawImg(bg, offset, 0, bg.getWidth(), bg.getHeight(), g);
 		p1.draw(g);
 		p2.draw(g);
 	}
@@ -43,12 +47,6 @@ public class MainGame extends Screen implements IDrawable, KeyListener
 			if (game.getState() == STATE.GAME)
 			{
 				game.setState(STATE.PAUSE);
-			}
-			break;
-		case KeyEvent.VK_ENTER:
-			if (game.getState() == STATE.PAUSE)
-			{
-				game.setState(STATE.GAME);
 			}
 			break;
 		}
