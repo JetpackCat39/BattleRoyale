@@ -3,11 +3,12 @@ package game.Menus;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import game.BattleRoyale.STATE;
 import game.Button;
 import game.GUIUtils;
 import game.IDrawable;
 
-public class PauseMenu extends Screen implements IDrawable
+public class PauseMenu extends Screen
 {
 	IDrawable itemToOverlay;
 	
@@ -43,5 +44,23 @@ public class PauseMenu extends Screen implements IDrawable
 	public Button getTitle()
 	{
 		return buttonList.get(2);
+	}
+
+	@Override
+	public STATE mousePressed(int x, int y, STATE currentState, STATE previousState)
+	{
+		if (getResume().contains(x, y))
+		{
+			return STATE.GAME;
+		}
+		if (getControls().contains(x, y))
+		{
+			return STATE.CONTROLS;
+		}
+		if (getTitle().contains(x, y))
+		{
+			return STATE.MENU;
+		}
+		return currentState;
 	}
 }

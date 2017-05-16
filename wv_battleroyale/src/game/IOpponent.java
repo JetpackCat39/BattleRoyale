@@ -1,6 +1,8 @@
 package game;
 
-public interface IOpponent extends IDrawable
+import game.Input.IKeya;
+
+public interface IOpponent extends IDrawable, IKeya
 {
 
 	public int getXSpeed();

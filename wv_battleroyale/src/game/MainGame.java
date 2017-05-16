@@ -1,31 +1,28 @@
 package game;
 
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 import game.BattleRoyale.STATE;
 import game.Menus.Screen;
 
-public class MainGame extends Screen implements IDrawable, KeyListener
+public class MainGame extends Screen
 {
 
-	private BattleRoyale game;
-	private int midpoint;
+ 	private int midpoint;
 	private final int MIDDLE = 592;
 	private IOpponent p1, p2;
 
-	public MainGame(BufferedImage background, BattleRoyale g, IOpponent player1, IOpponent player2)
+	public MainGame(BufferedImage background, IOpponent player1, IOpponent player2)
 	{
 		super(background);
-		game = g;
 		p1 = player1;
 		p2 = player2;
 		midpoint = MIDDLE;
 	}
 
+	@Override
 	public void draw(Graphics g)
 	{
 		midpoint = (p1.getX() + p2.getX()) / 2;
@@ -34,24 +31,18 @@ public class MainGame extends Screen implements IDrawable, KeyListener
 		p2.draw(g);
 	}
 
-	public void keyTyped(KeyEvent e)
+	@Override
+	public STATE keyPressed(int keyCode, STATE currentState, STATE previousState)
 	{
-	}
-
-	public void keyPressed(KeyEvent e)
-	{
-		switch (e.getExtendedKeyCode())
+		switch (keyCode)
 		{
 		case KeyEvent.VK_ESCAPE:
-			if (game.getState() == STATE.GAME)
+			if (currentState == STATE.GAME)
 			{
-				game.setState(STATE.PAUSE);
+				return STATE.PAUSE;
 			}
 			break;
 		}
-	}
-
-	public void keyReleased(KeyEvent e)
-	{		
+		return currentState;
 	}
 }

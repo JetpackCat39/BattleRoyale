@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.RoundRectangle2D;
+import java.util.function.Consumer;
 
 public class Button extends RoundRectangle2D.Double implements IDrawable
 {
@@ -23,6 +24,8 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 	private int fontSize;
 	private Color backColor;
 	private Color textColor;
+	
+	private Consumer<Integer> action = null;
 
 	/**
 	 * 
@@ -59,7 +62,21 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 		backColor = background;
 		textColor = tcolor;
 	}
-
+	
+	public Button setAction(Consumer<Integer> action)
+	{
+		this.action = action;
+		return this;
+	}
+	
+	public void performAction(int param)
+	{
+		if (action != null)
+		{
+			action.accept(param);
+		}
+	}
+	
 	public String getText()
 	{
 		return buttonText;

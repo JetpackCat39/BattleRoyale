@@ -3,7 +3,10 @@ package game;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public class Fighter extends Hitbox implements IOpponent, IDrawable
+import game.BattleRoyale.STATE;
+import game.Input.PlayerControls;
+
+public class Fighter extends Hitbox implements IOpponent
 {
 
 	private static final int KICK = 2;
@@ -19,9 +22,10 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 	private int jumpCount;
 	private final int JUMPS = 1;
 	private int health;
+	private PlayerControls controls;
 	private IOpponent opponent;
 
-	public Fighter(int newX, int newY, BufferedImage img)
+	public Fighter(int newX, int newY, BufferedImage img, PlayerControls ctrls)
 	{
 		super(newX, newY, img.getWidth(), img.getHeight());
 		x = newX;
@@ -33,6 +37,7 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 		opponent = null;
 		health = STARTHEALTH;
 		image = img;
+		controls = ctrls;
 		// BufferedImageLoader loader = new BufferedImageLoader();
 		// try
 		// {
@@ -334,5 +339,51 @@ public class Fighter extends Hitbox implements IOpponent, IDrawable
 	public void setOpponent(IOpponent fighter)
 	{
 		opponent = fighter;
+	}
+
+	@Override
+	public STATE keyPressed(int keyCode, STATE currentState, STATE previousState)
+	{
+		if (keyCode == controls.getLeft())
+		{
+			setXSpeed(-5);
+		}
+		else if (keyCode == controls.getRight())
+		{
+			setXSpeed(5);
+		}
+		else if (keyCode == controls.getJump())
+		{
+			jump();
+		}
+		else if (keyCode == controls.getPunch())
+		{
+			punch();
+		}
+		else if (keyCode == controls.getKick())
+		{
+			kick();
+		}
+		return currentState;
+	}
+
+	@Override
+	public STATE keyReleased(int keyCode, STATE currentState, STATE previousState)
+	{
+		if (keyCode == controls.getLeft())
+		{
+			if (getXSpeed() != 0)
+			{
+				incrementXSpeed(5);
+			}
+		}
+		else if (keyCode == controls.getRight())
+		{
+			if (getXSpeed() != 0)
+			{
+				incrementXSpeed(-5);
+			}
+		}
+		return currentState;
 	}
 }

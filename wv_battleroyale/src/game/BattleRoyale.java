@@ -1,24 +1,26 @@
 package game;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.*;
 
 import javax.swing.*;
 
-import game.Input.KeyInputP1;
-import game.Input.KeyInputP2;
-import game.Input.MouseInput;
+import game.Input.PlayerControls;
 import game.Menus.ChampMenu;
-import game.Menus.ControlChange;
 import game.Menus.ControlsMenu;
 import game.Menus.MainMenu;
 import game.Menus.PauseMenu;
+import game.Menus.Screen;
 import game.Menus.StageMenu;
 
 import java.io.IOException;
 import java.util.Hashtable;
 
-public class BattleRoyale extends Canvas implements Runnable
+public class BattleRoyale extends Canvas implements Runnable, MouseListener, KeyListener
 {
 	private static final int PLAYERY = 90;
 	private static final int PLAYERX = 300;
@@ -33,7 +35,7 @@ public class BattleRoyale extends Canvas implements Runnable
 	// variables to make the game work
 	private boolean running = false;
 	private Thread thread;
-	private IDrawable currentDrawable;
+	private Screen currentScreen;
 
 	// buffer the window to reduce lag
 	// private BufferedImage image = new BufferedImage(WIDTH, HEIGHT,
@@ -46,6 +48,8 @@ public class BattleRoyale extends Canvas implements Runnable
 	public static BufferedImage pauseBG = null;
 
 	private Fighter p1, p2;
+	private PlayerControls p1Controls = new PlayerControls(true);
+	private PlayerControls p2Controls = new PlayerControls(false);
 
 	private Graphics g;
 
@@ -55,16 +59,12 @@ public class BattleRoyale extends Canvas implements Runnable
 	private PauseMenu pause;
 	private StageMenu stage;
 	private ChampMenu champ;
-	private ControlChange change;
-
-	private KeyInputP1 input1;
-	private KeyInputP2 input2;
 	
-	private Hashtable<STATE,IDrawable> drawables = new Hashtable<STATE,IDrawable>();
+	private Hashtable<STATE,Screen> screens = new Hashtable<STATE,Screen>();
 
 	public enum STATE
 	{
-		GAME, CONTROLS, MENU, PAUSE, STAGESELECT, CHAMPSELECT, CONTROLCHANGE
+		GAME, CONTROLS, MENU, PAUSE, STAGESELECT, CHAMPSELECT, STOP
 	};
 
 	private STATE State, prevState;
@@ -81,24 +81,22 @@ public class BattleRoyale extends Canvas implements Runnable
 		}
 
 		game = createGame();
-		drawables.put(STATE.GAME, game);
+		screens.put(STATE.GAME, game);
 		menu = new MainMenu(menuBG, fire);
-		drawables.put(STATE.MENU, menu);
-		controls = new ControlsMenu(controlsBG);
-		drawables.put(STATE.CONTROLS, controls);
+		screens.put(STATE.MENU, menu);
+		controls = new ControlsMenu(controlsBG, p1Controls, p2Controls);
+		screens.put(STATE.CONTROLS, controls);
 		pause = new PauseMenu(game, pauseBG);
-		drawables.put(STATE.PAUSE, pause);
+		screens.put(STATE.PAUSE, pause);
 		stage = new StageMenu(menuBG);
-		drawables.put(STATE.STAGESELECT, stage);
+		screens.put(STATE.STAGESELECT, stage);
 		champ = new ChampMenu(menuBG);
-		drawables.put(STATE.CHAMPSELECT, champ);
-		change = new ControlChange(this, controls, pauseBG);
-		drawables.put(STATE.CONTROLCHANGE, change);
+		screens.put(STATE.CHAMPSELECT, champ);
 
 		setState(STATE.MENU);
 		setPreviousState(null);
 		
-		this.addMouseListener(new MouseInput(this, menu, controls, pause, stage, champ, change));
+		this.addMouseListener(this);
 		//this.addMouseListener(change);
 	}
 
@@ -115,8 +113,13 @@ public class BattleRoyale extends Canvas implements Runnable
 
 	public void setState(STATE newState)
 	{
+		if (newState == STATE.STOP)
+		{
+			stop();
+			return;
+		}
 		setPreviousState(State);
-		currentDrawable = drawables.get(newState);
+		currentScreen = screens.get(newState);
 		State = newState;
 	}
 
@@ -211,19 +214,14 @@ public class BattleRoyale extends Canvas implements Runnable
 	private MainGame createGame()
 	{
 		MainGame tempGame;
-		p1 = new Fighter(PLAYERX, tammy.getHeight() + PLAYERY, tammy);
-		p2 = new Fighter(WIDTH - PLAYERX - tammy.getWidth(), tammy.getHeight() + PLAYERY, tammy);
+		p1 = new Fighter(PLAYERX, tammy.getHeight() + PLAYERY, tammy, p1Controls);
+		p2 = new Fighter(WIDTH - PLAYERX - tammy.getWidth(), tammy.getHeight() + PLAYERY, tammy, p2Controls);
 		p1.setOpponent(p2);
 		p2.setOpponent(p1);
 
-		tempGame = new MainGame(arena, this, p1, p2);
+		tempGame = new MainGame(arena, p1, p2);
 
-		input1 = new KeyInputP1(p1);
-		input2 = new KeyInputP2(p2);
-
-		this.addKeyListener(tempGame);
-		this.addKeyListener(input1);
-		this.addKeyListener(input2);
+		this.addKeyListener(this);
 		return tempGame;
 	}
 
@@ -238,7 +236,7 @@ public class BattleRoyale extends Canvas implements Runnable
 			return;
 		}
 		g = strat.getDrawGraphics();
-		currentDrawable.draw(g);
+		currentScreen.draw(g);
 		g.dispose();
 		strat.show();
 	}
@@ -261,5 +259,60 @@ public class BattleRoyale extends Canvas implements Runnable
 		frame.setFocusable(true);
 
 		game.start();
+	}
+
+	public void mouseClicked(MouseEvent e)
+	{		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{
+		int x = e.getX();
+		int y = e.getY();
+		STATE newState = currentScreen.mousePressed(x, y, getState(), getPreviousState());
+		
+		if (getState() != newState)
+		{
+			setState(newState);
+		}
+	}
+
+	public void mouseReleased(MouseEvent e)
+	{		
+	}
+
+	public void mouseEntered(MouseEvent e)
+	{		
+	}
+
+	public void mouseExited(MouseEvent e)
+	{		
+	}
+
+	public void keyTyped(KeyEvent e)
+	{		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e)
+	{
+		STATE newState = currentScreen.keyPressed(e.getKeyCode(), getState(), getPreviousState());
+		
+		if (getState() != newState)
+		{
+			setState(newState);
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e)
+	{
+		STATE newState = currentScreen.keyReleased(e.getKeyCode(), getState(), getPreviousState());
+		
+		if (getState() != newState)
+		{
+			setState(newState);
+		}
 	}
 }

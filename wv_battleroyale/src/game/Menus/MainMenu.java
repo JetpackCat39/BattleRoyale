@@ -2,13 +2,13 @@ package game.Menus;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
+import game.BattleRoyale.STATE;
 import game.Button;
 import game.GUIUtils;
 import game.IDrawable;
 
-public class MainMenu extends Screen implements IDrawable
+public class MainMenu extends Screen implements IDrawable, IMenu
 {
 
 	BufferedImage litFire;
@@ -50,6 +50,24 @@ public class MainMenu extends Screen implements IDrawable
 	public Button getExit()
 	{
 		return buttonList.get(2);
+	}
+
+	@Override
+	public STATE mousePressed(int x, int y, STATE currentState, STATE previousState)
+	{
+		if (getPlay().contains(x, y))
+		{
+			return STATE.CHAMPSELECT;
+		}
+		if (getControls().contains(x, y))
+		{
+			return STATE.CONTROLS;
+		}
+		if (getExit().contains(x, y))
+		{
+			return STATE.STOP;
+		}
+		return currentState;
 	}
 
 }
