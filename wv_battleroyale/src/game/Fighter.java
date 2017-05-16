@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import game.BattleRoyale.STATE;
 import game.Input.PlayerControls;
 
-public class Fighter extends Hitbox implements IOpponent
+public class Fighter implements IOpponent
 {
 
 	private static final int KICK = 2;
@@ -24,10 +24,10 @@ public class Fighter extends Hitbox implements IOpponent
 	private int health;
 	private PlayerControls controls;
 	private IOpponent opponent;
+	private Hitbox hitbox;
 
 	public Fighter(int newX, int newY, BufferedImage img, PlayerControls ctrls)
 	{
-		super(newX, newY, img.getWidth(), img.getHeight());
 		x = newX;
 		y = newY;
 		xSpeed = 0;
@@ -38,6 +38,7 @@ public class Fighter extends Hitbox implements IOpponent
 		health = STARTHEALTH;
 		image = img;
 		controls = ctrls;
+		hitbox = new Hitbox(newX, newY, img.getWidth(), img.getHeight());
 		// BufferedImageLoader loader = new BufferedImageLoader();
 		// try
 		// {
