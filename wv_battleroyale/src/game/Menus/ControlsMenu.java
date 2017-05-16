@@ -76,7 +76,7 @@ public class ControlsMenu extends Screen
 			GUIUtils.self().drawText(width * 17 / 48, height * 39 / 40, "KICK", 20, g, false);
 			GUIUtils.self().drawText(width * 35 / 64, height * 39 / 40, "PUNCH", 20, g, false);
 			GUIUtils.self().drawText(width * 23 / 32, height * 39 / 40, "KICK", 20, g, false);
-			GUIUtils.self().drawText(width * 1 / 18, height * 19 / 27, "PAUSE", 20, g, false);
+			GUIUtils.self().drawText(width * 1 / 15, height * 19 / 27, "PAUSE", 20, g, false);
 			for (int i = 0; i < buttonList.size(); i++)
 			{
 				getKey(i).draw(g);
