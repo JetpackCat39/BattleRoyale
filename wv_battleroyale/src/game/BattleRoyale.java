@@ -97,7 +97,6 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 		setPreviousState(null);
 		
 		this.addMouseListener(this);
-		//this.addMouseListener(change);
 	}
 
 	private void imageLoader() throws IOException

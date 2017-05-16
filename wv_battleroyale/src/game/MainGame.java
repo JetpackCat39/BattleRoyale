@@ -42,7 +42,18 @@ public class MainGame extends Screen
 				return STATE.PAUSE;
 			}
 			break;
+			default:
+				p1.keyPressed(keyCode, currentState, previousState);
+				p2.keyPressed(keyCode, currentState, previousState);
 		}
+		return currentState;
+	}
+	
+	@Override
+	public STATE keyReleased(int keyCode, STATE currentState, STATE previousState)
+	{
+		p1.keyReleased(keyCode, currentState, previousState);
+		p2.keyReleased(keyCode, currentState, previousState);
 		return currentState;
 	}
 }
