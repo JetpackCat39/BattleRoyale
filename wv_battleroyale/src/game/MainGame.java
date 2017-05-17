@@ -13,6 +13,8 @@ public class MainGame extends Screen
  	private int midpoint;
 	private final int MIDDLE = 592;
 	private IOpponent p1, p2;
+	private final int LEFT = 0;
+	private final int RIGHT = 1184;
 
 	public MainGame(BufferedImage background, IOpponent player1, IOpponent player2)
 	{
@@ -26,7 +28,10 @@ public class MainGame extends Screen
 	public void draw(Graphics g)
 	{
 		midpoint = (p1.getX() + p2.getX()) / 2;
-		GUIUtils.self().drawImg(bg,  (bg.getWidth()/2) - MIDDLE * 8 / 3 - midpoint, 0, bg.getWidth(), bg.getHeight(), g);
+		//-1452 RIGHT
+		//0 LEFT
+		//-726 MIDDLE
+		GUIUtils.self().drawImg(bg, -430 - (midpoint/2), 0, bg.getWidth(), bg.getHeight(), g);
 		p1.draw(g);
 		p2.draw(g);
 	}
