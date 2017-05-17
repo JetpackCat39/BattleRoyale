@@ -32,20 +32,17 @@ public class Screen implements IDrawable, IMenu, IKeya
 	}
 
 	@Override
-	public Screen mousePressed(BattleRoyale g, int x, int y, Screen currentScreen, Screen previousScreen)
+	public void mousePressed(BattleRoyale g, int x, int y)
 	{
-		return currentScreen;
 	}
 
 	@Override
-	public Screen keyPressed(BattleRoyale g, int keyCode, Screen currentScreen, Screen previousScreen)
+	public void keyPressed(BattleRoyale g, int keyCode)
 	{
-		return currentScreen;
 	}
 
 	@Override
-	public Screen keyReleased(int keyCode, Screen currentScreen, Screen previousScreen)
+	public void keyReleased(int keyCode)
 	{
-		return currentScreen;
 	}
 }
