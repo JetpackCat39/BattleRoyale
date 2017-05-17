@@ -31,15 +31,6 @@ public class MainGame extends Screen
 		//-1452 RIGHT
 		//0 LEFT
 		//-726 MIDDLE
-		if(midpoint > 1184 - 52) {
-			midpoint = 52;
-			p1.setX(0);
-			p2.setX(104);
-		}
-		if(midpoint < 52) {
-			midpoint = 1184 - 52;
-		
-		}
 		GUIUtils.self().drawImg(bg, -430 - (midpoint/2), 0, bg.getWidth(), bg.getHeight(), g);
 		p1.draw(g);
 		p2.draw(g);
