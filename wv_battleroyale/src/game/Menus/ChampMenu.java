@@ -3,7 +3,7 @@ package game.Menus;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import game.BattleRoyale.STATE;
+import game.BattleRoyale;
 import game.GUIUtils;
 
 public class ChampMenu extends Screen
@@ -22,9 +22,9 @@ public class ChampMenu extends Screen
 	}
 	
 	@Override
-	public STATE mousePressed(int x, int y, STATE currentState, STATE previousState)
+	public Screen mousePressed(BattleRoyale g, int x, int y, Screen currentScreen, Screen previousScreen)
 	{
-		return STATE.STAGESELECT;
+		return g.getStageSelect();
 	}
 
 }

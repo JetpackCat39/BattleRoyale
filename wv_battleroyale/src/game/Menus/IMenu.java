@@ -1,8 +1,8 @@
 package game.Menus;
 
-import game.BattleRoyale.STATE;
+import game.BattleRoyale;
 
 public interface IMenu
 {
-	STATE mousePressed(int x, int y, STATE currentState, STATE previousState);
+	Screen mousePressed(BattleRoyale g, int x, int y, Screen currentScreen, Screen previousScreen);
 }

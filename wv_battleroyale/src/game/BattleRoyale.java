@@ -12,6 +12,7 @@ import javax.swing.*;
 import game.Input.PlayerControls;
 import game.Menus.ChampMenu;
 import game.Menus.ControlsMenu;
+import game.Menus.IScreen;
 import game.Menus.MainMenu;
 import game.Menus.PauseMenu;
 import game.Menus.Screen;
@@ -20,7 +21,7 @@ import game.Menus.StageMenu;
 import java.io.IOException;
 import java.util.Hashtable;
 
-public class BattleRoyale extends Canvas implements Runnable, MouseListener, KeyListener
+public class BattleRoyale extends Canvas implements Runnable, MouseListener, KeyListener, IScreen
 {
 	private static final int PLAYERY = 90;
 	private static final int PLAYERX = 300;
@@ -35,7 +36,6 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 	// variables to make the game work
 	private boolean running = false;
 	private Thread thread;
-	private Screen currentScreen;
 
 	// buffer the window to reduce lag
 	// private BufferedImage image = new BufferedImage(WIDTH, HEIGHT,
@@ -59,15 +59,9 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 	private PauseMenu pause;
 	private StageMenu stage;
 	private ChampMenu champ;
-	
-	private Hashtable<STATE,Screen> screens = new Hashtable<STATE,Screen>();
+	private Screen stop;
 
-	public enum STATE
-	{
-		GAME, CONTROLS, MENU, PAUSE, STAGESELECT, CHAMPSELECT, STOP
-	};
-
-	private STATE State, prevState;
+	private Screen screen, prevScreen;
 
 	private void initialize()
 	{
@@ -81,20 +75,15 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 		}
 
 		game = createGame();
-		screens.put(STATE.GAME, game);
 		menu = new MainMenu(menuBG, fire);
-		screens.put(STATE.MENU, menu);
 		controls = new ControlsMenu(controlsBG, p1Controls, p2Controls);
-		screens.put(STATE.CONTROLS, controls);
 		pause = new PauseMenu(game, pauseBG);
-		screens.put(STATE.PAUSE, pause);
 		stage = new StageMenu(menuBG);
-		screens.put(STATE.STAGESELECT, stage);
 		champ = new ChampMenu(menuBG);
-		screens.put(STATE.CHAMPSELECT, champ);
+		stop = new Screen(null);
 
-		setState(STATE.MENU);
-		setPreviousState(null);
+		setScreen(getMenu());
+		setPreviousScreen(null);
 		
 		this.addMouseListener(this);
 	}
@@ -110,31 +99,30 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 		fire = GUIUtils.self().loadImage("Images/fire.png");
 	}
 
-	public void setState(STATE newState)
+	private void setScreen(Screen newScreen)
 	{
-		if (newState == STATE.STOP)
+		if (newScreen == getStop())
 		{
 			stop();
 			return;
 		}
-		setPreviousState(State);
-		currentScreen = screens.get(newState);
-		State = newState;
+		setPreviousScreen(screen);
+		screen = newScreen;
 	}
 
-	public STATE getState()
+	private Screen getScreen()
 	{
-		return State;
+		return screen;
 	}
 	
-	private void setPreviousState(STATE oldState)
+	private void setPreviousScreen(Screen oldScreen)
 	{
-		prevState = oldState;
+		prevScreen = oldScreen;
 	}
 	
-	public STATE getPreviousState()
+	public Screen getPreviousScreen()
 	{
-		return prevState;
+		return prevScreen;
 	}
 
 	private synchronized void start()
@@ -235,7 +223,7 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 			return;
 		}
 		g = strat.getDrawGraphics();
-		currentScreen.draw(g);
+		screen.draw(g);
 		g.dispose();
 		strat.show();
 	}
@@ -269,16 +257,16 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 	{
 		int x = e.getX();
 		int y = e.getY();
-		STATE newState = currentScreen.mousePressed(x, y, getState(), getPreviousState());
+		Screen newScreen = screen.mousePressed(this, x, y, getScreen(), getPreviousScreen());
 		
-		if (getState() != newState)
+		if (getScreen() != newScreen)
 		{
-			setState(newState);
+			setScreen(newScreen);
 		}
 	}
 
 	public void mouseReleased(MouseEvent e)
-	{		
+	{	
 	}
 
 	public void mouseEntered(MouseEvent e)
@@ -296,22 +284,64 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
-		STATE newState = currentScreen.keyPressed(e.getKeyCode(), getState(), getPreviousState());
+		Screen newScreen = screen.keyPressed(this, e.getKeyCode(), getScreen(), getPreviousScreen());
 		
-		if (getState() != newState)
+		if (getScreen() != newScreen)
 		{
-			setState(newState);
+			setScreen(newScreen);
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e)
 	{
-		STATE newState = currentScreen.keyReleased(e.getKeyCode(), getState(), getPreviousState());
+		Screen newScreen = screen.keyReleased(e.getKeyCode(), getScreen(), getPreviousScreen());
 		
-		if (getState() != newState)
+		if (getScreen() != newScreen)
 		{
-			setState(newState);
+			setScreen(newScreen);
 		}
+	}
+
+	@Override
+	public Screen getGame()
+	{
+		return game;
+	}
+
+	@Override
+	public Screen getPause()
+	{
+		return pause;
+	}
+
+	@Override
+	public Screen getStageSelect()
+	{
+		return stage;
+	}
+
+	@Override
+	public Screen getChampSelect()
+	{
+		return champ;
+	}
+
+	@Override
+	public Screen getControls()
+	{
+		return controls;
+	}
+
+	@Override
+	public Screen getStop()
+	{
+		return stop;
+	}
+
+	@Override
+	public Screen getMenu()
+	{
+		return menu;
 	}
 }

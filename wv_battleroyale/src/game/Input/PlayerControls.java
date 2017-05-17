@@ -193,7 +193,7 @@ public class PlayerControls
 		case KeyEvent.VK_SHIFT:
 			return "SHIFT";
 		case KeyEvent.VK_CONTROL:
-			return "CONTROL";
+			return "CTRL";
 		case KeyEvent.VK_ALT:
 			return "ALT";
 		case KeyEvent.VK_PAUSE:
@@ -205,9 +205,9 @@ public class PlayerControls
 		case KeyEvent.VK_SPACE:
 			return "SPACE";
 		case KeyEvent.VK_PAGE_UP:
-			return "PAGE_UP";
+			return "PAGE UP";
 		case KeyEvent.VK_PAGE_DOWN:
-			return "PAGE_DOWN";
+			return "PAGE DOWN";
 		case KeyEvent.VK_END:
 			return "END";
 		case KeyEvent.VK_HOME:
@@ -295,9 +295,9 @@ public class PlayerControls
 		case KeyEvent.VK_META:
 			return "META";
 		case KeyEvent.VK_BACK_QUOTE:
-			return "BACK_QUOTE";
+			return "\"";
 		case KeyEvent.VK_QUOTE:
-			return "QUOTE";
+			return "\"";
 		case KeyEvent.VK_KP_UP:
 			return "KP_UP";
 		case KeyEvent.VK_KP_DOWN:

@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
-import game.BattleRoyale.STATE;
 import game.Menus.Screen;
 
 public class MainGame extends Screen
@@ -32,28 +31,29 @@ public class MainGame extends Screen
 	}
 
 	@Override
-	public STATE keyPressed(int keyCode, STATE currentState, STATE previousState)
+	public Screen keyPressed(BattleRoyale g, int keyCode, Screen currentScreen, Screen previousScreen)
 	{
 		switch (keyCode)
 		{
 		case KeyEvent.VK_ESCAPE:
-			if (currentState == STATE.GAME)
+			if (currentScreen == g.getGame())
 			{
-				return STATE.PAUSE;
+				return g.getPause();
 			}
 			break;
-			default:
-				p1.keyPressed(keyCode, currentState, previousState);
-				p2.keyPressed(keyCode, currentState, previousState);
+		default:
+			p1.keyPressed(null, keyCode, currentScreen, previousScreen);
+			p2.keyPressed(null, keyCode, currentScreen, previousScreen);
+			break;
 		}
-		return currentState;
+		return currentScreen;
 	}
 	
 	@Override
-	public STATE keyReleased(int keyCode, STATE currentState, STATE previousState)
+	public Screen keyReleased(int keyCode, Screen currentScreen, Screen previousScreen)
 	{
-		p1.keyReleased(keyCode, currentState, previousState);
-		p2.keyReleased(keyCode, currentState, previousState);
-		return currentState;
+		p1.keyReleased(keyCode, currentScreen, previousScreen);
+		p2.keyReleased(keyCode, currentScreen, previousScreen);
+		return currentScreen;
 	}
 }

@@ -3,8 +3,8 @@ package game;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import game.BattleRoyale.STATE;
 import game.Input.PlayerControls;
+import game.Menus.Screen;
 
 public class Fighter implements IOpponent
 {
@@ -343,7 +343,7 @@ public class Fighter implements IOpponent
 	}
 
 	@Override
-	public STATE keyPressed(int keyCode, STATE currentState, STATE previousState)
+	public Screen keyPressed(BattleRoyale g, int keyCode, Screen currentScreen, Screen previousScreen)
 	{
 		if (keyCode == controls.getLeft())
 		{
@@ -365,11 +365,11 @@ public class Fighter implements IOpponent
 		{
 			kick();
 		}
-		return currentState;
+		return currentScreen;
 	}
 
 	@Override
-	public STATE keyReleased(int keyCode, STATE currentState, STATE previousState)
+	public Screen keyReleased(int keyCode, Screen currentScreen, Screen previousScreen)
 	{
 		if (keyCode == controls.getLeft())
 		{
@@ -385,6 +385,6 @@ public class Fighter implements IOpponent
 				incrementXSpeed(-5);
 			}
 		}
-		return currentState;
+		return currentScreen;
 	}
 }

@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import game.BattleRoyale;
-import game.BattleRoyale.STATE;
 import game.Button;
 import game.GUIUtils;
 import game.IDrawable;
@@ -33,20 +32,20 @@ public class Screen implements IDrawable, IMenu, IKeya
 	}
 
 	@Override
-	public STATE mousePressed(int x, int y, STATE currentState, STATE previousState)
+	public Screen mousePressed(BattleRoyale g, int x, int y, Screen currentScreen, Screen previousScreen)
 	{
-		return currentState;
+		return currentScreen;
 	}
 
 	@Override
-	public STATE keyPressed(int keyCode, STATE currentState, STATE previousState)
+	public Screen keyPressed(BattleRoyale g, int keyCode, Screen currentScreen, Screen previousScreen)
 	{
-		return currentState;
+		return currentScreen;
 	}
 
 	@Override
-	public STATE keyReleased(int keyCode, STATE currentState, STATE previousState)
+	public Screen keyReleased(int keyCode, Screen currentScreen, Screen previousScreen)
 	{
-		return currentState;
+		return currentScreen;
 	}
 }

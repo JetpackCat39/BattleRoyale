@@ -1,10 +1,11 @@
 package game.Input;
 
-import game.BattleRoyale.STATE;
+import game.BattleRoyale;
+import game.Menus.Screen;
 
 public interface IKeya
 {
-	STATE keyPressed(int keyCode, STATE currentState, STATE previousState);
+	Screen keyPressed(BattleRoyale g, int keyCode, Screen currentScreen, Screen previousScreen);
 	
-	STATE keyReleased(int keyCode, STATE currentState, STATE previousState);
+	Screen keyReleased(int keyCode, Screen currentScreen, Screen previousScreen);
 }

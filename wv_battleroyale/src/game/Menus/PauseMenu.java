@@ -3,7 +3,7 @@ package game.Menus;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import game.BattleRoyale.STATE;
+import game.BattleRoyale;
 import game.Button;
 import game.GUIUtils;
 import game.IDrawable;
@@ -47,20 +47,20 @@ public class PauseMenu extends Screen
 	}
 
 	@Override
-	public STATE mousePressed(int x, int y, STATE currentState, STATE previousState)
+	public Screen mousePressed(BattleRoyale g, int x, int y, Screen currentScreen, Screen previousScreen)
 	{
 		if (getResume().contains(x, y))
 		{
-			return STATE.GAME;
+			return g.getGame();
 		}
 		if (getControls().contains(x, y))
 		{
-			return STATE.CONTROLS;
+			return g.getControls();
 		}
 		if (getTitle().contains(x, y))
 		{
-			return STATE.MENU;
+			return g.getMenu();
 		}
-		return currentState;
+		return currentScreen;
 	}
 }

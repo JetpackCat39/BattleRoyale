@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import game.Button;
 import game.GUIUtils;
 import game.Input.PlayerControls;
-import game.BattleRoyale.STATE;
+import game.BattleRoyale;
 
 public class ControlsMenu extends Screen
 {
@@ -106,14 +106,14 @@ public class ControlsMenu extends Screen
 	}
 
 	@Override
-	public STATE mousePressed(int x, int y, STATE currentState, STATE previousState)
+	public Screen mousePressed(BattleRoyale g, int x, int y, Screen currentScreen, Screen previousScreen)
 	{
 		if (changingControl == null)
 		{
 			if (getBack().contains(x, y))
 			{
 				otherMenu = true;
-				return previousState;
+				return previousScreen;
 
 			}
 			if (!otherMenu)
@@ -128,11 +128,11 @@ public class ControlsMenu extends Screen
 			}
 			otherMenu = false;
 		}
-		return currentState;
+		return currentScreen;
 	}
 
 	@Override
-	public STATE keyPressed(int keyCode, STATE currentState, STATE previousState)
+	public Screen keyPressed(BattleRoyale g, int keyCode, Screen currentScreen, Screen previousScreen)
 	{
 		if (changingControl != null)
 		{
@@ -140,7 +140,7 @@ public class ControlsMenu extends Screen
 			changingControl.setText(PlayerControls.getKeyText(keyCode));
 			changingControl = null;
 		}
-		return currentState;
+		return currentScreen;
 	}
 
 }
