@@ -39,22 +39,22 @@ public class ControlsMenu extends Screen
 
 		// player 2 movement controls
 		buttonList.add(new Button(width * 5 / 8, height * 5 / 9, SIDE, SIDE, 0, player2.getJumpString())
-				.setAction(newKey -> player1.setJump(newKey))); // up
+				.setAction(newKey -> player2.setJump(newKey))); // up
 		buttonList.add(new Button(width * 5 / 8, height * 25 / 36, SIDE, SIDE, 0, player2.getCrouchString())
-				.setAction(newKey -> player1.setCrouch(newKey)));
+				.setAction(newKey -> player2.setCrouch(newKey)));
 		buttonList.add(new Button(width * 13 / 24, height * 25 / 36, SIDE, SIDE, 0, player2.getLeftString())
-				.setAction(newKey -> player1.setLeft(newKey)));
+				.setAction(newKey -> player2.setLeft(newKey)));
 		buttonList.add(new Button(width * 17 / 24, height * 25 / 36, SIDE, SIDE, 0, player2.getRightString())
-				.setAction(newKey -> player1.setRight(newKey)));
+				.setAction(newKey -> player2.setRight(newKey)));
 		// player 2 punch
 		buttonList.add(new Button(width * 13 / 24, height * 5 / 6, SIDE, SIDE, 0, player2.getPunchString())
-				.setAction(newKey -> player1.setPunch(newKey)));
+				.setAction(newKey -> player2.setPunch(newKey)));
 		// player 2 kick
 		buttonList.add(new Button(width * 17 / 24, height * 5 / 6, SIDE, SIDE, 0, player2.getKickString())
-				.setAction(newKey -> player1.setKick(newKey)));
+				.setAction(newKey -> player2.setKick(newKey)));
 		// pause button
-		buttonList.add(new Button(width * 1 / 16, height * 5 / 9, SIDE, SIDE, 0, player1.getPauseString())
-		.setAction(newKey -> player1.setPause(newKey)));
+		buttonList.add(new Button(width * 1 / 16, height * 5 / 9, SIDE, SIDE, 0, player2.getPauseString())
+		.setAction(newKey -> player2.setPause(newKey)));
 	}
 
 	@Override
