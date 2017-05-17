@@ -18,6 +18,7 @@ public class PlayerControls
 	private static final int P2_RIGHT = KeyEvent.VK_RIGHT;
 	private static final int P2_PUNCH = KeyEvent.VK_N;
 	private static final int P2_KICK = KeyEvent.VK_M;
+	private static final int PAUSE = KeyEvent.VK_ESCAPE;
 
 	private int jump;
 	private int crouch;
@@ -25,7 +26,7 @@ public class PlayerControls
 	private int right;
 	private int kick;
 	private int punch;
-
+	private int pause;
 	public PlayerControls(Boolean isPlayer1)
 	{
 		if (isPlayer1)
@@ -46,13 +47,14 @@ public class PlayerControls
 			punch = P2_PUNCH;
 			kick = P2_KICK;
 		}
+		pause = PAUSE;
 	}
 
 	public int getJump()
 	{
 		return jump;
 	}
-	
+
 	public String getJumpString()
 	{
 		return getKeyText(getJump());
@@ -72,7 +74,7 @@ public class PlayerControls
 	{
 		return getKeyText(getCrouch());
 	}
-	
+
 	public void setCrouch(int newKey)
 	{
 		crouch = newKey;
@@ -87,7 +89,7 @@ public class PlayerControls
 	{
 		return getKeyText(getLeft());
 	}
-	
+
 	public void setLeft(int newKey)
 	{
 		left = newKey;
@@ -97,7 +99,7 @@ public class PlayerControls
 	{
 		return right;
 	}
-	
+
 	public String getRightString()
 	{
 		return getKeyText(getRight());
@@ -112,7 +114,7 @@ public class PlayerControls
 	{
 		return punch;
 	}
-	
+
 	public String getPunchString()
 	{
 		return getKeyText(getPunch());
@@ -127,7 +129,7 @@ public class PlayerControls
 	{
 		return kick;
 	}
-	
+
 	public String getKickString()
 	{
 		return getKeyText(getKick());
@@ -137,36 +139,51 @@ public class PlayerControls
 	{
 		kick = newKey;
 	}
+	
+	public int getPause()
+	{
+		return pause;
+	}
+
+	public String getPauseString()
+	{
+		return getKeyText(getPause());
+	}
+
+	public void setPause(int newKey)
+	{
+		pause = newKey;
+	}
 
 	public static String getKeyText(int keyCode)
 	{
-		if (keyCode >= KeyEvent.VK_0 && keyCode <= KeyEvent.VK_9
-				|| keyCode >= KeyEvent.VK_A && keyCode <= KeyEvent.VK_Z)
+		if (keyCode >= KeyEvent.VK_0 && keyCode <= KeyEvent.VK_9 || keyCode >= KeyEvent.VK_A
+				&& keyCode <= KeyEvent.VK_Z)
 		{
 			return String.valueOf((char) keyCode);
 		}
 		switch (keyCode)
 		{
 		case KeyEvent.VK_COMMA:
-			return "COMMA";
+			return ",";
 		case KeyEvent.VK_PERIOD:
-			return "PERIOD";
+			return ".";
 		case KeyEvent.VK_SLASH:
-			return "SLASH";
+			return "/";
 		case KeyEvent.VK_SEMICOLON:
-			return "SEMICOLON";
+			return ";";
 		case KeyEvent.VK_EQUALS:
-			return "EQUALS";
+			return "=";
 		case KeyEvent.VK_OPEN_BRACKET:
-			return "OPEN_BRACKET";
+			return "[";
 		case KeyEvent.VK_BACK_SLASH:
-			return "BACK_SLASH";
+			return "\\";
 		case KeyEvent.VK_CLOSE_BRACKET:
-			return "CLOSE_BRACKET";
+			return "]";
 		case KeyEvent.VK_ENTER:
 			return "ENTER";
 		case KeyEvent.VK_BACK_SPACE:
-			return "BACK_SPACE";
+			return "BACKSPACE";
 		case KeyEvent.VK_TAB:
 			return "TAB";
 		case KeyEvent.VK_CANCEL:
@@ -182,9 +199,9 @@ public class PlayerControls
 		case KeyEvent.VK_PAUSE:
 			return "PAUSE";
 		case KeyEvent.VK_CAPS_LOCK:
-			return "CAPS_LOCK";
+			return "CAPS LOCK";
 		case KeyEvent.VK_ESCAPE:
-			return "ESCAPE";
+			return "ESC";
 		case KeyEvent.VK_SPACE:
 			return "SPACE";
 		case KeyEvent.VK_PAGE_UP:
@@ -204,17 +221,17 @@ public class PlayerControls
 		case KeyEvent.VK_DOWN:
 			return "\u2193";
 		case KeyEvent.VK_MULTIPLY:
-			return "MULTIPLY";
+			return "*";
 		case KeyEvent.VK_ADD:
-			return "ADD";
+			return "+";
 		case KeyEvent.VK_SEPARATOR:
 			return "SEPARATOR";
 		case KeyEvent.VK_SUBTRACT:
-			return "SUBTRACT";
+			return "_";
 		case KeyEvent.VK_DECIMAL:
 			return "DECIMAL";
 		case KeyEvent.VK_DIVIDE:
-			return "DIVIDE";
+			return "/";
 		case KeyEvent.VK_DELETE:
 			return "DELETE";
 		case KeyEvent.VK_NUM_LOCK:
@@ -270,7 +287,7 @@ public class PlayerControls
 		case KeyEvent.VK_F24:
 			return "F24";
 		case KeyEvent.VK_PRINTSCREEN:
-			return "PRINTSCREEN";
+			return "PrtScn";
 		case KeyEvent.VK_INSERT:
 			return "INSERT";
 		case KeyEvent.VK_HELP:
@@ -328,39 +345,39 @@ public class PlayerControls
 		case KeyEvent.VK_QUOTEDBL:
 			return "QUOTEDBL";
 		case KeyEvent.VK_LESS:
-			return "LESS";
+			return "<";
 		case KeyEvent.VK_GREATER:
-			return "GREATER";
+			return ">";
 		case KeyEvent.VK_BRACELEFT:
-			return "BRACELEFT";
+			return "{";
 		case KeyEvent.VK_BRACERIGHT:
-			return "BRACERIGHT";
+			return "}";
 		case KeyEvent.VK_AT:
-			return "AT";
+			return "@";
 		case KeyEvent.VK_COLON:
-			return "COLON";
+			return ":";
 		case KeyEvent.VK_CIRCUMFLEX:
 			return "CIRCUMFLEX";
 		case KeyEvent.VK_DOLLAR:
-			return "DOLLAR";
+			return "$";
 		case KeyEvent.VK_EURO_SIGN:
 			return "EURO_SIGN";
 		case KeyEvent.VK_EXCLAMATION_MARK:
-			return "EXCLAMATION_MARK";
+			return "!";
 		case KeyEvent.VK_INVERTED_EXCLAMATION_MARK:
 			return "INVERTED_EXCLAMATION_MARK";
 		case KeyEvent.VK_LEFT_PARENTHESIS:
-			return "LEFT_PARENTHESIS";
+			return "(";
 		case KeyEvent.VK_NUMBER_SIGN:
 			return "NUMBER_SIGN";
 		case KeyEvent.VK_MINUS:
-			return "MINUS";
+			return "-";
 		case KeyEvent.VK_PLUS:
-			return "PLUS";
+			return "+";
 		case KeyEvent.VK_RIGHT_PARENTHESIS:
-			return "RIGHT_PARENTHESIS";
+			return ")";
 		case KeyEvent.VK_UNDERSCORE:
-			return "UNDERSCORE";
+			return "_";
 		case KeyEvent.VK_FINAL:
 			return "FINAL";
 		case KeyEvent.VK_CONVERT:

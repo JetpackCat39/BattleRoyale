@@ -12,7 +12,7 @@ public class ControlsMenu extends Screen
 {
 	private static final int SIDE = 80;
 	private PlayerControls player1, player2;
-
+	private boolean otherMenu = true;
 	private Button changingControl = null;
 
 	public ControlsMenu(BufferedImage background, PlayerControls p1, PlayerControls p2)
@@ -22,36 +22,39 @@ public class ControlsMenu extends Screen
 		player2 = p2;
 		buttonList.add(new Button(width * 1 / 13, height * 3 / 19, "BACK"));
 		// player 1 movement controls
-		buttonList.add(new Button(width * 8 / 30, height * 5 / 9, SIDE, SIDE, 0, player1.getJumpString())
+		buttonList.add(new Button(width * 4 / 15, height * 5 / 9, SIDE, SIDE, 0, player1.getJumpString())
 				.setAction(newKey -> player1.setJump(newKey)));
-		buttonList.add(new Button(width * 8 / 30, height * 25 / 36, SIDE, SIDE, 0, player1.getCrouchString())
+		buttonList.add(new Button(width * 4 / 15, height * 25 / 36, SIDE, SIDE, 0, player1.getCrouchString())
 				.setAction(newKey -> player1.setCrouch(newKey)));
-		buttonList.add(new Button(width * 46 / 240, height * 25 / 36, SIDE, SIDE, 0, player1.getLeftString())
+		buttonList.add(new Button(width * 23 / 120, height * 25 / 36, SIDE, SIDE, 0, player1.getLeftString())
 				.setAction(newKey -> player1.setLeft(newKey)));
-		buttonList.add(new Button(width * 82 / 240, height * 25 / 36, SIDE, SIDE, 0, player1.getRightString())
+		buttonList.add(new Button(width * 41 / 120, height * 25 / 36, SIDE, SIDE, 0, player1.getRightString())
 				.setAction(newKey -> player1.setRight(newKey)));
 		// player 1 punch
-		buttonList.add(new Button(width * 46 / 240, height * 15 / 18, SIDE, SIDE, 0, player1.getPunchString())
+		buttonList.add(new Button(width * 23 / 120, height * 5 / 6, SIDE, SIDE, 0, player1.getPunchString())
 				.setAction(newKey -> player1.setPunch(newKey)));
 		// player 1 kick
-		buttonList.add(new Button(width * 82 / 240, height * 15 / 18, SIDE, SIDE, 0, player1.getKickString())
+		buttonList.add(new Button(width * 41 / 120, height * 5 / 6, SIDE, SIDE, 0, player1.getKickString())
 				.setAction(newKey -> player1.setKick(newKey)));
 
 		// player 2 movement controls
-		buttonList.add(new Button(width * 30 / 48, height * 5 / 9, SIDE, SIDE, 0, player2.getJumpString())
-				.setAction(newKey -> player1.setJump(newKey))); // up															
-		buttonList.add(new Button(width * 30 / 48, height * 25 / 36, SIDE, SIDE, 0, player2.getCrouchString())
+		buttonList.add(new Button(width * 5 / 8, height * 5 / 9, SIDE, SIDE, 0, player2.getJumpString())
+				.setAction(newKey -> player1.setJump(newKey))); // up
+		buttonList.add(new Button(width * 5 / 8, height * 25 / 36, SIDE, SIDE, 0, player2.getCrouchString())
 				.setAction(newKey -> player1.setCrouch(newKey)));
-		buttonList.add(new Button(width * 26 / 48, height * 25 / 36, SIDE, SIDE, 0, player2.getLeftString())
-				.setAction(newKey -> player1.setLeft(newKey))); 
-		buttonList.add(new Button(width * 34 / 48, height * 25 / 36, SIDE, SIDE, 0, player2.getRightString())
-				.setAction(newKey -> player1.setRight(newKey))); 
+		buttonList.add(new Button(width * 13 / 24, height * 25 / 36, SIDE, SIDE, 0, player2.getLeftString())
+				.setAction(newKey -> player1.setLeft(newKey)));
+		buttonList.add(new Button(width * 17 / 24, height * 25 / 36, SIDE, SIDE, 0, player2.getRightString())
+				.setAction(newKey -> player1.setRight(newKey)));
 		// player 2 punch
-		buttonList.add(new Button(width * 26 / 48, height * 15 / 18, SIDE, SIDE, 0, player2.getPunchString())
+		buttonList.add(new Button(width * 13 / 24, height * 5 / 6, SIDE, SIDE, 0, player2.getPunchString())
 				.setAction(newKey -> player1.setPunch(newKey)));
 		// player 2 kick
-		buttonList.add(new Button(width * 34 / 48, height * 15 / 18, SIDE, SIDE, 0, player2.getKickString())
+		buttonList.add(new Button(width * 17 / 24, height * 5 / 6, SIDE, SIDE, 0, player2.getKickString())
 				.setAction(newKey -> player1.setKick(newKey)));
+		// pause button
+		buttonList.add(new Button(width * 1 / 16, height * 5 / 9, SIDE, SIDE, 0, player1.getPauseString())
+		.setAction(newKey -> player1.setPause(newKey)));
 	}
 
 	@Override
@@ -70,9 +73,10 @@ public class ControlsMenu extends Screen
 			GUIUtils.self().drawText(width / 5, height * 17 / 36, "PLAYER 1", 54, g, false);
 			GUIUtils.self().drawText(width * 5 / 9, height * 17 / 36, "PLAYER 2", 54, g, false);
 			GUIUtils.self().drawText(width * 47 / 240, height * 39 / 40, "PUNCH", 20, g, false);
-			GUIUtils.self().drawText(width * 85 / 240, height * 39 / 40, "KICK", 20, g, false);
-			GUIUtils.self().drawText(width * 105 / 192, height * 39 / 40, "PUNCH", 20, g, false);
-			GUIUtils.self().drawText(width * 69 / 96, height * 39 / 40, "KICK", 20, g, false);
+			GUIUtils.self().drawText(width * 17 / 48, height * 39 / 40, "KICK", 20, g, false);
+			GUIUtils.self().drawText(width * 35 / 64, height * 39 / 40, "PUNCH", 20, g, false);
+			GUIUtils.self().drawText(width * 23 / 32, height * 39 / 40, "KICK", 20, g, false);
+			GUIUtils.self().drawText(width * 1 / 15, height * 19 / 27, "PAUSE", 20, g, false);
 			for (int i = 0; i < buttonList.size(); i++)
 			{
 				getKey(i).draw(g);
@@ -108,15 +112,21 @@ public class ControlsMenu extends Screen
 		{
 			if (getBack().contains(x, y))
 			{
+				otherMenu = true;
 				return previousState;
+
 			}
-			for (int i = 1; i < getNumButtons(); i++)
+			if (!otherMenu)
 			{
-				if (getKey(i).contains(x, y))
+				for (int i = 1; i < getNumButtons(); i++)
 				{
-					changingControl = getKey(i);
+					if (getKey(i).contains(x, y))
+					{
+						changingControl = getKey(i);
+					}
 				}
 			}
+			otherMenu = false;
 		}
 		return currentState;
 	}
