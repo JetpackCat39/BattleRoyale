@@ -106,14 +106,14 @@ public class ControlsMenu extends Screen
 	}
 
 	@Override
-	public Screen mousePressed(BattleRoyale g, int x, int y, Screen currentScreen, Screen previousScreen)
+	public void mousePressed(BattleRoyale g, int x, int y)
 	{
 		if (changingControl == null)
 		{
 			if (getBack().contains(x, y))
 			{
 				otherMenu = true;
-				return previousScreen;
+				g.prevScreen();
 
 			}
 			if (!otherMenu)
@@ -128,7 +128,6 @@ public class ControlsMenu extends Screen
 			}
 			otherMenu = false;
 		}
-		return currentScreen;
 	}
 
 	@Override

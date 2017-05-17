@@ -19,6 +19,7 @@ import game.Menus.Screen;
 import game.Menus.StageMenu;
 
 import java.io.IOException;
+import java.util.Stack;
 
 public class BattleRoyale extends Canvas implements Runnable, MouseListener, KeyListener, IScreen
 {
@@ -59,7 +60,9 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 	private StageMenu stage;
 	private ChampMenu champ;
 
-	private Screen screen, prevScreen, stop;
+//	private Screen screen, prevScreen, stop;
+	private Screen stop;
+	private Stack<Screen> screens;
 
 	private void initialize()
 	{
@@ -79,9 +82,10 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 		stage = new StageMenu(menuBG);
 		champ = new ChampMenu(menuBG);
 		stop = new Screen(null);
+		
+		screens = new Stack<Screen>();
 
 		setScreen(getMenu());
-		setPreviousScreen(null);
 		
 		this.addMouseListener(this);
 	}
@@ -97,31 +101,31 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 		fire = GUIUtils.self().loadImage("Images/fire.png");
 	}
 
-	private void setScreen(Screen newScreen)
-	{
-		if (newScreen == getStop())
-		{
-			stop();
-			return;
-		}
-		setPreviousScreen(screen);
-		screen = newScreen;
-	}
-
-	private Screen getScreen()
-	{
-		return screen;
-	}
-	
-	private void setPreviousScreen(Screen oldScreen)
-	{
-		prevScreen = oldScreen;
-	}
-	
-	public Screen getPreviousScreen()
-	{
-		return prevScreen;
-	}
+//	private void setScreen(Screen newScreen)
+//	{
+//		if (newScreen == getStop())
+//		{
+//			stop();
+//			return;
+//		}
+//		setPreviousScreen(screen);
+//		screen = newScreen;
+//	}
+//
+//	private Screen getScreen()
+//	{
+//		return screen;
+//	}
+//	
+//	private void setPreviousScreen(Screen oldScreen)
+//	{
+//		prevScreen = oldScreen;
+//	}
+//	
+//	public Screen getPreviousScreen()
+//	{
+//		return prevScreen;
+//	}
 
 	private synchronized void start()
 	{
@@ -221,7 +225,7 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 			return;
 		}
 		g = strat.getDrawGraphics();
-		screen.draw(g);
+		screens.peek().draw(g);
 		g.dispose();
 		strat.show();
 	}
@@ -255,12 +259,20 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 	{
 		int x = e.getX();
 		int y = e.getY();
-		Screen newScreen = screen.mousePressed(this, x, y, getScreen(), getPreviousScreen());
-		
-		if (getScreen() != newScreen)
-		{
-			setScreen(newScreen);
-		}
+		getScreen().mousePressed(this, x, y);
+	}
+	
+	public Screen prevScreen() {
+		screens.pop();
+		return getScreen();
+	}
+	
+	public void setScreen(Screen screen) {
+		screens.push(screen);
+	}
+	
+	public Screen getScreen() {
+		return screens.peek();
 	}
 
 	public void mouseReleased(MouseEvent e)
@@ -282,7 +294,7 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
-		Screen newScreen = screen.keyPressed(this, e.getKeyCode(), getScreen(), getPreviousScreen());
+		Screen newScreen = getScreen().keyPressed(this, e.getKeyCode(), getScreen(), null);
 		
 		if (getScreen() != newScreen)
 		{
@@ -293,7 +305,7 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 	@Override
 	public void keyReleased(KeyEvent e)
 	{
-		Screen newScreen = screen.keyReleased(e.getKeyCode(), getScreen(), getPreviousScreen());
+		Screen newScreen = getScreen().keyReleased(e.getKeyCode(), getScreen(), null);
 		
 		if (getScreen() != newScreen)
 		{

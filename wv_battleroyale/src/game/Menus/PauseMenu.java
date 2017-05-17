@@ -47,20 +47,19 @@ public class PauseMenu extends Screen
 	}
 
 	@Override
-	public Screen mousePressed(BattleRoyale g, int x, int y, Screen currentScreen, Screen previousScreen)
+	public void mousePressed(BattleRoyale g, int x, int y)
 	{
 		if (getResume().contains(x, y))
 		{
-			return g.getGame();
+			g.setScreen(g.getGame());
 		}
 		if (getControls().contains(x, y))
 		{
-			return g.getControls();
+			g.setScreen(g.getControls());
 		}
 		if (getTitle().contains(x, y))
 		{
-			return g.getMenu();
+			g.setScreen(g.getMenu());
 		}
-		return currentScreen;
 	}
 }

@@ -22,9 +22,9 @@ public class StageMenu extends Screen
 	}
 
 	@Override
-	public Screen mousePressed(BattleRoyale g, int x, int y, Screen currentScreen, Screen previousScreen)
+	public void mousePressed(BattleRoyale g, int x, int y)
 	{
-		return g.getGame();
+		g.setScreen(g.getGame());
 	}
 
 }

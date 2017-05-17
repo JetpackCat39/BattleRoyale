@@ -53,21 +53,20 @@ public class MainMenu extends Screen implements IDrawable, IMenu
 	}
 
 	@Override
-	public Screen mousePressed(BattleRoyale g, int x, int y, Screen currentScreen, Screen previousScreen)
+	public void mousePressed(BattleRoyale g, int x, int y)
 	{
 		if (getPlay().contains(x, y))
 		{
-			return g.getChampSelect();
+			g.setScreen(g.getChampSelect());
 		}
 		if (getControls().contains(x, y))
 		{
-			return g.getControls();
+			g.setScreen(g.getControls());
 		}
 		if (getExit().contains(x, y))
 		{
-			return g.getStop();
+			g.setScreen(g.getStop());
 		}
-		return currentScreen;
 	}
 
 }
