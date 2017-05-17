@@ -134,7 +134,7 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 		thread.start();
 	}
 
-	public synchronized void stop()
+	private synchronized void stop()
 	{
 		if (!running)
 		{
