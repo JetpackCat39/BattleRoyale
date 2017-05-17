@@ -268,10 +268,15 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 	}
 	
 	public void setScreen(Screen screen) {
-		screens.push(screen);
+		if(screen != getScreen()) {
+			screens.push(screen);
+		}
 	}
 	
 	public Screen getScreen() {
+		if(screens.isEmpty()) {
+			return null;
+		}
 		return screens.peek();
 	}
 
@@ -294,23 +299,13 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 	@Override
 	public void keyPressed(KeyEvent e)
 	{
-		Screen newScreen = getScreen().keyPressed(this, e.getKeyCode(), getScreen(), null);
-		
-		if (getScreen() != newScreen)
-		{
-			setScreen(newScreen);
-		}
+		getScreen().keyPressed(this, e.getKeyCode());
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e)
 	{
-		Screen newScreen = getScreen().keyReleased(e.getKeyCode(), getScreen(), null);
-		
-		if (getScreen() != newScreen)
-		{
-			setScreen(newScreen);
-		}
+		getScreen().keyReleased(e.getKeyCode());
 	}
 
 	@Override

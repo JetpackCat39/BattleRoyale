@@ -131,7 +131,7 @@ public class ControlsMenu extends Screen
 	}
 
 	@Override
-	public Screen keyPressed(BattleRoyale g, int keyCode, Screen currentScreen, Screen previousScreen)
+	public void keyPressed(BattleRoyale g, int keyCode)
 	{
 		if (changingControl != null)
 		{
@@ -139,7 +139,6 @@ public class ControlsMenu extends Screen
 			changingControl.setText(PlayerControls.getKeyText(keyCode));
 			changingControl = null;
 		}
-		return currentScreen;
 	}
 
 }

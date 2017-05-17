@@ -36,29 +36,27 @@ public class MainGame extends Screen
 	}
 
 	@Override
-	public Screen keyPressed(BattleRoyale g, int keyCode, Screen currentScreen, Screen previousScreen)
+	public void keyPressed(BattleRoyale g, int keyCode)
 	{
 		switch (keyCode)
 		{
 		case KeyEvent.VK_ESCAPE:
-			if (currentScreen == g.getGame())
+			if (g.getScreen() == g.getGame())
 			{
-				return g.getPause();
+				g.setScreen(g.getPause());
 			}
 			break;
 		default:
-			p1.keyPressed(null, keyCode, currentScreen, previousScreen);
-			p2.keyPressed(null, keyCode, currentScreen, previousScreen);
+			p1.keyPressed(null, keyCode);
+			p2.keyPressed(null, keyCode);
 			break;
 		}
-		return currentScreen;
 	}
 	
 	@Override
-	public Screen keyReleased(int keyCode, Screen currentScreen, Screen previousScreen)
+	public void keyReleased(int keyCode)
 	{
-		p1.keyReleased(keyCode, currentScreen, previousScreen);
-		p2.keyReleased(keyCode, currentScreen, previousScreen);
-		return currentScreen;
+		p1.keyReleased(keyCode);
+		p2.keyReleased(keyCode);
 	}
 }

@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import game.Input.PlayerControls;
-import game.Menus.Screen;
 
 public class Fighter implements IOpponent
 {
@@ -325,7 +324,7 @@ public class Fighter implements IOpponent
 	}
 
 	@Override
-	public Screen keyPressed(BattleRoyale g, int keyCode, Screen currentScreen, Screen previousScreen)
+	public void keyPressed(BattleRoyale g, int keyCode)
 	{
 		if (keyCode == controls.getLeft())
 		{
@@ -347,11 +346,10 @@ public class Fighter implements IOpponent
 		{
 			kick();
 		}
-		return currentScreen;
 	}
 
 	@Override
-	public Screen keyReleased(int keyCode, Screen currentScreen, Screen previousScreen)
+	public void keyReleased(int keyCode)
 	{
 		if (keyCode == controls.getLeft())
 		{
@@ -367,6 +365,5 @@ public class Fighter implements IOpponent
 				incrementXSpeed(-5);
 			}
 		}
-		return currentScreen;
 	}
 }
