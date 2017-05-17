@@ -19,7 +19,6 @@ import game.Menus.Screen;
 import game.Menus.StageMenu;
 
 import java.io.IOException;
-import java.util.Hashtable;
 
 public class BattleRoyale extends Canvas implements Runnable, MouseListener, KeyListener, IScreen
 {
@@ -59,9 +58,8 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 	private PauseMenu pause;
 	private StageMenu stage;
 	private ChampMenu champ;
-	private Screen stop;
 
-	private Screen screen, prevScreen;
+	private Screen screen, prevScreen, stop;
 
 	private void initialize()
 	{
