@@ -136,15 +136,10 @@ public class Fighter implements IOpponent
 
 	public void moveCollisionChecker()
 	{
-		if (compareXPosition() != 0)
-		{
-			if(compareXPosition() > 0)
-				x = opponent.getX() + opponent.getWidth();
-			else
-			{
-				x = opponent.getX() - getWidth();
-			}
-		}
+		if (compareXPosition() > 0)
+			x = opponent.getX() + opponent.getWidth();
+		else if (compareXPosition() < 0)
+			x = opponent.getX() - getWidth();
 	}
 
 	public boolean isCollision()
