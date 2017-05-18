@@ -39,16 +39,6 @@ public class Fighter implements IOpponent
 		image = img;
 		controls = ctrls;
 		hitbox = new Hitbox(newX, newY, img.getWidth(), img.getHeight());
-		// BufferedImageLoader loader = new BufferedImageLoader();
-		// try
-		// {
-		// image = loader.loadImage("tammy.png");
-		// }
-		// catch (IOException e)
-		// {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
 	}
 
 	public void incrementXSpeed(int howMuch)
@@ -111,16 +101,19 @@ public class Fighter implements IOpponent
 		return ySpeed;
 	}
 
-	public void move()
+	@Override
+	public boolean move(int minX, int maxX)
 	{
+		int prevX = x;
+		int prevY = y;
 		x += xSpeed;
-		if (x > width - image.getWidth())
+		if (x > maxX)
 		{
-			x = width - image.getWidth();
+			x = maxX;
 		}
-		if (x < 0)
+		if (x < minX)
 		{
-			x = 0;
+			x = minX;
 		}
 		y += ySpeed;
 		if (y < BASE)
@@ -138,6 +131,7 @@ public class Fighter implements IOpponent
 			ySpeed *= -1;
 		}
 		moveCollisionChecker();
+		return (prevX != x) || (prevY != y);
 	}
 
 	public void moveCollisionChecker()

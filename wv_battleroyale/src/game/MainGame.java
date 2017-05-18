@@ -10,30 +10,53 @@ import game.Menus.Screen;
 public class MainGame extends Screen
 {
 
- 	private int midpoint;
-	private final int MIDDLE = 592;
 	private IOpponent p1, p2;
-	private final int LEFT = 0;
-	private final int RIGHT = 1184;
+	private int  minVal, offset, maxVal;
 
 	public MainGame(BufferedImage background, IOpponent player1, IOpponent player2)
 	{
 		super(background);
 		p1 = player1;
 		p2 = player2;
-		midpoint = MIDDLE;
+		minVal = -(background.getWidth());
+		offset = minVal/2;
+		maxVal = 0;
 	}
 
 	@Override
 	public void draw(Graphics g)
 	{
-		midpoint = (p1.getX() + p2.getX()) / 2;
-		//-1452 RIGHT
-		//0 LEFT
-		//-726 MIDDLE
-		GUIUtils.self().drawImg(bg, -430 - (midpoint/2), 0, bg.getWidth(), bg.getHeight(), g);
+		GUIUtils.self().drawImg(bg, offset, 0, bg.getWidth(), bg.getHeight(), g);
 		p1.draw(g);
 		p2.draw(g);
+	}
+	
+	public boolean move()
+	{
+		if (Math.abs(p1.getX() - (p2.getX() + p2.getWidth())) > width)
+		{
+			return false; //need to find a way to jump at the ends of teh screen, becase you cant do that here.
+		}
+		
+		int p1Min = Math.max(0, p2.getX() + p2.getWidth() - width);
+		int p1Max = Math.min(bg.getWidth() - p1.getWidth(), p2.getX() + p2.getWidth());
+		int p2Min = Math.max(0, p1.getX() + p1.getWidth() - width);
+		int p2Max = Math.min(bg.getWidth() - p2.getWidth(), p1.getX() + p1.getWidth());
+		
+		boolean p1Moved = p1.move(p1Min, p1Max);
+		boolean p2Moved = p2.move(p2Min, p2Max);	
+		
+		if (p1.getX() + offset < 0 || p1.getX() + offset < 0)
+		{
+			offset = -Math.min(p1.getX(), p2.getX());
+		}
+		
+		if (p1.getX() + offset > width || p1.getX() + offset > width)
+		{
+			offset = -Math.max(p1.getX() + p1.getWidth(), p2.getX() + p2.getWidth());
+		}
+		
+		return (p1Moved || p2Moved);
 	}
 
 	@Override

@@ -5,6 +5,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.*;
 
 import javax.swing.*;
@@ -21,7 +23,7 @@ import game.Menus.StageMenu;
 import java.io.IOException;
 import java.util.Stack;
 
-public class BattleRoyale extends Canvas implements Runnable, MouseListener, KeyListener, IScreen
+public class BattleRoyale extends Canvas implements MouseListener, KeyListener, IScreen
 {
 	private static final int PLAYERY = 90;
 	private static final int PLAYERX = 300;
@@ -35,7 +37,6 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 
 	// variables to make the game work
 	private boolean running = false;
-	private Thread thread;
 
 	// buffer the window to reduce lag
 	// private BufferedImage image = new BufferedImage(WIDTH, HEIGHT,
@@ -50,9 +51,7 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 	private Fighter p1, p2;
 	private PlayerControls p1Controls = new PlayerControls(true);
 	private PlayerControls p2Controls = new PlayerControls(false);
-
-	private Graphics g;
-
+	
 	private MainGame game;
 	private MainMenu menu;
 	private ControlsMenu controls;
@@ -61,7 +60,7 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 	private ChampMenu champ;
 
 	private Screen stop;
-	private Stack<Screen> screens;
+	private Stack<Screen> screens = new Stack<Screen>();
 
 	private void initialize()
 	{
@@ -81,9 +80,7 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 		stage = new StageMenu(menuBG);
 		champ = new ChampMenu(menuBG);
 		stop = new Screen(null);
-
-		screens = new Stack<Screen>();
-
+		
 		setScreen(getMenu());
 
 		this.addMouseListener(this);
@@ -107,8 +104,6 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 			return;
 		}
 		running = true;
-		thread = new Thread(this);
-		thread.start();
 	}
 
 	private synchronized void stop()
@@ -118,15 +113,16 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 			return;
 		}
 		running = false;
-		try
-		{
-			thread.join();
-		}
-		catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}
 		System.exit(1);
+	}
+	
+	@Override
+	public void paint(Graphics g)
+	{
+		if (!screens.isEmpty())
+		{
+			screens.peek().draw(g);
+		}
 	}
 
 	public void run()
@@ -153,10 +149,7 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 				updates++;
 				delta--;
 			}
-
-			render();
 			frames++;
-
 			if (System.currentTimeMillis() - timer > 1000)
 			{
 				timer += 1000;
@@ -169,8 +162,10 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 
 	private void tick()
 	{
-		p1.move();
-		p2.move();
+		if (game.move())
+		{
+			repaint();
+		}
 	}
 
 	private MainGame createGame()
@@ -185,22 +180,6 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 
 		this.addKeyListener(this);
 		return tempGame;
-	}
-
-	private void render()
-	{
-		BufferStrategy strat = this.getBufferStrategy();
-
-		if (strat == null)
-		{
-			createBufferStrategy(3); // its a triple buffer, so the system
-										// thinks 2 steps ahead
-			return;
-		}
-		g = strat.getDrawGraphics();
-		screens.peek().draw(g);
-		g.dispose();
-		strat.show();
 	}
 
 	public static void main(String args[])
@@ -220,6 +199,7 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 		frame.setFocusable(true);
 
 		game.start();
+		game.run();
 	}
 
 	public void mouseClicked(MouseEvent e)
@@ -326,12 +306,15 @@ public class BattleRoyale extends Canvas implements Runnable, MouseListener, Key
 		{
 			screens.push(screen);
 		}
+		repaint();
 	}
 	
 	@Override
 	public Screen getPrevScreen()
 	{
 		screens.pop();
+		repaint();
 		return getScreen();
 	}
+
 }

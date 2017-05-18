@@ -27,4 +27,6 @@ public interface IOpponent extends IDrawable, IKeya
 
 	public void setY(int val);
 
+	public boolean move(int minX, int maxX);
+
 }
