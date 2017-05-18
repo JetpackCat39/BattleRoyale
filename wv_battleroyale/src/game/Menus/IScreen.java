@@ -15,4 +15,11 @@ public interface IScreen
 	public Screen getStop();
 	
 	public Screen getMenu();
+
+	public Screen getScreen();
+	
+	public Screen getPrevScreen();
+
+	public void setScreen(Screen screen);
+
 }

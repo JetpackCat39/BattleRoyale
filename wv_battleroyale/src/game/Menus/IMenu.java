@@ -1,8 +1,6 @@
 package game.Menus;
 
-import game.BattleRoyale;
-
 public interface IMenu
 {
-	void mousePressed(BattleRoyale g, int x, int y);
+	void mousePressed(IScreen screen, int x, int y);
 }

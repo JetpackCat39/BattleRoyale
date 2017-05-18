@@ -1,10 +1,10 @@
 package game.Input;
 
-import game.BattleRoyale;
+import game.Menus.IScreen;
 
 public interface IKeya
 {
-	void keyPressed(BattleRoyale g, int keyCode);
+	void keyPressed(IScreen screen, int keyCode);
 	
 	void keyReleased(int keyCode);
 }

@@ -3,7 +3,6 @@ package game.Menus;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import game.BattleRoyale;
 import game.GUIUtils;
 
 public class ChampMenu extends Screen
@@ -22,9 +21,9 @@ public class ChampMenu extends Screen
 	}
 	
 	@Override
-	public void mousePressed(BattleRoyale g, int x, int y)
+	public void mousePressed(IScreen screen, int x, int y)
 	{
-		g.setScreen(g.getStageSelect());
+		screen.setScreen(screen.getStageSelect());
 	}
 
 }

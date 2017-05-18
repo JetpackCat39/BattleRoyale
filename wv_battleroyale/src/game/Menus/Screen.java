@@ -32,12 +32,12 @@ public class Screen implements IDrawable, IMenu, IKeya
 	}
 
 	@Override
-	public void mousePressed(BattleRoyale g, int x, int y)
+	public void mousePressed(IScreen screen, int x, int y)
 	{
 	}
 
 	@Override
-	public void keyPressed(BattleRoyale g, int keyCode)
+	public void keyPressed(IScreen screen, int keyCode)
 	{
 	}
 

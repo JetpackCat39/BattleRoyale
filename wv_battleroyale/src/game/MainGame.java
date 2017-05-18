@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
+import game.Menus.IScreen;
 import game.Menus.Screen;
 
 public class MainGame extends Screen
@@ -36,14 +37,14 @@ public class MainGame extends Screen
 	}
 
 	@Override
-	public void keyPressed(BattleRoyale g, int keyCode)
+	public void keyPressed(IScreen screen, int keyCode)
 	{
 		switch (keyCode)
 		{
 		case KeyEvent.VK_ESCAPE:
-			if (g.getScreen() == g.getGame())
+			if (screen.getScreen() == screen.getGame())
 			{
-				g.setScreen(g.getPause());
+				screen.setScreen(screen.getPause());
 			}
 			break;
 		default:

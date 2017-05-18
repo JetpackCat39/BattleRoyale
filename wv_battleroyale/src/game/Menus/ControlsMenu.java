@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 import game.Button;
 import game.GUIUtils;
 import game.Input.PlayerControls;
-import game.BattleRoyale;
 
 public class ControlsMenu extends Screen
 {
@@ -106,14 +105,14 @@ public class ControlsMenu extends Screen
 	}
 
 	@Override
-	public void mousePressed(BattleRoyale g, int x, int y)
+	public void mousePressed(IScreen screen, int x, int y)
 	{
 		if (changingControl == null)
 		{
 			if (getBack().contains(x, y))
 			{
 				otherMenu = true;
-				g.prevScreen();
+				screen.getPrevScreen();
 
 			}
 			if (!otherMenu)
@@ -131,7 +130,7 @@ public class ControlsMenu extends Screen
 	}
 
 	@Override
-	public void keyPressed(BattleRoyale g, int keyCode)
+	public void keyPressed(IScreen screen, int keyCode)
 	{
 		if (changingControl != null)
 		{

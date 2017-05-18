@@ -3,7 +3,6 @@ package game.Menus;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import game.BattleRoyale;
 import game.Button;
 import game.GUIUtils;
 import game.IDrawable;
@@ -53,19 +52,19 @@ public class MainMenu extends Screen implements IDrawable, IMenu
 	}
 
 	@Override
-	public void mousePressed(BattleRoyale g, int x, int y)
+	public void mousePressed(IScreen screen, int x, int y)
 	{
 		if (getPlay().contains(x, y))
 		{
-			g.setScreen(g.getChampSelect());
+			screen.setScreen(screen.getChampSelect());
 		}
 		if (getControls().contains(x, y))
 		{
-			g.setScreen(g.getControls());
+			screen.setScreen(screen.getControls());
 		}
 		if (getExit().contains(x, y))
 		{
-			g.setScreen(g.getStop());
+			screen.setScreen(screen.getStop());
 		}
 	}
 
