@@ -5,8 +5,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.*;
 
 import javax.swing.*;
@@ -238,7 +236,6 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		frame.setFocusable(true);
 
 		game.start();
-		game.run();
 	}
 
 	public void mouseClicked(MouseEvent e)
