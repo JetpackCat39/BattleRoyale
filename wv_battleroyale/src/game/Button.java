@@ -2,6 +2,7 @@ package game;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.font.FontRenderContext;
@@ -123,14 +124,16 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.draw(this);
 		g2d.fill(this);
-		AffineTransform affinetransform = new AffineTransform();
-		FontRenderContext frc = new FontRenderContext(affinetransform, true, true);
 		Font font = new Font(buttonText, fontStyle, fontSize);
-		int width = (int) (font.getStringBounds(buttonText, frc).getWidth());
 
-		GUIUtils.self().drawText((int) this.getX() + ((int) this.getWidth() - width) / 2,
-				(int) this.getY() + (int) this.getHeight() - ((int) this.getHeight() - fontSize) / 2, textColor,
-				buttonText, fontSize, g, fontStyle);
+		FontMetrics metric = g.getFontMetrics(font);
+		
+		GUIUtils.self().drawText((int) (this.getX() + this.getWidth() / 2 - metric.stringWidth(buttonText) / 2),
+				(int) (this.getY() + this.getHeight() / 2 + metric.getAscent() / 2), textColor, buttonText, fontSize, g, fontStyle);
+		
+//		GUIUtils.self().drawText((int) this.getX() + ((int) this.getWidth() - width) / 2,
+//				(int) this.getY() + (int) this.getHeight() - ((int) this.getHeight() - fontSize) / 2, textColor,
+//				buttonText, fontSize, g, fontStyle);
 	}
 
 }

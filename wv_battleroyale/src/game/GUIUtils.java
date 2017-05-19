@@ -53,9 +53,10 @@ public class GUIUtils
 
 	public void drawText(int x, int y, Color color, String text, int fontSize, Graphics g, int fontStyle)
 	{
-		g.setFont(new Font(DEFAULT_FONT, fontStyle, fontSize));
-		g.setColor(color);
-		g.drawString(text, x, y);
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setFont(new Font(DEFAULT_FONT, fontStyle, fontSize));
+		g2d.setColor(color);
+		g2d.drawString(text, x, y);
 	}
 
 	public void drawImg(BufferedImage bg, int x, int y, int w, int h, Graphics g)
