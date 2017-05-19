@@ -36,23 +36,26 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	public static final String TITLE = "Westview Battle Royale";
 
 	// variables to make the game work
+<<<<<<< HEAD
 	private boolean running = false;
 	private Thread thread;
+=======
+	private boolean running;
+>>>>>>> branch 'master' of https://github.com/JetpackCat39/BattleRoyale.git
 
 	// buffer the window to reduce lag
 	// private BufferedImage image = new BufferedImage(WIDTH, HEIGHT,
 	// BufferedImage.TYPE_INT_RGB);
-	private static BufferedImage menuBG = null;
-	private static BufferedImage arena = null;
-	private static BufferedImage tammy = null;
-	private static BufferedImage fire = null;
-	public static BufferedImage controlsBG = null;
-	public static BufferedImage pauseBG = null;
+	private static BufferedImage menuBG;
+	private static BufferedImage arena;
+	private static BufferedImage tammy;
+	private static BufferedImage fire;
+	public static BufferedImage controlsBG;
+	public static BufferedImage pauseBG;
 
 	private Fighter p1, p2;
-	private PlayerControls p1Controls = new PlayerControls(true);
-	private PlayerControls p2Controls = new PlayerControls(false);
-	
+	private PlayerControls p1Controls;
+	private PlayerControls p2Controls;
 	private MainGame game;
 	private MainMenu menu;
 	private ControlsMenu controls;
@@ -63,7 +66,21 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	private Graphics g;
 	
 	private Screen stop;
-	private Stack<Screen> screens = new Stack<Screen>();
+	private Stack<Screen> screens;
+	
+	public BattleRoyale()
+	{
+		p1Controls = new PlayerControls(true);
+		p2Controls = new PlayerControls(false);
+		running = false;
+		menuBG = null;
+		arena = null;
+		tammy = null;
+		fire = null;
+		controlsBG = null;
+		pauseBG = null;
+		screens = new Stack<Screen>();
+	}
 
 	private void initialize()
 	{
@@ -83,7 +100,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		controls = new ControlsMenu(controlsBG, p1Controls, p2Controls);
 		pause = new PauseMenu(game, pauseBG);
 		stage = new StageMenu(menuBG);
-		champ = new ChampMenu(menuBG);
+		champ = new ChampMenu(menuBG, p1Controls, p2Controls);
 		stop = new Screen(null);
 		
 		setScreen(getMenu());
