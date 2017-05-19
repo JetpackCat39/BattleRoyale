@@ -36,12 +36,8 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	public static final String TITLE = "Westview Battle Royale";
 
 	// variables to make the game work
-<<<<<<< HEAD
-	private boolean running = false;
-	private Thread thread;
-=======
 	private boolean running;
->>>>>>> branch 'master' of https://github.com/JetpackCat39/BattleRoyale.git
+	private Thread thread;
 
 	// buffer the window to reduce lag
 	// private BufferedImage image = new BufferedImage(WIDTH, HEIGHT,
