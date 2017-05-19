@@ -16,6 +16,7 @@ public class ChampMenu extends Screen
 	private PlayerControls p2Controls;
 	private static final Color P1COLOR = Color.red;
 	private static final Color P2COLOR = Color.blue;
+	private static final Color BOTH = Color.MAGENTA;
 	private int p1Index;
 	private int p2Index;
 	
@@ -58,8 +59,15 @@ public class ChampMenu extends Screen
 		getHester().draw(g);
 		getReturn().draw(g);
 		getNext().draw(g);
-		GUIUtils.self().drawSelector(g, buttonList.get(p1Index), P1COLOR);
-		GUIUtils.self().drawSelector(g, buttonList.get(p2Index), P2COLOR);
+		if(p1Index == p2Index)
+		{
+			GUIUtils.self().drawSelector(g, buttonList.get(p1Index), BOTH);
+		}
+		else
+		{
+			GUIUtils.self().drawSelector(g, buttonList.get(p1Index), P1COLOR);
+			GUIUtils.self().drawSelector(g, buttonList.get(p2Index), P2COLOR);
+		}
 	}
 
 	public Button getNeuhaus()
