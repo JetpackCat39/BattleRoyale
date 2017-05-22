@@ -58,10 +58,10 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	private ChampMenu champ;
 
 	private Graphics g;
-	
+
 	private Screen stop;
 	private Stack<Screen> screens;
-	
+
 	public BattleRoyale()
 	{
 		p1Controls = new PlayerControls(true);
@@ -88,15 +88,15 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		}
 
 		g = null;
-		
+
 		game = createGame();
 		menu = new MainMenu(menuBG, fire);
 		controls = new ControlsMenu(controlsBG, p1Controls, p2Controls);
 		pause = new PauseMenu(game, pauseBG);
-		stage = new StageMenu(menuBG);
 		champ = new ChampMenu(menuBG, p1Controls, p2Controls);
+		stage = new StageMenu(menuBG);
 		stop = new Screen(null);
-		
+
 		setScreen(getMenu());
 
 		this.addMouseListener(this);
@@ -130,33 +130,26 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		{
 			return;
 		}
-		try
-		{
-			thread.join();
-		} catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}
 		running = false;
 		System.exit(1);
 	}
-	
+
 	private void render()
 	{
 		BufferStrategy strat = this.getBufferStrategy();
 
 		if (strat == null)
 		{
-			createBufferStrategy(3);  // its a triple buffer, so the system thinks 2 steps ahead
+			createBufferStrategy(3); // its a triple buffer, so the system
+										// thinks 2 steps ahead
 			return;
 		}
 
 		g = strat.getDrawGraphics();
-		if(!screens.isEmpty())
+		if (!screens.isEmpty())
+		{
 			screens.peek().draw(g);
-		// This is where we draw shit /////////////
-//		menu.render(g);
-		///////////////////////////////////////////
+		}
 		g.dispose();
 		strat.show();
 	}
@@ -173,7 +166,6 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		int frames = 0;
 		long timer = System.currentTimeMillis();
 
-		
 		while (running)
 		{
 			long currentTime = System.nanoTime();
@@ -199,8 +191,12 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 
 	private void tick()
 	{
-		if(game != null) {
-			game.move();
+		if (screens.peek().equals(getGame()))
+		{
+			if (game != null)
+			{
+				game.move();
+			}
 		}
 	}
 
@@ -319,7 +315,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		return menu;
 	}
-	
+
 	@Override
 	public Screen getScreen()
 	{
@@ -329,7 +325,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		}
 		return screens.peek();
 	}
-	
+
 	@Override
 	public void setScreen(Screen screen)
 	{
@@ -342,14 +338,12 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		{
 			screens.push(screen);
 		}
-		repaint();
 	}
-	
+
 	@Override
 	public Screen getPrevScreen()
 	{
 		screens.pop();
-		repaint();
 		return getScreen();
 	}
 

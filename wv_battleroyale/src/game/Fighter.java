@@ -303,9 +303,9 @@ public class Fighter implements IOpponent
 		}
 	}
 
-	public void draw(Graphics g)
+	public void draw(Graphics g, int offset)
 	{
-		GUIUtils.self().drawImg(image, x, height - y, image.getWidth(), image.getHeight(), g);
+		GUIUtils.self().drawImg(image, x + offset, height - y, image.getWidth(), image.getHeight(), g);
 	}
 
 	public void setOpponent(IOpponent fighter)

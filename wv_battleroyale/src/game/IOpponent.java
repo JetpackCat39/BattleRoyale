@@ -1,8 +1,10 @@
 package game;
 
+import java.awt.Graphics;
+
 import game.Input.IKeya;
 
-public interface IOpponent extends IDrawable, IKeya
+public interface IOpponent extends IKeya
 {
 
 	public int getXSpeed();
@@ -28,5 +30,7 @@ public interface IOpponent extends IDrawable, IKeya
 	public void setY(int val);
 
 	public boolean move(int minX, int maxX);
+
+	public void draw(Graphics g, int offset);
 
 }

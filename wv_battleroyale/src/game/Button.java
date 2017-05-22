@@ -21,10 +21,8 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 	private static final int DEFAULT_FONT_SIZE = 32;
 	private static final int DEFAULT_FONT_STYLE = Font.BOLD;
 	private String buttonText;
-	private int fontStyle;
-	private int fontSize;
-	private Color backColor;
-	private Color textColor;
+	private int fontStyle, fontSize;
+	private Color backColor, textColor, fillColor;
 	
 	private Consumer<Integer> action = null;
 
@@ -37,6 +35,13 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 	public Button(int x, int y, String text)
 	{
 		this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, text, DEFAULT_FONT_SIZE, DEFAULT_FONT_STYLE, 
+				ARC_WIDTH, DEFAULT_BACKGROUND, DEFAULT_TCOLOR);
+	}
+	
+	// Button w/ smaller text
+	public Button(int x, int y, String text, int fontSize)
+	{
+		this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, text, fontSize, DEFAULT_FONT_STYLE, 
 				ARC_WIDTH, DEFAULT_BACKGROUND, DEFAULT_TCOLOR);
 	}
 
@@ -62,6 +67,7 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 		fontSize = size;
 		backColor = background;
 		textColor = tcolor;
+		fillColor = DEFAULT_BACKGROUND;
 	}
 	
 	public Button setAction(Consumer<Integer> action)
@@ -134,6 +140,22 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 //		GUIUtils.self().drawText((int) this.getX() + ((int) this.getWidth() - width) / 2,
 //				(int) this.getY() + (int) this.getHeight() - ((int) this.getHeight() - fontSize) / 2, textColor,
 //				buttonText, fontSize, g, fontStyle);
+	}
+
+	public void fill(Graphics g, Color c)
+	{
+		g.setColor(c);
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.draw(this);
+		g2d.fill(this);
+		
+		Font font = new Font(buttonText, fontStyle, fontSize);
+
+		FontMetrics metric = g.getFontMetrics(font);
+		
+		GUIUtils.self().drawText((int) (this.getX() + this.getWidth() / 2 - metric.stringWidth(buttonText) / 2),
+				(int) (this.getY() + this.getHeight() / 2 + metric.getAscent() / 2), fillColor, buttonText, fontSize, g, fontStyle);
+		
 	}
 
 }

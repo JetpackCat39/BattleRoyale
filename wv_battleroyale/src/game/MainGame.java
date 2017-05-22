@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
+import game.Menus.ChampMenu;
 import game.Menus.IScreen;
 import game.Menus.Screen;
 
@@ -11,7 +12,13 @@ public class MainGame extends Screen
 {
 
 	private IOpponent p1, p2;
-	private int  minVal, offset, maxVal;
+	private int minVal, offset, maxVal;
+	int l1Min;
+	int l1Max;
+	int l2Min;
+	int l2Max;
+	int l1;
+	int l2;
 
 	public MainGame(BufferedImage background, IOpponent player1, IOpponent player2)
 	{
@@ -19,7 +26,9 @@ public class MainGame extends Screen
 		p1 = player1;
 		p2 = player2;
 		minVal = -(background.getWidth());
-		offset = minVal/2;
+		offset = (minVal + width) / 2;
+		p1.setX(p1.getX() - offset);
+		p2.setX(p2.getX() - offset);
 		maxVal = 0;
 	}
 
@@ -27,36 +36,36 @@ public class MainGame extends Screen
 	public void draw(Graphics g)
 	{
 		GUIUtils.self().drawImg(bg, offset, 0, bg.getWidth(), bg.getHeight(), g);
-		p1.draw(g);
-		p2.draw(g);
+		p1.draw(g, offset);
+		p2.draw(g, offset);
 	}
-	
+
 	public boolean move()
 	{
-		if (Math.abs(p1.getX() - (p2.getX() + p2.getWidth())) > width)
-		{
-			return false; //need to find a way to jump at the ends of teh screen, becase you cant do that here.
-		}
-		
-		int p1Min = Math.max(0, p2.getX() + p2.getWidth() - width);
-		int p1Max = Math.min(bg.getWidth() - p1.getWidth(), p2.getX() + p2.getWidth());
-		int p2Min = Math.max(0, p1.getX() + p1.getWidth() - width);
-		int p2Max = Math.min(bg.getWidth() - p2.getWidth(), p1.getX() + p1.getWidth());
-		
+		int p1Max = p2.getX() - p1.getWidth();
+		int p1Min = Math.max(0, p1Max - width);
+		int p2Min = p1.getX() + p1.getWidth();
+		int p2Max = Math.min(bg.getWidth() - p2.getWidth(), p1.getX() + width - p2.getWidth());
+
 		boolean p1Moved = p1.move(p1Min, p1Max);
-		boolean p2Moved = p2.move(p2Min, p2Max);	
-		
-		if (p1.getX() + offset < 0 || p1.getX() + offset < 0)
+		boolean p2Moved = p2.move(p2Min, p2Max);
+
+		if (p1.getX() + offset < 0)
 		{
-			offset = -Math.min(p1.getX(), p2.getX());
+			System.out.println("left");
+			offset = -p1.getX();
 		}
-		
-		if (p1.getX() + offset > width || p1.getX() + offset > width)
+		else if (p2.getX() + offset + p2.getWidth() > width)
 		{
-			offset = -Math.max(p1.getX() + p1.getWidth(), p2.getX() + p2.getWidth());
+			System.out.println("right");
+			offset = -(p2.getX() + p2.getWidth() - width);
 		}
-		
 		return (p1Moved || p2Moved);
+	}
+
+	public IOpponent createP1()
+	{
+		return null;
 	}
 
 	@Override
@@ -76,7 +85,7 @@ public class MainGame extends Screen
 			break;
 		}
 	}
-	
+
 	@Override
 	public void keyReleased(int keyCode)
 	{
