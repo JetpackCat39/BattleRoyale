@@ -273,6 +273,12 @@ public class Fighter implements IOpponent
 	{
 		return health;
 	}
+	
+	public int getPause(){
+		return controls.getPause();
+	}
+	
+	
 
 	public void setHealth(int newHealth)
 	{

@@ -32,5 +32,11 @@ public interface IOpponent extends IKeya
 	public boolean move(int minX, int maxX);
 
 	public void draw(Graphics g, int offset);
+	
+	public int getPause();
+
+	
+		
+	
 
 }
