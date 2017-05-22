@@ -9,9 +9,9 @@ import game.IDrawable;
 
 public class PauseMenu extends Screen
 {
-	IDrawable itemToOverlay;
+	IScreen itemToOverlay;
 	
-	public PauseMenu(IDrawable d, BufferedImage background)
+	public PauseMenu(IScreen d, BufferedImage background)
 	{
 		super(background);
 		itemToOverlay = d;
@@ -22,7 +22,8 @@ public class PauseMenu extends Screen
 	
 	public void draw(Graphics g)
 	{
-		itemToOverlay.draw(g);
+		System.out.println("gonna draw stuff");
+		itemToOverlay.getGame().draw(g);
 		super.draw(g);
 		GUIUtils.self().drawText(width / 2 - 72*2, height * 1/3, "PAUSED", 72, g, false);
 		getResume().draw(g);
@@ -50,15 +51,15 @@ public class PauseMenu extends Screen
 	{
 		if (getResume().contains(x, y))
 		{
-			screen.setScreen(screen.getGame());
+			screen.setScreen(screen.getGame(), false);
 		}
 		if (getControls().contains(x, y))
 		{
-			screen.setScreen(screen.getControls());
+			screen.setScreen(screen.getControls(), false);
 		}
 		if (getTitle().contains(x, y))
 		{
-			screen.setScreen(screen.getMenu());
+			screen.setScreen(screen.getMenu(), false);
 		}
 	}
 }

@@ -90,22 +90,22 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		g = null;
 
 		game = createGame();
-		menu = new MainMenu(menuBG, fire);
-		controls = new ControlsMenu(controlsBG, p1Controls, p2Controls);
-		pause = new PauseMenu(game, pauseBG);
 		champ = new ChampMenu(menuBG, p1Controls, p2Controls);
 		stage = new StageMenu(menuBG);
+		menu = new MainMenu(menuBG, fire);
+		controls = new ControlsMenu(controlsBG, p1Controls, p2Controls);
+		pause = new PauseMenu(this, pauseBG);
 		stop = new Screen(null);
 
-		setScreen(getMenu());
+		setScreen(getMenu(), false);
 
 		this.addMouseListener(this);
 	}
 
 	private void imageLoader() throws IOException
 	{
-		menuBG = GUIUtils.self().loadImage("Images/menuBG.png");
 		arena = GUIUtils.self().loadImage("Images/ampitheater.png");
+		menuBG = GUIUtils.self().loadImage("Images/menuBG.png");
 		tammy = GUIUtils.self().loadImage("Images/tammy.png");
 		controlsBG = GUIUtils.self().loadImage("Images/controlsBG.jpg");
 		pauseBG = GUIUtils.self().createOverlay(WIDTH, HEIGHT, 0.85f);
@@ -243,7 +243,14 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		int x = e.getX();
 		int y = e.getY();
-		getScreen().mousePressed(this, x, y);
+		try
+		{
+			getScreen().mousePressed(this, x, y);
+		}
+		catch (IOException e1)
+		{
+			e1.printStackTrace();
+		}
 	}
 
 	public void mouseReleased(MouseEvent e)
@@ -277,6 +284,13 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	@Override
 	public Screen getGame()
 	{
+		return game;
+	}
+	
+	@Override
+	public Screen getNewGame()
+	{
+		game = createGame();
 		return game;
 	}
 
@@ -327,7 +341,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	}
 
 	@Override
-	public void setScreen(Screen screen)
+	public void setScreen(Screen screen, boolean doReset)
 	{
 		if (screen == stop)
 		{
@@ -337,6 +351,10 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		if (screen != getScreen())
 		{
 			screens.push(screen);
+			if (doReset)
+			{
+				screen.reset();
+			}
 		}
 	}
 
@@ -345,6 +363,19 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		screens.pop();
 		return getScreen();
+	}
+
+	@Override
+	public void setPlayer(IOpponent p)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setBackground(BufferedImage b)
+	{
+		arena = b;
 	}
 
 }

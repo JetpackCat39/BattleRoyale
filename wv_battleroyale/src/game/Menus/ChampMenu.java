@@ -17,6 +17,7 @@ public class ChampMenu extends Screen
 	private static final Color P1COLOR = Color.red;
 	private static final Color P2COLOR = Color.blue;
 	private static final Color BOTH = Color.MAGENTA;
+	private static final Color NEXT = Color.GREEN;
 	private int p1Index, p2Index;
 	private IOpponent p1, p2;
 
@@ -25,8 +26,7 @@ public class ChampMenu extends Screen
 		super(background);
 		p1Controls = p1;
 		p2Controls = p2;
-		p1Index = 0;
-		p2Index = 0;
+		reset();
 		buttonList.add(new Button(width * 1 / 8, height / 5, "NEUHAUS"));
 		buttonList.add(new Button(width * 5 / 16, height / 5, "JUSTIN"));
 		buttonList.add(new Button(width / 2, height / 5, "SPIESS"));
@@ -36,9 +36,17 @@ public class ChampMenu extends Screen
 		buttonList.add(new Button(width / 2, height * 2 / 5, "WHITNEY"));
 		buttonList.add(new Button(width * 11 / 16, height * 2 / 5, "HESTER"));
 		// exit button
-		buttonList.add(new Button(width * 1 / 8, height * 4 / 5, "RETURN"));
+		buttonList.add(new Button(width * 1 / 8, height * 4 / 5, "BACK"));
 		// next button
 		buttonList.add(new Button(width * 11 / 16, height * 4 / 5, "NEXT"));
+
+	}
+
+	@Override
+	public void reset()
+	{
+		p1Index = 0;
+		p2Index = 0;
 		isSelected1 = false;
 		isSelected2 = false;
 	}
@@ -55,7 +63,7 @@ public class ChampMenu extends Screen
 		getWay().draw(g);
 		getWhitney().draw(g);
 		getHester().draw(g);
-		getReturn().draw(g);
+		getBack().draw(g);
 		getNext().draw(g);
 		GUIUtils.self().drawText(width * 1 / 8, height * 3/5, "Movement to select, Punch to lock in, Kick to cancel", 30, g, false);
 		if (p1Index == p2Index)
@@ -66,7 +74,7 @@ public class ChampMenu extends Screen
 			}
 			else
 			{
-				buttonList.get(p1Index).fill(g, BOTH);
+				getSelectedP1().fill(g, BOTH);
 			}
 		}
 		else
@@ -77,7 +85,7 @@ public class ChampMenu extends Screen
 			}
 			else
 			{
-				buttonList.get(p1Index).fill(g, P1COLOR);
+				getSelectedP1().fill(g, P1COLOR);
 			}
 			if (!isSelected2)
 			{
@@ -85,8 +93,12 @@ public class ChampMenu extends Screen
 			}
 			else
 			{
-				buttonList.get(p2Index).fill(g, P2COLOR);
+				getSelectedP2().fill(g, P2COLOR);
 			}
+		}
+		if (isSelected1 && isSelected2)
+		{
+			getNext().fill(g, NEXT);
 		}
 	}
 
@@ -130,7 +142,7 @@ public class ChampMenu extends Screen
 		return buttonList.get(7);
 	}
 
-	public Button getReturn()
+	public Button getBack()
 	{
 		return buttonList.get(8);
 	}
@@ -138,6 +150,16 @@ public class ChampMenu extends Screen
 	public Button getNext()
 	{
 		return buttonList.get(9);
+	}
+	
+	public Button getSelectedP1()
+	{
+		return buttonList.get(p1Index);
+	}
+	
+	public Button getSelectedP2()
+	{
+		return buttonList.get(p2Index);
 	}
 
 	public int p1Left()
@@ -213,6 +235,10 @@ public class ChampMenu extends Screen
 
 	public void setP1()
 	{
+		if (getSelectedP1().equals(getNeuhaus()))
+		{
+			
+		}
 		isSelected1 = true;
 	}
 
@@ -233,10 +259,10 @@ public class ChampMenu extends Screen
 		{
 			if (getNext().contains(x, y))
 			{
-				screen.setScreen(screen.getStageSelect());
+				screen.setScreen(screen.getStageSelect(), true);
 			}
 		}
-		if (getReturn().contains(x, y))
+		if (getBack().contains(x, y))
 		{
 			screen.getPrevScreen();
 		}

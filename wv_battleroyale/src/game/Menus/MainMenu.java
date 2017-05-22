@@ -56,15 +56,15 @@ public class MainMenu extends Screen implements IDrawable, IMenu
 	{
 		if (getPlay().contains(x, y))
 		{
-			screen.setScreen(screen.getChampSelect());
+			screen.setScreen(screen.getChampSelect(), true);
 		}
 		if (getControls().contains(x, y))
 		{
-			screen.setScreen(screen.getControls());
+			screen.setScreen(screen.getControls(), false);
 		}
 		if (getExit().contains(x, y))
 		{
-			screen.setScreen(screen.getStop());
+			screen.setScreen(screen.getStop(), false);
 		}
 	}
 

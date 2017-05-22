@@ -13,12 +13,6 @@ public class MainGame extends Screen
 
 	private IOpponent p1, p2;
 	private int minVal, offset, maxVal;
-	int l1Min;
-	int l1Max;
-	int l2Min;
-	int l2Max;
-	int l1;
-	int l2;
 
 	public MainGame(BufferedImage background, IOpponent player1, IOpponent player2)
 	{
@@ -26,10 +20,10 @@ public class MainGame extends Screen
 		p1 = player1;
 		p2 = player2;
 		minVal = -(background.getWidth());
-		offset = (minVal + width) / 2;
+		maxVal = 0;
+		setOffset((minVal + width) / 2);
 		p1.setX(p1.getX() - offset);
 		p2.setX(p2.getX() - offset);
-		maxVal = 0;
 	}
 
 	@Override
@@ -52,15 +46,26 @@ public class MainGame extends Screen
 
 		if (p1.getX() + offset < 0)
 		{
-			System.out.println("left");
-			offset = -p1.getX();
+			setOffset(-p1.getX());
 		}
 		else if (p2.getX() + offset + p2.getWidth() > width)
 		{
-			System.out.println("right");
-			offset = -(p2.getX() + p2.getWidth() - width);
+			setOffset(-(p2.getX() + p2.getWidth() - width));
 		}
 		return (p1Moved || p2Moved);
+	}
+
+	private void setOffset(int newOffset)
+	{
+		if (newOffset < minVal)
+		{
+			newOffset = minVal;
+		}
+		else if (newOffset > maxVal)
+		{
+			newOffset = maxVal;
+		}
+		offset = newOffset;	
 	}
 
 	public IOpponent createP1()
@@ -76,7 +81,7 @@ public class MainGame extends Screen
 		case KeyEvent.VK_ESCAPE:
 			if (screen.getScreen() == screen.getGame())
 			{
-				screen.setScreen(screen.getPause());
+				screen.setScreen(screen.getPause(), false);
 			}
 			break;
 		default:

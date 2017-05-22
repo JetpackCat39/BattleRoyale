@@ -2,6 +2,7 @@ package game.Menus;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import game.BattleRoyale;
@@ -32,7 +33,7 @@ public class Screen implements IDrawable, IMenu, IKeya
 	}
 
 	@Override
-	public void mousePressed(IScreen screen, int x, int y)
+	public void mousePressed(IScreen screen, int x, int y) throws IOException
 	{
 	}
 
@@ -44,5 +45,9 @@ public class Screen implements IDrawable, IMenu, IKeya
 	@Override
 	public void keyReleased(int keyCode)
 	{
+	}
+	
+	public void reset()
+	{	
 	}
 }

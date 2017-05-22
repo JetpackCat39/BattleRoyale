@@ -8,7 +8,6 @@ import game.Menus.IScreen;
 
 public class Fighter implements IOpponent
 {
-
 	private static final int KICK = 2;
 	private static final int MAX_Y_SPEED = 15;
 	private static final int MAX_X_SPEED = 5;
