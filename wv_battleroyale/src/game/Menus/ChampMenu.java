@@ -27,12 +27,12 @@ public class ChampMenu extends Screen
 		p2Controls = p2;
 		reset();
 		buttonList.add(new Button(width * 1 / 8, height / 5, "NEUHAUS"));
-		buttonList.add(new Button(width * 5 / 16, height / 5, "JUSTIN"));
-		buttonList.add(new Button(width / 2, height / 5, "SPIESS"));
+		buttonList.add(new Button(width * 5 / 16, height / 5, "CASSEN"));
+		buttonList.add(new Button(width / 2, height / 5, "TOMBOC"));
 		buttonList.add(new Button(width * 11 / 16, height / 5, "KURTH"));
 		buttonList.add(new Button(width * 1 / 8, height * 2 / 5, "WEBB"));
 		buttonList.add(new Button(width * 5 / 16, height * 2 / 5, "WAY"));
-		buttonList.add(new Button(width / 2, height * 2 / 5, "WHITNEY"));
+		buttonList.add(new Button(width / 2, height * 2 / 5, "HALANDER"));
 		buttonList.add(new Button(width * 11 / 16, height * 2 / 5, "HESTER"));
 		// exit button
 		buttonList.add(new Button(width * 1 / 8, height * 4 / 5, "BACK"));
