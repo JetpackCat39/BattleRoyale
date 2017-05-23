@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 
 import game.Button;
 import game.GUIUtils;
-import game.IDrawable;
 
 public class PauseMenu extends Screen
 {

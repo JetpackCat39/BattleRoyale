@@ -1,10 +1,8 @@
 package game;
 
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
-import game.Menus.ChampMenu;
 import game.Menus.IScreen;
 import game.Menus.Screen;
 

@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 import game.Input.PlayerControls;
 
 import game.Button;
-import game.Fighter;
 import game.GUIUtils;
 import game.IOpponent;
 

@@ -16,14 +16,14 @@ public class Fighter implements IOpponent
 	private int x, y, xSpeed, ySpeed;
 	private BufferedImage image;
 	private int height = BattleRoyale.HEIGHT;
-	private int width = BattleRoyale.WIDTH;
+//	private int width = BattleRoyale.WIDTH;
 	private final int BASE;
 	private int jumpCount;
 	private final int JUMPS = 1;
 	private int health;
 	private PlayerControls controls;
 	private IOpponent opponent;
-	private Hitbox hitbox;
+//	private Hitbox hitbox;
 
 	public Fighter(int newX, int newY, BufferedImage img, PlayerControls ctrls)
 	{
@@ -37,7 +37,7 @@ public class Fighter implements IOpponent
 		health = STARTHEALTH;
 		image = img;
 		controls = ctrls;
-		hitbox = new Hitbox(newX, newY, img.getWidth(), img.getHeight());
+//		hitbox = new Hitbox(newX, newY, img.getWidth(), img.getHeight());
 	}
 
 	public void incrementXSpeed(int howMuch)
