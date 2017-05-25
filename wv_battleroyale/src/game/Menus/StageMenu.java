@@ -43,15 +43,7 @@ public class StageMenu extends Screen
 	public void draw(Graphics g)
 	{
 		super.draw(g);
-		getSchoolFront().draw(g);
-		getSchoolQuad().draw(g);
-		getAmpitheater().draw(g);
-		getTheaterFront().draw(g);
-		getPool().draw(g);
-		getFootballField().draw(g);
-		getBack().draw(g);
-		getCancel().draw(g);
-		getPlay().draw(g);
+		
 		if (isSelected)
 		{
 			selected.fill(g, SELECT);

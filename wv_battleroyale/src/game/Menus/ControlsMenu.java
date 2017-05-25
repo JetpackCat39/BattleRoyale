@@ -62,7 +62,7 @@ public class ControlsMenu extends Screen
 	@Override
 	public void draw(Graphics g)
 	{
-		super.draw(g);
+		GUIUtils.self().drawImg(bg, 0, 0, (width + 15), (height + 15), g);
 
 		if (changingControl != null)
 		{
@@ -91,10 +91,7 @@ public class ControlsMenu extends Screen
 		return buttonList.get(0);
 	}
 
-	public Button getKey(int num)
-	{
-		return buttonList.get(num);
-	}
+	
 
 	public int getNumButtons()
 	{

@@ -24,12 +24,16 @@ public class Screen implements IDrawable, IMenu, IKeya
 	{
 		bg = background;
 		buttonList = new ArrayList<Button>();
+		
 	}
 
 	@Override
 	public void draw(Graphics g)
 	{
 		GUIUtils.self().drawImg(bg, 0, 0, (width + 15), (height + 15), g);
+		for(int i = 0; i < buttonList.size();i++){
+			buttonList.get(i).draw(g);
+		}
 	}
 
 	@Override
@@ -45,6 +49,10 @@ public class Screen implements IDrawable, IMenu, IKeya
 	@Override
 	public void keyReleased(int keyCode)
 	{
+	}
+	
+	public Button getKey(int num){
+		return buttonList.get(num);
 	}
 	
 	public void reset()

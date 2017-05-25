@@ -54,9 +54,7 @@ public class ChampMenu extends Screen
 	public void draw(Graphics g)
 	{
 		super.draw(g);
-		for(int i=0;i<buttonList.size();i++){
-			getKey(i).draw(g);
-		}
+		
 		GUIUtils.self().drawText(width * 1 / 8, height * 3/5, "Movement to select, Punch to lock in, Kick to cancel", 30, g, false);
 		if (p1Index == p2Index)
 		{
@@ -94,9 +92,7 @@ public class ChampMenu extends Screen
 		}
 	}
 
-	public Button getKey(int num){
-		return buttonList.get(num);
-	}
+	
 	public Button getNeuhaus()
 	{
 		return buttonList.get(0);
