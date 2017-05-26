@@ -66,7 +66,6 @@ public class Fighter implements IOpponent
 		health = STARTHEALTH;
 		idle1 = img;
 		controls = ctrls;
-		hitbox = new Hitbox(newX, newY, img.getWidth(), img.getHeight());
 		frame = 1;
 	}
 	
