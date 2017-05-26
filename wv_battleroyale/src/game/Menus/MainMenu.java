@@ -11,26 +11,31 @@ public class MainMenu extends Screen implements IDrawable, IMenu
 {
 
 	BufferedImage litFire;
-	
+
 	public MainMenu(BufferedImage background, BufferedImage fire)
 	{
 		super(background);
 		litFire = fire;
 		// play button
-		buttonList.add(new Button(width * 1/5, height * 2 / 5, "PLAY"));
+		buttonList.add(new Button(width * 1 / 5, height * 1 / 5, "PLAY"));
 		// controls button
-		buttonList.add(new Button(width * 1/5, height * 3 / 5, "CONTROLS"));
+		buttonList.add(new Button(width * 1 / 5, height * 2 / 5, "CONTROLS"));
+		// Credits button
+		buttonList.add(new Button(width * 1 / 5, height * 3 / 5, "CREDITS"));
 		// exit button
-		buttonList.add(new Button(width * 1/5, height * 4 / 5, "EXIT"));
+		buttonList.add(new Button(width * 1 / 5, height * 4 / 5, "EXIT"));
 	}
 
 	public void draw(Graphics g)
 	{
 		super.draw(g);
 		GUIUtils.self().drawText(850, 480, "B A T T L E  R O Y A L E", 32, g, true);
-		GUIUtils.self().drawImg(litFire, 595, height - 230, litFire.getWidth() * 2 / 3, litFire.getHeight() * 1/35, g);
-		GUIUtils.self().drawImg(litFire, 595, height - 280, litFire.getWidth() * 2 / 3, litFire.getHeight() * 1/35, g);
-		GUIUtils.self().drawImg(litFire, 595, height - 280, litFire.getWidth() * 1/150, litFire.getHeight() * 1/2, g);
+		GUIUtils.self()
+				.drawImg(litFire, 595, height - 230, litFire.getWidth() * 2 / 3, litFire.getHeight() * 1 / 35, g);
+		GUIUtils.self()
+				.drawImg(litFire, 595, height - 280, litFire.getWidth() * 2 / 3, litFire.getHeight() * 1 / 35, g);
+		GUIUtils.self().drawImg(litFire, 595, height - 280, litFire.getWidth() * 1 / 150, litFire.getHeight() * 1 / 2,
+				g);
 		getPlay().draw(g);
 		getControls().draw(g);
 		getExit().draw(g);
@@ -46,9 +51,14 @@ public class MainMenu extends Screen implements IDrawable, IMenu
 		return buttonList.get(1);
 	}
 
-	public Button getExit()
+	public Button getCredits()
 	{
 		return buttonList.get(2);
+	}
+
+	public Button getExit()
+	{
+		return buttonList.get(3);
 	}
 
 	@Override
@@ -62,10 +72,15 @@ public class MainMenu extends Screen implements IDrawable, IMenu
 		{
 			screen.setScreen(screen.getControls(), false);
 		}
+		if (getCredits().contains(x, y))
+		{
+			screen.setScreen(screen.getCredits(), false);
+		}
 		if (getExit().contains(x, y))
 		{
-			screen.setScreen(screen.getStop(), false);
+			screen.setScreen(screen.getExit(), false);
 		}
+
 	}
 
 }

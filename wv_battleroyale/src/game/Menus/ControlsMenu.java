@@ -11,16 +11,21 @@ public class ControlsMenu extends Screen
 {
 	private static final int SIDE = 80;
 	private PlayerControls player1, player2;
-	private boolean otherMenu = true;
+	private boolean otherMenu;
 	private Button changingControl = null;
 
 	public ControlsMenu(BufferedImage background, PlayerControls p1, PlayerControls p2)
 	{
 		super(background);
+		otherMenu = false;
 		player1 = p1;
 		player2 = p2;
 		buttonList.add(new Button(width * 1 / 13, height * 3 / 19, "BACK"));
 		// player 1 movement controls
+
+		// pause button
+		buttonList.add(new Button(width * 1 / 16, height * 5 / 9, SIDE, SIDE, 0, player1.getPauseString())
+				.setAction(newKey -> player1.setPause(newKey)));
 		buttonList.add(new Button(width * 4 / 15, height * 5 / 9, SIDE, SIDE, 0, player1.getJumpString())
 				.setAction(newKey -> player1.setJump(newKey)));
 		buttonList.add(new Button(width * 4 / 15, height * 25 / 36, SIDE, SIDE, 0, player1.getCrouchString())
@@ -51,15 +56,13 @@ public class ControlsMenu extends Screen
 		// player 2 kick
 		buttonList.add(new Button(width * 17 / 24, height * 5 / 6, SIDE, SIDE, 0, player2.getKickString())
 				.setAction(newKey -> player2.setKick(newKey)));
-		// pause button
-		buttonList.add(new Button(width * 1 / 16, height * 5 / 9, SIDE, SIDE, 0, player2.getPauseString())
-		.setAction(newKey -> player2.setPause(newKey)));
+
 	}
 
 	@Override
 	public void draw(Graphics g)
 	{
-		super.draw(g);
+		GUIUtils.self().drawImg(bg, 0, 0, (width + 15), (height + 15), g);
 
 		if (changingControl != null)
 		{
@@ -88,10 +91,7 @@ public class ControlsMenu extends Screen
 		return buttonList.get(0);
 	}
 
-	public Button getKey(int num)
-	{
-		return buttonList.get(num);
-	}
+	
 
 	public int getNumButtons()
 	{

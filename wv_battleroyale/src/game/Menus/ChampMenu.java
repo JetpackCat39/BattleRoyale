@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 import game.Input.PlayerControls;
 
 import game.Button;
-import game.Fighter;
 import game.GUIUtils;
 import game.IOpponent;
 
@@ -28,12 +27,12 @@ public class ChampMenu extends Screen
 		p2Controls = p2;
 		reset();
 		buttonList.add(new Button(width * 1 / 8, height / 5, "NEUHAUS"));
-		buttonList.add(new Button(width * 5 / 16, height / 5, "JUSTIN"));
-		buttonList.add(new Button(width / 2, height / 5, "SPIESS"));
+		buttonList.add(new Button(width * 5 / 16, height / 5, "CASSEN"));
+		buttonList.add(new Button(width / 2, height / 5, "TOMBOC"));
 		buttonList.add(new Button(width * 11 / 16, height / 5, "KURTH"));
-		buttonList.add(new Button(width * 1 / 8, height * 2 / 5, "WEBB"));
-		buttonList.add(new Button(width * 5 / 16, height * 2 / 5, "WAY"));
-		buttonList.add(new Button(width / 2, height * 2 / 5, "WHITNEY"));
+		buttonList.add(new Button(width * 1 / 8, height * 2 / 5, "BOB"));
+		buttonList.add(new Button(width * 5 / 16, height * 2 / 5, "NGUYEN"));
+		buttonList.add(new Button(width / 2, height * 2 / 5, "HALANDER"));
 		buttonList.add(new Button(width * 11 / 16, height * 2 / 5, "HESTER"));
 		// exit button
 		buttonList.add(new Button(width * 1 / 8, height * 4 / 5, "BACK"));
@@ -55,16 +54,7 @@ public class ChampMenu extends Screen
 	public void draw(Graphics g)
 	{
 		super.draw(g);
-		getNeuhaus().draw(g);
-		getJustin().draw(g);
-		getSpiess().draw(g);
-		getKurth().draw(g);
-		getWebb().draw(g);
-		getWay().draw(g);
-		getWhitney().draw(g);
-		getHester().draw(g);
-		getBack().draw(g);
-		getNext().draw(g);
+		
 		GUIUtils.self().drawText(width * 1 / 8, height * 3/5, "Movement to select, Punch to lock in, Kick to cancel", 30, g, false);
 		if (p1Index == p2Index)
 		{
@@ -102,17 +92,18 @@ public class ChampMenu extends Screen
 		}
 	}
 
+	
 	public Button getNeuhaus()
 	{
 		return buttonList.get(0);
 	}
 
-	public Button getJustin()
+	public Button getCassen()
 	{
 		return buttonList.get(1);
 	}
 
-	public Button getSpiess()
+	public Button getTomboc()
 	{
 		return buttonList.get(2);
 	}
@@ -122,17 +113,17 @@ public class ChampMenu extends Screen
 		return buttonList.get(3);
 	}
 
-	public Button getWebb()
+	public Button getBob()
 	{
 		return buttonList.get(4);
 	}
 
-	public Button getWay()
+	public Button getNguyen()
 	{
 		return buttonList.get(5);
 	}
 
-	public Button getWhitney()
+	public Button getHalander()
 	{
 		return buttonList.get(6);
 	}

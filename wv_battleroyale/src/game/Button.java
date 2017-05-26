@@ -5,8 +5,6 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.font.FontRenderContext;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.RoundRectangle2D;
 import java.util.function.Consumer;
 

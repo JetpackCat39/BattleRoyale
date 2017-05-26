@@ -1,10 +1,8 @@
 package game;
 
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
-import game.Menus.ChampMenu;
 import game.Menus.IScreen;
 import game.Menus.Screen;
 
@@ -65,7 +63,7 @@ public class MainGame extends Screen
 		{
 			newOffset = maxVal;
 		}
-		offset = newOffset;	
+		offset = newOffset;
 	}
 
 	public IOpponent createP1()
@@ -76,18 +74,18 @@ public class MainGame extends Screen
 	@Override
 	public void keyPressed(IScreen screen, int keyCode)
 	{
-		switch (keyCode)
+		if (p1.getPause() == keyCode)
 		{
-		case KeyEvent.VK_ESCAPE:
 			if (screen.getScreen() == screen.getGame())
 			{
 				screen.setScreen(screen.getPause(), false);
 			}
-			break;
-		default:
+
+		}
+		else
+		{
 			p1.keyPressed(null, keyCode);
 			p2.keyPressed(null, keyCode);
-			break;
 		}
 	}
 

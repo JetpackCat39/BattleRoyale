@@ -12,6 +12,7 @@ import javax.swing.*;
 import game.Input.PlayerControls;
 import game.Menus.ChampMenu;
 import game.Menus.ControlsMenu;
+import game.Menus.CreditsMenu;
 import game.Menus.IScreen;
 import game.Menus.MainMenu;
 import game.Menus.PauseMenu;
@@ -56,6 +57,8 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	private PauseMenu pause;
 	private StageMenu stage;
 	private ChampMenu champ;
+	private CreditsMenu credits;
+	
 
 	private Graphics g;
 
@@ -95,7 +98,9 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		menu = new MainMenu(menuBG, fire);
 		controls = new ControlsMenu(controlsBG, p1Controls, p2Controls);
 		pause = new PauseMenu(this, pauseBG);
+		credits = new CreditsMenu(menuBG);
 		stop = new Screen(null);
+		
 
 		setScreen(getMenu(), false);
 
@@ -319,7 +324,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	}
 
 	@Override
-	public Screen getStop()
+	public Screen getExit()
 	{
 		return stop;
 	}
@@ -328,6 +333,10 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	public Screen getMenu()
 	{
 		return menu;
+	}
+	
+	public Screen getCredits(){
+		return credits;
 	}
 
 	@Override

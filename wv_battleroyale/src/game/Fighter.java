@@ -15,14 +15,13 @@ public class Fighter implements IOpponent
 	private static final int PUNCH = 3;
 	private int x, y, xSpeed, ySpeed;
 	private int height = BattleRoyale.HEIGHT;
-	private int width = BattleRoyale.WIDTH;
+//	private int width = BattleRoyale.WIDTH;
 	private final int BASE;
 	private int jumpCount;
 	private final int JUMPS = 1;
 	private int health;
 	private PlayerControls controls;
 	private IOpponent opponent;
-	private Hitbox hitbox;
 	
 	private int frame;
 	
@@ -52,6 +51,8 @@ public class Fighter implements IOpponent
 		JPUNCH;
 	}
 	private STATE State = STATE.IDLE;
+	
+//	private Hitbox hitbox;
 
 	public Fighter(int newX, int newY, BufferedImage img, PlayerControls ctrls)
 	{
@@ -326,6 +327,12 @@ public class Fighter implements IOpponent
 	{
 		return health;
 	}
+	
+	public int getPause(){
+		return controls.getPause();
+	}
+	
+	
 
 	public void setHealth(int newHealth)
 	{
