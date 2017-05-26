@@ -26,14 +26,14 @@ public class ChampMenu extends Screen
 		p1Controls = p1;
 		p2Controls = p2;
 		reset();
-		buttonList.add(new Button(width * 1 / 8, height / 5, "NEUHAUS"));
+		buttonList.add(new Button(width * 1 / 8, height / 5, "JAMAL"));
 		buttonList.add(new Button(width * 5 / 16, height / 5, "CASSEN"));
 		buttonList.add(new Button(width / 2, height / 5, "TOMBOC"));
 		buttonList.add(new Button(width * 11 / 16, height / 5, "KURTH"));
 		buttonList.add(new Button(width * 1 / 8, height * 2 / 5, "BOB"));
 		buttonList.add(new Button(width * 5 / 16, height * 2 / 5, "NGUYEN"));
 		buttonList.add(new Button(width / 2, height * 2 / 5, "HALANDER"));
-		buttonList.add(new Button(width * 11 / 16, height * 2 / 5, "HESTER"));
+		buttonList.add(new Button(width * 11 / 16, height * 2 / 5, "WAY"));
 		// exit button
 		buttonList.add(new Button(width * 1 / 8, height * 4 / 5, "BACK"));
 		// next button
@@ -54,8 +54,10 @@ public class ChampMenu extends Screen
 	public void draw(Graphics g)
 	{
 		super.draw(g);
-		
-		GUIUtils.self().drawText(width * 1 / 8, height * 3/5, "Movement to select, Punch to lock in, Kick to cancel", 30, g, false);
+
+		GUIUtils.self().drawText(width / 10, height * 3 / 5,
+				"Movement to select, Punch to lock in/cancel, kick to view character description", 25, g,
+				false);
 		if (p1Index == p2Index)
 		{
 			if (!(isSelected1 && isSelected2))
@@ -92,8 +94,7 @@ public class ChampMenu extends Screen
 		}
 	}
 
-	
-	public Button getNeuhaus()
+	public Button getJamal()
 	{
 		return buttonList.get(0);
 	}
@@ -128,7 +129,7 @@ public class ChampMenu extends Screen
 		return buttonList.get(6);
 	}
 
-	public Button getHester()
+	public Button getWay()
 	{
 		return buttonList.get(7);
 	}
@@ -142,12 +143,12 @@ public class ChampMenu extends Screen
 	{
 		return buttonList.get(9);
 	}
-	
+
 	public Button getSelectedP1()
 	{
 		return buttonList.get(p1Index);
 	}
-	
+
 	public Button getSelectedP2()
 	{
 		return buttonList.get(p2Index);
@@ -226,10 +227,7 @@ public class ChampMenu extends Screen
 
 	public void setP1()
 	{
-		if (getSelectedP1().equals(getNeuhaus()))
-		{
-			
-		}
+
 		isSelected1 = true;
 	}
 
@@ -281,6 +279,10 @@ public class ChampMenu extends Screen
 				setP1();
 			}
 		}
+		else if (keyCode == p1Controls.getPunch())
+		{
+			isSelected1 = false;
+		}
 		if (!isSelected2)
 		{
 			if (keyCode == p2Controls.getLeft())
@@ -300,11 +302,8 @@ public class ChampMenu extends Screen
 				setP2();
 			}
 		}
-		if (keyCode == p1Controls.getKick())
-		{
-			isSelected1 = false;
-		}
-		if (keyCode == p2Controls.getKick())
+
+		else if (keyCode == p2Controls.getPunch())
 		{
 			isSelected2 = false;
 		}
