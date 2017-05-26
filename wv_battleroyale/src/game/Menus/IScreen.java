@@ -18,7 +18,12 @@ public interface IScreen
 	
 	public Screen getControls();
 	
-	public Screen getStop();
+	//public Screen getCharacters();
+	
+	public Screen getCredits();
+	
+	public Screen getExit();
+	
 	
 	public Screen getMenu();
 
