@@ -14,7 +14,6 @@ public class Fighter implements IOpponent
 	private static final int STARTHEALTH = 20;
 	private static final int PUNCH = 3;
 	private int x, y, xSpeed, ySpeed;
-	private BufferedImage image;
 	private int height = BattleRoyale.HEIGHT;
 	private int width = BattleRoyale.WIDTH;
 	private final int BASE;
@@ -24,6 +23,35 @@ public class Fighter implements IOpponent
 	private PlayerControls controls;
 	private IOpponent opponent;
 	private Hitbox hitbox;
+	
+	private int frame;
+	
+	private BufferedImage idle1;
+	private BufferedImage idle2;
+	private BufferedImage idle3;
+	private BufferedImage idle4;
+	private BufferedImage walk1;
+	private BufferedImage walk2;
+	private BufferedImage walk3;
+	private BufferedImage walk4;
+	private BufferedImage walk5;
+	private BufferedImage punch1;
+	private BufferedImage punch2;
+	private BufferedImage punch3;
+	private BufferedImage cpunch1;
+	private BufferedImage cpunch2;
+	private BufferedImage cpunch3;
+	private BufferedImage jpunch1;
+	private BufferedImage jpunch2;
+	
+	private enum STATE {
+		IDLE,
+		WALK,
+		PUNCH,
+		CPUNCH,
+		JPUNCH;
+	}
+	private STATE State = STATE.IDLE;
 
 	public Fighter(int newX, int newY, BufferedImage img, PlayerControls ctrls)
 	{
@@ -35,9 +63,29 @@ public class Fighter implements IOpponent
 		jumpCount = 0;
 		opponent = null;
 		health = STARTHEALTH;
-		image = img;
+		idle1 = img;
 		controls = ctrls;
 		hitbox = new Hitbox(newX, newY, img.getWidth(), img.getHeight());
+		frame = 1;
+	}
+	
+	public BufferedImage getImg() {
+		if(State == STATE.IDLE) {
+			
+		}
+		if(State == STATE.IDLE) {
+			
+		}
+		if(State == STATE.IDLE) {
+			
+		}
+		if(State == STATE.IDLE) {
+			
+		}
+			if(State == STATE.IDLE) {
+			
+		}
+			return idle1;
 	}
 
 	public void incrementXSpeed(int howMuch)
@@ -130,6 +178,11 @@ public class Fighter implements IOpponent
 			ySpeed *= -1;
 		}
 		moveCollisionChecker();
+		if(x > prevX) {
+			State = STATE.WALK;
+		} else {
+			State = STATE.IDLE;
+		}
 		return (prevX != x) || (prevY != y);
 	}
 
@@ -220,7 +273,7 @@ public class Fighter implements IOpponent
 	@Override
 	public int getWidth()
 	{
-		return image.getWidth();
+		return getImg().getWidth();
 	}
 
 	/*
@@ -231,7 +284,7 @@ public class Fighter implements IOpponent
 	@Override
 	public int getHeight()
 	{
-		return image.getHeight();
+		return getImg().getHeight();
 	}
 
 	public int getJumpCount()
@@ -304,7 +357,7 @@ public class Fighter implements IOpponent
 
 	public void draw(Graphics g, int offset)
 	{
-		GUIUtils.self().drawImg(image, x + offset, height - y, image.getWidth(), image.getHeight(), g);
+		GUIUtils.self().drawImg(getImg(), x + offset, height - y, getImg().getWidth(), getImg().getHeight(), g);
 	}
 
 	public void setOpponent(IOpponent fighter)
