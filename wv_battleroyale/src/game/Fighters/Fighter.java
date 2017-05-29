@@ -15,38 +15,29 @@ public abstract class Fighter implements IOpponent
 	private static final int MAX_X_SPEED = 5;
 	private static final int STARTHEALTH = 20;
 	private static final int PUNCH = 3;
-	private int x, y, xSpeed, ySpeed;
+	private int x, y, xSpeed, ySpeed, changeAnimation;
 	private int height = BattleRoyale.HEIGHT;
 	// private int width = BattleRoyale.WIDTH;
 	private final int BASE;
-	private int jumpCount;
-	private final int JUMPS = 1;
 	private int health;
 	private PlayerControls controls;
 	private IOpponent opponent;
 
 	private int frame;
-	
+
 	BufferedImage sprites, win, loss;
 
 	enum STATE
 	{
-		IDLE (0),
-		WALK (1), 
-		KICK (2), 
-		PUNCH (3), 
-		JUMP (4), 
-		CROUCH (5), 
-		ENTER (6), 
-		BLOCK (7), 
-		HIT (8);
-		
+		IDLE(0), WALK(1), KICK(2), PUNCH(3), JUMP(4), CROUCH(5), ENTER(6), BLOCK(7), HIT(8);
+
 		private final int _index;
+
 		STATE(int index)
 		{
 			_index = index;
 		}
-		
+
 		public int getIndex()
 		{
 			return _index;
@@ -54,28 +45,41 @@ public abstract class Fighter implements IOpponent
 	}
 
 	private STATE State = STATE.IDLE;
+	
+	protected void setState(STATE s)
+	{
+		//System.out.println("From " + State + " To " + s);
+		State = s;
+	}
+	
+	protected boolean checkState(STATE s)
+	{
+		return State == s;
+	}
 
-
-	public Fighter(int newX, int newY, BufferedImage spriteSheet, BufferedImage victory, BufferedImage KO, PlayerControls ctrls)
+	public Fighter(int newX, int newY, BufferedImage spriteSheet, BufferedImage victory, BufferedImage KO,
+			PlayerControls ctrls)
 	{
 		x = newX + getWidth();
 		y = newY + getHeight();
 		xSpeed = 0;
 		ySpeed = 0;
 		BASE = newY;
-		jumpCount = 0;
 		opponent = null;
 		health = STARTHEALTH;
 		controls = ctrls;
 		frame = 0;
+		changeAnimation = 0;
 		sprites = spriteSheet;
 		win = victory;
 		loss = KO;
 	}
-	
+
 	protected abstract int getNumImages(STATE s);
 	
-	protected BufferedImage getImage()
+	protected abstract int getAnimationSpeed(STATE s);
+
+	protected BufferedImage getSpriteSheet()
 	{
 		return sprites;
 	}
@@ -158,7 +162,6 @@ public abstract class Fighter implements IOpponent
 		if (y < BASE)
 		{
 			y = BASE;
-			jumpCount = 0;
 		}
 		if (y > BASE)
 		{
@@ -170,13 +173,9 @@ public abstract class Fighter implements IOpponent
 			ySpeed *= -1;
 		}
 		moveCollisionChecker();
-		if (x > prevX)
+		if (checkState(STATE.JUMPadd) && y == BASE)
 		{
-			State = STATE.WALK;
-		}
-		else
-		{
-			State = STATE.IDLE;
+			setState(STATE.IDLE);
 		}
 		return (prevX != x) || (prevY != y);
 	}
@@ -279,28 +278,24 @@ public abstract class Fighter implements IOpponent
 	 */
 	@Override
 	public abstract int getHeight();
-
-	public int getJumpCount()
-	{
-		return jumpCount;
-	}
-
-	public void setJumpCount(int count)
-	{
-		jumpCount = count;
-	}
-
+	
 	public void jump()
 	{
-		if (jumpCount < JUMPS)
+		setState(STATE.JUMP);
+		if (y > BASE)
 		{
-			ySpeed = MAX_Y_SPEED;
+			return;
 		}
-		jumpCount++;
+		setYSpeed(MAX_Y_SPEED);		
 	}
 
 	public void punch()
 	{
+		if (checkState(STATE.PUNCH))
+		{
+			return;
+		}
+		setState(STATE.PUNCH);
 		if (compareXPosition() != 0)
 		{
 			opponent.damage(PUNCH);
@@ -309,6 +304,11 @@ public abstract class Fighter implements IOpponent
 
 	public void kick()
 	{
+		if (checkState(STATE.KICK))
+		{
+			return;
+		}
+		setState(STATE.KICK);
 		if (compareXPosition() != 0)
 		{
 			opponent.damage(KICK);
@@ -355,12 +355,34 @@ public abstract class Fighter implements IOpponent
 
 	public void draw(Graphics g, int offset)
 	{
-		GUIUtils.self().drawImg(getImage(), frame * getWidth(), State.getIndex() * getHeight(), 
+
+		GUIUtils.self().drawImg(getSpriteSheet(), frame * (getWidth() + 1), State.getIndex() * (getHeight() + 1),
 				x + offset, height - y, getWidth(), getHeight(), g);
-		frame++;
-		if (frame > getNumImages(State))
+		changeAnimation++;
+		if (changeAnimation >= getAnimationSpeed(State))
 		{
+			frame++;
+			changeAnimation = 0;
+		}
+		if (frame >= getNumImages(State))
+		{
+			if (checkState(STATE.PUNCH))
+			{
+				setState(STATE.IDLE);
+			}
+			if (checkState(STATE.KICK))
+			{
+				setState(STATE.IDLE);
+			}
+			if (checkState(STATE.JUMP))
+			{
+				setState(STATE.IDLE);
+			}
 			frame = 0;
+			if (checkState(STATE.CROUCH))
+			{
+				frame = 1;
+			}
 		}
 	}
 
@@ -374,15 +396,19 @@ public abstract class Fighter implements IOpponent
 	{
 		if (keyCode == controls.getLeft())
 		{
-			setXSpeed(-5);
+			walkLeft();
 		}
 		else if (keyCode == controls.getRight())
 		{
-			setXSpeed(5);
+			walkRight();
 		}
 		else if (keyCode == controls.getJump())
 		{
 			jump();
+		}
+		else if (keyCode == controls.getCrouch())
+		{
+			crouch();
 		}
 		else if (keyCode == controls.getPunch())
 		{
@@ -394,6 +420,23 @@ public abstract class Fighter implements IOpponent
 		}
 	}
 
+	private void walkRight()
+	{
+		setState(STATE.WALK);
+		setXSpeed(5);
+	}
+
+	private void walkLeft()
+	{
+		setState(STATE.WALK);
+		setXSpeed(-5);
+	}
+
+	private void crouch()
+	{
+		setState(STATE.CROUCH);
+	}
+
 	@Override
 	public void keyReleased(int keyCode)
 	{
@@ -401,15 +444,25 @@ public abstract class Fighter implements IOpponent
 		{
 			if (getXSpeed() != 0)
 			{
-				changeXSpeed(5);
+				stopWalking();
 			}
 		}
 		else if (keyCode == controls.getRight())
 		{
 			if (getXSpeed() != 0)
 			{
-				changeXSpeed(-5);
+				stopWalking();
 			}
 		}
+		else if (keyCode == controls.getCrouch())
+		{
+			setState(STATE.IDLE);
+		}
+	}
+
+	private void stopWalking()
+	{
+		setXSpeed(0);
+		setState(STATE.IDLE);
 	}
 }

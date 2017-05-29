@@ -42,6 +42,34 @@ public class Jamal extends Fighter
 	}
 
 	@Override
+	protected int getAnimationSpeed(STATE s)
+	{
+		switch (s)
+		{
+		case IDLE:
+			return 20;
+		case WALK:
+			return 30;
+		case KICK:
+			return 40;
+		case PUNCH:
+			return 40;
+		case JUMP:
+			return 60/7;
+		case CROUCH:
+			return 20;
+		case ENTER:
+			return 20;
+		case BLOCK:
+			return 20;
+		case HIT:
+			return 20;
+		default:
+			throw new IndexOutOfBoundsException();
+		}
+	}
+	
+	@Override
 	public int getWidth()
 	{
 		return 75;
@@ -52,5 +80,4 @@ public class Jamal extends Fighter
 	{
 		return 115;
 	}
-	
 }

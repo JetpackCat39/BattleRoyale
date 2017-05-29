@@ -81,7 +81,6 @@ public class MainGame extends Screen
 			{
 				screen.setScreen(screen.getPause(), false);
 			}
-
 		}
 		else
 		{
