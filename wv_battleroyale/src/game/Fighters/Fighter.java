@@ -8,7 +8,7 @@ import game.GUIUtils;
 import game.Input.PlayerControls;
 import game.Menus.IScreen;
 
-public class Fighter implements IOpponent
+public abstract class Fighter implements IOpponent
 {
 	private static final int KICK = 2;
 	private static final int MAX_Y_SPEED = 15;
@@ -26,37 +26,40 @@ public class Fighter implements IOpponent
 	private IOpponent opponent;
 
 	private int frame;
+	
+	BufferedImage sprites, win, loss;
 
-	private BufferedImage idle1;
-	private BufferedImage idle2;
-	private BufferedImage idle3;
-	private BufferedImage idle4;
-	private BufferedImage walk1;
-	private BufferedImage walk2;
-	private BufferedImage walk3;
-	private BufferedImage walk4;
-	private BufferedImage walk5;
-	private BufferedImage punch1;
-	private BufferedImage punch2;
-	private BufferedImage punch3;
-	private BufferedImage cpunch1;
-	private BufferedImage cpunch2;
-	private BufferedImage cpunch3;
-	private BufferedImage jpunch1;
-	private BufferedImage jpunch2;
-
-	private enum STATE
+	enum STATE
 	{
-		IDLE, WALK, PUNCH, CPUNCH, JPUNCH;
+		IDLE (0),
+		WALK (1), 
+		KICK (2), 
+		PUNCH (3), 
+		JUMP (4), 
+		CROUCH (5), 
+		ENTER (6), 
+		BLOCK (7), 
+		HIT (8);
+		
+		private final int _index;
+		STATE(int index)
+		{
+			_index = index;
+		}
+		
+		public int getIndex()
+		{
+			return _index;
+		}
 	}
 
 	private STATE State = STATE.IDLE;
 
 
-	public Fighter(int newX, int newY, BufferedImage spriteSheet, PlayerControls ctrls)
+	public Fighter(int newX, int newY, BufferedImage spriteSheet, BufferedImage victory, BufferedImage KO, PlayerControls ctrls)
 	{
-		x = newX;
-		y = newY;
+		x = newX + getWidth();
+		y = newY + getHeight();
 		xSpeed = 0;
 		ySpeed = 0;
 		BASE = newY;
@@ -64,32 +67,17 @@ public class Fighter implements IOpponent
 		opponent = null;
 		health = STARTHEALTH;
 		controls = ctrls;
-		frame = 1;
+		frame = 0;
+		sprites = spriteSheet;
+		win = victory;
+		loss = KO;
 	}
-
-	public BufferedImage getImg()
+	
+	protected abstract int getNumImages(STATE s);
+	
+	protected BufferedImage getImage()
 	{
-		if (State == STATE.IDLE)
-		{
-
-		}
-		if (State == STATE.IDLE)
-		{
-
-		}
-		if (State == STATE.IDLE)
-		{
-
-		}
-		if (State == STATE.IDLE)
-		{
-
-		}
-		if (State == STATE.IDLE)
-		{
-
-		}
-		return idle1;
+		return sprites;
 	}
 
 	public void changeXSpeed(int howMuch)
@@ -282,10 +270,7 @@ public class Fighter implements IOpponent
 	 * @see game.iOpponent#getWidth()
 	 */
 	@Override
-	public int getWidth()
-	{
-		return getImg().getWidth();
-	}
+	public abstract int getWidth();
 
 	/*
 	 * (non-Javadoc)
@@ -293,10 +278,7 @@ public class Fighter implements IOpponent
 	 * @see game.iOpponent#getHeight()
 	 */
 	@Override
-	public int getHeight()
-	{
-		return getImg().getHeight();
-	}
+	public abstract int getHeight();
 
 	public int getJumpCount()
 	{
@@ -373,7 +355,13 @@ public class Fighter implements IOpponent
 
 	public void draw(Graphics g, int offset)
 	{
-		GUIUtils.self().drawImg(getImg(), x + offset, height - y, getImg().getWidth(), getImg().getHeight(), g);
+		GUIUtils.self().drawImg(getImage(), frame * getWidth(), State.getIndex() * getHeight(), 
+				x + offset, height - y, getWidth(), getHeight(), g);
+		frame++;
+		if (frame > getNumImages(State))
+		{
+			frame = 0;
+		}
 	}
 
 	public void setOpponent(IOpponent fighter)

@@ -1,25 +1,14 @@
 package game;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.awt.image.*;
 
 import javax.swing.*;
 
-import game.Fighters.Fighter;
-import game.Fighters.IOpponent;
-import game.Input.PlayerControls;
-import game.Menus.ChampMenu;
-import game.Menus.ControlsMenu;
-import game.Menus.CreditsMenu;
-import game.Menus.IScreen;
-import game.Menus.MainMenu;
-import game.Menus.PauseMenu;
-import game.Menus.Screen;
-import game.Menus.StageMenu;
+import game.Fighters.*;
+import game.Input.*;
+import game.Menus.*;
 
 import java.io.IOException;
 import java.util.Stack;
@@ -94,7 +83,14 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 
 		g = null;
 
-		game = createGame();
+		try
+		{
+			game = createGame();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 		champ = new ChampMenu(menuBG, p1Controls, p2Controls);
 		stage = new StageMenu(menuBG);
 		menu = new MainMenu(menuBG, fire);
@@ -207,11 +203,13 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		}
 	}
 
-	private MainGame createGame()
+	private MainGame createGame() throws IOException
 	{
 		MainGame tempGame;
-		p1 = new Fighter(PLAYERX, tammy.getHeight() + PLAYERY, tammy, p1Controls);
-		p2 = new Fighter(WIDTH - PLAYERX - tammy.getWidth(), tammy.getHeight() + PLAYERY, tammy, p2Controls);
+		p1 = new Jamal(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Jamal-Ingame.png"),
+				GUIUtils.self().loadImage("Images/Jamal-Victory.png"), GUIUtils.self().loadImage("Images/JamalKO.png"), p1Controls);
+		p2 = new Jamal(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Jamal-Ingame.png"),
+				GUIUtils.self().loadImage("Images/Jamal-Victory.png"), GUIUtils.self().loadImage("Images/JamalKO.png"), p1Controls);
 		p1.setOpponent(p2);
 		p2.setOpponent(p1);
 
@@ -297,7 +295,14 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	@Override
 	public Screen getNewGame()
 	{
-		game = createGame();
+		try
+		{
+			game = createGame();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 		return game;
 	}
 
