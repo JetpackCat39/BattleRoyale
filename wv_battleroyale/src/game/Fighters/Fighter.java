@@ -1,8 +1,10 @@
-package game;
+package game.Fighters;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import game.BattleRoyale;
+import game.GUIUtils;
 import game.Input.PlayerControls;
 import game.Menus.IScreen;
 
@@ -15,16 +17,16 @@ public class Fighter implements IOpponent
 	private static final int PUNCH = 3;
 	private int x, y, xSpeed, ySpeed;
 	private int height = BattleRoyale.HEIGHT;
-//	private int width = BattleRoyale.WIDTH;
+	// private int width = BattleRoyale.WIDTH;
 	private final int BASE;
 	private int jumpCount;
 	private final int JUMPS = 1;
 	private int health;
 	private PlayerControls controls;
 	private IOpponent opponent;
-	
+
 	private int frame;
-	
+
 	private BufferedImage idle1;
 	private BufferedImage idle2;
 	private BufferedImage idle3;
@@ -42,19 +44,16 @@ public class Fighter implements IOpponent
 	private BufferedImage cpunch3;
 	private BufferedImage jpunch1;
 	private BufferedImage jpunch2;
-	
-	private enum STATE {
-		IDLE,
-		WALK,
-		PUNCH,
-		CPUNCH,
-		JPUNCH;
-	}
-	private STATE State = STATE.IDLE;
-	
-//	private Hitbox hitbox;
 
-	public Fighter(int newX, int newY, BufferedImage img, PlayerControls ctrls)
+	private enum STATE
+	{
+		IDLE, WALK, PUNCH, CPUNCH, JPUNCH;
+	}
+
+	private STATE State = STATE.IDLE;
+
+
+	public Fighter(int newX, int newY, BufferedImage spriteSheet, PlayerControls ctrls)
 	{
 		x = newX;
 		y = newY;
@@ -64,31 +63,36 @@ public class Fighter implements IOpponent
 		jumpCount = 0;
 		opponent = null;
 		health = STARTHEALTH;
-		idle1 = img;
 		controls = ctrls;
 		frame = 1;
 	}
-	
-	public BufferedImage getImg() {
-		if(State == STATE.IDLE) {
-			
+
+	public BufferedImage getImg()
+	{
+		if (State == STATE.IDLE)
+		{
+
 		}
-		if(State == STATE.IDLE) {
-			
+		if (State == STATE.IDLE)
+		{
+
 		}
-		if(State == STATE.IDLE) {
-			
+		if (State == STATE.IDLE)
+		{
+
 		}
-		if(State == STATE.IDLE) {
-			
+		if (State == STATE.IDLE)
+		{
+
 		}
-			if(State == STATE.IDLE) {
-			
+		if (State == STATE.IDLE)
+		{
+
 		}
-			return idle1;
+		return idle1;
 	}
 
-	public void incrementXSpeed(int howMuch)
+	public void changeXSpeed(int howMuch)
 	{
 		int temp = xSpeed + howMuch;
 		if (temp > MAX_X_SPEED)
@@ -102,7 +106,7 @@ public class Fighter implements IOpponent
 		xSpeed = temp;
 	}
 
-	public void incrementYSpeed(int howMuch)
+	public void changeYSpeed(int howMuch)
 	{
 		int temp = ySpeed + howMuch;
 		if (temp > MAX_Y_SPEED)
@@ -170,7 +174,7 @@ public class Fighter implements IOpponent
 		}
 		if (y > BASE)
 		{
-			incrementYSpeed(-1);
+			changeYSpeed(-1);
 		}
 		if (height - y < 0)
 		{
@@ -178,9 +182,12 @@ public class Fighter implements IOpponent
 			ySpeed *= -1;
 		}
 		moveCollisionChecker();
-		if(x > prevX) {
+		if (x > prevX)
+		{
 			State = STATE.WALK;
-		} else {
+		}
+		else
+		{
 			State = STATE.IDLE;
 		}
 		return (prevX != x) || (prevY != y);
@@ -189,9 +196,13 @@ public class Fighter implements IOpponent
 	public void moveCollisionChecker()
 	{
 		if (compareXPosition() > 0)
+		{
 			x = opponent.getX() + opponent.getWidth();
+		}
 		else if (compareXPosition() < 0)
+		{
 			x = opponent.getX() - getWidth();
+		}
 	}
 
 	public boolean isCollision()
@@ -326,12 +337,11 @@ public class Fighter implements IOpponent
 	{
 		return health;
 	}
-	
-	public int getPause(){
+
+	public int getPause()
+	{
 		return controls.getPause();
 	}
-	
-	
 
 	public void setHealth(int newHealth)
 	{
@@ -403,14 +413,14 @@ public class Fighter implements IOpponent
 		{
 			if (getXSpeed() != 0)
 			{
-				incrementXSpeed(5);
+				changeXSpeed(5);
 			}
 		}
 		else if (keyCode == controls.getRight())
 		{
 			if (getXSpeed() != 0)
 			{
-				incrementXSpeed(-5);
+				changeXSpeed(-5);
 			}
 		}
 	}

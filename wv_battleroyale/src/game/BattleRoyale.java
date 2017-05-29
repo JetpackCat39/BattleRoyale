@@ -9,6 +9,8 @@ import java.awt.image.*;
 
 import javax.swing.*;
 
+import game.Fighters.Fighter;
+import game.Fighters.IOpponent;
 import game.Input.PlayerControls;
 import game.Menus.ChampMenu;
 import game.Menus.ControlsMenu;

@@ -7,7 +7,7 @@ import game.Input.PlayerControls;
 
 import game.Button;
 import game.GUIUtils;
-import game.IOpponent;
+import game.Fighters.IOpponent;
 
 public class ChampMenu extends Screen
 {

@@ -1,4 +1,4 @@
-package game;
+package game.Fighters;
 
 public class Hitbox
 {

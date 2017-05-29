@@ -2,7 +2,7 @@ package game.Menus;
 
 import java.awt.image.BufferedImage;
 
-import game.IOpponent;
+import game.Fighters.IOpponent;
 
 public interface IScreen
 {

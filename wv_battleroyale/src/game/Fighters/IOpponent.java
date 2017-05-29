@@ -1,4 +1,4 @@
-package game;
+package game.Fighters;
 
 import java.awt.Graphics;
 
@@ -34,9 +34,5 @@ public interface IOpponent extends IKeya
 	public void draw(Graphics g, int offset);
 	
 	public int getPause();
-
-	
-		
-	
 
 }

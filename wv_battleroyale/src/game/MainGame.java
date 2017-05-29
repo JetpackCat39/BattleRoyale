@@ -3,6 +3,7 @@ package game;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import game.Fighters.IOpponent;
 import game.Menus.IScreen;
 import game.Menus.Screen;
 
