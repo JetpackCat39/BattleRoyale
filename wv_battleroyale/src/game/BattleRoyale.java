@@ -34,7 +34,6 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	// BufferedImage.TYPE_INT_RGB);
 	private static BufferedImage menuBG;
 	private static BufferedImage arena;
-	private static BufferedImage tammy;
 	private static BufferedImage fire;
 	public static BufferedImage controlsBG;
 	public static BufferedImage pauseBG;
@@ -63,7 +62,6 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		running = false;
 		menuBG = null;
 		arena = null;
-		tammy = null;
 		fire = null;
 		controlsBG = null;
 		pauseBG = null;
@@ -109,7 +107,6 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		arena = GUIUtils.self().loadImage("Images/ampitheater.png");
 		menuBG = GUIUtils.self().loadImage("Images/menuBG.png");
-		tammy = GUIUtils.self().loadImage("Images/tammy.png");
 		controlsBG = GUIUtils.self().loadImage("Images/controlsBG.jpg");
 		pauseBG = GUIUtils.self().createOverlay(WIDTH, HEIGHT, 0.85f);
 		// fire image: http://dreamicus.com/data/fire/fire-04.jpg
@@ -162,7 +159,8 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		long lastTime = System.nanoTime();
 		final double fps = 60.0;
 		final double ns = 1000000000 / fps;
-		double delta = 0; // time passed
+		final double ns2 = ns/3;
+		double delta = 0, delta2 = 0; // time passed
 
 		// to display time and fps
 		int updates = 0;
@@ -173,6 +171,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		{
 			long currentTime = System.nanoTime();
 			delta += (currentTime - lastTime) / ns;
+			delta2 +=(currentTime - lastTime) / ns2;
 			lastTime = currentTime;
 			if (delta >= 1)
 			{
@@ -180,8 +179,12 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 				updates++;
 				delta--;
 			}
-			render();
-			frames++;
+			if (delta2 >= 1)
+			{
+				render();
+				frames++;
+				delta2--;
+			}
 			if (System.currentTimeMillis() - timer > 1000)
 			{
 				timer += 1000;

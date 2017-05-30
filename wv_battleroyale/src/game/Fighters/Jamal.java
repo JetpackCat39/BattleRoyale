@@ -6,15 +6,18 @@ public class Jamal extends Fighter
 {
 	private static final int JAMAL_HEIGHT = 115;
 	private static final int JAMAL_WIDTH = 75;
+	
+	// 180 = fps
 	private static final int CHARACTER_HIT_UPDATE_COUNT = 20;
 	private static final int BLOCK_UPDATE_COUNT = 20;
 	private static final int STAGE_ENTRANCE_UPDATE_COUNT = 20;
-	private static final int CROUCH_UPDATE_COUNT = 20;
-	private static final int JUMP_UPDATE_COUNT = 120/7;
-	private static final int PUNCH_UPDATE_COUNT = 40;
-	private static final int KICK_UPDATE_COUNT = 40;
-	private static final int WALK_UPDATE_COUNT = 30;
-	private static final int IDLE_UPDATE_COUNT = 20;
+	private static final int CROUCH_UPDATE_COUNT = 180/10;  //goes to a crouch pose in a fifth of a second
+	private static final int JUMP_UPDATE_COUNT = 180/7; // goes through a jump animation over 1 second
+	private static final int PUNCH_UPDATE_COUNT = 180/6; // makes it punch twice in a second
+	private static final int KICK_UPDATE_COUNT = 180/8; // makes it kick twice in a second
+	private static final int WALK_UPDATE_COUNT = 180/10; // walks 2 cycles in a second
+	private static final int IDLE_UPDATE_COUNT = 180/8; // makes it cycle through an "idle" animation 2 times a second
+	
 	private static final int CHARACTER_HIT_ANIMATION_COUNT = 4;
 	private static final int BLOCK_ANIMATION_COUNT = 2;
 	private static final int STAGE_ENTRANCE_ANIMATION_COUNT = 1;
