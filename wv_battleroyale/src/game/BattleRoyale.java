@@ -48,6 +48,15 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	private StageMenu stage;
 	private ChampMenu champ;
 	private CreditsMenu credits;
+	private BobMenu bob;
+	private CassenMenu cassen;
+	private HalanderMenu halander;
+	private JamalMenu jamal;
+	private KurthMenu kurth;
+	private NguyenMenu nguyen;
+	private TombocMenu tomboc;
+	private WayMenu way;
+	
 	
 
 	private Graphics g;
@@ -96,6 +105,14 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		pause = new PauseMenu(this, pauseBG);
 		credits = new CreditsMenu(menuBG);
 		stop = new Screen(null);
+		bob = new BobMenu(menuBG);
+		cassen = new CassenMenu(menuBG);
+		halander = new HalanderMenu(menuBG);
+		jamal = new JamalMenu(menuBG);
+		kurth = new KurthMenu(menuBG);
+		nguyen = new NguyenMenu(menuBG);
+		tomboc = new TombocMenu(menuBG);
+		way = new WayMenu(menuBG);
 		
 
 		setScreen(getMenu(), false);
@@ -348,6 +365,33 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	public Screen getCredits(){
 		return credits;
 	}
+	
+	public Screen getBob(){
+		return bob;
+	}
+	
+	public Screen getCassen(){
+		return cassen;
+	}
+	
+	public Screen getHalander(){
+		return halander;
+	}
+	public Screen getJamal(){
+		return jamal;
+	}	
+	public Screen getKurth(){
+		return kurth;
+	}
+	public Screen getNguyen(){
+		return nguyen;
+	}
+	public Screen getTomboc(){
+		return tomboc;
+	}	
+	public Screen getWay(){
+		return way;
+	}	
 
 	@Override
 	public Screen getScreen()
