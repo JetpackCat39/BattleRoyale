@@ -374,7 +374,7 @@ public abstract class Fighter
 		GUIUtils.self().drawHP(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2, HP_BAR_Y, HP_BAR_WIDTH, HP_BAR_HEIGHT, health, 
 				getMaxHealth(), isP1 ? P1COLOR : P2COLOR, g);
 		// TODO: Draw p1 and p2 next to the bars
-		GUIUtils.self().drawImg(getSpriteSheet(), frame * (getSrcWidth() + 1), State.getIndex() * (getSrcHeight() + 1),
+		GUIUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(),
 				x + offset, height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
 		changeAnimation++;
 		if (isP1)
