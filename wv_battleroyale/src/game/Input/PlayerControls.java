@@ -9,6 +9,7 @@ public class PlayerControls
 	private static final int P1_CROUCH = KeyEvent.VK_S;
 	private static final int P1_LEFT = KeyEvent.VK_A;
 	private static final int P1_RIGHT = KeyEvent.VK_D;
+	private static final int P1_BLOCK = KeyEvent.VK_R;
 	private static final int P1_PUNCH = KeyEvent.VK_T;
 	private static final int P1_KICK = KeyEvent.VK_Y;
 	// P2 default controls
@@ -16,6 +17,7 @@ public class PlayerControls
 	private static final int P2_CROUCH = KeyEvent.VK_DOWN;
 	private static final int P2_LEFT = KeyEvent.VK_LEFT;
 	private static final int P2_RIGHT = KeyEvent.VK_RIGHT;
+	private static final int P2_BLOCK = KeyEvent.VK_B;
 	private static final int P2_PUNCH = KeyEvent.VK_N;
 	private static final int P2_KICK = KeyEvent.VK_M;
 	private static final int PAUSE = KeyEvent.VK_ESCAPE;
@@ -24,10 +26,10 @@ public class PlayerControls
 	private int crouch;
 	private int left;
 	private int right;
+	private int block;
 	private int kick;
 	private int punch;
 	private int pause;
-	
 	
 	public PlayerControls(Boolean isPlayer1)
 	{
@@ -37,6 +39,7 @@ public class PlayerControls
 			crouch = P1_CROUCH;
 			left = P1_LEFT;
 			right = P1_RIGHT;
+			block = P1_BLOCK;
 			punch = P1_PUNCH;
 			kick = P1_KICK;
 		}
@@ -46,6 +49,7 @@ public class PlayerControls
 			crouch = P2_CROUCH;
 			left = P2_LEFT;
 			right = P2_RIGHT;
+			block = P2_BLOCK;
 			punch = P2_PUNCH;
 			kick = P2_KICK;
 		}
@@ -110,6 +114,21 @@ public class PlayerControls
 	public void setRight(int newKey)
 	{
 		right = newKey;
+	}
+	
+	public int getBlock()
+	{
+		return block;
+	}
+
+	public String getBlockString()
+	{
+		return getKeyText(getBlock());
+	}
+
+	public void setBlock(int newKey)
+	{
+		block = newKey;
 	}
 
 	public int getPunch()
