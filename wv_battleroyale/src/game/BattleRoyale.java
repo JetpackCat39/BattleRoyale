@@ -78,7 +78,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		{
 			e.printStackTrace();
 		};
-		pauseBG = GUIUtils.self().createOverlay(WIDTH, HEIGHT, 0.85f);;
+		pauseBG = GUIUtils.self().createOverlay(WIDTH, HEIGHT, 0.85f);
 		arena = null;
 		screens = new Stack<Screen>();
 	}
