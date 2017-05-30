@@ -67,10 +67,10 @@ public class GUIUtils
 		g2d.drawImage(img, x, y, w, h, null);
 	}
 	
-	public void drawImg(BufferedImage img, int xSrc, int ySrc, int xDest, int yDest, int w, int h, Graphics g)
+	public void drawImg(BufferedImage img, int xSrc, int ySrc, int xDest, int yDest, int wSrc, int hSrc, int wDest, int hDest, Graphics g)
 	{
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawImage(img, xDest, yDest, xDest + w, yDest + h, xSrc, ySrc, xSrc + w, ySrc + h, null);
+		g2d.drawImage(img, xDest, yDest, xDest + wDest, yDest + hDest, xSrc, ySrc, xSrc + wSrc, ySrc + hSrc, null);
 	}
 
 	public BufferedImage loadImage(String path) throws IOException

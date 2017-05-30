@@ -4,8 +4,11 @@ import java.awt.image.BufferedImage;
 
 public class Jamal extends Fighter
 {
-	private static final int JAMAL_HEIGHT = 115;
-	private static final int JAMAL_WIDTH = 75;
+	private static final int JAMAL_SRC_HEIGHT = 115;
+	private static final int JAMAL_SRC_WIDTH = 75;
+	
+	private static final int JAMAL_HEIGHT = JAMAL_SRC_HEIGHT * 2;
+	private static final int JAMAL_WIDTH = JAMAL_SRC_WIDTH * 2;
 	
 	// 180 = fps
 	private static final int CHARACTER_HIT_UPDATE_COUNT = 20;
@@ -99,5 +102,17 @@ public class Jamal extends Fighter
 	public int getHeight()
 	{
 		return JAMAL_HEIGHT;
+	}
+
+	@Override
+	public int getSrcWidth()
+	{
+		return JAMAL_SRC_WIDTH;
+	}
+
+	@Override
+	public int getSrcHeight()
+	{
+		return JAMAL_SRC_HEIGHT;
 	}
 }

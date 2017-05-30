@@ -18,6 +18,7 @@ public abstract class Fighter
 	private int height = BattleRoyale.HEIGHT;
 	private int x, y, xSpeed, ySpeed, changeAnimation, health, frame;
 	// private int width = BattleRoyale.WIDTH;
+	private boolean isP1;
 	private PlayerControls controls;
 	private Fighter opponent;
 	private BufferedImage sprites, win, loss;
@@ -63,9 +64,10 @@ public abstract class Fighter
 		y = newY + getHeight();
 		xSpeed = 0;
 		ySpeed = 0;
-		BASE = newY;
+		BASE = newY + getSrcHeight();
 		opponent = null;
 		health = STARTHEALTH;
+		isP1 = isPlayer1;
 		controls = new PlayerControls(isPlayer1);
 		frame = 0;
 		changeAnimation = 0;
@@ -233,8 +235,12 @@ public abstract class Fighter
 	}
 
 	public abstract int getWidth();
+	
+	public abstract int getSrcWidth();
 
 	public abstract int getHeight();
+	
+	public abstract int getSrcHeight();
 
 	public void jump()
 	{
@@ -306,8 +312,8 @@ public abstract class Fighter
 
 	public void draw(Graphics g, int offset)
 	{
-		GUIUtils.self().drawImg(getSpriteSheet(), frame * (getWidth() + 1), State.getIndex() * (getHeight() + 1),
-				x + offset, height - y, getWidth(), getHeight(), g);
+		GUIUtils.self().drawImg(getSpriteSheet(), frame * (getSrcWidth() + 1), State.getIndex() * (getSrcHeight() + 1),
+				x + offset, height - y, getSrcWidth(), getSrcHeight(), getWidth(), getHeight(), g);
 		changeAnimation++;
 		if (changeAnimation >= getAnimationSpeed(State))
 		{

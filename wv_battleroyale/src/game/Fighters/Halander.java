@@ -40,4 +40,18 @@ public class Halander extends Fighter
 		return 0;
 	}
 
+	@Override
+	public int getSrcWidth()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getSrcHeight()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
