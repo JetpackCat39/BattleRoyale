@@ -80,8 +80,10 @@ public class GUIUtils
 		g2d.fillRect(x - BORDER, y - BORDER, w + BORDER * 2, h + BORDER * 2);
 		g2d.setColor(c);
 		g2d.fillRect(x, y, w * currentHealth / maxHealth, h);
-		// TODO: Put hp% in the middle of the bar
-		
+		double healthPercent = (double) currentHealth / maxHealth * 100;
+		FontMetrics fontMetrics = new JFrame().getFontMetrics(new Font(DEFAULT_FONT, DEFAULT_FONT_STYLE, 24));
+		drawText(x + w/2 - (fontMetrics.stringWidth(healthPercent + "%"))/2, y+fontMetrics.getAscent(), 
+				Color.WHITE, healthPercent + "%", 24, g2d, DEFAULT_FONT_STYLE);
 	}
 
 	public BufferedImage loadImage(String path) throws IOException

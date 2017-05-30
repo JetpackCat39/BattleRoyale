@@ -1,8 +1,12 @@
 package game.Fighters;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+
+import javax.swing.JFrame;
 
 import game.BattleRoyale;
 import game.GUIUtils;
@@ -373,15 +377,28 @@ public abstract class Fighter
 	{
 		GUIUtils.self().drawHP(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2, HP_BAR_Y, HP_BAR_WIDTH, HP_BAR_HEIGHT, health, 
 				getMaxHealth(), isP1 ? P1COLOR : P2COLOR, g);
+
+		FontMetrics fontMetrics = new JFrame().getFontMetrics(new Font("arial", Font.BOLD, 36));
+		
+		GUIUtils.self().drawText(isP1 ? HP_BAR_X_P1 - fontMetrics.stringWidth("P1") - 5: 
+			HP_BAR_X_P2 + HP_BAR_WIDTH + 5, HP_BAR_Y + fontMetrics.getAscent() - 5, Color.WHITE, isP1 ? "P1" : "P2", 
+				36, g, Font.BOLD);
 		// TODO: Draw p1 and p2 next to the bars
 		GUIUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(),
 				x + offset, height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
 		changeAnimation++;
-		draw(isP1 ? true : false);
+		if(isP1)
+		{
+			drawP1();
+		}
+		else
+		{
+			drawP2();
+		}
 		
 	}
 
-	private void draw(boolean p1)
+	private void drawP1()
 	{
 		if (changeAnimation >= getAnimationSpeed(State))
 		{
@@ -394,11 +411,33 @@ public abstract class Fighter
 			frame = 0;
 			if (checkState(STATE.CROUCH))
 			{
-				frame = p1 ? getNumImages(STATE.CROUCH) - 1 : getMaxFrames() - getNumImages(STATE.CROUCH) + 1;
+				frame = getNumImages(STATE.CROUCH) - 1;
 			}
 			if (checkState(STATE.BLOCK))
 			{
-				frame = p1 ? getNumImages(STATE.BLOCK) - 1 : getMaxFrames() - getNumImages(STATE.BLOCK) + 1;
+				frame = getNumImages(STATE.BLOCK) - 1;
+			}
+		}
+	}
+	
+	private void drawP2()
+	{
+		if (changeAnimation >= getAnimationSpeed(State))
+		{
+			frame--;
+			changeAnimation = 0;
+		}
+		if (frame <= (getMaxFrames() - getNumImages(State)))
+		{
+			setIdles();
+			frame = getMaxFrames();
+			if (checkState(STATE.CROUCH))
+			{
+				frame = getMaxFrames() - getNumImages(STATE.CROUCH) + 1;
+			}
+			if (checkState(STATE.BLOCK))
+			{
+				frame = getMaxFrames() - getNumImages(STATE.BLOCK) + 1;
 			}
 		}
 	}
