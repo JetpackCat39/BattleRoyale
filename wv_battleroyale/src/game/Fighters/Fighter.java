@@ -27,7 +27,7 @@ public abstract class Fighter
 	private boolean isP1;
 	private PlayerControls controls;
 	private Fighter opponent;
-	private BufferedImage sprites, win, loss;
+	private BufferedImage sprites, winorloss;
 
 	enum STATE
 	{
@@ -63,8 +63,7 @@ public abstract class Fighter
 		return State == s;
 	}
 
-	public Fighter(int newX, int newY, BufferedImage spriteSheet, BufferedImage victory, BufferedImage KO,
-			boolean isPlayer1)
+	public Fighter(int newX, int newY, BufferedImage spriteSheet, BufferedImage worl, boolean isPlayer1, PlayerControls c)
 	{
 		if (isPlayer1)
 		{
@@ -85,10 +84,9 @@ public abstract class Fighter
 		opponent = null;
 		health = getMaxHealth();
 		isP1 = isPlayer1;
-		controls = new PlayerControls(isPlayer1);
+		controls = c;
 		changeAnimation = 0;
-		win = victory;
-		loss = KO;
+		winorloss = worl;
 	}
 
 	protected abstract int getNumImages(STATE s);
@@ -102,14 +100,9 @@ public abstract class Fighter
 		return sprites;
 	}
 
-	protected BufferedImage getWinAnimation()
+	protected BufferedImage getWLAnimation()
 	{
-		return win;
-	}
-
-	protected BufferedImage getLossAnimation()
-	{
-		return loss;
+		return winorloss;
 	}
 	
 	public abstract int getWidth();

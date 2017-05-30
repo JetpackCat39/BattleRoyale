@@ -1,6 +1,7 @@
 package game.Fighters;
 
 import java.awt.image.BufferedImage;
+import game.Input.PlayerControls;
 
 public class Jamal extends Fighter
 {
@@ -43,9 +44,9 @@ public class Jamal extends Fighter
 	private static final int WALK_ANIMATION_COUNT = 5;
 	private static final int IDLE_ANIMATION_COUNT = 4;
 	
-	public Jamal(int newX, int newY, BufferedImage spriteSheet, BufferedImage victory, BufferedImage KO, boolean isPlayer1)
+	public Jamal(int newX, int newY, BufferedImage spriteSheet, BufferedImage worl, boolean isPlayer1, PlayerControls c)
 	{
-		super(newX, newY, spriteSheet, victory, KO, isPlayer1);
+		super(newX, newY, spriteSheet, worl, isPlayer1, c);
 	}
 
 	@Override

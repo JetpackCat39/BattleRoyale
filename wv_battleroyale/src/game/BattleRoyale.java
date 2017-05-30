@@ -210,9 +210,9 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		MainGame tempGame;
 		p1 = new Jamal(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Jamal-Ingame.png"),
-				GUIUtils.self().loadImage("Images/Jamal-Victory.png"), GUIUtils.self().loadImage("Images/JamalKO.png"), true);
+				GUIUtils.self().loadImage("Images/Jamal-Victory.png"), true, p1Controls);
 		p2 = new Jamal(WIDTH - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Jamal-Ingame.png"),
-				GUIUtils.self().loadImage("Images/Jamal-Victory.png"), GUIUtils.self().loadImage("Images/JamalKO.png"), false);
+				GUIUtils.self().loadImage("Images/Jamal-Victory.png"), false, p2Controls);
 		p1.setOpponent(p2);
 		p2.setOpponent(p1);
 
