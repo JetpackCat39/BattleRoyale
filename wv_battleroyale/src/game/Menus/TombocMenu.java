@@ -9,12 +9,13 @@ import game.Input.PlayerControls;
 
 public class TombocMenu extends Screen {
 	
-	public TombocMenu(BufferedImage background) {
+	private BufferedImage character;
+	public TombocMenu(BufferedImage background,BufferedImage characterImage) {
 		
 		super(background);
-		
+		character = characterImage;
 		buttonList.add(new Button(width * 1 / 13, height * 3 / 19, "BACK"));
-
+		
 	}
 
 	@Override
@@ -25,6 +26,7 @@ public class TombocMenu extends Screen {
 			getKey(i).draw(g);
 		}
 		GUIUtils.self().drawText(width*5/12, height * 2 / 9, "TOMBOC", 72, g, false);
+		GUIUtils.self().drawImg(character, 150, 250, character.getWidth()/12, character.getHeight()/12, g);
 	}
 
 	public Button getBack() {
