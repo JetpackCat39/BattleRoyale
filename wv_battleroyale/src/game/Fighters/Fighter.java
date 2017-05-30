@@ -11,7 +11,7 @@ import game.Menus.IScreen;
 public abstract class Fighter
 {
 	private static final int KICK = 2;
-	private static final int MAX_Y_SPEED = 15;
+	private static final int MAX_Y_SPEED = 20;
 	private static final int STARTHEALTH = 20;
 	private static final int PUNCH = 3;
 	private final int BASE;
@@ -154,7 +154,7 @@ public abstract class Fighter
 		if (height - y < 0)
 		{
 			y = height;
-			ySpeed *= -1;
+			ySpeed *= -1.5;
 		}
 		moveCollisionChecker();
 		if (checkState(STATE.JUMP) && y == BASE)
