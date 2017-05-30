@@ -244,7 +244,7 @@ public class FighterMenu extends Screen
 					p1Controls);
 			break;
 		case "KURTH":
-			p1 = new Kurth(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Kurth-Ingame.png"), null, true, p1Controls);
+			p1 = new Kurth(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Kurth-Ingame1.png"), null, true, p1Controls);
 			break;
 		case "BOB":
 			break;
@@ -280,7 +280,7 @@ public class FighterMenu extends Screen
 					false, p2Controls);
 			break;
 		case "KURTH":
-			p2 = new Kurth(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Kurth-Ingame.png"), null,
+			p2 = new Kurth(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Kurth-Ingame1.png"), null,
 					false, p2Controls);
 			break;
 		case "BOB":

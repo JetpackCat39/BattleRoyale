@@ -32,7 +32,6 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	// BufferedImage.TYPE_INT_RGB);
 	private static BufferedImage menuBG;
 	private static BufferedImage arena;
-	private static BufferedImage fire;
 	public static BufferedImage controlsBG;
 	public static BufferedImage pauseBG;
 	public static BufferedImage bobHead;
@@ -80,8 +79,6 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		{
 			controlsBG = GUIUtils.self().loadImage("Images/controlsBG.jpg");
 			menuBG = GUIUtils.self().loadImage("Images/menuBG.png");
-			//http://dreamicus.com/data/fire/fire-04.jpg
-			fire = GUIUtils.self().loadImage("Images/fire.png");
 			bobHead = GUIUtils.self().loadImage("Images/Bob-Head.jpg");
 			cassenHead = GUIUtils.self().loadImage("Images/Cassen-Head.jpg");
 			halanderHead = GUIUtils.self().loadImage("Images/Halander-Head.jpg");
@@ -364,7 +361,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (menu == null)
 		{
-			menu = new MainMenu(menuBG, fire);
+			menu = new MainMenu(menuBG);
 		}
 		return menu;
 	}
