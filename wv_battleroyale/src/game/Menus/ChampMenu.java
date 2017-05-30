@@ -59,7 +59,7 @@ public class ChampMenu extends Screen
 		super.draw(g);
 
 		GUIUtils.self().drawText(width / 10, height * 3 / 5,
-				"Movement to select, Punch to lock in/cancel, kick to view character description", 25, g,
+				"Movement to select, Punch to lock in/cancel, Kick to view character description", 25, g,
 				false);
 		if (p1Index == p2Index)
 		{
@@ -311,7 +311,8 @@ public class ChampMenu extends Screen
 
 	@Override
 	public void keyPressed(IScreen screen, int keyCode)
-	{
+	{	
+		
 		if (!isSelected1)
 		{
 			if (keyCode == p1Controls.getLeft())
@@ -373,6 +374,61 @@ public class ChampMenu extends Screen
 		{
 			isSelected2 = false;
 		}
+		
+		
+		if(keyCode ==p1Controls.getKick()){
+			if(p1Index ==0){
+				screen.setScreen(screen.getJamal(), false);
+			}
+			else if(p1Index==1){
+				screen.setScreen(screen.getCassen(), false);
+			}
+			else if(p1Index==2){
+				screen.setScreen(screen.getTomboc(), false);
+			}
+			else if(p1Index==3){
+				screen.setScreen(screen.getKurth(), false);
+			}
+			else if(p1Index==4){
+				screen.setScreen(screen.getBob(), false);
+			}
+			else if(p1Index==5){
+				screen.setScreen(screen.getNguyen(), false);
+			}
+			else if(p1Index==6){
+				screen.setScreen(screen.getHalander(), false);
+			}
+			else if(p1Index==7){
+				screen.setScreen(screen.getWay(), false);
+			}
+		}
+		else if(keyCode == p2Controls.getKick()){
+			if(p2Index ==0){
+				screen.setScreen(screen.getJamal(), false);
+			}
+			else if(p2Index==1){
+				screen.setScreen(screen.getCassen(), false);
+			}
+			else if(p2Index==2){
+				screen.setScreen(screen.getTomboc(), false);
+			}
+			else if(p2Index==3){
+				screen.setScreen(screen.getKurth(), false);
+			}
+			else if(p2Index==4){
+				screen.setScreen(screen.getBob(), false);
+			}
+			else if(p2Index==5){
+				screen.setScreen(screen.getNguyen(), false);
+			}
+			else if(p2Index==6){
+				screen.setScreen(screen.getHalander(), false);
+			}
+			else if(p2Index==7){
+				screen.setScreen(screen.getWay(), false);
+			}
+		}
+		
 
 	}
 }

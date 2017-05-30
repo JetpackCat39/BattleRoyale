@@ -18,6 +18,21 @@ public interface IScreen
 	
 	public Screen getControls();
 	
+	public Screen getBob();
+	
+	public Screen getCassen();
+	
+	public Screen getHalander();
+	
+	public Screen getJamal();
+	
+	public Screen getKurth();
+	
+	public Screen getNguyen();
+	
+	public Screen getTomboc();
+	
+	public Screen getWay();
 	//public Screen getCharacters();
 	
 	public Screen getCredits();
@@ -36,5 +51,7 @@ public interface IScreen
 	public void setPlayer(Fighter p);
 	
 	public void setBackground(BufferedImage b);
+	
+	
 
 }

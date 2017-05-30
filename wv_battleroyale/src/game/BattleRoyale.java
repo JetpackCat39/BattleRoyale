@@ -46,6 +46,14 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	private StageMenu stage;
 	private ChampMenu champ;
 	private CreditsMenu credits;
+	private BobMenu bob;
+	private CassenMenu cassen;
+	private HalanderMenu halander;
+	private JamalMenu jamal;
+	private KurthMenu kurth;
+	private NguyenMenu nguyen;
+	private TombocMenu tomboc;
+	private WayMenu way;
 	
 
 	private Graphics g;
@@ -70,7 +78,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		{
 			e.printStackTrace();
 		};
-		pauseBG = GUIUtils.self().createOverlay(WIDTH, HEIGHT, 0.85f);
+		pauseBG = GUIUtils.self().createOverlay(WIDTH, HEIGHT, 0.85f);;
 		arena = null;
 		screens = new Stack<Screen>();
 	}
@@ -399,6 +407,86 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	public void setBackground(BufferedImage b)
 	{
 		arena = b;
+	}
+
+	@Override
+	public Screen getBob()
+	{
+		if (bob == null)
+		{
+			bob = new BobMenu(menuBG);
+		}
+		return bob;
+	}
+
+	@Override
+	public Screen getCassen()
+	{
+		if (cassen == null)
+		{
+			cassen = new CassenMenu(menuBG);
+		}
+		return cassen;
+	}
+
+	@Override
+	public Screen getHalander()
+	{
+		if (halander == null)
+		{
+			halander = new HalanderMenu(menuBG);
+		}
+		return halander;
+	}
+
+	@Override
+	public Screen getJamal()
+	{
+		if (jamal == null)
+		{
+			jamal = new JamalMenu(menuBG);
+		}
+		return jamal;
+	}
+
+	@Override
+	public Screen getKurth()
+	{
+		if (kurth == null)
+		{
+			kurth = new KurthMenu(menuBG);
+		}
+		return kurth;
+	}
+
+	@Override
+	public Screen getNguyen()
+	{
+		if (nguyen == null)
+		{
+			nguyen = new NguyenMenu(menuBG);
+		}
+		return nguyen;
+	}
+
+	@Override
+	public Screen getTomboc()
+	{
+		if (tomboc == null)
+		{
+			tomboc = new TombocMenu(menuBG);
+		}
+		return tomboc;
+	}
+
+	@Override
+	public Screen getWay()
+	{
+		if (way == null)
+		{
+			way = new WayMenu(menuBG);
+		}
+		return way;
 	}
 
 }

@@ -37,6 +37,9 @@ public class ControlsMenu extends Screen
 		// player 1 punch
 		buttonList.add(new Button(width * 23 / 120, height * 5 / 6, SIDE, SIDE, 0, player1.getPunchString())
 				.setAction(newKey -> player1.setPunch(newKey)));
+		//player 1 block
+		buttonList.add(new Button(width * 4 / 15, height * 5 /6, SIDE, SIDE, 0, player1.getBlockString())
+				.setAction(newKey -> player1.setBlock(newKey)));
 		// player 1 kick
 		buttonList.add(new Button(width * 41 / 120, height * 5 / 6, SIDE, SIDE, 0, player1.getKickString())
 				.setAction(newKey -> player1.setKick(newKey)));
@@ -51,8 +54,12 @@ public class ControlsMenu extends Screen
 		buttonList.add(new Button(width * 17 / 24, height * 25 / 36, SIDE, SIDE, 0, player2.getRightString())
 				.setAction(newKey -> player2.setRight(newKey)));
 		// player 2 punch
+		buttonList.add(new Button(width * 5 / 8, height * 5 /6, SIDE, SIDE, 0, player2.getBlockString())
+				.setAction(newKey -> player2.setBlock(newKey)));
 		buttonList.add(new Button(width * 13 / 24, height * 5 / 6, SIDE, SIDE, 0, player2.getPunchString())
 				.setAction(newKey -> player2.setPunch(newKey)));
+		//player 2 block
+		
 		// player 2 kick
 		buttonList.add(new Button(width * 17 / 24, height * 5 / 6, SIDE, SIDE, 0, player2.getKickString())
 				.setAction(newKey -> player2.setKick(newKey)));
@@ -78,6 +85,8 @@ public class ControlsMenu extends Screen
 			GUIUtils.self().drawText(width * 17 / 48, height * 39 / 40, "KICK", 20, g, false);
 			GUIUtils.self().drawText(width * 35 / 64, height * 39 / 40, "PUNCH", 20, g, false);
 			GUIUtils.self().drawText(width * 23 / 32, height * 39 / 40, "KICK", 20, g, false);
+			GUIUtils.self().drawText(width * 13 / 48, height * 39 / 40, "BLOCK", 20, g, false);
+			GUIUtils.self().drawText(width * 161 / 256, height * 39 / 40, "BLOCK", 20, g, false);
 			GUIUtils.self().drawText(width * 1 / 15, height * 19 / 27, "PAUSE", 20, g, false);
 			for (int i = 0; i < buttonList.size(); i++)
 			{
