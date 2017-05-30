@@ -9,13 +9,15 @@ import game.Input.PlayerControls;
 
 public class KurthMenu extends Screen {
 	
-	public KurthMenu(BufferedImage background) {
+	private BufferedImage character;
+	public KurthMenu(BufferedImage background,BufferedImage characterImage) {
 		
 		super(background);
-		
+		character = characterImage;
 		buttonList.add(new Button(width * 1 / 13, height * 3 / 19, "BACK"));
-
+		
 	}
+
 
 	@Override
 	public void draw(Graphics g) {
@@ -25,7 +27,7 @@ public class KurthMenu extends Screen {
 			getKey(i).draw(g);
 		}
 		GUIUtils.self().drawText(width*5/12, height * 2 / 9, "KURTH", 72, g, false);
-
+		GUIUtils.self().drawImg(character, 150, 250, character.getWidth()/12, character.getHeight()/12, g);
 	}
 
 	public Button getBack() {

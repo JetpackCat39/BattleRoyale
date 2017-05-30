@@ -8,11 +8,11 @@ import game.GUIUtils;
 import game.Input.PlayerControls;
 
 public class HalanderMenu extends Screen {
-	
-	public HalanderMenu(BufferedImage background) {
+	private BufferedImage character;
+	public HalanderMenu(BufferedImage background,BufferedImage characterImage) {
 		
 		super(background);
-		
+		character = characterImage;
 		buttonList.add(new Button(width * 1 / 13, height * 3 / 19, "BACK"));
 
 	}
@@ -26,7 +26,7 @@ public class HalanderMenu extends Screen {
 		}
 		
 		GUIUtils.self().drawText(width*5/12, height * 2 / 9, "HALANDER", 72, g, false);
-
+		GUIUtils.self().drawImg(character, 150, 250, character.getWidth()/12, character.getHeight()/12, g);
 	}
 
 	public Button getBack() {
