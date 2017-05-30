@@ -13,7 +13,7 @@ public class Tomboc extends Fighter
 	private static final int DRAW_HEIGHT = SRC_HEIGHT * 2;
 	
 	// width of sprite while not attacking is 55ß
-	private static final int NON_ATTACK_WIDTH = 86 * 2;
+	private static final int NON_ATTACK_WIDTH = 70 * 2;
 	
 	private static final int PUNCH = 3;
 	private static final int BLOCKED_PUNCH = 1;

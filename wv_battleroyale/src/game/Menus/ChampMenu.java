@@ -239,7 +239,7 @@ public class ChampMenu extends Screen
 		case "CASSEN":
 			break;
 		case "TOMBOC":
-			p1 = new Tomboc(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Tomboc-Ingame.png"), null, true,
+			p1 = new Tomboc(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Tomboc-Ingame1.png"), null, true,
 					p1Controls);
 			break;
 		case "KURTH":
@@ -275,7 +275,7 @@ public class ChampMenu extends Screen
 		case "CASSEN":
 			break;
 		case "TOMBOC":
-			p2 = new Tomboc(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Tomboc-Ingame.png"), null,
+			p2 = new Tomboc(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Tomboc-Ingame1.png"), null,
 					false, p2Controls);
 			break;
 		case "KURTH":
