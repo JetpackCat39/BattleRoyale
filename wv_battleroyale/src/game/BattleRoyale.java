@@ -44,7 +44,8 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	public static BufferedImage tombocHead;
 	public static BufferedImage wayHead;
 	public static BufferedImage profileBG;
-
+	public static BufferedImage creditsBG;
+	
 	private Fighter p1, p2;
 	private PlayerControls p1Controls;
 	private PlayerControls p2Controls;
@@ -79,7 +80,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		{
 			controlsBG = GUIUtils.self().loadImage("Images/controlsBG.jpg");
 			menuBG = GUIUtils.self().loadImage("Images/menuBG.png");
-			// fire image: http://dreamicus.com/data/fire/fire-04.jpg
+			//http://dreamicus.com/data/fire/fire-04.jpg
 			fire = GUIUtils.self().loadImage("Images/fire.png");
 			bobHead = GUIUtils.self().loadImage("Images/Bob-Head.jpg");
 			cassenHead = GUIUtils.self().loadImage("Images/Cassen-Head.jpg");
@@ -89,8 +90,6 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 			nguyenHead = GUIUtils.self().loadImage("Images/Nguyen-Head.jpg");
 			tombocHead = GUIUtils.self().loadImage("Images/Tomboc-Head.jpg");
 			wayHead = GUIUtils.self().loadImage("Images/Way-Head.jpg");
-			
-
 		}
 		catch (IOException e)
 		{
@@ -98,6 +97,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		};
 		pauseBG = GUIUtils.self().createOverlay(WIDTH, HEIGHT, 0.85f);
 		profileBG = GUIUtils.self().createOverlay(WIDTH,HEIGHT,1f);
+		creditsBG = GUIUtils.self().createOverlay(WIDTH,HEIGHT,1f);
 		arena = null;
 		screens = new Stack<Screen>();
 	}
@@ -373,7 +373,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (credits == null)
 		{
-			credits = new CreditsMenu(menuBG);
+			credits = new CreditsMenu(creditsBG);
 		}
 		return credits;
 	}

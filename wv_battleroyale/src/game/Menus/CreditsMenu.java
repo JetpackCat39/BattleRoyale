@@ -23,6 +23,7 @@ public class CreditsMenu extends Screen
 	{
 		super.draw(g);
 		GUIUtils.self().drawText(width / 3, height * 2 / 9, "CREDITS", 72, g, false);
+		GUIUtils.self().drawText(width /13, height * 11 / 36, "Fire Image: http://dreamicus.com/data/fire/fire-04.jpg", 20, g, false);
 
 	}
 
