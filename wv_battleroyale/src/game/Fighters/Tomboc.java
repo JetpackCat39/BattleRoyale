@@ -27,7 +27,6 @@ public class Tomboc extends Fighter
 	
 	// 180 = fps
 	
-	private static final int CHARACTER_HIT_ANIMATION_COUNT = 0;
 	private static final int BLOCK_ANIMATION_COUNT = 2;
 	private static final int STAGE_ENTRANCE_ANIMATION_COUNT = 1;
 	private static final int CROUCH_ANIMATION_COUNT = 2;
@@ -37,7 +36,6 @@ public class Tomboc extends Fighter
 	private static final int WALK_ANIMATION_COUNT = 8;
 	private static final int IDLE_ANIMATION_COUNT = 4;
 	
-	private static final int CHARACTER_HIT_UPDATE_COUNT = 20;
 	private static final int BLOCK_UPDATE_COUNT = FPS/10; //goes to a block pose in a fifth of a second
 	private static final int STAGE_ENTRANCE_UPDATE_COUNT = 20;
 	private static final int CROUCH_UPDATE_COUNT = FPS/10;  //goes to a crouch pose in a fifth of a second
@@ -73,8 +71,6 @@ public class Tomboc extends Fighter
 			return STAGE_ENTRANCE_ANIMATION_COUNT;
 		case BLOCK:
 			return BLOCK_ANIMATION_COUNT;
-		case HIT:
-			return CHARACTER_HIT_ANIMATION_COUNT;
 		default:
 			throw new IndexOutOfBoundsException();
 		}
@@ -101,8 +97,6 @@ public class Tomboc extends Fighter
 			return STAGE_ENTRANCE_UPDATE_COUNT;
 		case BLOCK:
 			return BLOCK_UPDATE_COUNT;
-		case HIT:
-			return CHARACTER_HIT_UPDATE_COUNT;
 		default:
 			throw new IndexOutOfBoundsException();
 		}
