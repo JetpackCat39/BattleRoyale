@@ -59,8 +59,7 @@ public class ChampMenu extends Screen
 		super.draw(g);
 
 		GUIUtils.self().drawText(width / 10, height * 3 / 5,
-				"Movement to select, Punch to lock in/cancel, Kick to view character description", 25, g,
-				false);
+				"Movement to select, Punch to lock in, kick to cancel, block to view character description", 25, g, false);
 		if (p1Index == p2Index)
 		{
 			if (!(isSelected1 && isSelected2))
@@ -231,17 +230,17 @@ public class ChampMenu extends Screen
 	public void setP1() throws IOException
 	{
 		isSelected1 = true;
-		switch(getSelectedP1().getText())
+		switch (getSelectedP1().getText())
 		{
 		case "JAMAL":
-			p1 = new Jamal(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Jamal-Ingame.png"),
-					GUIUtils.self().loadImage("Images/Jamal-Victory.png"), true, p1Controls);
+			p1 = new Jamal(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Jamal-Ingame.png"), GUIUtils.self()
+					.loadImage("Images/Jamal-Victory.png"), true, p1Controls);
 			break;
 		case "CASSEN":
 			break;
 		case "TOMBOC":
-			p1 = new Tomboc(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Tomboc-Ingame.png"),
-					null, true, p1Controls);
+			p1 = new Tomboc(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Tomboc-Ingame.png"), null, true,
+					p1Controls);
 			break;
 		case "KURTH":
 			break;
@@ -266,17 +265,17 @@ public class ChampMenu extends Screen
 	public void setP2() throws IOException
 	{
 		isSelected2 = true;
-		switch(getSelectedP2().getText())
+		switch (getSelectedP2().getText())
 		{
 		case "JAMAL":
-			p2 = new Jamal(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Jamal-Ingame.png"),
-					GUIUtils.self().loadImage("Images/Jamal-Victory.png"), false, p2Controls);
+			p2 = new Jamal(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Jamal-Ingame.png"), GUIUtils
+					.self().loadImage("Images/Jamal-Victory.png"), false, p2Controls);
 			break;
 		case "CASSEN":
 			break;
 		case "TOMBOC":
-			p2 = new Tomboc(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Tomboc-Ingame.png"),
-					null, false, p2Controls);
+			p2 = new Tomboc(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Tomboc-Ingame.png"), null,
+					false, p2Controls);
 			break;
 		case "KURTH":
 			break;
@@ -311,8 +310,8 @@ public class ChampMenu extends Screen
 
 	@Override
 	public void keyPressed(IScreen screen, int keyCode)
-	{	
-		
+	{
+
 		if (!isSelected1)
 		{
 			if (keyCode == p1Controls.getLeft())
@@ -339,7 +338,7 @@ public class ChampMenu extends Screen
 				}
 			}
 		}
-		else if (keyCode == p1Controls.getPunch())
+		else if (keyCode == p1Controls.getKick())
 		{
 			isSelected1 = false;
 		}
@@ -370,65 +369,81 @@ public class ChampMenu extends Screen
 			}
 		}
 
-		else if (keyCode == p2Controls.getPunch())
+		else if (keyCode == p2Controls.getKick())
 		{
 			isSelected2 = false;
 		}
-		
-		
-		if(keyCode ==p1Controls.getKick()){
-			if(p1Index ==0){
+
+		if (keyCode == p1Controls.getBlock())
+		{
+			if (p1Index == 0)
+			{
 				screen.setScreen(screen.getJamal(), false);
 			}
-			else if(p1Index==1){
+			else if (p1Index == 1)
+			{
 				screen.setScreen(screen.getCassen(), false);
 			}
-			else if(p1Index==2){
+			else if (p1Index == 2)
+			{
 				screen.setScreen(screen.getTomboc(), false);
 			}
-			else if(p1Index==3){
+			else if (p1Index == 3)
+			{
 				screen.setScreen(screen.getKurth(), false);
 			}
-			else if(p1Index==4){
+			else if (p1Index == 4)
+			{
 				screen.setScreen(screen.getBob(), false);
 			}
-			else if(p1Index==5){
+			else if (p1Index == 5)
+			{
 				screen.setScreen(screen.getNguyen(), false);
 			}
-			else if(p1Index==6){
+			else if (p1Index == 6)
+			{
 				screen.setScreen(screen.getHalander(), false);
 			}
-			else if(p1Index==7){
+			else if (p1Index == 7)
+			{
 				screen.setScreen(screen.getWay(), false);
 			}
 		}
-		else if(keyCode == p2Controls.getKick()){
-			if(p2Index ==0){
+		else if (keyCode == p2Controls.getBlock())
+		{
+			if (p2Index == 0)
+			{
 				screen.setScreen(screen.getJamal(), false);
 			}
-			else if(p2Index==1){
+			else if (p2Index == 1)
+			{
 				screen.setScreen(screen.getCassen(), false);
 			}
-			else if(p2Index==2){
+			else if (p2Index == 2)
+			{
 				screen.setScreen(screen.getTomboc(), false);
 			}
-			else if(p2Index==3){
+			else if (p2Index == 3)
+			{
 				screen.setScreen(screen.getKurth(), false);
 			}
-			else if(p2Index==4){
+			else if (p2Index == 4)
+			{
 				screen.setScreen(screen.getBob(), false);
 			}
-			else if(p2Index==5){
+			else if (p2Index == 5)
+			{
 				screen.setScreen(screen.getNguyen(), false);
 			}
-			else if(p2Index==6){
+			else if (p2Index == 6)
+			{
 				screen.setScreen(screen.getHalander(), false);
 			}
-			else if(p2Index==7){
+			else if (p2Index == 7)
+			{
 				screen.setScreen(screen.getWay(), false);
 			}
 		}
-		
 
 	}
 }
