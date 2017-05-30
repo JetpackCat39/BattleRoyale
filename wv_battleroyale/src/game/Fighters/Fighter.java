@@ -31,7 +31,7 @@ public abstract class Fighter
 
 	enum STATE
 	{
-		IDLE(0), WALK(1), KICK(2), PUNCH(3), JUMP(4), CROUCH(5), ENTER(6), BLOCK(7), HIT(8);
+		IDLE(0), WALK(1), KICK(2), PUNCH(3), JUMP(4), CROUCH(5), ENTER(6), BLOCK(7);
 
 		private final int _index;
 
