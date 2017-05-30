@@ -24,7 +24,9 @@ public class CreditsMenu extends Screen
 		super.draw(g);
 		GUIUtils.self().drawText(width / 3, height * 2 / 9, "CREDITS", 72, g, false);
 		GUIUtils.self().drawText(width /13, height * 11 / 36, "Fire Image: http://dreamicus.com/data/fire/fire-04.jpg", 20, g, false);
-
+		GUIUtils.self().drawText(width /13, height * 13 / 36, "Drawing the Street Fighter images: https://youtu.be/anQcM-lh5DM", 20, g, false);
+		GUIUtils.self().drawText(width /13, height * 15 / 36, "Character Sprites: https://www.spriters-resource.com/snes/supersf2/", 20, g, false);
+	
 	}
 
 	public Button getBack()
