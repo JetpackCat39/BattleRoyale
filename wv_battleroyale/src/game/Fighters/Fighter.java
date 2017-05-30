@@ -60,7 +60,18 @@ public abstract class Fighter
 	public Fighter(int newX, int newY, BufferedImage spriteSheet, BufferedImage victory, BufferedImage KO,
 			boolean isPlayer1)
 	{
-		x = newX + getWidth();
+		if (isPlayer1)
+		{
+			sprites = spriteSheet;
+			frame = 0;
+			x = newX;
+		}
+		else 
+		{
+			sprites = GUIUtils.self().flipImage(spriteSheet);
+			frame = getMaxFrames();
+			x = newX - getWidth();
+		}
 		y = newY + getHeight();
 		xSpeed = 0;
 		ySpeed = 0;
@@ -69,9 +80,7 @@ public abstract class Fighter
 		health = STARTHEALTH;
 		isP1 = isPlayer1;
 		controls = new PlayerControls(isPlayer1);
-		frame = 0;
 		changeAnimation = 0;
-		sprites = spriteSheet;
 		win = victory;
 		loss = KO;
 	}
@@ -79,6 +88,8 @@ public abstract class Fighter
 	protected abstract int getNumImages(STATE s);
 
 	protected abstract int getAnimationSpeed(STATE s);
+	
+	protected abstract int getMaxFrames();
 
 	protected BufferedImage getSpriteSheet()
 	{
@@ -315,34 +326,56 @@ public abstract class Fighter
 		GUIUtils.self().drawImg(getSpriteSheet(), frame * (getSrcWidth() + 1), State.getIndex() * (getSrcHeight() + 1),
 				x + offset, height - y, getSrcWidth(), getSrcHeight(), getWidth(), getHeight(), g);
 		changeAnimation++;
-		if (changeAnimation >= getAnimationSpeed(State))
+		if (isP1)
 		{
-			if (checkState(STATE.JUMP))
+			if (changeAnimation >= getAnimationSpeed(State))
 			{
-				System.out.println(frame);
+				frame++;
+				changeAnimation = 0;
 			}
-			frame++;
-			changeAnimation = 0;
+			if (frame >= getNumImages(State))
+			{
+				setIdles();
+				frame = 0;
+				if (checkState(STATE.CROUCH))
+				{
+					frame = 1;
+				}
+			}
 		}
-		if (frame >= getNumImages(State))
+		else
 		{
-			if (checkState(STATE.PUNCH))
+			if (changeAnimation >= getAnimationSpeed(State))
 			{
-				setState(STATE.IDLE);
+				frame--;
+				changeAnimation = 0;
 			}
-			if (checkState(STATE.KICK))
+			if (frame <= (getMaxFrames() - getNumImages(State)))
 			{
-				setState(STATE.IDLE);
+				setIdles();
+				frame = getMaxFrames();
+				if (checkState(STATE.CROUCH))
+				{
+					frame = getMaxFrames() - 1;
+				}
 			}
-			if (checkState(STATE.JUMP) && y == BASE)
-			{
-				setState(STATE.IDLE);
-			}
-			frame = 0;
-			if (checkState(STATE.CROUCH))
-			{
-				frame = 1;
-			}
+		}
+		
+	}
+
+	private void setIdles()
+	{
+		if (checkState(STATE.PUNCH))
+		{
+			setState(STATE.IDLE);
+		}
+		if (checkState(STATE.KICK))
+		{
+			setState(STATE.IDLE);
+		}
+		if (checkState(STATE.JUMP) && y == BASE)
+		{
+			setState(STATE.IDLE);
 		}
 	}
 

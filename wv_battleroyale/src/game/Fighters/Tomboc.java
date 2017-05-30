@@ -54,4 +54,11 @@ public class Tomboc extends Fighter
 		return 0;
 	}
 
+	@Override
+	protected int getMaxFrames()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

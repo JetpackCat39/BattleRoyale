@@ -10,6 +10,8 @@ public class Jamal extends Fighter
 	private static final int JAMAL_HEIGHT = JAMAL_SRC_HEIGHT * 2;
 	private static final int JAMAL_WIDTH = JAMAL_SRC_WIDTH * 2;
 	
+	private static final int MAX_FRAMES = 6;
+	
 	// 180 = fps
 	private static final int CHARACTER_HIT_UPDATE_COUNT = 20;
 	private static final int BLOCK_UPDATE_COUNT = 20;
@@ -114,5 +116,11 @@ public class Jamal extends Fighter
 	public int getSrcHeight()
 	{
 		return JAMAL_SRC_HEIGHT;
+	}
+
+	@Override
+	protected int getMaxFrames()
+	{
+		return MAX_FRAMES;
 	}
 }

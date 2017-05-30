@@ -5,6 +5,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -81,10 +82,18 @@ public class GUIUtils
 	
 	public BufferedImage flipImage(BufferedImage img)
 	{
-		AffineTransform tx = AffineTransform.getScaleInstance(1, -1);
-		tx.translate(0, -img.getHeight(null));
+		// Flip the image horizontally
+		AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+		tx.translate(-img.getWidth(null), 0);
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 		img = op.filter(img, null);
+//		try {
+//			File file = new File("/Users/prpaxson/sprite.png");
+//			ImageIO.write(img, "PNG", file);
+//		} catch (IOException e)
+//		{
+//			
+//		}
 		return img;
 	}
 
