@@ -32,14 +32,7 @@ public class Tomboc extends Fighter
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	@Override
-	public int getHeight()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	
 	@Override
 	public int getSrcWidth()
 	{
@@ -56,6 +49,20 @@ public class Tomboc extends Fighter
 
 	@Override
 	protected int getMaxFrames()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getDrawWidth()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getDrawHeight()
 	{
 		// TODO Auto-generated method stub
 		return 0;

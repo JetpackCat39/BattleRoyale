@@ -4,11 +4,14 @@ import java.awt.image.BufferedImage;
 
 public class Jamal extends Fighter
 {
-	private static final int JAMAL_SRC_HEIGHT = 115;
 	private static final int JAMAL_SRC_WIDTH = 75;
+	private static final int JAMAL_SRC_HEIGHT = 115;
 	
-	private static final int JAMAL_HEIGHT = JAMAL_SRC_HEIGHT * 2;
-	private static final int JAMAL_WIDTH = JAMAL_SRC_WIDTH * 2;
+	private static final int JAMAL_DRAW_WIDTH = JAMAL_SRC_WIDTH * 2;
+	private static final int JAMAL_DRAW_HEIGHT = JAMAL_SRC_HEIGHT * 2;
+	
+	// width of idle in sprite is 55ß
+	private static final int JAMAL_WIDTH = 55 * 2;
 	
 	private static final int MAX_FRAMES = 6;
 	
@@ -32,7 +35,7 @@ public class Jamal extends Fighter
 	private static final int KICK_ANIMATION_COUNT = 4;
 	private static final int WALK_ANIMATION_COUNT = 5;
 	private static final int IDLE_ANIMATION_COUNT = 4;
-
+	
 	public Jamal(int newX, int newY, BufferedImage spriteSheet, BufferedImage victory, BufferedImage KO, boolean isPlayer1)
 	{
 		super(newX, newY, spriteSheet, victory, KO, isPlayer1);
@@ -101,12 +104,6 @@ public class Jamal extends Fighter
 	}
 
 	@Override
-	public int getHeight()
-	{
-		return JAMAL_HEIGHT;
-	}
-
-	@Override
 	public int getSrcWidth()
 	{
 		return JAMAL_SRC_WIDTH;
@@ -122,5 +119,17 @@ public class Jamal extends Fighter
 	protected int getMaxFrames()
 	{
 		return MAX_FRAMES;
+	}
+
+	@Override
+	public int getDrawWidth()
+	{
+		return JAMAL_DRAW_WIDTH;
+	}
+
+	@Override
+	public int getDrawHeight()
+	{
+		return JAMAL_DRAW_HEIGHT;
 	}
 }

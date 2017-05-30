@@ -34,13 +34,6 @@ public class Bob extends Fighter
 	}
 
 	@Override
-	public int getHeight()
-	{
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public int getSrcWidth()
 	{
 		// TODO Auto-generated method stub
@@ -56,6 +49,20 @@ public class Bob extends Fighter
 
 	@Override
 	protected int getMaxFrames()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getDrawWidth()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getDrawHeight()
 	{
 		// TODO Auto-generated method stub
 		return 0;

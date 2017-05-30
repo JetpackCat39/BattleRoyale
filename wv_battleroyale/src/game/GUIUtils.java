@@ -5,7 +5,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -72,6 +71,17 @@ public class GUIUtils
 	{
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(img, xDest, yDest, xDest + wDest, yDest + hDest, xSrc, ySrc, xSrc + wSrc, ySrc + hSrc, null);
+	}
+	
+	public void drawHP(int x, int y, int w, int h, int currentHealth, int maxHealth, Color c, Graphics g)
+	{
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setColor(Color.gray);
+		g2d.fillRect(x - BORDER, y - BORDER, w + BORDER * 2, h + BORDER * 2);
+		g2d.setColor(c);
+		g2d.fillRect(x, y, w * currentHealth / maxHealth, h);
+		// TODO: Put hp% in the middle of the bar
+		
 	}
 
 	public BufferedImage loadImage(String path) throws IOException

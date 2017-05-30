@@ -1,5 +1,6 @@
 package game.Fighters;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -10,14 +11,22 @@ import game.Menus.IScreen;
 
 public abstract class Fighter
 {
+	private int height = BattleRoyale.HEIGHT;
+	private static int width = BattleRoyale.WIDTH;
 	private static final int KICK = 2;
 	private static final int MAX_Y_SPEED = 20;
 	private static final int STARTHEALTH = 20;
 	private static final int PUNCH = 3;
+	private static final int HP_BAR_WIDTH = 100;
+	private static final int HP_BAR_HEIGHT = 30;
+	private static final int HP_BAR_MARGIN = 100;
+	private static final int HP_BAR_Y = 100;
+	private static final int HP_BAR_X_P1 = HP_BAR_MARGIN;
+	private static final int HP_BAR_X_P2 = width - HP_BAR_WIDTH - HP_BAR_MARGIN;
+	private static final Color P1COLOR = Color.red;
+	private static final Color P2COLOR = Color.blue;
 	private final int BASE;
-	private int height = BattleRoyale.HEIGHT;
 	private int x, y, xSpeed, ySpeed, changeAnimation, health, frame;
-	// private int width = BattleRoyale.WIDTH;
 	private boolean isP1;
 	private PlayerControls controls;
 	private Fighter opponent;
@@ -48,7 +57,7 @@ public abstract class Fighter
 		{
 			return;
 		}
-		System.out.println("From " + State + " To " + s);
+//		System.out.println("From " + State + " To " + s);
 		State = s;
 	}
 
@@ -70,9 +79,9 @@ public abstract class Fighter
 		{
 			sprites = GUIUtils.self().flipImage(spriteSheet);
 			frame = getMaxFrames();
-			x = newX - getWidth();
+			x = newX - getDrawWidth();
 		}
-		y = newY + getHeight();
+		y = newY + getDrawHeight();
 		xSpeed = 0;
 		ySpeed = 0;
 		BASE = newY + getSrcHeight();
@@ -105,6 +114,13 @@ public abstract class Fighter
 	{
 		return loss;
 	}
+	
+	public abstract int getWidth();
+	public abstract int getSrcWidth();
+	public abstract int getDrawWidth();
+
+	public abstract int getSrcHeight();
+	public abstract int getDrawHeight();
 
 	public void changeYSpeed(int howMuch)
 	{
@@ -144,15 +160,31 @@ public abstract class Fighter
 	{
 		int prevX = x;
 		int prevY = y;
+		moveX(minX, maxX);
+		moveY();
+		moveCollisionChecker();
+		if (checkState(STATE.JUMP) && y == BASE)
+		{
+			setState(STATE.IDLE);
+		}
+		return (prevX != x) || (prevY != y);
+	}
+
+	private void moveX(int minX, int maxX)
+	{
 		x += xSpeed;
-		if (x > maxX)
+		if (getLeft() > maxX)
 		{
-			x = maxX;
+			setLeft(maxX);
 		}
-		if (x < minX)
+		if (getLeft() < minX)
 		{
-			x = minX;
+			setLeft(minX);
 		}
+	}
+	
+	private void moveY()
+	{
 		y += ySpeed;
 		if (y < BASE)
 		{
@@ -167,91 +199,84 @@ public abstract class Fighter
 			y = height;
 			ySpeed *= -1.5;
 		}
-		moveCollisionChecker();
-		if (checkState(STATE.JUMP) && y == BASE)
-		{
-			setState(STATE.IDLE);
-		}
-		return (prevX != x) || (prevY != y);
 	}
 
 	public void moveCollisionChecker()
 	{
 		if (compareXPosition() > 0)
 		{
-			x = opponent.getX() + opponent.getWidth();
+			setLeft(opponent.getLeft() - getWidth());
 		}
 		else if (compareXPosition() < 0)
 		{
-			x = opponent.getX() - getWidth();
+			setLeft(opponent.getRight());
 		}
-	}
-
-	public boolean isCollision()
-	{
-		return (compareXPosition() != 0 && compareYPosition() != 0)
-				&& !(y >= (opponent.getY() + opponent.getHeight() - 50)) && !(compareYPosition() < 0);
 	}
 
 	// will only return non-0 values if fighters are touching
 	public int compareXPosition()
 	{
-		// if you're to the right of them
-		if (x < opponent.getX() + opponent.getWidth() && x >= opponent.getX())
-		{
-			return 1;
-		}
 		// if you're to the left of them
-		else if (x + getWidth() > opponent.getX() && opponent.getX() >= x)
-		{
-			return -1;
-		}
-		return 0;
-	}
-
-	// will only return non-0 values if fighters are touching
-	public int compareYPosition()
-	{
-		// if you're above them
-		if ((y <= opponent.getY() + opponent.getHeight()) && (y >= (opponent.getY())))
+		if (getLeft() < opponent.getRight() && getLeft() >= opponent.getLeft())
 		{
 			return 1;
 		}
-		// if you're below them
-		else if (y + getHeight() >= opponent.getY() && opponent.getY() >= y)
+		// if you're to the right of them
+		else if (getRight() > opponent.getLeft() && opponent.getLeft() >= getLeft())
 		{
 			return -1;
 		}
 		return 0;
-	}
-
-	public void setX(int val)
-	{
-		x = val;
 	}
 
 	public void setY(int val)
 	{
 		y = val;
 	}
-
-	public int getX()
+	
+	public int getLeft()
 	{
-		return x;
+		return isP1 ? x : (x + getDrawWidth() - getWidth());
+	}
+	
+	public void setLeft(int left)
+	{
+		if (isP1)
+		{
+			x = left;
+		}
+		else
+		{
+			x = left + getWidth() - getDrawWidth();
+		}
+	}
+	
+	public int getRight()
+	{
+		return isP1 ? (x + getWidth()) : (x + getDrawWidth());
 	}
 
 	public int getY()
 	{
 		return y;
 	}
-
-	public abstract int getWidth();
 	
-	public abstract int getSrcWidth();
+	private void walkRight()
+	{
+		setState(STATE.WALK);
+		setXSpeed(5);
+	}
 
-	public abstract int getHeight();
-	
-	public abstract int getSrcHeight();
+	private void walkLeft()
+	{
+		setState(STATE.WALK);
+		setXSpeed(-5);
+	}
+
+	private void crouch()
+	{
+		setState(STATE.CROUCH);
+	}
 
 	public void jump()
 	{
@@ -289,19 +314,25 @@ public abstract class Fighter
 		}
 	}
 
+	private void stopWalking()
+	{
+		setXSpeed(0);
+		setState(STATE.IDLE);
+	}
+
 	public int getHealth()
 	{
 		return health;
 	}
 
-	public int getPause()
-	{
-		return controls.getPause();
-	}
-
 	public void setHealth(int newHealth)
 	{
 		health = newHealth;
+	}
+	
+	public int getPause()
+	{
+		return controls.getPause();
 	}
 
 	public void damage(int damage)
@@ -323,8 +354,11 @@ public abstract class Fighter
 
 	public void draw(Graphics g, int offset)
 	{
+		GUIUtils.self().drawHP(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2, HP_BAR_Y, HP_BAR_WIDTH, HP_BAR_HEIGHT, getHealth(), 
+				STARTHEALTH, isP1 ? P1COLOR : P2COLOR, g);
+		// TODO: Draw p1 and p2 next to the bars
 		GUIUtils.self().drawImg(getSpriteSheet(), frame * (getSrcWidth() + 1), State.getIndex() * (getSrcHeight() + 1),
-				x + offset, height - y, getSrcWidth(), getSrcHeight(), getWidth(), getHeight(), g);
+				x + offset, height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
 		changeAnimation++;
 		if (isP1)
 		{
@@ -412,23 +446,6 @@ public abstract class Fighter
 		}
 	}
 
-	private void walkRight()
-	{
-		setState(STATE.WALK);
-		setXSpeed(5);
-	}
-
-	private void walkLeft()
-	{
-		setState(STATE.WALK);
-		setXSpeed(-5);
-	}
-
-	private void crouch()
-	{
-		setState(STATE.CROUCH);
-	}
-
 	public void keyReleased(int keyCode)
 	{
 		if (keyCode == controls.getLeft())
@@ -449,11 +466,5 @@ public abstract class Fighter
 		{
 			setState(STATE.IDLE);
 		}
-	}
-
-	private void stopWalking()
-	{
-		setXSpeed(0);
-		setState(STATE.IDLE);
 	}
 }
