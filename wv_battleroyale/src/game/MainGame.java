@@ -3,17 +3,17 @@ package game;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import game.Fighters.IOpponent;
+import game.Fighters.Fighter;
 import game.Menus.IScreen;
 import game.Menus.Screen;
 
 public class MainGame extends Screen
 {
 
-	private IOpponent p1, p2;
+	private Fighter p1, p2;
 	private int minVal, offset, maxVal;
 
-	public MainGame(BufferedImage background, IOpponent player1, IOpponent player2)
+	public MainGame(BufferedImage background, Fighter player1, Fighter player2)
 	{
 		super(background);
 		p1 = player1;
@@ -65,11 +65,6 @@ public class MainGame extends Screen
 			newOffset = maxVal;
 		}
 		offset = newOffset;
-	}
-
-	public IOpponent createP1()
-	{
-		return null;
 	}
 
 	@Override

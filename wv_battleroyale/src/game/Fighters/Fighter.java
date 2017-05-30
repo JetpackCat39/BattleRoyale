@@ -8,24 +8,19 @@ import game.GUIUtils;
 import game.Input.PlayerControls;
 import game.Menus.IScreen;
 
-public abstract class Fighter implements IOpponent
+public abstract class Fighter
 {
 	private static final int KICK = 2;
 	private static final int MAX_Y_SPEED = 15;
-	private static final int MAX_X_SPEED = 5;
 	private static final int STARTHEALTH = 20;
 	private static final int PUNCH = 3;
-	private int x, y, xSpeed, ySpeed, changeAnimation;
-	private int height = BattleRoyale.HEIGHT;
-	// private int width = BattleRoyale.WIDTH;
 	private final int BASE;
-	private int health;
+	private int height = BattleRoyale.HEIGHT;
+	private int x, y, xSpeed, ySpeed, changeAnimation, health, frame;
+	// private int width = BattleRoyale.WIDTH;
 	private PlayerControls controls;
-	private IOpponent opponent;
-
-	private int frame;
-
-	BufferedImage sprites, win, loss;
+	private Fighter opponent;
+	private BufferedImage sprites, win, loss;
 
 	enum STATE
 	{
@@ -45,20 +40,24 @@ public abstract class Fighter implements IOpponent
 	}
 
 	private STATE State = STATE.IDLE;
-	
+
 	protected void setState(STATE s)
 	{
-		//System.out.println("From " + State + " To " + s);
+		if (checkState(s))
+		{
+			return;
+		}
+		System.out.println("From " + State + " To " + s);
 		State = s;
 	}
-	
+
 	protected boolean checkState(STATE s)
 	{
 		return State == s;
 	}
 
 	public Fighter(int newX, int newY, BufferedImage spriteSheet, BufferedImage victory, BufferedImage KO,
-			PlayerControls ctrls)
+			boolean isPlayer1)
 	{
 		x = newX + getWidth();
 		y = newY + getHeight();
@@ -67,7 +66,7 @@ public abstract class Fighter implements IOpponent
 		BASE = newY;
 		opponent = null;
 		health = STARTHEALTH;
-		controls = ctrls;
+		controls = new PlayerControls(isPlayer1);
 		frame = 0;
 		changeAnimation = 0;
 		sprites = spriteSheet;
@@ -76,7 +75,7 @@ public abstract class Fighter implements IOpponent
 	}
 
 	protected abstract int getNumImages(STATE s);
-	
+
 	protected abstract int getAnimationSpeed(STATE s);
 
 	protected BufferedImage getSpriteSheet()
@@ -84,18 +83,14 @@ public abstract class Fighter implements IOpponent
 		return sprites;
 	}
 
-	public void changeXSpeed(int howMuch)
+	protected BufferedImage getWinAnimation()
 	{
-		int temp = xSpeed + howMuch;
-		if (temp > MAX_X_SPEED)
-		{
-			temp = MAX_X_SPEED;
-		}
-		if (temp < -MAX_X_SPEED)
-		{
-			temp = -MAX_X_SPEED;
-		}
-		xSpeed = temp;
+		return win;
+	}
+
+	protected BufferedImage getLossAnimation()
+	{
+		return loss;
 	}
 
 	public void changeYSpeed(int howMuch)
@@ -111,7 +106,7 @@ public abstract class Fighter implements IOpponent
 		}
 		ySpeed = temp;
 	}
-
+	
 	public void setXSpeed(int newSpeed)
 	{
 		xSpeed = newSpeed;
@@ -122,29 +117,16 @@ public abstract class Fighter implements IOpponent
 		ySpeed = newSpeed;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see game.iOpponent#getXSpeed()
-	 */
-	@Override
 	public int getXSpeed()
 	{
 		return xSpeed;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see game.iOpponent#getYSpeed()
-	 */
-	@Override
 	public int getYSpeed()
 	{
 		return ySpeed;
 	}
 
-	@Override
 	public boolean move(int minX, int maxX)
 	{
 		int prevX = x;
@@ -173,7 +155,7 @@ public abstract class Fighter implements IOpponent
 			ySpeed *= -1;
 		}
 		moveCollisionChecker();
-		if (checkState(STATE.JUMPadd) && y == BASE)
+		if (checkState(STATE.JUMP) && y == BASE)
 		{
 			setState(STATE.IDLE);
 		}
@@ -230,7 +212,6 @@ public abstract class Fighter implements IOpponent
 		return 0;
 	}
 
-	@Override
 	public void setX(int val)
 	{
 		x = val;
@@ -241,44 +222,20 @@ public abstract class Fighter implements IOpponent
 		y = val;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see game.iOpponent#getX()
-	 */
-	@Override
 	public int getX()
 	{
 		return x;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see game.iOpponent#getY()
-	 */
-	@Override
 	public int getY()
 	{
 		return y;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see game.iOpponent#getWidth()
-	 */
-	@Override
 	public abstract int getWidth();
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see game.iOpponent#getHeight()
-	 */
-	@Override
 	public abstract int getHeight();
-	
+
 	public void jump()
 	{
 		setState(STATE.JUMP);
@@ -286,7 +243,7 @@ public abstract class Fighter implements IOpponent
 		{
 			return;
 		}
-		setYSpeed(MAX_Y_SPEED);		
+		setYSpeed(MAX_Y_SPEED);
 	}
 
 	public void punch()
@@ -330,12 +287,6 @@ public abstract class Fighter implements IOpponent
 		health = newHealth;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see game.iOpponent#damage(int)
-	 */
-	@Override
 	public void damage(int damage)
 	{
 		health -= damage;
@@ -355,12 +306,15 @@ public abstract class Fighter implements IOpponent
 
 	public void draw(Graphics g, int offset)
 	{
-
 		GUIUtils.self().drawImg(getSpriteSheet(), frame * (getWidth() + 1), State.getIndex() * (getHeight() + 1),
 				x + offset, height - y, getWidth(), getHeight(), g);
 		changeAnimation++;
 		if (changeAnimation >= getAnimationSpeed(State))
 		{
+			if (checkState(STATE.JUMP))
+			{
+				System.out.println(frame);
+			}
 			frame++;
 			changeAnimation = 0;
 		}
@@ -374,7 +328,7 @@ public abstract class Fighter implements IOpponent
 			{
 				setState(STATE.IDLE);
 			}
-			if (checkState(STATE.JUMP))
+			if (checkState(STATE.JUMP) && y == BASE)
 			{
 				setState(STATE.IDLE);
 			}
@@ -386,12 +340,11 @@ public abstract class Fighter implements IOpponent
 		}
 	}
 
-	public void setOpponent(IOpponent fighter)
+	public void setOpponent(Fighter fighter)
 	{
 		opponent = fighter;
 	}
 
-	@Override
 	public void keyPressed(IScreen screen, int keyCode)
 	{
 		if (keyCode == controls.getLeft())
@@ -437,7 +390,6 @@ public abstract class Fighter implements IOpponent
 		setState(STATE.CROUCH);
 	}
 
-	@Override
 	public void keyReleased(int keyCode)
 	{
 		if (keyCode == controls.getLeft())

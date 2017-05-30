@@ -27,6 +27,8 @@ public class PlayerControls
 	private int kick;
 	private int punch;
 	private int pause;
+	
+	
 	public PlayerControls(Boolean isPlayer1)
 	{
 		if (isPlayer1)

@@ -2,7 +2,7 @@ package game.Menus;
 
 import java.awt.image.BufferedImage;
 
-import game.Fighters.IOpponent;
+import game.Fighters.Fighter;
 
 public interface IScreen
 {
@@ -33,7 +33,7 @@ public interface IScreen
 
 	public void setScreen(Screen screen, boolean doReset);
 	
-	public void setPlayer(IOpponent p);
+	public void setPlayer(Fighter p);
 	
 	public void setBackground(BufferedImage b);
 

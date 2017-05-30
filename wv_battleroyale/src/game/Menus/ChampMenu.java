@@ -7,7 +7,7 @@ import game.Input.PlayerControls;
 
 import game.Button;
 import game.GUIUtils;
-import game.Fighters.IOpponent;
+import game.Fighters.Fighter;
 
 public class ChampMenu extends Screen
 {
@@ -18,7 +18,7 @@ public class ChampMenu extends Screen
 	private static final Color BOTH = Color.MAGENTA;
 	private static final Color NEXT = Color.GREEN;
 	private int p1Index, p2Index;
-	private IOpponent p1, p2;
+	private Fighter p1, p2;
 
 	public ChampMenu(BufferedImage background, PlayerControls p1, PlayerControls p2)
 	{
@@ -220,7 +220,7 @@ public class ChampMenu extends Screen
 		return p2Index;
 	}
 
-	public IOpponent getP1()
+	public Fighter getP1()
 	{
 		return p1;
 	}
@@ -231,7 +231,7 @@ public class ChampMenu extends Screen
 		isSelected1 = true;
 	}
 
-	public IOpponent getP2()
+	public Fighter getP2()
 	{
 		return p2;
 	}
