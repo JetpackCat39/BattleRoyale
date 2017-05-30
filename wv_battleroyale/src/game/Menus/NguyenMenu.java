@@ -26,7 +26,7 @@ public class NguyenMenu extends Screen {
 			getKey(i).draw(g);
 		}
 		GUIUtils.self().drawText(width*5/12, height * 2 / 9, "NGUYEN", 72, g, false);
-		GUIUtils.self().drawImg(character, 150, 250, character.getWidth()/12, character.getHeight()/12, g);
+		GUIUtils.self().drawImg(character, 150, 250, character.getWidth()/9, character.getHeight()/9, g);
 
 	}
 
