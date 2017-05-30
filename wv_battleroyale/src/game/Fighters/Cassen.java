@@ -68,4 +68,39 @@ public class Cassen extends Fighter
 		return 0;
 	}
 
+	@Override
+	public int getPunchDamage()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getBlockedPunchDamage()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getKickDamage()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getBlockedKickDamage()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getMaxHealth()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

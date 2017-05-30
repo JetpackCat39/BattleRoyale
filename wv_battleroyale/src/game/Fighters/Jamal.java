@@ -4,20 +4,27 @@ import java.awt.image.BufferedImage;
 
 public class Jamal extends Fighter
 {
-	private static final int JAMAL_SRC_WIDTH = 75;
-	private static final int JAMAL_SRC_HEIGHT = 115;
+	private static final int SRC_WIDTH = 75;
+	private static final int SRC_HEIGHT = 115;
 	
-	private static final int JAMAL_DRAW_WIDTH = JAMAL_SRC_WIDTH * 2;
-	private static final int JAMAL_DRAW_HEIGHT = JAMAL_SRC_HEIGHT * 2;
+	private static final int DRAW_WIDTH = SRC_WIDTH * 2;
+	private static final int DRAW_HEIGHT = SRC_HEIGHT * 2;
 	
-	// width of idle in sprite is 55ß
-	private static final int JAMAL_WIDTH = 55 * 2;
+	// width of sprite while not attacking is 55ß
+	private static final int NON_ATTACK_WIDTH = 55 * 2;
+	
+	private static final int PUNCH = 3;
+	private static final int BLOCKED_PUNCH = 1;
+	private static final int KICK = 4;
+	private static final int BLOCKED_KICK = 2;
+	
+	public static final int HEALTH = 20;
 	
 	private static final int MAX_FRAMES = 6;
 	
 	// 180 = fps
 	private static final int CHARACTER_HIT_UPDATE_COUNT = 20;
-	private static final int BLOCK_UPDATE_COUNT = 20;
+	private static final int BLOCK_UPDATE_COUNT = 180/10; //goes to a block pose in a fifth of a second
 	private static final int STAGE_ENTRANCE_UPDATE_COUNT = 20;
 	private static final int CROUCH_UPDATE_COUNT = 180/10;  //goes to a crouch pose in a fifth of a second
 	private static final int JUMP_UPDATE_COUNT = 180/7; // goes through a jump animation over 1 second
@@ -100,19 +107,19 @@ public class Jamal extends Fighter
 	@Override
 	public int getWidth()
 	{
-		return JAMAL_WIDTH;
+		return NON_ATTACK_WIDTH;
 	}
 
 	@Override
 	public int getSrcWidth()
 	{
-		return JAMAL_SRC_WIDTH;
+		return SRC_WIDTH;
 	}
 
 	@Override
 	public int getSrcHeight()
 	{
-		return JAMAL_SRC_HEIGHT;
+		return SRC_HEIGHT;
 	}
 
 	@Override
@@ -124,12 +131,42 @@ public class Jamal extends Fighter
 	@Override
 	public int getDrawWidth()
 	{
-		return JAMAL_DRAW_WIDTH;
+		return DRAW_WIDTH;
 	}
 
 	@Override
 	public int getDrawHeight()
 	{
-		return JAMAL_DRAW_HEIGHT;
+		return DRAW_HEIGHT;
+	}
+
+	@Override
+	public int getPunchDamage()
+	{
+		return PUNCH;
+	}
+
+	@Override
+	public int getKickDamage()
+	{
+		return KICK;
+	}
+
+	@Override
+	public int getBlockedPunchDamage()
+	{
+		return BLOCKED_PUNCH;
+	}
+
+	@Override
+	public int getBlockedKickDamage()
+	{
+		return BLOCKED_KICK;
+	}
+
+	@Override
+	public int getMaxHealth()
+	{
+		return HEALTH;
 	}
 }
