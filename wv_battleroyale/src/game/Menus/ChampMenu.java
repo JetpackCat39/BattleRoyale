@@ -3,11 +3,13 @@ package game.Menus;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+
 import game.Input.PlayerControls;
 
 import game.Button;
 import game.GUIUtils;
-import game.Fighters.Fighter;
+import game.Fighters.*;
 
 public class ChampMenu extends Screen
 {
@@ -15,6 +17,8 @@ public class ChampMenu extends Screen
 	private PlayerControls p1Controls, p2Controls;
 	private static final Color P1COLOR = Color.red;
 	private static final Color P2COLOR = Color.blue;
+	private static final int PLAYERX = 300;
+	private static final int PLAYERY = 190;
 	private static final Color BOTH = Color.MAGENTA;
 	private static final Color NEXT = Color.GREEN;
 	private int p1Index, p2Index;
@@ -38,7 +42,6 @@ public class ChampMenu extends Screen
 		buttonList.add(new Button(width * 1 / 8, height * 4 / 5, "BACK"));
 		// next button
 		buttonList.add(new Button(width * 11 / 16, height * 4 / 5, "NEXT"));
-
 	}
 
 	@Override
@@ -225,10 +228,34 @@ public class ChampMenu extends Screen
 		return p1;
 	}
 
-	public void setP1()
+	public void setP1() throws IOException
 	{
-
 		isSelected1 = true;
+		switch(getSelectedP1().getText())
+		{
+		case "JAMAL":
+			p1 = new Jamal(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Jamal-Ingame.png"),
+					GUIUtils.self().loadImage("Images/Jamal-Victory.png"), true, p1Controls);
+			break;
+		case "CASSEN":
+			break;
+		case "TOMBOC":
+			p1 = new Tomboc(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Tomboc-Ingame.png"),
+					null, true, p1Controls);
+			break;
+		case "KURTH":
+			break;
+		case "BOB":
+			break;
+		case "NGUYEN":
+			break;
+		case "HALANDER":
+			break;
+		case "WAY":
+			break;
+		default:
+			break;
+		}
 	}
 
 	public Fighter getP2()
@@ -236,9 +263,34 @@ public class ChampMenu extends Screen
 		return p2;
 	}
 
-	public void setP2()
+	public void setP2() throws IOException
 	{
 		isSelected2 = true;
+		switch(getSelectedP2().getText())
+		{
+		case "JAMAL":
+			p2 = new Jamal(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Jamal-Ingame.png"),
+					GUIUtils.self().loadImage("Images/Jamal-Victory.png"), false, p2Controls);
+			break;
+		case "CASSEN":
+			break;
+		case "TOMBOC":
+			p2 = new Tomboc(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Tomboc-Ingame.png"),
+					null, false, p2Controls);
+			break;
+		case "KURTH":
+			break;
+		case "BOB":
+			break;
+		case "NGUYEN":
+			break;
+		case "HALANDER":
+			break;
+		case "WAY":
+			break;
+		default:
+			break;
+		}
 	}
 
 	@Override
@@ -276,7 +328,14 @@ public class ChampMenu extends Screen
 			}
 			else if (keyCode == p1Controls.getPunch())
 			{
-				setP1();
+				try
+				{
+					setP1();
+				}
+				catch (IOException e)
+				{
+					e.printStackTrace();
+				}
 			}
 		}
 		else if (keyCode == p1Controls.getPunch())
@@ -299,7 +358,14 @@ public class ChampMenu extends Screen
 			}
 			else if (keyCode == p2Controls.getPunch())
 			{
-				setP2();
+				try
+				{
+					setP2();
+				}
+				catch (IOException e)
+				{
+					e.printStackTrace();
+				}
 			}
 		}
 

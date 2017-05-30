@@ -153,7 +153,6 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 		
 		GUIUtils.self().drawText((int) (this.getX() + this.getWidth() / 2 - metric.stringWidth(buttonText) / 2),
 				(int) (this.getY() + this.getHeight() / 2 + metric.getAscent() / 2), fillColor, buttonText, fontSize, g, fontStyle);
-		
 	}
 
 }

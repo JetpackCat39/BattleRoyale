@@ -15,8 +15,6 @@ import java.util.Stack;
 
 public class BattleRoyale extends Canvas implements MouseListener, KeyListener, IScreen, Runnable
 {
-	private static final int PLAYERX = 300;
-	private static final int PLAYERY = 190;
 	/**
 	 * 
 	 */
@@ -60,57 +58,28 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		p1Controls = new PlayerControls(true);
 		p2Controls = new PlayerControls(false);
 		running = false;
-		menuBG = null;
+		try
+		{
+			controlsBG = GUIUtils.self().loadImage("Images/controlsBG.jpg");
+			menuBG = GUIUtils.self().loadImage("Images/menuBG.png");
+			// fire image: http://dreamicus.com/data/fire/fire-04.jpg
+			fire = GUIUtils.self().loadImage("Images/fire.png");
+
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		};
+		pauseBG = GUIUtils.self().createOverlay(WIDTH, HEIGHT, 0.85f);
 		arena = null;
-		fire = null;
-		controlsBG = null;
-		pauseBG = null;
 		screens = new Stack<Screen>();
 	}
 
 	private void initialize()
 	{
-		try
-		{
-			imageLoader();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
-		g = null;
-
-		try
-		{
-			game = createGame();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		champ = new ChampMenu(menuBG, p1Controls, p2Controls);
-		stage = new StageMenu(menuBG);
-		menu = new MainMenu(menuBG, fire);
-		controls = new ControlsMenu(controlsBG, p1Controls, p2Controls);
-		pause = new PauseMenu(this, pauseBG);
-		credits = new CreditsMenu(menuBG);
-		stop = new Screen(null);
-		
-
 		setScreen(getMenu(), false);
-
 		this.addMouseListener(this);
-	}
-
-	private void imageLoader() throws IOException
-	{
-		arena = GUIUtils.self().loadImage("Images/ampitheater.png");
-		menuBG = GUIUtils.self().loadImage("Images/menuBG.png");
-		controlsBG = GUIUtils.self().loadImage("Images/controlsBG.jpg");
-		pauseBG = GUIUtils.self().createOverlay(WIDTH, HEIGHT, 0.85f);
-		// fire image: http://dreamicus.com/data/fire/fire-04.jpg
-		fire = GUIUtils.self().loadImage("Images/fire.png");
+		this.addKeyListener(this);
 	}
 
 	private synchronized void start()
@@ -197,9 +166,9 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 
 	private void tick()
 	{
-		if (screens.peek().equals(getGame()))
+		if (game != null)
 		{
-			if (game != null)
+			if (screens.peek().equals(getGame()))
 			{
 				game.move();
 			}
@@ -209,16 +178,15 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	private MainGame createGame() throws IOException
 	{
 		MainGame tempGame;
-		p1 = new Jamal(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Jamal-Ingame.png"),
-				GUIUtils.self().loadImage("Images/Jamal-Victory.png"), true, p1Controls);
-		p2 = new Jamal(WIDTH - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Jamal-Ingame.png"),
-				GUIUtils.self().loadImage("Images/Jamal-Victory.png"), false, p2Controls);
+		p1 = champ.getP1();
+		System.out.println("p1 created!");
+		p2 = champ.getP2();
+		System.out.println("p2 created!");
 		p1.setOpponent(p2);
 		p2.setOpponent(p1);
 
 		tempGame = new MainGame(arena, p1, p2);
 
-		this.addKeyListener(this);
 		return tempGame;
 	}
 
@@ -292,6 +260,17 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	@Override
 	public Screen getGame()
 	{
+		if (game == null)
+		{
+			try
+			{
+				createGame();
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
 		return game;
 	}
 	
@@ -312,24 +291,40 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	@Override
 	public Screen getPause()
 	{
+		if (pause == null)
+		{
+			pause = new PauseMenu(this, pauseBG);
+		}
 		return pause;
 	}
 
 	@Override
 	public Screen getStageSelect()
 	{
+		if (stage == null)
+		{
+			stage = new StageMenu(menuBG);
+		}
 		return stage;
 	}
 
 	@Override
 	public Screen getChampSelect()
 	{
+		if (champ == null)
+		{
+			champ = new ChampMenu(menuBG, p1Controls, p2Controls);
+		}
 		return champ;
 	}
 
 	@Override
 	public Screen getControls()
 	{
+		if (controls == null)
+		{
+			controls = new ControlsMenu(controlsBG, p1Controls, p2Controls);
+		}
 		return controls;
 	}
 
@@ -342,10 +337,19 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	@Override
 	public Screen getMenu()
 	{
+		if (menu == null)
+		{
+			menu = new MainMenu(menuBG, fire);
+		}
 		return menu;
 	}
 	
-	public Screen getCredits(){
+	public Screen getCredits()
+	{
+		if (credits == null)
+		{
+			credits = new CreditsMenu(menuBG);
+		}
 		return credits;
 	}
 
@@ -354,7 +358,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (screens.isEmpty())
 		{
-			return null;
+			screens.push(getMenu());
 		}
 		return screens.peek();
 	}
