@@ -187,9 +187,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		MainGame tempGame;
 		p1 = champ.getP1();
-		System.out.println("p1 created!");
 		p2 = champ.getP2();
-		System.out.println("p2 created!");
 		p1.setOpponent(p2);
 		p2.setOpponent(p1);
 
