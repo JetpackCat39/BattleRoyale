@@ -31,7 +31,7 @@ public abstract class Fighter
 
 	enum STATE
 	{
-		IDLE(0), WALK(1), KICK(2), PUNCH(3), JUMP(4), CROUCH(5), ENTER(6), BLOCK(7), HIT(8);
+		IDLE(0), WALK(1), KICK(2), PUNCH(3), JUMP(4), CROUCH(5), ENTER(6), BLOCK(7);
 
 		private final int _index;
 
@@ -374,21 +374,14 @@ public abstract class Fighter
 		GUIUtils.self().drawHP(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2, HP_BAR_Y, HP_BAR_WIDTH, HP_BAR_HEIGHT, health, 
 				getMaxHealth(), isP1 ? P1COLOR : P2COLOR, g);
 		// TODO: Draw p1 and p2 next to the bars
-		GUIUtils.self().drawImg(getSpriteSheet(), frame * (getSrcWidth() + 1), State.getIndex() * (getSrcHeight() + 1),
+		GUIUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(),
 				x + offset, height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
 		changeAnimation++;
-		if (isP1)
-		{
-			drawP1();
-		}
-		else
-		{
-			drawP2();
-		}
+		draw(isP1 ? true : false);
 		
 	}
 
-	private void drawP1()
+	private void draw(boolean p1)
 	{
 		if (changeAnimation >= getAnimationSpeed(State))
 		{
@@ -401,33 +394,11 @@ public abstract class Fighter
 			frame = 0;
 			if (checkState(STATE.CROUCH))
 			{
-				frame = getNumImages(STATE.CROUCH) - 1;
+				frame = p1 ? getNumImages(STATE.CROUCH) - 1 : getMaxFrames() - getNumImages(STATE.CROUCH) + 1;
 			}
 			if (checkState(STATE.BLOCK))
 			{
-				frame = getNumImages(STATE.BLOCK) - 1;
-			}
-		}
-	}
-	
-	private void drawP2()
-	{
-		if (changeAnimation >= getAnimationSpeed(State))
-		{
-			frame--;
-			changeAnimation = 0;
-		}
-		if (frame <= (getMaxFrames() - getNumImages(State)))
-		{
-			setIdles();
-			frame = getMaxFrames();
-			if (checkState(STATE.CROUCH))
-			{
-				frame = getMaxFrames() - getNumImages(STATE.CROUCH) + 1;
-			}
-			if (checkState(STATE.BLOCK))
-			{
-				frame = getMaxFrames() - getNumImages(STATE.BLOCK) + 1;
+				frame = p1 ? getNumImages(STATE.BLOCK) - 1 : getMaxFrames() - getNumImages(STATE.BLOCK) + 1;
 			}
 		}
 	}
