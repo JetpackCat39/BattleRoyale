@@ -377,18 +377,11 @@ public abstract class Fighter
 		GUIUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(),
 				x + offset, height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
 		changeAnimation++;
-		if (isP1)
-		{
-			drawP1();
-		}
-		else
-		{
-			drawP2();
-		}
+		draw(isP1 ? true : false);
 		
 	}
 
-	private void drawP1()
+	private void draw(boolean p1)
 	{
 		if (changeAnimation >= getAnimationSpeed(State))
 		{
@@ -401,33 +394,11 @@ public abstract class Fighter
 			frame = 0;
 			if (checkState(STATE.CROUCH))
 			{
-				frame = getNumImages(STATE.CROUCH) - 1;
+				frame = p1 ? getNumImages(STATE.CROUCH) - 1 : getMaxFrames() - getNumImages(STATE.CROUCH) + 1;
 			}
 			if (checkState(STATE.BLOCK))
 			{
-				frame = getNumImages(STATE.BLOCK) - 1;
-			}
-		}
-	}
-	
-	private void drawP2()
-	{
-		if (changeAnimation >= getAnimationSpeed(State))
-		{
-			frame--;
-			changeAnimation = 0;
-		}
-		if (frame <= (getMaxFrames() - getNumImages(State)))
-		{
-			setIdles();
-			frame = getMaxFrames();
-			if (checkState(STATE.CROUCH))
-			{
-				frame = getMaxFrames() - getNumImages(STATE.CROUCH) + 1;
-			}
-			if (checkState(STATE.BLOCK))
-			{
-				frame = getMaxFrames() - getNumImages(STATE.BLOCK) + 1;
+				frame = p1 ? getNumImages(STATE.BLOCK) - 1 : getMaxFrames() - getNumImages(STATE.BLOCK) + 1;
 			}
 		}
 	}
