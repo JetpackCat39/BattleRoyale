@@ -383,7 +383,6 @@ public abstract class Fighter
 		GUIUtils.self().drawText(isP1 ? HP_BAR_X_P1 - fontMetrics.stringWidth("P1") - 5: 
 			HP_BAR_X_P2 + HP_BAR_WIDTH + 5, HP_BAR_Y + fontMetrics.getAscent() - 5, Color.WHITE, isP1 ? "P1" : "P2", 
 				36, g, Font.BOLD);
-		// TODO: Draw p1 and p2 next to the bars
 		GUIUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(),
 				x + offset, height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
 		changeAnimation++;

@@ -6,12 +6,14 @@ import java.awt.geom.RoundRectangle2D;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 public class GUIUtils
 {
+	// various defaults
 	private static final String DEFAULT_FONT = "arial";
 	private static final Color DEFAULT_COLOR = Color.white;
 	private static final int DEFAULT_FONT_STYLE = Font.BOLD;
@@ -28,31 +30,11 @@ public class GUIUtils
 	{
 	}
 
-	public void drawText(int x, int y, String text, int fontSize, Graphics g, boolean gradient)
+	public void drawText(int x, int y, String text, int fontSize, Graphics g)
 	{
-
-		Graphics2D g2d = (Graphics2D) g;
-
-		if (gradient)
-		{
-			g2d.setFont(new Font("impact", DEFAULT_FONT_STYLE, fontSize));
-			FontMetrics fontMetrics = new JFrame().getFontMetrics(new Font(DEFAULT_FONT, DEFAULT_FONT_STYLE, fontSize));
-			g2d.setColor(Color.decode("#4d4d4d"));
-			GradientPaint gp = new GradientPaint(x + (fontMetrics.stringWidth("B A T T L E  R O Y A L E") / 2),
-					y + fontMetrics.getHeight(), Color.decode("#010101"),
-					x + (fontMetrics.stringWidth("B A T T L E  R O Y A L E") / 2), y, Color.decode("#5d5d5d"), true);
-
-			g2d.setPaint(gp);
-		}
-		else
-		{
-			g2d.setFont(new Font(DEFAULT_FONT, DEFAULT_FONT_STYLE, fontSize));
-			g2d.setColor(DEFAULT_COLOR);
-		}
-
-		g2d.drawString(text, x, y);
+		drawText(x, y, DEFAULT_COLOR, text, fontSize, g, DEFAULT_FONT_STYLE);
 	}
-
+	
 	public void drawText(int x, int y, Color color, String text, int fontSize, Graphics g, int fontStyle)
 	{
 		Graphics2D g2d = (Graphics2D) g;
@@ -81,9 +63,11 @@ public class GUIUtils
 		g2d.setColor(c);
 		g2d.fillRect(x, y, w * currentHealth / maxHealth, h);
 		double healthPercent = (double) currentHealth / maxHealth * 100;
+		DecimalFormat df = new DecimalFormat("##0.00");
+		String num = df.format(healthPercent);
 		FontMetrics fontMetrics = new JFrame().getFontMetrics(new Font(DEFAULT_FONT, DEFAULT_FONT_STYLE, 24));
-		drawText(x + w/2 - (fontMetrics.stringWidth(healthPercent + "%"))/2, y+fontMetrics.getAscent(), 
-				Color.WHITE, healthPercent + "%", 24, g2d, DEFAULT_FONT_STYLE);
+		drawText(x + w/2 - (fontMetrics.stringWidth(num + "%"))/2, y + fontMetrics.getAscent(), 
+				Color.WHITE, num + "%", 24, g2d, DEFAULT_FONT_STYLE);
 	}
 
 	public BufferedImage loadImage(String path) throws IOException
@@ -94,18 +78,11 @@ public class GUIUtils
 	
 	public BufferedImage flipImage(BufferedImage img)
 	{
-		// Flip the image horizontally
+		// Flips the image horizontally
 		AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
 		tx.translate(-img.getWidth(null), 0);
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 		img = op.filter(img, null);
-//		try {
-//			File file = new File("/Users/prpaxson/sprite.png");
-//			ImageIO.write(img, "PNG", file);
-//		} catch (IOException e)
-//		{
-//			
-//		}
 		return img;
 	}
 

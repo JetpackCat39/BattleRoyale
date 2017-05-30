@@ -29,7 +29,7 @@ public class MainMenu extends Screen implements IDrawable, IMenu
 	public void draw(Graphics g)
 	{
 		super.draw(g);
-		GUIUtils.self().drawText(850, 480, "B A T T L E  R O Y A L E", 32, g, true);
+		GUIUtils.self().drawText(850, 480, "B A T T L E  R O Y A L E", 32, g);
 		GUIUtils.self()
 				.drawImg(litFire, 595, height - 230, litFire.getWidth() * 2 / 3, litFire.getHeight() * 1 / 35, g);
 		GUIUtils.self()

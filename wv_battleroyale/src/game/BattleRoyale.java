@@ -54,7 +54,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	private ControlsMenu controls;
 	private PauseMenu pause;
 	private StageMenu stage;
-	private ChampMenu champ;
+	private FighterMenu champ;
 	private CreditsMenu credits;
 	private BobMenu bob;
 	private CassenMenu cassen;
@@ -338,7 +338,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (champ == null)
 		{
-			champ = new ChampMenu(menuBG, p1Controls, p2Controls);
+			champ = new FighterMenu(menuBG, p1Controls, p2Controls);
 		}
 		return champ;
 	}

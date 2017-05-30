@@ -5,57 +5,61 @@ import java.awt.image.BufferedImage;
 
 import game.Button;
 import game.GUIUtils;
-import game.Input.PlayerControls;
 
-public class KurthMenu extends Screen {
-	
+public class KurthMenu extends Screen
+{
+
 	private BufferedImage character;
-	public KurthMenu(BufferedImage background,BufferedImage characterImage) {
-		
+
+	public KurthMenu(BufferedImage background, BufferedImage characterImage)
+	{
+
 		super(background);
 		character = characterImage;
 		buttonList.add(new Button(width * 1 / 13, height * 3 / 19, "BACK"));
-		
-	}
 
+	}
 
 	@Override
-	public void draw(Graphics g) {
+	public void draw(Graphics g)
+	{
 		GUIUtils.self().drawImg(bg, 0, 0, (width + 15), (height + 15), g);
 
-		for (int i = 0; i < buttonList.size(); i++) {
+		for (int i = 0; i < buttonList.size(); i++)
+		{
 			getKey(i).draw(g);
 		}
-		GUIUtils.self().drawText(width*5/12, height * 2 / 9, "KURTH", 72, g, false);
-		GUIUtils.self().drawImg(character, 150, 250, character.getWidth()/12, character.getHeight()/12, g);
+		GUIUtils.self().drawText(width * 5 / 12, height * 2 / 9, "KURTH", 72, g);
+		GUIUtils.self().drawImg(character, 150, 250, character.getWidth() / 12, character.getHeight() / 12, g);
 	}
 
-	public Button getBack() {
+	public Button getBack()
+	{
 		return buttonList.get(0);
 	}
 
-	public int getNumButtons() {
+	public int getNumButtons()
+	{
 		return buttonList.size();
 	}
 
-	public void rebind(int keyToRebind, char key) {
+	public void rebind(int keyToRebind, char key)
+	{
 		Button b = buttonList.get(keyToRebind);
 		b.setText(String.valueOf(key));
 	}
 
 	@Override
-	public void mousePressed(IScreen screen, int x, int y) {
-		
-			if (getBack().contains(x, y)) {
-				
-				screen.getPrevScreen();
+	public void mousePressed(IScreen screen, int x, int y)
+	{
 
-			}
-			
-			
+		if (getBack().contains(x, y))
+		{
+
+			screen.getPrevScreen();
+
 		}
-	
 
-	
+	}
 
 }

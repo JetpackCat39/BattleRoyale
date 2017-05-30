@@ -23,7 +23,7 @@ public class PauseMenu extends Screen
 	{
 		itemToOverlay.getGame().draw(g);
 		super.draw(g);
-		GUIUtils.self().drawText(width / 2 - 72*2, height * 1/3, "PAUSED", 72, g, false);
+		GUIUtils.self().drawText(width / 2 - 72*2, height * 1/3, "PAUSED", 72, g);
 		
 	}
 

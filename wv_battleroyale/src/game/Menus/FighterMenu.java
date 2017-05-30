@@ -11,7 +11,8 @@ import game.Button;
 import game.GUIUtils;
 import game.Fighters.*;
 
-public class ChampMenu extends Screen
+// Menu to select which fighter each player wants to use
+public class FighterMenu extends Screen
 {
 	private boolean isSelected1, isSelected2;
 	private PlayerControls p1Controls, p2Controls;
@@ -24,7 +25,7 @@ public class ChampMenu extends Screen
 	private int p1Index, p2Index;
 	private Fighter p1, p2;
 
-	public ChampMenu(BufferedImage background, PlayerControls p1, PlayerControls p2)
+	public FighterMenu(BufferedImage background, PlayerControls p1, PlayerControls p2)
 	{
 		super(background);
 		p1Controls = p1;
@@ -59,7 +60,7 @@ public class ChampMenu extends Screen
 		super.draw(g);
 
 		GUIUtils.self().drawText(width / 10, height * 3 / 5,
-				"Movement to select, Punch to lock in, kick to cancel, block to view character description", 25, g, false);
+				"Movement to select, Punch to lock in, kick to cancel, block to view character description", 25, g);
 		if (p1Index == p2Index)
 		{
 			if (!(isSelected1 && isSelected2))
