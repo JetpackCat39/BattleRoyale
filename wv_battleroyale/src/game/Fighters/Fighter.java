@@ -1,7 +1,6 @@
 package game.Fighters;
 
 import java.awt.*;
-import java.awt.font.FontRenderContext;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,9 +21,9 @@ public abstract class Fighter
 	private int height = BattleRoyale.HEIGHT;
 	private static int width = BattleRoyale.WIDTH;
 	private static final int MAX_Y_SPEED = 20;
-	private static final int HP_BAR_WIDTH = 100;
-	private static final int HP_BAR_HEIGHT = 30;
-	private static final int HP_BAR_MARGIN = 100;
+	private static final int HP_BAR_WIDTH = 450;
+	private static final int HP_BAR_HEIGHT = 60;
+	private static final int HP_BAR_MARGIN = 150;
 	private static final int HP_BAR_Y = 100;
 	private static final int HP_BAR_X_P1 = HP_BAR_MARGIN;
 	private static final int HP_BAR_X_P2 = width - HP_BAR_WIDTH - HP_BAR_MARGIN;
@@ -39,6 +38,7 @@ public abstract class Fighter
 	protected Random randomizer = new Random();
 	private List<String> connectedPunch = new ArrayList<String>();
 	private List<String> connectedKick = new ArrayList<String>();
+	private int walkSpeed;
 
 	enum STATE
 	{
@@ -74,7 +74,7 @@ public abstract class Fighter
 		return State == s;
 	}
 
-	public Fighter(int newX, int newY, BufferedImage spriteSheet, BufferedImage worl, boolean isPlayer1, PlayerControls c)
+	public Fighter(int newX, int newY, BufferedImage spriteSheet, BufferedImage worl, boolean isPlayer1, PlayerControls c, int walkSpeed)
 	{
 		if (isPlayer1)
 		{
@@ -100,6 +100,7 @@ public abstract class Fighter
 		winorloss = worl;
 		createConnectedPunchList();
 		createConnectedKickList();
+		this.walkSpeed = walkSpeed;
 	}
 
 	private void createConnectedPunchList()
@@ -306,13 +307,13 @@ public abstract class Fighter
 	private void walkRight()
 	{
 		setState(STATE.WALK);
-		setXSpeed(5);
+		setXSpeed(walkSpeed);
 	}
 
 	private void walkLeft()
 	{
 		setState(STATE.WALK);
-		setXSpeed(-5);
+		setXSpeed(-walkSpeed);
 	}
 
 	private void crouch()

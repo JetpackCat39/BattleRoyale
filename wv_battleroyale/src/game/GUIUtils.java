@@ -66,7 +66,7 @@ public class GUIUtils
 		DecimalFormat df = new DecimalFormat("##0.00");
 		String num = df.format(healthPercent);
 		FontMetrics fontMetrics = new JFrame().getFontMetrics(new Font(DEFAULT_FONT, DEFAULT_FONT_STYLE, 24));
-		drawText(x + w/2 - (fontMetrics.stringWidth(num + "%"))/2, y + fontMetrics.getAscent(), 
+		drawText(x + w/2 - (fontMetrics.stringWidth(num + "%"))/2, y + h/2 + fontMetrics.getHeight()/2, 
 				Color.WHITE, num + "%", 24, g2d, DEFAULT_FONT_STYLE);
 	}
 
