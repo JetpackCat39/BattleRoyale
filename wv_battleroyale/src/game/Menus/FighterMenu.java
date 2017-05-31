@@ -251,6 +251,8 @@ public class FighterMenu extends Screen
 		case "BOB":
 			break;
 		case "NGUYEN":
+			p1 = new Nguyen(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Nguyen-Ingame.png"), null, true,
+					p1Controls);
 			break;
 		case "HALANDER":
 			break;
@@ -290,6 +292,8 @@ public class FighterMenu extends Screen
 		case "BOB":
 			break;
 		case "NGUYEN":
+			p2 = new Nguyen(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Nguyen-Ingame.png"), null,
+					false, p2Controls);
 			break;
 		case "HALANDER":
 			break;
