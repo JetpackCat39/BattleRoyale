@@ -1,14 +1,14 @@
 package game;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.RoundRectangle2D;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
+import java.awt.geom.*;
+import java.awt.image.*;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.text.DecimalFormat;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.*;
 import javax.swing.JFrame;
 
 public class GUIUtils
@@ -104,6 +104,25 @@ public class GUIUtils
 		g2d.draw(r);
 		g2d.fill(r);
 		b.draw(g2d);
+	}
+	
+	public void playSound(String path) throws MalformedURLException, LineUnavailableException, UnsupportedAudioFileException, IOException
+	{
+	    Clip clip = AudioSystem.getClip();
+	    AudioInputStream ais = AudioSystem.getAudioInputStream(getClass().getResource(path));
+	    clip.open(ais);
+	    clip.start();
+	}
+	
+	public float getSoundFileLength(String path) throws UnsupportedAudioFileException, IOException
+	{
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource(path));
+	    AudioFormat format = audioInputStream.getFormat();
+	    long audioFileLength = path.length();
+	    int frameSize = format.getFrameSize();
+	    float frameRate = format.getFrameRate();
+	    float durationInSeconds = (audioFileLength / (frameSize * frameRate));
+	    return durationInSeconds;
 	}
 
 }

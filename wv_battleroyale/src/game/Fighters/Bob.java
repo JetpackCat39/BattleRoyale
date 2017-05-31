@@ -1,6 +1,9 @@
 package game.Fighters;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+
 import game.Input.PlayerControls;
 
 public class Bob extends Fighter
@@ -164,5 +167,27 @@ public class Bob extends Fighter
 	public int getMaxHealth()
 	{
 		return HEALTH;
+	}
+
+	@Override
+	public String getEntranceQuote()
+	{
+		return "Sounds/BobEntrance.wav";
+	}
+
+	@Override
+	public String getResponseQuote()
+	{
+		return "Sounds/BobResponse.wav";
+	}
+
+	@Override
+	public String getGrunt()
+	{
+		List<String> temp = new ArrayList<String>();
+		temp.add("Sounds/BobGrunt1.wav");
+		temp.add("Sounds/BobGrunt2.wav");
+		temp.add("Sounds/BobGrunt3.wav");
+		return temp.get(randomizer.nextInt(temp.size()));
 	}
 }

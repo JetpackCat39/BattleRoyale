@@ -30,7 +30,10 @@ public class HalanderMenu extends Screen
 		}
 
 		GUIUtils.self().drawText(width * 5 / 12, height * 2 / 9, "HALANDER", 72, g);
-		GUIUtils.self().drawImg(character, 150, 250, character.getWidth() / 12, character.getHeight() / 12, g);
+		GUIUtils.self().drawImg(character, bg.getWidth()/13, 250, character.getWidth() / 12, character.getHeight() / 12, g);
+		GUIUtils.self().drawText(width * 5 / 12, 275, "Mr. Halander is the only AP Chemistry teacher", 30, g);
+		GUIUtils.self().drawText(width * 5 / 12, 315, "at Westview. His teaching methods make", 30, g);
+		GUIUtils.self().drawText(width * 5 / 12, 355, "chemistry intuitive to students.", 30, g);
 	}
 
 	public Button getBack()

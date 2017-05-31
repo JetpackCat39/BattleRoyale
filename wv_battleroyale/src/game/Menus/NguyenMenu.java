@@ -30,8 +30,10 @@ public class NguyenMenu extends Screen
 			getKey(i).draw(g);
 		}
 		GUIUtils.self().drawText(width * 5 / 12, height * 2 / 9, "NGUYEN", 72, g);
-		GUIUtils.self().drawImg(character, 150, 250, character.getWidth() / 9, character.getHeight() / 9, g);
-
+		GUIUtils.self().drawImg(character, bg.getWidth()/13, 250, character.getWidth() / 9, character.getHeight() / 9, g);
+		GUIUtils.self().drawText(width * 5 / 12, 275, "Mr. Nguyen is a math teacher at Westview.", 30, g);
+		GUIUtils.self().drawText(width * 5 / 12, 315, "He connects with the students and makes", 30, g);
+		GUIUtils.self().drawText(width * 5 / 12, 355, "sure they understand the content.", 30, g);
 	}
 
 	public Button getBack()

@@ -1,18 +1,21 @@
 package game.Fighters;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+
 import game.Input.PlayerControls;
 
 public class Nguyen extends Fighter
 {
-	private static final int SRC_WIDTH = 75;
-	private static final int SRC_HEIGHT = 115;
+	private static final int SRC_WIDTH = 87;
+	private static final int SRC_HEIGHT = 108;
 	
 	private static final int DRAW_WIDTH = SRC_WIDTH * 2;
 	private static final int DRAW_HEIGHT = SRC_HEIGHT * 2;
 	
 	// width of sprite while not attacking is 55ß
-	private static final int NON_ATTACK_WIDTH = 55 * 2;
+	private static final int NON_ATTACK_WIDTH = 50 * 2;
 	
 	private static final int PUNCH = 3;
 	private static final int BLOCKED_PUNCH = 1;
@@ -21,7 +24,7 @@ public class Nguyen extends Fighter
 	
 	public static final int HEALTH = 20;
 	
-	private static final int MAX_FRAMES = 6;
+	private static final int MAX_FRAMES = 9;
 	
 	// 180 = fps
 	private static final int BLOCK_UPDATE_COUNT = 180/10; //goes to a block pose in a fifth of a second
@@ -36,11 +39,11 @@ public class Nguyen extends Fighter
 	private static final int BLOCK_ANIMATION_COUNT = 2;
 	private static final int STAGE_ENTRANCE_ANIMATION_COUNT = 1;
 	private static final int CROUCH_ANIMATION_COUNT = 2;
-	private static final int JUMP_ANIMATION_COUNT = 7;
+	private static final int JUMP_ANIMATION_COUNT = 6;
 	private static final int PUNCH_ANIMATION_COUNT = 3;
 	private static final int KICK_ANIMATION_COUNT = 4;
 	private static final int WALK_ANIMATION_COUNT = 5;
-	private static final int IDLE_ANIMATION_COUNT = 4;
+	private static final int IDLE_ANIMATION_COUNT = 10;
 	
 	public Nguyen(int newX, int newY, BufferedImage spriteSheet, BufferedImage worl, boolean isPlayer1, PlayerControls c)
 	{
@@ -164,4 +167,28 @@ public class Nguyen extends Fighter
 	{
 		return HEALTH;
 	}
+
+	@Override
+	public String getEntranceQuote()
+	{
+		return "Sounds/NguyenEntrance.wav";
+	}
+
+	@Override
+	public String getResponseQuote()
+	{
+		return "Sounds/NguyenResponse.wav";
+	}
+
+	@Override
+	public String getGrunt()
+	{
+		List<String> temp = new ArrayList<String>();
+		temp.add("Sounds/NguyenGrunt1.wav");
+		temp.add("Sounds/NguyenGrunt2.wav");		
+		temp.add("Sounds/NguyenGrunt3.wav");
+		temp.add("Sounds/NguyenGrunt4.wav");
+		return temp.get(randomizer.nextInt(temp.size()));
+	}
+
 }

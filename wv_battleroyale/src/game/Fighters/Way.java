@@ -1,6 +1,9 @@
 package game.Fighters;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+
 import game.Input.PlayerControls;
 
 public class Way extends Fighter
@@ -164,5 +167,27 @@ public class Way extends Fighter
 	public int getMaxHealth()
 	{
 		return HEALTH;
+	}
+
+	@Override
+	public String getEntranceQuote()
+	{
+		return "Sounds/WayEntrance.wav";
+	}
+
+	@Override
+	public String getResponseQuote()
+	{
+		return "Sounds/WayResponse.wav";
+	}
+
+	@Override
+	public String getGrunt()
+	{
+		List<String> temp = new ArrayList<String>();
+		temp.add("Sounds/WayGrunt1.wav");
+		temp.add("Sounds/WayGrunt2.wav");
+		temp.add("Sounds/WayGrunt3.wav");
+		return temp.get(randomizer.nextInt(temp.size()));
 	}
 }

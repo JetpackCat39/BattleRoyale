@@ -1,6 +1,9 @@
 package game.Fighters;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+
 import game.Input.PlayerControls;
 
 public class Kurth extends Fighter
@@ -164,5 +167,35 @@ public class Kurth extends Fighter
 	public int getMaxHealth()
 	{
 		return HEALTH;
+	}
+
+	@Override
+	public String getEntranceQuote()
+	{
+		return "Sounds/KurthEntrance.wav";
+	}
+
+	@Override
+	public String getResponseQuote()
+	{
+		return "Sounds/KurthResponse.wav";
+	}
+
+	@Override
+	public String getGrunt()
+	{
+		List<String> temp = new ArrayList<String>();
+		temp.add("Sounds/KurthGrunt1.wav");
+		temp.add("Sounds/KurthGrunt2.wav");		
+		temp.add("Sounds/KurthGrunt3.wav");
+		temp.add("Sounds/KurthGrunt4.wav");
+		temp.add("Sounds/KurthGrunt5.wav");
+		temp.add("Sounds/KurthGrunt6.wav");
+		temp.add("Sounds/KurthGrunt7.wav");
+		temp.add("Sounds/KurthGrunt8.wav");
+		temp.add("Sounds/KurthGrunt9.wav");
+		temp.add("Sounds/KurthGrunt10.wav");
+		temp.add("Sounds/KurthGrunt11.wav");
+		return temp.get(randomizer.nextInt(temp.size()));
 	}
 }

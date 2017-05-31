@@ -1,6 +1,9 @@
 package game.Fighters;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+
 import game.Input.PlayerControls;
 
 public class Tomboc extends Fighter
@@ -166,5 +169,29 @@ public class Tomboc extends Fighter
 	public int getMaxHealth()
 	{
 		return HEALTH;
+	}
+
+	@Override
+	public String getEntranceQuote()
+	{
+		return "Sounds/TombocEntrance.wav";
+	}
+
+	@Override
+	public String getResponseQuote()
+	{
+		return "Sounds/TombocResponse.wav";
+	}
+
+	@Override
+	public String getGrunt()
+	{
+		List<String> temp = new ArrayList<String>();
+		temp.add("Sounds/TombocGrunt1.wav");
+		temp.add("Sounds/TombocGrunt2.wav");		
+		temp.add("Sounds/TombocGrunt3.wav");
+		temp.add("Sounds/TombocGrunt4.wav");
+		temp.add("Sounds/TombocGrunt5.wav");
+		return temp.get(randomizer.nextInt(temp.size()));
 	}
 }

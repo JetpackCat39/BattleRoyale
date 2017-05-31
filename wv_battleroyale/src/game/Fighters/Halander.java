@@ -1,6 +1,9 @@
 package game.Fighters;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+
 import game.Input.PlayerControls;
 
 public class Halander extends Fighter
@@ -164,6 +167,30 @@ public class Halander extends Fighter
 	public int getMaxHealth()
 	{
 		return HEALTH;
+	}
+
+	@Override
+	public String getEntranceQuote()
+	{
+		return "Sounds/HalanderEntrance.wav";
+	}
+
+	@Override
+	public String getResponseQuote()
+	{
+		return "Sounds/HalanderResponse.wav";
+	}
+
+	@Override
+	public String getGrunt()
+	{
+		List<String> temp = new ArrayList<String>();
+		temp.add("Sounds/HalanderGrunt1.wav");
+		temp.add("Sounds/HalanderGrunt2.wav");
+		temp.add("Sounds/HalanderGrunt3.wav");
+		temp.add("Sounds/HalanderGrunt4.wav");
+		temp.add("Sounds/HalanderGrunt5.wav");
+		return temp.get(randomizer.nextInt(temp.size()));
 	}
 
 }

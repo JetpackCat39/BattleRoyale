@@ -1,6 +1,9 @@
 package game.Fighters;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+
 import game.Input.PlayerControls;
 
 public class Jamal extends Fighter
@@ -163,5 +166,28 @@ public class Jamal extends Fighter
 	public int getMaxHealth()
 	{
 		return HEALTH;
+	}
+
+	@Override
+	public String getEntranceQuote()
+	{
+		return "Sounds/JamalEntrance.wav";
+	}
+
+	@Override
+	public String getResponseQuote()
+	{
+		return "Sounds/JamalResponse.wav";
+	}
+
+	@Override
+	public String getGrunt()
+	{
+		List<String> temp = new ArrayList<String>();
+		temp.add("Sounds/JamalGrunt1.wav");
+		temp.add("Sounds/JamalGrunt2.wav");
+		temp.add("Sounds/JamalGrunt3.wav");
+		temp.add("Sounds/JamalGrunt4.wav");
+		return temp.get(randomizer.nextInt(temp.size()));
 	}
 }

@@ -1,19 +1,22 @@
 package game.Fighters;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+
 import game.Input.PlayerControls;
 
 public class Cassen extends Fighter
 {
 
-	private static final int SRC_WIDTH = 75;
-	private static final int SRC_HEIGHT = 115;
+	private static final int SRC_WIDTH = 67;
+	private static final int SRC_HEIGHT = 130;
 	
 	private static final int DRAW_WIDTH = SRC_WIDTH * 2;
 	private static final int DRAW_HEIGHT = SRC_HEIGHT * 2;
 	
 	// width of sprite while not attacking is 55ß
-	private static final int NON_ATTACK_WIDTH = 55 * 2;
+	private static final int NON_ATTACK_WIDTH = 50 * 2;
 	
 	private static final int PUNCH = 3;
 	private static final int BLOCKED_PUNCH = 1;
@@ -39,7 +42,7 @@ public class Cassen extends Fighter
 	private static final int CROUCH_ANIMATION_COUNT = 2;
 	private static final int JUMP_ANIMATION_COUNT = 7;
 	private static final int PUNCH_ANIMATION_COUNT = 3;
-	private static final int KICK_ANIMATION_COUNT = 4;
+	private static final int KICK_ANIMATION_COUNT = 3;
 	private static final int WALK_ANIMATION_COUNT = 5;
 	private static final int IDLE_ANIMATION_COUNT = 4;
 	
@@ -166,4 +169,26 @@ public class Cassen extends Fighter
 		return HEALTH;
 	}
 
+	@Override
+	public String getEntranceQuote()
+	{
+		return "Sounds/CassenEntrance.wav";
+	}
+
+	@Override
+	public String getResponseQuote()
+	{
+		return "Sounds/CassenResponse.wav";
+	}
+
+	@Override
+	public String getGrunt()
+	{
+		List<String> temp = new ArrayList<String>();
+		temp.add("Sounds/CassenGrunt1.wav");
+		temp.add("Sounds/CassenGrunt2.wav");
+		temp.add("Sounds/CassenGrunt3.wav");
+		temp.add("Sounds/CassenGrunt4.wav");
+		return temp.get(randomizer.nextInt(temp.size()));
+	}
 }

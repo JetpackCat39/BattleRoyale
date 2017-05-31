@@ -238,6 +238,8 @@ public class FighterMenu extends Screen
 					.loadImage("Images/Jamal-Victory.png"), true, p1Controls);
 			break;
 		case "CASSEN":
+			p1 = new Cassen(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Cassen-Ingame1.png"), null, true,
+					p1Controls);
 			break;
 		case "TOMBOC":
 			p1 = new Tomboc(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/tomboc-ingame.png"), null, true,
@@ -249,6 +251,8 @@ public class FighterMenu extends Screen
 		case "BOB":
 			break;
 		case "NGUYEN":
+			p1 = new Nguyen(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Nguyen-Ingame.png"), null, true,
+					p1Controls);
 			break;
 		case "HALANDER":
 			break;
@@ -274,6 +278,8 @@ public class FighterMenu extends Screen
 					.self().loadImage("Images/Jamal-Victory.png"), false, p2Controls);
 			break;
 		case "CASSEN":
+			p2 = new Cassen(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Cassen-Ingame1.png"), null,
+					false, p2Controls);
 			break;
 		case "TOMBOC":
 			p2 = new Tomboc(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/tomboc-ingame.png"), null,
@@ -286,6 +292,8 @@ public class FighterMenu extends Screen
 		case "BOB":
 			break;
 		case "NGUYEN":
+			p2 = new Nguyen(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Nguyen-Ingame.png"), null,
+					false, p2Controls);
 			break;
 		case "HALANDER":
 			break;
