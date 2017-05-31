@@ -22,6 +22,7 @@ public class Bob extends Fighter
 	private static final int BLOCKED_PUNCH = 1;
 	private static final int KICK = 4;
 	private static final int BLOCKED_KICK = 2;
+	private static final int SPEED = 6;
 	
 	public static final int HEALTH = 20;
 	
@@ -48,7 +49,7 @@ public class Bob extends Fighter
 	
 	public Bob(int newX, int newY, BufferedImage spriteSheet, BufferedImage worl, boolean isPlayer1, PlayerControls c)
 	{
-		super(newX, newY, spriteSheet, worl, isPlayer1, c);
+		super(newX, newY, spriteSheet, worl, isPlayer1, c, SPEED);
 	}
 
 	@Override
