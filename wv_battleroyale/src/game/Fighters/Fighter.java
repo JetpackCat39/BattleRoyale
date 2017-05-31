@@ -1,10 +1,14 @@
 package game.Fighters;
 
+<<<<<<< HEAD
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
+=======
+import java.awt.*;
+>>>>>>> branch 'master' of https://github.com/jetpackcat39/battleroyale
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,9 +33,9 @@ public abstract class Fighter
 	private int height = BattleRoyale.HEIGHT;
 	private static int width = BattleRoyale.WIDTH;
 	private static final int MAX_Y_SPEED = 20;
-	private static final int HP_BAR_WIDTH = 100;
-	private static final int HP_BAR_HEIGHT = 30;
-	private static final int HP_BAR_MARGIN = 100;
+	private static final int HP_BAR_WIDTH = 450;
+	private static final int HP_BAR_HEIGHT = 60;
+	private static final int HP_BAR_MARGIN = 150;
 	private static final int HP_BAR_Y = 100;
 	private static final int HP_BAR_X_P1 = HP_BAR_MARGIN;
 	private static final int HP_BAR_X_P2 = width - HP_BAR_WIDTH - HP_BAR_MARGIN;
@@ -46,6 +50,7 @@ public abstract class Fighter
 	protected Random randomizer = new Random();
 	private List<String> connectedPunch = new ArrayList<String>();
 	private List<String> connectedKick = new ArrayList<String>();
+	private int walkSpeed;
 
 	enum STATE
 	{
@@ -81,8 +86,12 @@ public abstract class Fighter
 		return State == s;
 	}
 
+<<<<<<< HEAD
 	public Fighter(int newX, int newY, BufferedImage spriteSheet, BufferedImage worl, boolean isPlayer1,
 			PlayerControls c)
+=======
+	public Fighter(int newX, int newY, BufferedImage spriteSheet, BufferedImage worl, boolean isPlayer1, PlayerControls c, int walkSpeed)
+>>>>>>> branch 'master' of https://github.com/jetpackcat39/battleroyale
 	{
 		if (isPlayer1)
 		{
@@ -108,6 +117,7 @@ public abstract class Fighter
 		winorloss = worl;
 		createConnectedPunchList();
 		createConnectedKickList();
+		this.walkSpeed = walkSpeed;
 	}
 
 	private void createConnectedPunchList()
@@ -322,13 +332,13 @@ public abstract class Fighter
 	private void walkRight()
 	{
 		setState(STATE.WALK);
-		setXSpeed(5);
+		setXSpeed(walkSpeed);
 	}
 
 	private void walkLeft()
 	{
 		setState(STATE.WALK);
-		setXSpeed(-5);
+		setXSpeed(-walkSpeed);
 	}
 
 	private void crouch()
@@ -472,6 +482,7 @@ public abstract class Fighter
 		}
 	}
 
+<<<<<<< HEAD
 	public void draw(Graphics g, int offset)
 	{
 		if (checkState(STATE.ENTER))
@@ -545,9 +556,26 @@ public abstract class Fighter
 			}
 			setState(STATE.IDLE);
 		}
+=======
+	public void draw(Graphics g, int offset) {
+	
+		GUIUtils.self().drawHP(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2, HP_BAR_Y, HP_BAR_WIDTH, HP_BAR_HEIGHT, health, 
+				getMaxHealth(), isP1 ? P1COLOR : P2COLOR, g);
+		FontMetrics fontMetrics = new JFrame().getFontMetrics(new Font("arial", Font.BOLD, 36));
+	    
+		GUIUtils.self().drawText(isP1 ? HP_BAR_X_P1 - fontMetrics.stringWidth("P1 "): 
+			HP_BAR_X_P2 + HP_BAR_WIDTH + fontMetrics.stringWidth(" "), HP_BAR_Y + (int) fontMetrics.getAscent() - 5, Color.WHITE, isP1 ? "P1 " : " P2", 
+				36, g, Font.BOLD);
+		GUIUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(),
+			x + offset, height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
+		changeAnimation++;
+		if(isP1) drawP1();
+		else drawP2();
+		
+>>>>>>> branch 'master' of https://github.com/jetpackcat39/battleroyale
 	}
 
-	private void drawP1()
+	private int drawP1()
 	{
 		if (changeAnimation >= getAnimationSpeed(State))
 		{
@@ -567,6 +595,7 @@ public abstract class Fighter
 				frame = getNumImages(STATE.BLOCK) - 1;
 			}
 		}
+		return 1;
 	}
 
 	private void drawP2()

@@ -238,11 +238,19 @@ public class FighterMenu extends Screen
 					.loadImage("Images/Jamal-Victory.png"), true, p1Controls);
 			break;
 		case "CASSEN":
+<<<<<<< HEAD
 			p1 = new Cassen(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame1.png"), null, true,
+=======
+			p1 = new Cassen(PLAYERX,PLAYERY, GUIUtils.self().loadImage("Images/Cassen-Ingame1.png"), null, true,
+>>>>>>> branch 'master' of https://github.com/jetpackcat39/battleroyale
 					p1Controls);
 			break;
 		case "TOMBOC":
+<<<<<<< HEAD
 			p1 = new Tomboc(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Tomboc-Ingame1.png"), null, true,
+=======
+			p1 = new Tomboc(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/tomboc-ingame.png"), null, true,
+>>>>>>> branch 'master' of https://github.com/jetpackcat39/battleroyale
 					p1Controls);
 			break;
 		case "KURTH":
@@ -282,7 +290,11 @@ public class FighterMenu extends Screen
 					false, p2Controls);
 			break;
 		case "TOMBOC":
+<<<<<<< HEAD
 			p2 = new Tomboc(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Tomboc-Ingame1.png"), null,
+=======
+			p2 = new Tomboc(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/tomboc-ingame.png"), null,
+>>>>>>> branch 'master' of https://github.com/jetpackcat39/battleroyale
 					false, p2Controls);
 			break;
 		case "KURTH":
