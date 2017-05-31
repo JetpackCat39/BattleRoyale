@@ -8,7 +8,7 @@ import java.io.IOException;
 import game.Input.PlayerControls;
 
 import game.Button;
-import game.GameUtils;
+import game.GUIUtils;
 import game.Fighters.*;
 
 // Menu to select which fighter each player wants to use
@@ -59,13 +59,13 @@ public class FighterMenu extends Screen
 	{
 		super.draw(g);
 
-		GameUtils.self().drawText(width / 10, height * 3 / 5,
+		GUIUtils.self().drawText(width / 10, height * 3 / 5,
 				"Movement to select, Punch to lock in, kick to cancel, block to view character description", 25, g);
 		if (p1Index == p2Index)
 		{
 			if (!(isSelected1 && isSelected2))
 			{
-				GameUtils.self().drawSelector(g, buttonList.get(p1Index), BOTH);
+				GUIUtils.self().drawSelector(g, buttonList.get(p1Index), BOTH);
 			}
 			else
 			{
@@ -76,7 +76,7 @@ public class FighterMenu extends Screen
 		{
 			if (!isSelected1)
 			{
-				GameUtils.self().drawSelector(g, buttonList.get(p1Index), P1COLOR);
+				GUIUtils.self().drawSelector(g, buttonList.get(p1Index), P1COLOR);
 			}
 			else
 			{
@@ -84,7 +84,7 @@ public class FighterMenu extends Screen
 			}
 			if (!isSelected2)
 			{
-				GameUtils.self().drawSelector(g, buttonList.get(p2Index), P2COLOR);
+				GUIUtils.self().drawSelector(g, buttonList.get(p2Index), P2COLOR);
 			}
 			else
 			{
@@ -234,37 +234,31 @@ public class FighterMenu extends Screen
 		switch (getSelectedP1().getText())
 		{
 		case "JAMAL":
-			p1 = new Jamal(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Jamal-Ingame.png"), GameUtils.self()
+			p1 = new Jamal(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Jamal-Ingame.png"), GUIUtils.self()
 					.loadImage("Images/Jamal-Victory.png"), true, p1Controls);
 			break;
 		case "CASSEN":
-<<<<<<< HEAD
-			p1 = new Cassen(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame1.png"), null, true,
-=======
-			p1 = new Cassen(PLAYERX,PLAYERY, GUIUtils.self().loadImage("Images/Cassen-Ingame1.png"), null, true,
->>>>>>> branch 'master' of https://github.com/jetpackcat39/battleroyale
+			p1 = new Cassen(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Cassen-Ingame1.png"), null, true,
 					p1Controls);
 			break;
 		case "TOMBOC":
-<<<<<<< HEAD
-			p1 = new Tomboc(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Tomboc-Ingame1.png"), null, true,
-=======
-			p1 = new Tomboc(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/tomboc-ingame.png"), null, true,
->>>>>>> branch 'master' of https://github.com/jetpackcat39/battleroyale
+			p1 = new Tomboc(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Tomboc-Ingame1.png"), null, true,
 					p1Controls);
 			break;
 		case "KURTH":
-			p1 = new Kurth(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Kurth-Ingame1.png"), null, true, p1Controls);
+			p1 = new Kurth(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Kurth-Ingame1.png"), null, true, p1Controls);
 			break;
 		case "BOB":
 			break;
 		case "NGUYEN":
-			p1 = new Nguyen(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Nguyen-Ingame.png"), null, true,
+			p1 = new Nguyen(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Nguyen-Ingame.png"), null, true,
 					p1Controls);
 			break;
 		case "HALANDER":
 			break;
 		case "WAY":
+			p1 = new Way(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Way-Ingame.png"), null, true,
+					p1Controls);
 			break;
 		default:
 			break;
@@ -282,34 +276,32 @@ public class FighterMenu extends Screen
 		switch (getSelectedP2().getText())
 		{
 		case "JAMAL":
-			p2 = new Jamal(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Jamal-Ingame.png"), GameUtils
+			p2 = new Jamal(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Jamal-Ingame.png"), GUIUtils
 					.self().loadImage("Images/Jamal-Victory.png"), false, p2Controls);
 			break;
 		case "CASSEN":
-			p2 = new Cassen(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame1.png"), null,
+			p2 = new Cassen(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Cassen-Ingame1.png"), null,
 					false, p2Controls);
 			break;
 		case "TOMBOC":
-<<<<<<< HEAD
-			p2 = new Tomboc(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Tomboc-Ingame1.png"), null,
-=======
-			p2 = new Tomboc(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/tomboc-ingame.png"), null,
->>>>>>> branch 'master' of https://github.com/jetpackcat39/battleroyale
+			p2 = new Tomboc(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Tomboc-Ingame1.png"), null,
 					false, p2Controls);
 			break;
 		case "KURTH":
-			p2 = new Kurth(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Kurth-Ingame1.png"), null,
+			p2 = new Kurth(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Kurth-Ingame1.png"), null,
 					false, p2Controls);
 			break;
 		case "BOB":
 			break;
 		case "NGUYEN":
-			p2 = new Nguyen(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Nguyen-Ingame.png"), null,
+			p2 = new Nguyen(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Nguyen-Ingame.png"), null,
 					false, p2Controls);
 			break;
 		case "HALANDER":
 			break;
 		case "WAY":
+			p2 = new Way(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Way-Ingame.png"), null,
+					false, p2Controls);
 			break;
 		default:
 			break;
