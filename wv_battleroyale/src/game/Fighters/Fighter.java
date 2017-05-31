@@ -1,14 +1,7 @@
 package game.Fighters;
 
-<<<<<<< HEAD
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.event.ActionListener;
-=======
+
 import java.awt.*;
->>>>>>> branch 'master' of https://github.com/jetpackcat39/battleroyale
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -86,12 +79,7 @@ public abstract class Fighter
 		return State == s;
 	}
 
-<<<<<<< HEAD
-	public Fighter(int newX, int newY, BufferedImage spriteSheet, BufferedImage worl, boolean isPlayer1,
-			PlayerControls c)
-=======
 	public Fighter(int newX, int newY, BufferedImage spriteSheet, BufferedImage worl, boolean isPlayer1, PlayerControls c, int walkSpeed)
->>>>>>> branch 'master' of https://github.com/jetpackcat39/battleroyale
 	{
 		if (isPlayer1)
 		{
@@ -482,7 +470,6 @@ public abstract class Fighter
 		}
 	}
 
-<<<<<<< HEAD
 	public void draw(Graphics g, int offset)
 	{
 		if (checkState(STATE.ENTER))
@@ -556,23 +543,6 @@ public abstract class Fighter
 			}
 			setState(STATE.IDLE);
 		}
-=======
-	public void draw(Graphics g, int offset) {
-	
-		GUIUtils.self().drawHP(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2, HP_BAR_Y, HP_BAR_WIDTH, HP_BAR_HEIGHT, health, 
-				getMaxHealth(), isP1 ? P1COLOR : P2COLOR, g);
-		FontMetrics fontMetrics = new JFrame().getFontMetrics(new Font("arial", Font.BOLD, 36));
-	    
-		GUIUtils.self().drawText(isP1 ? HP_BAR_X_P1 - fontMetrics.stringWidth("P1 "): 
-			HP_BAR_X_P2 + HP_BAR_WIDTH + fontMetrics.stringWidth(" "), HP_BAR_Y + (int) fontMetrics.getAscent() - 5, Color.WHITE, isP1 ? "P1 " : " P2", 
-				36, g, Font.BOLD);
-		GUIUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(),
-			x + offset, height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
-		changeAnimation++;
-		if(isP1) drawP1();
-		else drawP2();
-		
->>>>>>> branch 'master' of https://github.com/jetpackcat39/battleroyale
 	}
 
 	private int drawP1()
