@@ -20,7 +20,7 @@ public class VictoryScreen extends Screen
 		player1 = p1;
 		player2 = p2;
 		isP1 = b;
-		buttonList.add(new Button(BUTTON_CENTER/2, height * 7/10, "NEW GAME"));
+		buttonList.add(new Button(BUTTON_CENTER / 2, height * 7/10, "NEW GAME"));
 		buttonList.add(new Button(BUTTON_CENTER * 3/2, height * 7/10, "MAIN MENU"));
 	}
 	
