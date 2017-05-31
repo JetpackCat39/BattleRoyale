@@ -1,6 +1,9 @@
 package game.Fighters;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+
 import game.Input.PlayerControls;
 
 public class Nguyen extends Fighter
@@ -164,4 +167,28 @@ public class Nguyen extends Fighter
 	{
 		return HEALTH;
 	}
+
+	@Override
+	public String getEntranceQuote()
+	{
+		return "Sounds/NguyenEntrance.wav";
+	}
+
+	@Override
+	public String getResponseQuote()
+	{
+		return "Sounds/NguyenResponse.wav";
+	}
+
+	@Override
+	public String getGrunt()
+	{
+		List<String> temp = new ArrayList<String>();
+		temp.add("Sounds/NguyenGrunt1.wav");
+		temp.add("Sounds/NguyenGrunt2.wav");		
+		temp.add("Sounds/NguyenGrunt3.wav");
+		temp.add("Sounds/NguyenGrunt4.wav");
+		return temp.get(randomizer.nextInt(temp.size()));
+	}
+
 }

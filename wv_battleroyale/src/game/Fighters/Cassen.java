@@ -1,6 +1,9 @@
 package game.Fighters;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+
 import game.Input.PlayerControls;
 
 public class Cassen extends Fighter
@@ -166,4 +169,26 @@ public class Cassen extends Fighter
 		return HEALTH;
 	}
 
+	@Override
+	public String getEntranceQuote()
+	{
+		return "Sounds/CassenEntrance.wav";
+	}
+
+	@Override
+	public String getResponseQuote()
+	{
+		return "Sounds/CassenResponse.wav";
+	}
+
+	@Override
+	public String getGrunt()
+	{
+		List<String> temp = new ArrayList<String>();
+		temp.add("Sounds/CassenGrunt1.wav");
+		temp.add("Sounds/CassenGrunt2.wav");
+		temp.add("Sounds/CassenGrunt3.wav");
+		temp.add("Sounds/CassenGrunt4.wav");
+		return temp.get(randomizer.nextInt(temp.size()));
+	}
 }

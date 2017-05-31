@@ -5,7 +5,13 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 
 import game.BattleRoyale;
@@ -32,6 +38,9 @@ public abstract class Fighter
 	private PlayerControls controls;
 	private Fighter opponent;
 	private BufferedImage sprites, winorloss;
+	protected Random randomizer = new Random();
+	private List<String> connectedPunch = new ArrayList<String>();
+	private List<String> connectedKick = new ArrayList<String>();
 
 	enum STATE
 	{
@@ -50,7 +59,7 @@ public abstract class Fighter
 		}
 	}
 
-	private STATE State = STATE.IDLE;
+	private STATE State = STATE.ENTER;
 
 	protected void setState(STATE s)
 	{
@@ -91,6 +100,24 @@ public abstract class Fighter
 		controls = c;
 		changeAnimation = 0;
 		winorloss = worl;
+		createConnectedPunchList();
+		createConnectedKickList();
+	}
+
+	private void createConnectedPunchList()
+	{
+		connectedPunch.add("Sounds/punch.wav");
+		connectedPunch.add("Sounds/punch2.wav");
+		connectedPunch.add("Sounds/punch3.wav");
+		connectedPunch.add("Sounds/punch4.wav");
+	}
+	
+	private void createConnectedKickList()
+	{
+		connectedKick.add("Sounds/kick.wav");
+		connectedKick.add("Sounds/kick2.wav");
+		connectedKick.add("Sounds/kick3.wav");
+		connectedKick.add("Sounds/kick4.wav");
 	}
 
 	protected abstract int getNumImages(STATE s);
@@ -122,6 +149,22 @@ public abstract class Fighter
 	public abstract int getBlockedKickDamage();
 	
 	public abstract int getMaxHealth();
+	
+	public abstract String getEntranceQuote();
+	public abstract String getResponseQuote();
+	public abstract String getGrunt();
+	
+	public String getConnectedPunchSound()
+	{
+		String random = connectedPunch.get(randomizer.nextInt(connectedPunch.size()));
+		return random;
+	}
+	
+	public String getConnectedKickSound()
+	{
+		String random = connectedKick.get(randomizer.nextInt(connectedKick.size()));
+		return random;
+	}
 
 	public void changeYSpeed(int howMuch)
 	{
@@ -276,6 +319,14 @@ public abstract class Fighter
 
 	private void crouch()
 	{
+		try
+		{
+			GUIUtils.self().playSound(getGrunt());
+		}
+		catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
+		{
+			e.printStackTrace();
+		}
 		setState(STATE.CROUCH);
 	}
 
@@ -301,10 +352,26 @@ public abstract class Fighter
 			return;
 		}
 		setState(STATE.PUNCH);
-		if (isP1 ? (opponent.getLeft() < getLeft() + getDrawWidth()) : (opponent.getRight() > getRight() - getDrawWidth()))
+		try
 		{
+			GUIUtils.self().playSound(getGrunt());
+		}
+		catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
+		{
+			e.printStackTrace();
+		}
+		if (isP1 ? (opponent.getLeft() < getLeft() + getDrawWidth()) : (opponent.getRight() > getRight() - getDrawWidth()))
+		{		
 			if (!opponent.checkState(STATE.CROUCH))
 			{
+				try
+				{
+					GUIUtils.self().playSound(getConnectedPunchSound());
+				}
+				catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
+				{
+					e.printStackTrace();
+				}
 				if (opponent.checkState(STATE.BLOCK))
 				{
 					opponent.damage(getBlockedPunchDamage());
@@ -324,10 +391,26 @@ public abstract class Fighter
 			return;
 		}
 		setState(STATE.KICK);
+		try
+		{
+			GUIUtils.self().playSound(getGrunt());
+		}
+		catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
+		{
+			e.printStackTrace();
+		}
 		if (isP1 ? (opponent.getLeft() < getLeft() + getDrawWidth()):(opponent.getRight() > getRight() - getDrawWidth()))
 		{
 			if (!opponent.checkState(STATE.JUMP))
 			{
+				try
+				{
+					GUIUtils.self().playSound(getConnectedKickSound());
+				}
+				catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
+				{
+					e.printStackTrace();
+				}
 				if (opponent.checkState(STATE.BLOCK))
 				{
 					opponent.damage(getBlockedKickDamage());
@@ -377,9 +460,7 @@ public abstract class Fighter
 	{
 		GUIUtils.self().drawHP(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2, HP_BAR_Y, HP_BAR_WIDTH, HP_BAR_HEIGHT, health, 
 				getMaxHealth(), isP1 ? P1COLOR : P2COLOR, g);
-
 		FontMetrics fontMetrics = new JFrame().getFontMetrics(new Font("arial", Font.BOLD, 36));
-		
 		GUIUtils.self().drawText(isP1 ? HP_BAR_X_P1 - fontMetrics.stringWidth("P1") - 5: 
 			HP_BAR_X_P2 + HP_BAR_WIDTH + 5, HP_BAR_Y + fontMetrics.getAscent() - 5, Color.WHITE, isP1 ? "P1" : "P2", 
 				36, g, Font.BOLD);
