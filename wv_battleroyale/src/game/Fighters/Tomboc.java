@@ -13,12 +13,12 @@ public class Tomboc extends Fighter
 	private static final int DRAW_HEIGHT = SRC_HEIGHT * 2;
 	
 	// width of sprite while not attacking is 55ß
-	private static final int NON_ATTACK_WIDTH = 70 * 2;
+	private static final int NON_ATTACK_WIDTH = 49 * 2;
 	
-	private static final int PUNCH = 3;
-	private static final int BLOCKED_PUNCH = 1;
-	private static final int KICK = 4;
-	private static final int BLOCKED_KICK = 2;
+	private static final int PUNCH = 1;
+	private static final int BLOCKED_PUNCH = 0;
+	private static final int KICK = 2;
+	private static final int BLOCKED_KICK = 1;
 	
 	public static final int HEALTH = 20;
 	
@@ -40,8 +40,8 @@ public class Tomboc extends Fighter
 	private static final int STAGE_ENTRANCE_UPDATE_COUNT = 20;
 	private static final int CROUCH_UPDATE_COUNT = FPS/10;  //goes to a crouch pose in a fifth of a second
 	private static final int JUMP_UPDATE_COUNT = FPS/JUMP_ANIMATION_COUNT; // goes through a jump animation over 1 second
-	private static final int PUNCH_UPDATE_COUNT = FPS/(PUNCH_ANIMATION_COUNT * 2); // makes it punch twice in a second
-	private static final int KICK_UPDATE_COUNT = FPS/KICK_ANIMATION_COUNT; // makes it kick once in a second
+	private static final int PUNCH_UPDATE_COUNT = FPS/(PUNCH_ANIMATION_COUNT * 4); // makes it punch twice in a second
+	private static final int KICK_UPDATE_COUNT = FPS/(KICK_ANIMATION_COUNT * 2); // makes it kick once in a second
 	private static final int WALK_UPDATE_COUNT = FPS/(WALK_ANIMATION_COUNT * 2); // walks 2 cycles in a second
 	private static final int IDLE_UPDATE_COUNT = FPS/(IDLE_ANIMATION_COUNT * 2); // makes it cycle through an "idle" animation 2 times a second
 	

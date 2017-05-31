@@ -1,9 +1,7 @@
 package game.Fighters;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
+import java.awt.*;
+import java.awt.font.FontRenderContext;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
@@ -373,31 +371,25 @@ public abstract class Fighter
 		}
 	}
 
-	public void draw(Graphics g, int offset)
-	{
+	public void draw(Graphics g, int offset) {
+	
 		GUIUtils.self().drawHP(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2, HP_BAR_Y, HP_BAR_WIDTH, HP_BAR_HEIGHT, health, 
 				getMaxHealth(), isP1 ? P1COLOR : P2COLOR, g);
 
 		FontMetrics fontMetrics = new JFrame().getFontMetrics(new Font("arial", Font.BOLD, 36));
-		
-		GUIUtils.self().drawText(isP1 ? HP_BAR_X_P1 - fontMetrics.stringWidth("P1") - 5: 
-			HP_BAR_X_P2 + HP_BAR_WIDTH + 5, HP_BAR_Y + fontMetrics.getAscent() - 5, Color.WHITE, isP1 ? "P1" : "P2", 
+	    
+		GUIUtils.self().drawText(isP1 ? HP_BAR_X_P1 - fontMetrics.stringWidth("P1 "): 
+			HP_BAR_X_P2 + HP_BAR_WIDTH + fontMetrics.stringWidth(" "), HP_BAR_Y + (int) fontMetrics.getAscent() - 5, Color.WHITE, isP1 ? "P1 " : " P2", 
 				36, g, Font.BOLD);
 		GUIUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(),
-				x + offset, height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
+			x + offset, height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
 		changeAnimation++;
-		if(isP1)
-		{
-			drawP1();
-		}
-		else
-		{
-			drawP2();
-		}
+		if(isP1) drawP1();
+		else drawP2();
 		
 	}
 
-	private void drawP1()
+	private int drawP1()
 	{
 		if (changeAnimation >= getAnimationSpeed(State))
 		{
@@ -417,6 +409,7 @@ public abstract class Fighter
 				frame = getNumImages(STATE.BLOCK) - 1;
 			}
 		}
+		return 1;
 	}
 	
 	private void drawP2()
