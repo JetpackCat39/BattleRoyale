@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import game.Button;
-import game.GUIUtils;
+import game.GameUtils;
 
 public class StageMenu extends Screen
 {
@@ -108,37 +108,37 @@ public class StageMenu extends Screen
 		if (getSchoolFront().contains(x, y))
 		{
 			setSelected(getSchoolFront());
-			screen.setBackground(GUIUtils.self().loadImage("Images/schoolfront.png"));
+			screen.setBackground(GameUtils.self().loadImage("Images/schoolfront.png"));
 			isSelected = true;
 		}
 		if (getSchoolQuad().contains(x, y))
 		{
 			setSelected(getSchoolQuad());
-			screen.setBackground(GUIUtils.self().loadImage("Images/schoolquad.png"));
+			screen.setBackground(GameUtils.self().loadImage("Images/schoolquad.png"));
 			isSelected = true;
 		}
 		if (getAmpitheater().contains(x, y))
 		{
 			setSelected(getAmpitheater());
-			screen.setBackground(GUIUtils.self().loadImage("Images/ampitheater.png"));
+			screen.setBackground(GameUtils.self().loadImage("Images/ampitheater.png"));
 			isSelected = true;
 		}
 		if (getTheaterFront().contains(x, y))
 		{
 			setSelected(getTheaterFront());
-			screen.setBackground(GUIUtils.self().loadImage("Images/theaterfront.png"));
+			screen.setBackground(GameUtils.self().loadImage("Images/theaterfront.png"));
 			isSelected = true;
 		}
 		if (getPool().contains(x, y))
 		{
 			setSelected(getPool());
-			screen.setBackground(GUIUtils.self().loadImage("Images/pool.png"));
+			screen.setBackground(GameUtils.self().loadImage("Images/pool.png"));
 			isSelected = true;
 		}
 		if (getFootballField().contains(x, y))
 		{
 			setSelected(getFootballField());
-			screen.setBackground(GUIUtils.self().loadImage("Images/footballfield.png"));
+			screen.setBackground(GameUtils.self().loadImage("Images/footballfield.png"));
 			isSelected = true;
 		}
 

@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
 import javax.swing.JFrame;
 
-public class GUIUtils
+public class GameUtils
 {
 	// various defaults
 	private static final String DEFAULT_FONT = "arial";
@@ -19,14 +19,14 @@ public class GUIUtils
 	private static final int DEFAULT_FONT_STYLE = Font.BOLD;
 	public static final int BORDER = 5;
 	// Making GUIUtils a singleton
-	private static GUIUtils s_self = new GUIUtils();
+	private static GameUtils s_self = new GameUtils();
 
-	public static GUIUtils self()
+	public static GameUtils self()
 	{
 		return s_self;
 	}
 
-	private GUIUtils()
+	private GameUtils()
 	{
 	}
 
@@ -34,7 +34,7 @@ public class GUIUtils
 	{
 		drawText(x, y, DEFAULT_COLOR, text, fontSize, g, DEFAULT_FONT_STYLE);
 	}
-	
+
 	public void drawText(int x, int y, Color color, String text, int fontSize, Graphics g, int fontStyle)
 	{
 		Graphics2D g2d = (Graphics2D) g;
@@ -48,13 +48,14 @@ public class GUIUtils
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(img, x, y, w, h, null);
 	}
-	
-	public void drawImg(BufferedImage img, int xSrc, int ySrc, int xDest, int yDest, int wSrc, int hSrc, int wDest, int hDest, Graphics g)
+
+	public void drawImg(BufferedImage img, int xSrc, int ySrc, int xDest, int yDest, int wSrc, int hSrc, int wDest,
+			int hDest, Graphics g)
 	{
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(img, xDest, yDest, xDest + wDest, yDest + hDest, xSrc, ySrc, xSrc + wSrc, ySrc + hSrc, null);
 	}
-	
+
 	public void drawHP(int x, int y, int w, int h, int currentHealth, int maxHealth, Color c, Graphics g)
 	{
 		Graphics2D g2d = (Graphics2D) g;
@@ -66,8 +67,8 @@ public class GUIUtils
 		DecimalFormat df = new DecimalFormat("##0.00");
 		String num = df.format(healthPercent);
 		FontMetrics fontMetrics = new JFrame().getFontMetrics(new Font(DEFAULT_FONT, DEFAULT_FONT_STYLE, 24));
-		drawText(x + w/2 - (fontMetrics.stringWidth(num + "%"))/2, y + fontMetrics.getAscent(), 
-				Color.WHITE, num + "%", 24, g2d, DEFAULT_FONT_STYLE);
+		drawText(x + w / 2 - (fontMetrics.stringWidth(num + "%")) / 2, y + fontMetrics.getAscent(), Color.WHITE,
+				num + "%", 24, g2d, DEFAULT_FONT_STYLE);
 	}
 
 	public BufferedImage loadImage(String path) throws IOException
@@ -75,7 +76,7 @@ public class GUIUtils
 		BufferedImage image = ImageIO.read(getClass().getResource(path));
 		return image;
 	}
-	
+
 	public BufferedImage flipImage(BufferedImage img)
 	{
 		// Flips the image horizontally
@@ -105,24 +106,33 @@ public class GUIUtils
 		g2d.fill(r);
 		b.draw(g2d);
 	}
-	
-	public void playSound(String path) throws MalformedURLException, LineUnavailableException, UnsupportedAudioFileException, IOException
+
+	public void playSound(String path)
+			throws MalformedURLException, LineUnavailableException, UnsupportedAudioFileException, IOException
 	{
-	    Clip clip = AudioSystem.getClip();
-	    AudioInputStream ais = AudioSystem.getAudioInputStream(getClass().getResource(path));
-	    clip.open(ais);
-	    clip.start();
+		Clip clip = AudioSystem.getClip();
+		AudioInputStream ais = AudioSystem.getAudioInputStream(getClass().getResource(path));
+		clip.open(ais);
+		clip.start();
 	}
-	
-	public float getSoundFileLength(String path) throws UnsupportedAudioFileException, IOException
+
+	public long getSoundFileLength(String path) throws UnsupportedAudioFileException, IOException, LineUnavailableException
 	{
-		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResource(path));
-	    AudioFormat format = audioInputStream.getFormat();
-	    long audioFileLength = path.length();
-	    int frameSize = format.getFrameSize();
-	    float frameRate = format.getFrameRate();
-	    float durationInSeconds = (audioFileLength / (frameSize * frameRate));
-	    return durationInSeconds;
+		AudioInputStream stream;
+		stream = AudioSystem.getAudioInputStream(getClass().getResource(path));
+		AudioFormat format = stream.getFormat();
+		if (format.getEncoding() != AudioFormat.Encoding.PCM_SIGNED)
+		{
+			format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, format.getSampleRate(),
+					format.getSampleSizeInBits() * 2, format.getChannels(), format.getFrameSize() * 2,
+					format.getFrameRate(), true);
+			stream = AudioSystem.getAudioInputStream(format, stream);
+		}
+		DataLine.Info info = new DataLine.Info(Clip.class, stream.getFormat(),
+				((int) stream.getFrameLength() * format.getFrameSize()));
+		Clip clip = (Clip) AudioSystem.getLine(info);
+		clip.close();
+		return  (long) (clip.getBufferSize() / (clip.getFormat().getFrameSize() * clip.getFormat().getFrameRate()));
 	}
 
 }

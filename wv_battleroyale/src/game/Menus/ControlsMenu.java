@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import game.Button;
-import game.GUIUtils;
+import game.GameUtils;
 import game.Input.PlayerControls;
 
 public class ControlsMenu extends Screen
@@ -69,25 +69,25 @@ public class ControlsMenu extends Screen
 	@Override
 	public void draw(Graphics g)
 	{
-		GUIUtils.self().drawImg(bg, 0, 0, (width + 15), (height + 15), g);
+		GameUtils.self().drawImg(bg, 0, 0, (width + 15), (height + 15), g);
 
 		if (changingControl != null)
 		{
-			GUIUtils.self().drawText(width / 4, height / 3, "Press any key to rebind...", 50, g);
+			GameUtils.self().drawText(width / 4, height / 3, "Press any key to rebind...", 50, g);
 		}
 		else
 		{
 
-			GUIUtils.self().drawText(width / 3, height * 2 / 9, "CONTROLS", 72, g);
-			GUIUtils.self().drawText(width / 5, height * 17 / 36, "PLAYER 1", 54, g);
-			GUIUtils.self().drawText(width * 5 / 9, height * 17 / 36, "PLAYER 2", 54, g);
-			GUIUtils.self().drawText(width * 47 / 240, height * 39 / 40, "BLOCK", 20, g);
-			GUIUtils.self().drawText(width * 13 / 48, height * 39 / 40, "PUNCH", 20, g);
-			GUIUtils.self().drawText(width * 17 / 48, height * 39 / 40, "KICK", 20, g);
-			GUIUtils.self().drawText(width * 35 / 64, height * 39 / 40, "BLOCK", 20, g);
-			GUIUtils.self().drawText(width * 161 / 256, height * 39 / 40, "PUNCH", 20, g);
-			GUIUtils.self().drawText(width * 23 / 32, height * 39 / 40, "KICK", 20, g);
-			GUIUtils.self().drawText(width * 1 / 15, height * 19 / 27, "PAUSE", 20, g);
+			GameUtils.self().drawText(width / 3, height * 2 / 9, "CONTROLS", 72, g);
+			GameUtils.self().drawText(width / 5, height * 17 / 36, "PLAYER 1", 54, g);
+			GameUtils.self().drawText(width * 5 / 9, height * 17 / 36, "PLAYER 2", 54, g);
+			GameUtils.self().drawText(width * 47 / 240, height * 39 / 40, "BLOCK", 20, g);
+			GameUtils.self().drawText(width * 13 / 48, height * 39 / 40, "PUNCH", 20, g);
+			GameUtils.self().drawText(width * 17 / 48, height * 39 / 40, "KICK", 20, g);
+			GameUtils.self().drawText(width * 35 / 64, height * 39 / 40, "BLOCK", 20, g);
+			GameUtils.self().drawText(width * 161 / 256, height * 39 / 40, "PUNCH", 20, g);
+			GameUtils.self().drawText(width * 23 / 32, height * 39 / 40, "KICK", 20, g);
+			GameUtils.self().drawText(width * 1 / 15, height * 19 / 27, "PAUSE", 20, g);
 			for (int i = 0; i < buttonList.size(); i++)
 			{
 				getKey(i).draw(g);

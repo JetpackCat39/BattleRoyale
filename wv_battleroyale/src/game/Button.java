@@ -132,7 +132,7 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 
 		FontMetrics metric = g.getFontMetrics(font);
 		
-		GUIUtils.self().drawText((int) (this.getX() + this.getWidth() / 2 - metric.stringWidth(buttonText) / 2),
+		GameUtils.self().drawText((int) (this.getX() + this.getWidth() / 2 - metric.stringWidth(buttonText) / 2),
 				(int) (this.getY() + this.getHeight() / 2 + metric.getAscent() / 2), textColor, buttonText, fontSize, g, fontStyle);
 		
 //		GUIUtils.self().drawText((int) this.getX() + ((int) this.getWidth() - width) / 2,
@@ -151,7 +151,7 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 
 		FontMetrics metric = g.getFontMetrics(font);
 		
-		GUIUtils.self().drawText((int) (this.getX() + this.getWidth() / 2 - metric.stringWidth(buttonText) / 2),
+		GameUtils.self().drawText((int) (this.getX() + this.getWidth() / 2 - metric.stringWidth(buttonText) / 2),
 				(int) (this.getY() + this.getHeight() / 2 + metric.getAscent() / 2), fillColor, buttonText, fontSize, g, fontStyle);
 	}
 

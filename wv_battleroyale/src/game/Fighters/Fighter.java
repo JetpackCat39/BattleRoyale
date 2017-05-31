@@ -4,18 +4,23 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 
 import game.BattleRoyale;
-import game.GUIUtils;
+import game.GameUtils;
 import game.Input.PlayerControls;
 import game.Menus.IScreen;
 
@@ -67,7 +72,7 @@ public abstract class Fighter
 		{
 			return;
 		}
-//		System.out.println("From " + State + " To " + s);
+		// System.out.println("From " + State + " To " + s);
 		State = s;
 	}
 
@@ -76,7 +81,8 @@ public abstract class Fighter
 		return State == s;
 	}
 
-	public Fighter(int newX, int newY, BufferedImage spriteSheet, BufferedImage worl, boolean isPlayer1, PlayerControls c)
+	public Fighter(int newX, int newY, BufferedImage spriteSheet, BufferedImage worl, boolean isPlayer1,
+			PlayerControls c)
 	{
 		if (isPlayer1)
 		{
@@ -84,9 +90,9 @@ public abstract class Fighter
 			frame = 0;
 			x = newX;
 		}
-		else 
+		else
 		{
-			sprites = GUIUtils.self().flipImage(spriteSheet);
+			sprites = GameUtils.self().flipImage(spriteSheet);
 			frame = getMaxFrames();
 			x = newX - getDrawWidth();
 		}
@@ -111,7 +117,7 @@ public abstract class Fighter
 		connectedPunch.add("Sounds/punch3.wav");
 		connectedPunch.add("Sounds/punch4.wav");
 	}
-	
+
 	private void createConnectedKickList()
 	{
 		connectedKick.add("Sounds/kick.wav");
@@ -123,7 +129,7 @@ public abstract class Fighter
 	protected abstract int getNumImages(STATE s);
 
 	protected abstract int getAnimationSpeed(STATE s);
-	
+
 	protected abstract int getMaxFrames();
 
 	protected BufferedImage getSpriteSheet()
@@ -135,31 +141,39 @@ public abstract class Fighter
 	{
 		return winorloss;
 	}
-	
+
 	public abstract int getWidth();
+
 	public abstract int getSrcWidth();
+
 	public abstract int getDrawWidth();
 
 	public abstract int getSrcHeight();
+
 	public abstract int getDrawHeight();
-	
+
 	public abstract int getPunchDamage();
+
 	public abstract int getBlockedPunchDamage();
+
 	public abstract int getKickDamage();
+
 	public abstract int getBlockedKickDamage();
-	
+
 	public abstract int getMaxHealth();
-	
+
 	public abstract String getEntranceQuote();
+
 	public abstract String getResponseQuote();
+
 	public abstract String getGrunt();
-	
+
 	public String getConnectedPunchSound()
 	{
 		String random = connectedPunch.get(randomizer.nextInt(connectedPunch.size()));
 		return random;
 	}
-	
+
 	public String getConnectedKickSound()
 	{
 		String random = connectedKick.get(randomizer.nextInt(connectedKick.size()));
@@ -179,7 +193,7 @@ public abstract class Fighter
 		}
 		ySpeed = temp;
 	}
-	
+
 	public void setXSpeed(int newSpeed)
 	{
 		xSpeed = newSpeed;
@@ -226,7 +240,7 @@ public abstract class Fighter
 			setLeft(minX);
 		}
 	}
-	
+
 	private void moveY()
 	{
 		y += ySpeed;
@@ -277,12 +291,12 @@ public abstract class Fighter
 	{
 		y = val;
 	}
-	
+
 	public int getLeft()
 	{
 		return isP1 ? x : (x + getDrawWidth() - getWidth());
 	}
-	
+
 	public void setLeft(int left)
 	{
 		if (isP1)
@@ -294,7 +308,7 @@ public abstract class Fighter
 			x = left + getWidth() - getDrawWidth();
 		}
 	}
-	
+
 	public int getRight()
 	{
 		return isP1 ? (x + getWidth()) : (x + getDrawWidth());
@@ -304,7 +318,7 @@ public abstract class Fighter
 	{
 		return y;
 	}
-	
+
 	private void walkRight()
 	{
 		setState(STATE.WALK);
@@ -321,7 +335,7 @@ public abstract class Fighter
 	{
 		try
 		{
-			GUIUtils.self().playSound(getGrunt());
+			GameUtils.self().playSound(getGrunt());
 		}
 		catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
 		{
@@ -339,7 +353,7 @@ public abstract class Fighter
 		}
 		setYSpeed(MAX_Y_SPEED);
 	}
-	
+
 	public void block()
 	{
 		setState(STATE.BLOCK);
@@ -354,19 +368,20 @@ public abstract class Fighter
 		setState(STATE.PUNCH);
 		try
 		{
-			GUIUtils.self().playSound(getGrunt());
+			GameUtils.self().playSound(getGrunt());
 		}
 		catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
 		{
 			e.printStackTrace();
 		}
-		if (isP1 ? (opponent.getLeft() < getLeft() + getDrawWidth()) : (opponent.getRight() > getRight() - getDrawWidth()))
-		{		
+		if (isP1 ? (opponent.getLeft() < getLeft() + getDrawWidth())
+				: (opponent.getRight() > getRight() - getDrawWidth()))
+		{
 			if (!opponent.checkState(STATE.CROUCH))
 			{
 				try
 				{
-					GUIUtils.self().playSound(getConnectedPunchSound());
+					GameUtils.self().playSound(getConnectedPunchSound());
 				}
 				catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
 				{
@@ -393,19 +408,20 @@ public abstract class Fighter
 		setState(STATE.KICK);
 		try
 		{
-			GUIUtils.self().playSound(getGrunt());
+			GameUtils.self().playSound(getGrunt());
 		}
 		catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
 		{
 			e.printStackTrace();
 		}
-		if (isP1 ? (opponent.getLeft() < getLeft() + getDrawWidth()):(opponent.getRight() > getRight() - getDrawWidth()))
+		if (isP1 ? (opponent.getLeft() < getLeft() + getDrawWidth())
+				: (opponent.getRight() > getRight() - getDrawWidth()))
 		{
 			if (!opponent.checkState(STATE.JUMP))
 			{
 				try
 				{
-					GUIUtils.self().playSound(getConnectedKickSound());
+					GameUtils.self().playSound(getConnectedKickSound());
 				}
 				catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
 				{
@@ -433,7 +449,7 @@ public abstract class Fighter
 	{
 		health = newHealth;
 	}
-	
+
 	public int getPause()
 	{
 		return controls.getPause();
@@ -458,24 +474,77 @@ public abstract class Fighter
 
 	public void draw(Graphics g, int offset)
 	{
-		GUIUtils.self().drawHP(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2, HP_BAR_Y, HP_BAR_WIDTH, HP_BAR_HEIGHT, health, 
-				getMaxHealth(), isP1 ? P1COLOR : P2COLOR, g);
-		FontMetrics fontMetrics = new JFrame().getFontMetrics(new Font("arial", Font.BOLD, 36));
-		GUIUtils.self().drawText(isP1 ? HP_BAR_X_P1 - fontMetrics.stringWidth("P1") - 5: 
-			HP_BAR_X_P2 + HP_BAR_WIDTH + 5, HP_BAR_Y + fontMetrics.getAscent() - 5, Color.WHITE, isP1 ? "P1" : "P2", 
-				36, g, Font.BOLD);
-		GUIUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(),
-				x + offset, height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
-		changeAnimation++;
-		if(isP1)
+		if (checkState(STATE.ENTER))
 		{
-			drawP1();
+			GameUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(),
+					x + offset, height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
+			playEntranceQuote();
 		}
 		else
 		{
-			drawP2();
+			GameUtils.self().drawHP(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2, HP_BAR_Y, HP_BAR_WIDTH, HP_BAR_HEIGHT, health,
+					getMaxHealth(), isP1 ? P1COLOR : P2COLOR, g);
+			FontMetrics fontMetrics = new JFrame().getFontMetrics(new Font("arial", Font.BOLD, 36));
+			GameUtils.self().drawText(
+					isP1 ? HP_BAR_X_P1 - fontMetrics.stringWidth("P1") - 5 : HP_BAR_X_P2 + HP_BAR_WIDTH + 5,
+					HP_BAR_Y + fontMetrics.getAscent() - 5, Color.WHITE, isP1 ? "P1" : "P2", 36, g, Font.BOLD);
+			GameUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(),
+					x + offset, height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
+			changeAnimation++;
+			if (isP1)
+			{
+				drawP1();
+			}
+			else
+			{
+				drawP2();
+			}
 		}
-		
+
+	}
+
+	private void playEntranceQuote()
+	{
+		if (isP1)
+		{
+			try
+			{
+				GameUtils.self().playSound(getEntranceQuote());
+			}
+			catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
+			{
+				e.printStackTrace();
+			}
+			try
+			{
+				TimeUnit.SECONDS.sleep(GameUtils.self().getSoundFileLength(opponent.getEntranceQuote()));
+			}
+			catch (InterruptedException | UnsupportedAudioFileException | IOException | LineUnavailableException e)
+			{
+				e.printStackTrace();
+			}
+			setState(STATE.IDLE);
+		}
+		else
+		{
+			try
+			{
+				TimeUnit.SECONDS.sleep(GameUtils.self().getSoundFileLength(opponent.getEntranceQuote()));
+			}
+			catch (InterruptedException | UnsupportedAudioFileException | IOException | LineUnavailableException e)
+			{
+				e.printStackTrace();
+			}
+			try
+			{
+				GameUtils.self().playSound(getEntranceQuote());
+			}
+			catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
+			{
+				e.printStackTrace();
+			}
+			setState(STATE.IDLE);
+		}
 	}
 
 	private void drawP1()
@@ -499,7 +568,7 @@ public abstract class Fighter
 			}
 		}
 	}
-	
+
 	private void drawP2()
 	{
 		if (changeAnimation >= getAnimationSpeed(State))

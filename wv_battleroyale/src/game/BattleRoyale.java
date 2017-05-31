@@ -77,24 +77,24 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		running = false;
 		try
 		{
-			controlsBG = GUIUtils.self().loadImage("Images/controlsBG.jpg");
-			menuBG = GUIUtils.self().loadImage("Images/menuBG.png");
-			bobHead = GUIUtils.self().loadImage("Images/Bob-Head.jpg");
-			cassenHead = GUIUtils.self().loadImage("Images/Cassen-Head.jpg");
-			halanderHead = GUIUtils.self().loadImage("Images/Halander-Head.jpg");
-			jamalHead = GUIUtils.self().loadImage("Images/Jamal-Head.jpg");
-			kurthHead = GUIUtils.self().loadImage("Images/Kurth-Head.jpg");
-			nguyenHead = GUIUtils.self().loadImage("Images/Nguyen-Head.jpg");
-			tombocHead = GUIUtils.self().loadImage("Images/Tomboc-Head.jpg");
-			wayHead = GUIUtils.self().loadImage("Images/Way-Head.jpg");
+			controlsBG = GameUtils.self().loadImage("Images/controlsBG.jpg");
+			menuBG = GameUtils.self().loadImage("Images/menuBG.png");
+			bobHead = GameUtils.self().loadImage("Images/Bob-Head.jpg");
+			cassenHead = GameUtils.self().loadImage("Images/Cassen-Head.jpg");
+			halanderHead = GameUtils.self().loadImage("Images/Halander-Head.jpg");
+			jamalHead = GameUtils.self().loadImage("Images/Jamal-Head.jpg");
+			kurthHead = GameUtils.self().loadImage("Images/Kurth-Head.jpg");
+			nguyenHead = GameUtils.self().loadImage("Images/Nguyen-Head.jpg");
+			tombocHead = GameUtils.self().loadImage("Images/Tomboc-Head.jpg");
+			wayHead = GameUtils.self().loadImage("Images/Way-Head.jpg");
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
 		};
-		pauseBG = GUIUtils.self().createOverlay(WIDTH, HEIGHT, 0.85f);
-		profileBG = GUIUtils.self().createOverlay(WIDTH,HEIGHT,1f);
-		creditsBG = GUIUtils.self().createOverlay(WIDTH,HEIGHT,1f);
+		pauseBG = GameUtils.self().createOverlay(WIDTH, HEIGHT, 0.85f);
+		profileBG = GameUtils.self().createOverlay(WIDTH,HEIGHT,1f);
+		creditsBG = GameUtils.self().createOverlay(WIDTH,HEIGHT,1f);
 		arena = null;
 		screens = new Stack<Screen>();
 	}

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import game.BattleRoyale;
 import game.Button;
-import game.GUIUtils;
+import game.GameUtils;
 import game.IDrawable;
 import game.Input.IKeya;
 
@@ -30,7 +30,7 @@ public class Screen implements IDrawable, IMenu, IKeya
 	@Override
 	public void draw(Graphics g)
 	{
-		GUIUtils.self().drawImg(bg, 0, 0, (width + 15), (height + 15), g);
+		GameUtils.self().drawImg(bg, 0, 0, (width + 15), (height + 15), g);
 		for(int i = 0; i < buttonList.size();i++){
 			buttonList.get(i).draw(g);
 		}

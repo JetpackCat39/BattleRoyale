@@ -27,7 +27,7 @@ public class MainGame extends Screen
 	@Override
 	public void draw(Graphics g)
 	{
-		GUIUtils.self().drawImg(bg, offset, 0, bg.getWidth(), bg.getHeight(), g);
+		GameUtils.self().drawImg(bg, offset, 0, bg.getWidth(), bg.getHeight(), g);
 		p1.draw(g, offset);
 		p2.draw(g, offset);
 	}

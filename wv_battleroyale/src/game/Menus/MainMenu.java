@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import game.Button;
-import game.GUIUtils;
+import game.GameUtils;
 import game.IDrawable;
 
 public class MainMenu extends Screen implements IDrawable, IMenu
