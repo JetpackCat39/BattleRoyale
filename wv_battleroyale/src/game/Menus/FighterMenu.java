@@ -238,6 +238,8 @@ public class FighterMenu extends Screen
 					.loadImage("Images/Jamal-Victory.png"), true, p1Controls);
 			break;
 		case "CASSEN":
+			p1 = new Cassen(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Cassen-Ingame.png"), null, true,
+					p1Controls);
 			break;
 		case "TOMBOC":
 			p1 = new Tomboc(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Tomboc-Ingame1.png"), null, true,
@@ -274,6 +276,8 @@ public class FighterMenu extends Screen
 					.self().loadImage("Images/Jamal-Victory.png"), false, p2Controls);
 			break;
 		case "CASSEN":
+			p2 = new Cassen(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Cassen-Ingame.png"), null,
+					false, p2Controls);
 			break;
 		case "TOMBOC":
 			p2 = new Tomboc(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Tomboc-Ingame1.png"), null,
