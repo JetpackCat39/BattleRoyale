@@ -191,4 +191,10 @@ public class Bob extends Fighter
 		temp.add("Sounds/BobGrunt3.wav");
 		return temp.get(randomizer.nextInt(temp.size()));
 	}
+
+	@Override
+	public String getName()
+	{
+		return "BOB";
+	}
 }

@@ -86,6 +86,14 @@ public class MainGame extends Screen
 			p1.keyPressed(null, keyCode);
 			p2.keyPressed(null, keyCode);
 		}
+		if (p1.getKO())
+		{
+			screen.setScreen(screen.getVictory(p2), true);
+		}
+		else if (p2.getKO())
+		{
+			screen.setScreen(screen.getVictory(p1), true);
+		}
 	}
 
 	@Override

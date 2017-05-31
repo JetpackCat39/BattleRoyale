@@ -200,4 +200,10 @@ public class Kurth extends Fighter
 		temp.add("Sounds/KurthGrunt11.wav");
 		return temp.get(randomizer.nextInt(temp.size()));
 	}
+
+	@Override
+	public String getName()
+	{
+		return "KURTH";
+	}
 }

@@ -194,4 +194,10 @@ public class Tomboc extends Fighter
 		temp.add("Sounds/TombocGrunt5.wav");
 		return temp.get(randomizer.nextInt(temp.size()));
 	}
+
+	@Override
+	public String getName()
+	{
+		return "TOMBOC";
+	}
 }

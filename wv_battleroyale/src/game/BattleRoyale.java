@@ -48,6 +48,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	public static BufferedImage wayHead;
 	public static BufferedImage profileBG;
 	public static BufferedImage creditsBG;
+	public static BufferedImage victoryBG;
 
 	private Fighter p1, p2;
 	private PlayerControls p1Controls;
@@ -67,6 +68,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	private NguyenMenu nguyen;
 	private TombocMenu tomboc;
 	private WayMenu way;
+	private VictoryScreen victory;
 
 	private Graphics g;
 
@@ -99,6 +101,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		pauseBG = GameUtils.self().createOverlay(WIDTH, HEIGHT, 0.85f);
 		profileBG = GameUtils.self().createOverlay(WIDTH, HEIGHT, 1f);
 		creditsBG = GameUtils.self().createOverlay(WIDTH, HEIGHT, 1f);
+		victoryBG = GameUtils.self().createOverlay(WIDTH, HEIGHT, 0f);
 		arena = null;
 		screens = new Stack<Screen>();
 	}
@@ -401,6 +404,13 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	public Screen getExit()
 	{
 		return stop;
+	}
+	
+	@Override
+	public Screen getVictory(Fighter player)
+	{
+		victory = new VictoryScreen(this, victoryBG, p1, p2, player.getPlayerNum());
+		return victory;
 	}
 
 	@Override

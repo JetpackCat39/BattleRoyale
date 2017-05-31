@@ -6,10 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Timer;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -35,7 +31,7 @@ public abstract class Fighter
 	private static final Color P2COLOR = Color.blue;
 	private final int BASE;
 	private int x, y, xSpeed, ySpeed, changeAnimation, health, frame;
-	private boolean isP1;
+	private boolean isP1, ko;
 	private PlayerControls controls;
 	private Fighter opponent;
 	private BufferedImage sprites, winorloss;
@@ -100,6 +96,7 @@ public abstract class Fighter
 		opponent = null;
 		health = getMaxHealth();
 		isP1 = isPlayer1;
+		ko = false;
 		controls = c;
 		changeAnimation = 0;
 		winorloss = worl;
@@ -165,6 +162,13 @@ public abstract class Fighter
 	public abstract String getResponseQuote();
 
 	public abstract String getGrunt();
+
+	public abstract String getName();
+
+	public boolean getPlayerNum()
+	{
+		return isP1;
+	}
 
 	public String getConnectedPunchSound()
 	{
@@ -466,8 +470,18 @@ public abstract class Fighter
 		}
 		if (health == 0)
 		{
-
+			endGame();
 		}
+	}
+
+	public void endGame()
+	{
+		ko = true;
+	}
+
+	public boolean getKO()
+	{
+		return ko;
 	}
 
 	public void draw(Graphics g, int offset)
@@ -480,7 +494,7 @@ public abstract class Fighter
 				isP1 ? HP_BAR_X_P1 - fontMetrics.stringWidth("P1") - 5 : HP_BAR_X_P2 + HP_BAR_WIDTH + 5,
 				HP_BAR_Y + fontMetrics.getAscent() - 5, Color.WHITE, isP1 ? "P1" : "P2", 36, g, Font.BOLD);
 		GameUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(), x + offset,
-				y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
+				BASE, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
 		changeAnimation++;
 		if (isP1)
 		{
@@ -561,33 +575,36 @@ public abstract class Fighter
 
 	public void keyPressed(IScreen screen, int keyCode)
 	{
-		if (keyCode == controls.getLeft())
+		if (!ko)
 		{
-			walkLeft();
-		}
-		else if (keyCode == controls.getRight())
-		{
-			walkRight();
-		}
-		else if (keyCode == controls.getJump())
-		{
-			jump();
-		}
-		else if (keyCode == controls.getCrouch())
-		{
-			crouch();
-		}
-		else if (keyCode == controls.getBlock())
-		{
-			block();
-		}
-		else if (keyCode == controls.getPunch())
-		{
-			punch();
-		}
-		else if (keyCode == controls.getKick())
-		{
-			kick();
+			if (keyCode == controls.getLeft())
+			{
+				walkLeft();
+			}
+			else if (keyCode == controls.getRight())
+			{
+				walkRight();
+			}
+			else if (keyCode == controls.getJump())
+			{
+				jump();
+			}
+			else if (keyCode == controls.getCrouch())
+			{
+				crouch();
+			}
+			else if (keyCode == controls.getBlock())
+			{
+				block();
+			}
+			else if (keyCode == controls.getPunch())
+			{
+				punch();
+			}
+			else if (keyCode == controls.getKick())
+			{
+				kick();
+			}
 		}
 	}
 

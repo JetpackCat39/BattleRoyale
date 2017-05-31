@@ -194,4 +194,10 @@ public class Halander extends Fighter
 		return temp.get(randomizer.nextInt(temp.size()));
 	}
 
+	@Override
+	public String getName()
+	{
+		return "HALANDER";
+	}
+
 }

@@ -192,4 +192,10 @@ public class Cassen extends Fighter
 		temp.add("Sounds/CassenGrunt4.wav");
 		return temp.get(randomizer.nextInt(temp.size()));
 	}
+
+	@Override
+	public String getName()
+	{
+		return "CASSEN";
+	}
 }

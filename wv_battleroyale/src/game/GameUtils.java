@@ -17,6 +17,7 @@ public class GameUtils
 	private static final String DEFAULT_FONT = "arial";
 	private static final Color DEFAULT_COLOR = Color.white;
 	private static final int DEFAULT_FONT_STYLE = Font.BOLD;
+	public static final int CENTER = 530;
 	public static final int BORDER = 5;
 	// Making GUIUtils a singleton
 	private static GameUtils s_self = new GameUtils();
@@ -30,6 +31,12 @@ public class GameUtils
 	{
 	}
 
+	public void drawText (int height, String text, int fontSize, Graphics g)
+	{
+		FontMetrics fontMetrics = new JFrame().getFontMetrics(new Font(DEFAULT_FONT, DEFAULT_FONT_STYLE, fontSize));
+		drawText(CENTER - (fontMetrics.stringWidth(text))/4, height, text, fontSize, g);
+	}
+	
 	public void drawText(int x, int y, String text, int fontSize, Graphics g)
 	{
 		drawText(x, y, DEFAULT_COLOR, text, fontSize, g, DEFAULT_FONT_STYLE);
@@ -55,7 +62,7 @@ public class GameUtils
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(img, xDest, yDest, xDest + wDest, yDest + hDest, xSrc, ySrc, xSrc + wSrc, ySrc + hSrc, null);
 	}
-
+	
 	public void drawHP(int x, int y, int w, int h, int currentHealth, int maxHealth, Color c, Graphics g)
 	{
 		Graphics2D g2d = (Graphics2D) g;

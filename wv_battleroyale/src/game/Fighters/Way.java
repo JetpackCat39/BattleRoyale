@@ -191,4 +191,10 @@ public class Way extends Fighter
 		temp.add("Sounds/WayGrunt3.wav");
 		return temp.get(randomizer.nextInt(temp.size()));
 	}
+
+	@Override
+	public String getName()
+	{
+		return "WAY";
+	}
 }

@@ -33,12 +33,12 @@ public interface IScreen
 	public Screen getTomboc();
 	
 	public Screen getWay();
-	//public Screen getCharacters();
 	
 	public Screen getCredits();
 	
 	public Screen getExit();
 	
+	public Screen getVictory(Fighter player);
 	
 	public Screen getMenu();
 
