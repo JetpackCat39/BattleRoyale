@@ -31,10 +31,10 @@ public class GameUtils
 	{
 	}
 
-	public void drawText (int height, String text, int fontSize, Graphics g)
+	public void drawText (Color c, int height, String text, int fontSize, Graphics g)
 	{
 		FontMetrics fontMetrics = new JFrame().getFontMetrics(new Font(DEFAULT_FONT, DEFAULT_FONT_STYLE, fontSize));
-		drawText(CENTER - (fontMetrics.stringWidth(text))/4, height, text, fontSize, g);
+		drawText(CENTER - (fontMetrics.stringWidth(text))/4, height, c, text, fontSize, g, DEFAULT_FONT_STYLE);
 	}
 	
 	public void drawText(int x, int y, String text, int fontSize, Graphics g)

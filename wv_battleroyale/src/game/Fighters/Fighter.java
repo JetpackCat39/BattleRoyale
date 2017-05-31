@@ -494,7 +494,7 @@ public abstract class Fighter
 				isP1 ? HP_BAR_X_P1 - fontMetrics.stringWidth("P1") - 5 : HP_BAR_X_P2 + HP_BAR_WIDTH + 5,
 				HP_BAR_Y + fontMetrics.getAscent() - 5, Color.WHITE, isP1 ? "P1" : "P2", 36, g, Font.BOLD);
 		GameUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(), x + offset,
-				BASE, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
+				height-y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
 		changeAnimation++;
 		if (isP1)
 		{

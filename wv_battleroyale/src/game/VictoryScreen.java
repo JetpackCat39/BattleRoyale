@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -29,7 +30,8 @@ public class VictoryScreen extends Screen
 		itemToOverlay.getGame().draw(g);
 		super.draw(g);
 		String display = isP1 ? "P1 (" + player1.getName() + ") WINS" : "P2 (" + player2.getName() + ") WINS";
-		GameUtils.self().drawText(height * 1/3, display, 72, g);
+		Color color = isP1 ? Color.RED : Color.BLUE;
+		GameUtils.self().drawText(color, height * 1/3, display, 72, g);
 	}
 	
 	public Button getNewGame()
