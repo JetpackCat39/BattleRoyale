@@ -28,7 +28,10 @@ public class CassenMenu extends Screen
 			getKey(i).draw(g);
 		}
 		GUIUtils.self().drawText(width * 5 / 12, height * 2 / 9, "CASSEN", 72, g);
-		GUIUtils.self().drawImg(character, 150, 250, character.getWidth() / 12, character.getHeight() / 12, g);
+		GUIUtils.self().drawImg(character, bg.getWidth()/13, 250, character.getWidth() / 12, character.getHeight() / 12, g);
+		GUIUtils.self().drawText(width * 5 / 12, 275, "Mr. Cassen is the principal of Westview", 30, g);
+		GUIUtils.self().drawText(width * 5 / 12, 315, "High School and has lead it to become", 30, g);
+		GUIUtils.self().drawText(width * 5 / 12, 355, "one of the top schools in California.", 30, g);
 	}
 
 	public Button getBack()

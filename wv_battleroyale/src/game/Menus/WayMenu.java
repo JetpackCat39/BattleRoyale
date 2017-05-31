@@ -30,7 +30,10 @@ public class WayMenu extends Screen
 			getKey(i).draw(g);
 		}
 		GUIUtils.self().drawText(width * 5 / 12, height * 2 / 9, "WAY", 72, g);
-		GUIUtils.self().drawImg(character, 150, 250, character.getWidth() / 12, character.getHeight() / 12, g);
+		GUIUtils.self().drawImg(character, bg.getWidth()/13, 250, character.getWidth() / 12, character.getHeight() / 12, g);
+		GUIUtils.self().drawText(width * 5 / 12, 275, "Mr. Way is a music teacher at Westview. He", 30, g);
+		GUIUtils.self().drawText(width * 5 / 12, 315, "teaches students how to play and perform in", 30, g);
+		GUIUtils.self().drawText(width * 5 / 12, 355, "a concert band and a marching band.", 30, g);
 
 	}
 
