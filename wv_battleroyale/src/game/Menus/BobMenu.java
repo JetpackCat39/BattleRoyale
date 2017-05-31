@@ -30,7 +30,10 @@ public class BobMenu extends Screen
 		GUIUtils.self().drawText(width * 5 / 12, height * 2 / 9, "BOB", 72, g);
 		GUIUtils.self().drawImg(character, bg.getWidth()/13, 250, character.getWidth() / 12, character.getHeight() / 12, g);
 		GUIUtils.self().drawText(width * 5 / 12, 275, "Mr. Bob is an English teacher at Westview", 30, g);
-		GUIUtils.self().drawText(width * 5 / 12, 315, "High School.", 30, g);
+		GUIUtils.self().drawText(width * 5 / 12, 315, "High School.  He focuses on making students", 30, g);
+		GUIUtils.self().drawText(width * 5 / 12, 355, "enjoy writing instead of worrying about formats", 30, g);
+		GUIUtils.self().drawText(width * 5 / 12, 395, "or requirements. ", 30, g);
+
 
 	}
 
