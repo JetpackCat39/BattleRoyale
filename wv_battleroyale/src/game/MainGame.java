@@ -11,6 +11,7 @@ public class MainGame extends Screen
 {
 	private Fighter p1, p2;
 	private int minVal, offset, maxVal;
+	private int prevKeyCode;
 
 	public MainGame(BufferedImage background, Fighter player1, Fighter player2)
 	{
@@ -75,9 +76,12 @@ public class MainGame extends Screen
 			{
 				screen.setScreen(screen.getPause(), false);
 			}
+			keyReleased(prevKeyCode);
+		
 		}
 		else
 		{
+			prevKeyCode = keyCode;
 			p1.keyPressed(null, keyCode);
 			p2.keyPressed(null, keyCode);
 		}

@@ -176,7 +176,7 @@ public class Cassen extends Fighter
 	}
 
 	@Override
-	public String getResponseQuote()
+	public String getResponseQuote() 
 	{
 		return "Sounds/CassenResponse.wav";
 	}
