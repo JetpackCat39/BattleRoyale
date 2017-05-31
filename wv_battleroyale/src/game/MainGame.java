@@ -31,6 +31,7 @@ public class MainGame extends Screen
 		GameUtils.self().drawImg(bg, offset, 0, bg.getWidth(), bg.getHeight(), g);
 		p1.draw(g, offset);
 		p2.draw(g, offset);
+		
 	}
 
 	public boolean move()

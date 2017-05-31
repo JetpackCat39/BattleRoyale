@@ -147,6 +147,7 @@ public class StageMenu extends Screen
 			if (getPlay().contains(x, y))
 			{
 				screen.setScreen(screen.getNewGame(), true);
+				
 			}
 		}
 		if (getBack().contains(x, y))

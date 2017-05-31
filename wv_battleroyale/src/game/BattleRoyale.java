@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
 import game.Fighters.*;
@@ -12,6 +14,7 @@ import game.Menus.*;
 
 import java.io.IOException;
 import java.util.Stack;
+import java.util.concurrent.TimeUnit;
 
 public class BattleRoyale extends Canvas implements MouseListener, KeyListener, IScreen, Runnable
 {
@@ -26,6 +29,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	// variables to make the game work
 	private boolean running;
 	private Thread thread;
+	int num = 0;
 
 	// buffer the window to reduce lag
 	// private BufferedImage image = new BufferedImage(WIDTH, HEIGHT,
@@ -44,7 +48,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	public static BufferedImage wayHead;
 	public static BufferedImage profileBG;
 	public static BufferedImage creditsBG;
-	
+
 	private Fighter p1, p2;
 	private PlayerControls p1Controls;
 	private PlayerControls p2Controls;
@@ -63,7 +67,6 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	private NguyenMenu nguyen;
 	private TombocMenu tomboc;
 	private WayMenu way;
-	
 
 	private Graphics g;
 
@@ -91,10 +94,11 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		catch (IOException e)
 		{
 			e.printStackTrace();
-		};
+		}
+		;
 		pauseBG = GameUtils.self().createOverlay(WIDTH, HEIGHT, 0.85f);
-		profileBG = GameUtils.self().createOverlay(WIDTH,HEIGHT,1f);
-		creditsBG = GameUtils.self().createOverlay(WIDTH,HEIGHT,1f);
+		profileBG = GameUtils.self().createOverlay(WIDTH, HEIGHT, 1f);
+		creditsBG = GameUtils.self().createOverlay(WIDTH, HEIGHT, 1f);
 		arena = null;
 		screens = new Stack<Screen>();
 	}
@@ -152,7 +156,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		long lastTime = System.nanoTime();
 		final double fps = 60.0;
 		final double ns = 1000000000 / fps;
-		final double ns2 = ns/3;
+		final double ns2 = ns / 3;
 		double delta = 0, delta2 = 0; // time passed
 
 		// to display time and fps
@@ -164,7 +168,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		{
 			long currentTime = System.nanoTime();
 			delta += (currentTime - lastTime) / ns;
-			delta2 +=(currentTime - lastTime) / ns2;
+			delta2 += (currentTime - lastTime) / ns2;
 			lastTime = currentTime;
 			if (delta >= 1)
 			{
@@ -194,8 +198,50 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		{
 			if (screens.peek().equals(getGame()))
 			{
+				num++;
 				game.move();
+				if (num == 4)
+				{
+					playEntranceQuote();
+				}
 			}
+		}
+	}
+	
+	private void playEntranceQuote()
+	{
+		try
+		{
+			GameUtils.self().playSound(p1.getEntranceQuote());
+		}
+		catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
+		{
+			e.printStackTrace();
+		}
+		try
+		{
+			TimeUnit.SECONDS.sleep(GameUtils.self().getSoundFileLength(p2.getEntranceQuote()));
+		}
+		catch (InterruptedException | UnsupportedAudioFileException | IOException | LineUnavailableException e)
+		{
+			e.printStackTrace();
+		}
+
+		try
+		{
+			TimeUnit.SECONDS.sleep(GameUtils.self().getSoundFileLength(p1.getEntranceQuote()));
+		}
+		catch (InterruptedException | UnsupportedAudioFileException | IOException | LineUnavailableException e)
+		{
+			e.printStackTrace();
+		}
+		try
+		{
+			GameUtils.self().playSound(p2.getEntranceQuote());
+		}
+		catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
+		{
+			e.printStackTrace();
 		}
 	}
 
@@ -295,10 +341,11 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		}
 		return game;
 	}
-	
+
 	@Override
 	public Screen getNewGame()
 	{
+		num = 0;
 		try
 		{
 			game = createGame();
@@ -365,7 +412,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		}
 		return menu;
 	}
-	
+
 	public Screen getCredits()
 	{
 		if (credits == null)
@@ -414,7 +461,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	public void setPlayer(Fighter p)
 	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -428,7 +475,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (bob == null)
 		{
-			bob = new BobMenu(profileBG,bobHead);
+			bob = new BobMenu(profileBG, bobHead);
 		}
 		return bob;
 	}
@@ -438,7 +485,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (cassen == null)
 		{
-			cassen = new CassenMenu(profileBG,cassenHead);
+			cassen = new CassenMenu(profileBG, cassenHead);
 		}
 		return cassen;
 	}
@@ -448,7 +495,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (halander == null)
 		{
-			halander = new HalanderMenu(profileBG,halanderHead);
+			halander = new HalanderMenu(profileBG, halanderHead);
 		}
 		return halander;
 	}
@@ -458,7 +505,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (jamal == null)
 		{
-			jamal = new JamalMenu(profileBG,jamalHead);
+			jamal = new JamalMenu(profileBG, jamalHead);
 		}
 		return jamal;
 	}
@@ -468,7 +515,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (kurth == null)
 		{
-			kurth = new KurthMenu(profileBG,kurthHead);
+			kurth = new KurthMenu(profileBG, kurthHead);
 		}
 		return kurth;
 	}
@@ -478,7 +525,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (nguyen == null)
 		{
-			nguyen = new NguyenMenu(profileBG,nguyenHead);
+			nguyen = new NguyenMenu(profileBG, nguyenHead);
 		}
 		return nguyen;
 	}
@@ -488,7 +535,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (tomboc == null)
 		{
-			tomboc = new TombocMenu(profileBG,tombocHead);
+			tomboc = new TombocMenu(profileBG, tombocHead);
 		}
 		return tomboc;
 	}
@@ -498,7 +545,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (way == null)
 		{
-			way = new WayMenu(profileBG,wayHead);
+			way = new WayMenu(profileBG, wayHead);
 		}
 		return way;
 	}
