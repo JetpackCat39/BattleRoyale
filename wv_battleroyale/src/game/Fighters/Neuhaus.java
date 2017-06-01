@@ -196,4 +196,18 @@ public class Neuhaus extends Fighter
 		GameUtils.self().playSound(getGrunt());
 		getOpponent().damage(getKickDamage());
 	}
+
+	@Override
+	public void playKOAnimation()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void playVictoryAnimation()
+	{
+		// TODO Auto-generated method stub
+		
+	}
 }
