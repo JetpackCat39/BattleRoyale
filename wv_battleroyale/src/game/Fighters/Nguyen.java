@@ -1,9 +1,11 @@
 package game.Fighters;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import game.GameUtils;
 import game.Input.PlayerControls;
 
 public class Nguyen extends Fighter
@@ -45,6 +47,8 @@ public class Nguyen extends Fighter
 	private static final int WALK_UPDATE_COUNT = 180 / (2 * WALK_ANIMATION_COUNT); // walks 2 cycles in a second
 	private static final int IDLE_UPDATE_COUNT = 180 / (2 * IDLE_ANIMATION_COUNT); // makes it cycle through an "idle" animation 2 times a second
 	private static final int STAGE_ENTRANCE_UPDATE_COUNT = 20;
+	private static final int KO_ANIMATION_COUNT = 5;
+	private static final int VICTORY_ANIMATION_COUNT = 12;
 	
 	public Nguyen(int newX, int newY, BufferedImage spriteSheet, BufferedImage worl, boolean isPlayer1, PlayerControls c)
 	{
@@ -199,17 +203,25 @@ public class Nguyen extends Fighter
 	}
 
 	@Override
-	public void playKOAnimation()
+	public void playKOAnimation(Graphics g)
 	{
-		// TODO Auto-generated method stub
-		
+		int i = 0;
+		while (i < KO_ANIMATION_COUNT)
+		{
+			GameUtils.self().drawImg(getWLAnimation(), 57, i * 68, x, y, 82, 68, 82 * 2, 68 * 2, g);
+			i++;
+		}
 	}
 
 	@Override
-	public void playVictoryAnimation()
+	public void playVictoryAnimation(Graphics g)
 	{
-		// TODO Auto-generated method stub
-		
+		int i = 0;
+		while (i < VICTORY_ANIMATION_COUNT)
+		{
+			GameUtils.self().drawImg(getWLAnimation(), 0, i * 96, x, y, 57, 96, 57 * 2, 96 * 2, g);
+			i++;
+		}
 	}
 
 }
