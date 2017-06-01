@@ -200,4 +200,18 @@ public class Halander extends Fighter
 		return "HALANDER";
 	}
 
+	@Override
+	public void playKOAnimation()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void playVictoryAnimation()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 }

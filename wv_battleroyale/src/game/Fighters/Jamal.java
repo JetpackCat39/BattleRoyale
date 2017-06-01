@@ -196,4 +196,18 @@ public class Jamal extends Fighter
 	{
 		return "JAMAL";
 	}
+
+	@Override
+	public void playKOAnimation()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void playVictoryAnimation()
+	{
+		// TODO Auto-generated method stub
+		
+	}
 }
