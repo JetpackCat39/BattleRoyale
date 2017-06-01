@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.geom.*;
 import java.awt.image.*;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.text.DecimalFormat;
 
 import javax.imageio.ImageIO;
@@ -115,12 +114,20 @@ public class GameUtils
 	}
 
 	public void playSound(String path)
-			throws MalformedURLException, LineUnavailableException, UnsupportedAudioFileException, IOException
 	{
-		Clip clip = AudioSystem.getClip();
-		AudioInputStream ais = AudioSystem.getAudioInputStream(getClass().getResource(path));
-		clip.open(ais);
-		clip.start();
+		AudioInputStream ais;
+		try
+		{
+			Clip clip = AudioSystem.getClip();
+			ais = AudioSystem.getAudioInputStream(getClass().getResource(path));
+			clip.open(ais);
+			clip.start();
+		}
+		catch (UnsupportedAudioFileException | IOException | LineUnavailableException e)
+		{
+			e.printStackTrace();
+		}
+
 	}
 
 	public long getSoundFileLength(String path) throws UnsupportedAudioFileException, IOException, LineUnavailableException

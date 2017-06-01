@@ -4,8 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
 import game.Fighters.*;
@@ -14,7 +12,6 @@ import game.Menus.*;
 
 import java.io.IOException;
 import java.util.Stack;
-import java.util.concurrent.TimeUnit;
 
 public class BattleRoyale extends Canvas implements MouseListener, KeyListener, IScreen, Runnable
 {
