@@ -29,7 +29,6 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	// variables to make the game work
 	private boolean running;
 	private Thread thread;
-	int num = 0;
 
 	// buffer the window to reduce lag
 	// private BufferedImage image = new BufferedImage(WIDTH, HEIGHT,
@@ -201,50 +200,8 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		{
 			if (screens.peek().equals(getGame()))
 			{
-				num++;
 				game.move();
-				if (num == 4)
-				{
-					playEntranceQuote();
-				}
 			}
-		}
-	}
-	
-	private void playEntranceQuote()
-	{
-		try
-		{
-			GameUtils.self().playSound(p1.getEntranceQuote());
-		}
-		catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
-		{
-			e.printStackTrace();
-		}
-		try
-		{
-			TimeUnit.SECONDS.sleep(GameUtils.self().getSoundFileLength(p2.getEntranceQuote()));
-		}
-		catch (InterruptedException | UnsupportedAudioFileException | IOException | LineUnavailableException e)
-		{
-			e.printStackTrace();
-		}
-
-		try
-		{
-			TimeUnit.SECONDS.sleep(GameUtils.self().getSoundFileLength(p1.getEntranceQuote()));
-		}
-		catch (InterruptedException | UnsupportedAudioFileException | IOException | LineUnavailableException e)
-		{
-			e.printStackTrace();
-		}
-		try
-		{
-			GameUtils.self().playSound(p2.getEntranceQuote());
-		}
-		catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
-		{
-			e.printStackTrace();
 		}
 	}
 
@@ -348,7 +305,6 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	@Override
 	public Screen getNewGame()
 	{
-		num = 0;
 		try
 		{
 			game = createGame();
