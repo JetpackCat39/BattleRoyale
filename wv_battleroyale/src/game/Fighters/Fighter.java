@@ -19,7 +19,6 @@ public abstract class Fighter
 	private static int width = BattleRoyale.WIDTH;
 	private static final int MAX_Y_SPEED = 20;
 	private static final int HP_BAR_WIDTH = 450;
-	private static final int HP_BAR_HEIGHT = 60;
 	private static final int HP_BAR_MARGIN = 150;
 	private static final int HP_BAR_Y = 100;
 	private static final int HP_BAR_X_P1 = HP_BAR_MARGIN;

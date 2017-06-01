@@ -15,7 +15,7 @@ public class MainGame extends Screen
 {
 	private Fighter p1, p2;
 	private int minVal, offset, maxVal, prevKeyCode;
-	private boolean lockKeys;
+	private boolean lockKeys, playEntrance;
 
 	enum STATE
 	{
@@ -42,6 +42,7 @@ public class MainGame extends Screen
 		p1.setLeft(p1.getLeft() - offset);
 		p2.setLeft(p2.getLeft() - offset);
 		lockKeys = true;
+		playEntrance = true;
 		try
 		{
 			clip = AudioSystem.getClip();
@@ -75,7 +76,7 @@ public class MainGame extends Screen
 		default:
 			break;
 		}
-		if (lockKeys)
+		if (playEntrance)
 		{
 			try
 			{
@@ -123,11 +124,12 @@ public class MainGame extends Screen
 					state = STATE.startSound;
 					break;
 				case startSound:
+					p1.setIdle();
+					p2.setIdle();
+					lockKeys = false;
 					state = STATE.begin;
 					break;
 				case begin:
-					p1.setIdle();
-					p2.setIdle();
 					break;
 				default:
 					break;
@@ -137,7 +139,7 @@ public class MainGame extends Screen
 		};
 		clip.addLineListener(l);
 		play(p1.getEntranceQuote());
-		lockKeys = false;
+		playEntrance = false;
 	}
 
 	private void play(String path)
