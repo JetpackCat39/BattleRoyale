@@ -282,7 +282,7 @@ public class FighterMenu extends Screen
 			p2 = new Cassen(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame1.png"), null, false, p2Controls);
 			break;
 		case "TOMBOC":
-			p2 = new Tomboc(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Tomboc-Ingame1.png"), null, false, p2Controls);
+			p2 = new Tomboc(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tomboc-ingame.png"), null, false, p2Controls);
 			break;
 		case "KURTH":
 			p2 = new Kurth(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/Kurth-Ingame1.png"), null,
