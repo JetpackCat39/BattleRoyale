@@ -9,24 +9,24 @@ import game.Input.PlayerControls;
 public class Halander extends Fighter
 {
 
-	private static final int SRC_WIDTH = 75;
-	private static final int SRC_HEIGHT = 115;
+	private static final int SRC_WIDTH = 96;
+	private static final int SRC_HEIGHT = 108;
 	
 	private static final int DRAW_WIDTH = SRC_WIDTH * 2;
 	private static final int DRAW_HEIGHT = SRC_HEIGHT * 2;
 	
 	// width of sprite while not attacking is 55ß
-	private static final int NON_ATTACK_WIDTH = 55 * 2;
+	private static final int NON_ATTACK_WIDTH = 60 * 2;
 	
-	private static final int PUNCH = 3;
-	private static final int BLOCKED_PUNCH = 1;
-	private static final int KICK = 4;
-	private static final int BLOCKED_KICK = 2;
-	private static final int SPEED = 6;
+	private static final int PUNCH = 23;
+	private static final int BLOCKED_PUNCH = 14;
+	private static final int KICK = 45;
+	private static final int BLOCKED_KICK = 33;
+	private static final int SPEED = 4;
 	
-	public static final int HEALTH = 20;
+	public static final int HEALTH = 220;
 	
-	private static final int MAX_FRAMES = 6;
+	private static final int MAX_FRAMES = 4;
 	
 	// 180 = fps
 	private static final int BLOCK_UPDATE_COUNT = 180/10; //goes to a block pose in a fifth of a second
@@ -41,11 +41,11 @@ public class Halander extends Fighter
 	private static final int BLOCK_ANIMATION_COUNT = 2;
 	private static final int STAGE_ENTRANCE_ANIMATION_COUNT = 1;
 	private static final int CROUCH_ANIMATION_COUNT = 2;
-	private static final int JUMP_ANIMATION_COUNT = 7;
+	private static final int JUMP_ANIMATION_COUNT = 3;
 	private static final int PUNCH_ANIMATION_COUNT = 3;
-	private static final int KICK_ANIMATION_COUNT = 4;
-	private static final int WALK_ANIMATION_COUNT = 5;
-	private static final int IDLE_ANIMATION_COUNT = 4;
+	private static final int KICK_ANIMATION_COUNT = 5;
+	private static final int WALK_ANIMATION_COUNT = 4;
+	private static final int IDLE_ANIMATION_COUNT = 3;
 	
 	public Halander(int newX, int newY, BufferedImage spriteSheet, BufferedImage worl, boolean isPlayer1, PlayerControls c)
 	{

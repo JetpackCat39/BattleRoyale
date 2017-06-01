@@ -36,6 +36,7 @@ public abstract class Fighter
 	private List<String> connectedPunch = new ArrayList<String>();
 	private List<String> connectedKick = new ArrayList<String>();
 	private int walkSpeed;
+	private boolean walkingLeft = false, walkingRight = false;
 
 	enum STATE
 	{
@@ -327,12 +328,14 @@ public abstract class Fighter
 	{
 		setState(STATE.WALK);
 		setXSpeed(walkSpeed);
+		walkingRight = true;
 	}
 
 	private void walkLeft()
 	{
 		setState(STATE.WALK);
 		setXSpeed(-walkSpeed);
+		walkingLeft = true;
 	}
 
 	private void crouch()
@@ -454,10 +457,9 @@ public abstract class Fighter
 
 	public void draw(Graphics g, int offset)
 	{
-
-		GameUtils.self().drawHP(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2, HP_BAR_Y, HP_BAR_WIDTH, HP_BAR_HEIGHT, health,
-				getMaxHealth(), isP1 ? P1COLOR : P2COLOR, g);
 		FontMetrics fontMetrics = new JFrame().getFontMetrics(new Font("arial", Font.BOLD, 36));
+		GameUtils.self().drawHP(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2, HP_BAR_Y, HP_BAR_WIDTH, fontMetrics.getAscent(), health,
+				getMaxHealth(), isP1 ? P1COLOR : P2COLOR, g);
 		GameUtils.self().drawText(
 				isP1 ? HP_BAR_X_P1 - fontMetrics.stringWidth("P1") - 5 : HP_BAR_X_P2 + HP_BAR_WIDTH + 5,
 				HP_BAR_Y + fontMetrics.getAscent() - 5, Color.WHITE, isP1 ? "P1" : "P2", 36, g, Font.BOLD);
@@ -580,17 +582,26 @@ public abstract class Fighter
 	{
 		if (keyCode == controls.getLeft())
 		{
-			if (getXSpeed() != 0)
-			{
+			if(!walkingRight && walkingLeft) {
 				stopWalking();
 			}
+			if(walkingRight && walkingLeft) {
+				walkRight();
+			}
+
+			walkingLeft = false;
 		}
 		else if (keyCode == controls.getRight())
 		{
-			if (getXSpeed() != 0)
-			{
+
+			if(!walkingLeft && walkingRight) {
 				stopWalking();
 			}
+			if(walkingRight && walkingLeft) {
+				walkLeft();
+			}
+
+			walkingRight = false;
 		}
 		else if (keyCode == controls.getBlock())
 		{
