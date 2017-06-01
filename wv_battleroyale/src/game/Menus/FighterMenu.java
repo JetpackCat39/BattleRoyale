@@ -250,7 +250,10 @@ public class FighterMenu extends Screen
 					p1Controls);
 			break;
 		case "BOB":
-			p1 = new Bob(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Bob-Ingame.png"), null, true, p1Controls);
+//			p1 = new Bob(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Bob-Ingame.png"), null, true, p1Controls);
+			p1 = new Neuhaus(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tammy.png"), null, true, 
+					p1Controls);
+			
 			break;
 		case "NGUYEN":
 			p1 = new Nguyen(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Nguyen-Ingame.png"), null, true,

@@ -15,8 +15,8 @@ import game.Menus.IScreen;
 
 public abstract class Fighter
 {
-	private int height = BattleRoyale.HEIGHT;
-	private static int width = BattleRoyale.WIDTH;
+	protected static int height = BattleRoyale.HEIGHT;
+	protected static int width = BattleRoyale.WIDTH;
 	private static final int MAX_Y_SPEED = 20;
 	private static final int HP_BAR_WIDTH = 450;
 	private static final int HP_BAR_MARGIN = 150;
@@ -640,5 +640,13 @@ public abstract class Fighter
 		{
 			setState(STATE.IDLE);
 		}
+	}
+	
+	public Fighter getOpponent() {
+		return opponent;
+	}
+	
+	public boolean p1() {
+		return isP1;
 	}
 }
