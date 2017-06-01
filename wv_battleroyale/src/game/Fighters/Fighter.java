@@ -2,13 +2,10 @@ package game.Fighters;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 
 import game.BattleRoyale;
@@ -57,7 +54,7 @@ public abstract class Fighter
 		}
 	}
 
-	private STATE State = STATE.IDLE;
+	private STATE State = STATE.ENTER;
 
 	protected void setState(STATE s)
 	{
@@ -72,6 +69,11 @@ public abstract class Fighter
 	protected boolean checkState(STATE s)
 	{
 		return State == s;
+	}
+	
+	public void setIdle()
+	{
+		State = STATE.IDLE;
 	}
 
 	public Fighter(int newX, int newY, BufferedImage spriteSheet, BufferedImage worl, boolean isPlayer1,
@@ -335,14 +337,7 @@ public abstract class Fighter
 
 	private void crouch()
 	{
-		try
-		{
-			GameUtils.self().playSound(getGrunt());
-		}
-		catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
-		{
-			e.printStackTrace();
-		}
+		GameUtils.self().playSound(getGrunt());
 		setState(STATE.CROUCH);
 	}
 
@@ -368,27 +363,13 @@ public abstract class Fighter
 			return;
 		}
 		setState(STATE.PUNCH);
-		try
-		{
-			GameUtils.self().playSound(getGrunt());
-		}
-		catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
-		{
-			e.printStackTrace();
-		}
+		GameUtils.self().playSound(getGrunt());
 		if (isP1 ? (opponent.getLeft() < getLeft() + getDrawWidth())
 				: (opponent.getRight() > getRight() - getDrawWidth()))
 		{
 			if (!opponent.checkState(STATE.CROUCH))
 			{
-				try
-				{
-					GameUtils.self().playSound(getConnectedPunchSound());
-				}
-				catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
-				{
-					e.printStackTrace();
-				}
+				GameUtils.self().playSound(getConnectedPunchSound());
 				if (opponent.checkState(STATE.BLOCK))
 				{
 					opponent.damage(getBlockedPunchDamage());
@@ -408,27 +389,14 @@ public abstract class Fighter
 			return;
 		}
 		setState(STATE.KICK);
-		try
-		{
-			GameUtils.self().playSound(getGrunt());
-		}
-		catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
-		{
-			e.printStackTrace();
-		}
+
+		GameUtils.self().playSound(getGrunt());
 		if (isP1 ? (opponent.getLeft() < getLeft() + getDrawWidth())
 				: (opponent.getRight() > getRight() - getDrawWidth()))
 		{
 			if (!opponent.checkState(STATE.JUMP))
 			{
-				try
-				{
-					GameUtils.self().playSound(getConnectedKickSound());
-				}
-				catch (LineUnavailableException | UnsupportedAudioFileException | IOException e)
-				{
-					e.printStackTrace();
-				}
+				GameUtils.self().playSound(getConnectedKickSound());
 				if (opponent.checkState(STATE.BLOCK))
 				{
 					opponent.damage(getBlockedKickDamage());
