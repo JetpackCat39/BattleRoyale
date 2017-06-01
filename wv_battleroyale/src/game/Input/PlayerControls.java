@@ -17,9 +17,9 @@ public class PlayerControls
 	private static final int P2_CROUCH = KeyEvent.VK_DOWN;
 	private static final int P2_LEFT = KeyEvent.VK_LEFT;
 	private static final int P2_RIGHT = KeyEvent.VK_RIGHT;
-	private static final int P2_BLOCK = KeyEvent.VK_B;
-	private static final int P2_PUNCH = KeyEvent.VK_N;
-	private static final int P2_KICK = KeyEvent.VK_M;
+	private static final int P2_BLOCK = KeyEvent.VK_COMMA;
+	private static final int P2_PUNCH = KeyEvent.VK_PERIOD;
+	private static final int P2_KICK = KeyEvent.VK_SLASH;
 	private static final int PAUSE = KeyEvent.VK_ESCAPE;
 
 	private int jump;

@@ -18,13 +18,13 @@ public class Kurth extends Fighter
 	// width of sprite while not attacking is 70ß
 	private static final int NON_ATTACK_WIDTH = 70 * 2;
 	
-	private static final int PUNCH = 32;
-	private static final int BLOCKED_PUNCH = 21;
-	private static final int KICK = 57;
-	private static final int BLOCKED_KICK = 34;
-	private static final int SPEED = 3;
+	private static final int PUNCH = 7;
+	private static final int BLOCKED_PUNCH = 4;
+	private static final int KICK = 7;
+	private static final int BLOCKED_KICK = 4;
+	private static final int SPEED = 4;
 	
-	public static final int HEALTH = 160;
+	public static final int HEALTH = 600;
 	
 	private static final int MAX_FRAMES = 7;
 	
@@ -42,7 +42,7 @@ public class Kurth extends Fighter
 	private static final int BLOCK_UPDATE_COUNT = 180 / (5 * BLOCK_ANIMATION_COUNT); //goes to a block pose in a fifth of a second
 	private static final int CROUCH_UPDATE_COUNT = 180 / (5 * CROUCH_ANIMATION_COUNT);  //goes to a crouch pose in a fifth of a second
 	private static final int JUMP_UPDATE_COUNT = 180 / (1 * JUMP_ANIMATION_COUNT); // goes through a jump animation over 1 second
-	private static final int PUNCH_UPDATE_COUNT = 180 / (int) ((double) 2/3 * PUNCH_ANIMATION_COUNT); // makes it punch twice in a second
+	private static final int PUNCH_UPDATE_COUNT = 180 / (int) ((double) 1/2 * PUNCH_ANIMATION_COUNT); // makes it punch twice in a second
 	private static final int KICK_UPDATE_COUNT = 180 / (int) ((double) 1/2 * KICK_ANIMATION_COUNT); // makes it kick twice in a second
 	private static final int WALK_UPDATE_COUNT = 180 / (2 * WALK_ANIMATION_COUNT); // walks 2 cycles in a second
 	private static final int IDLE_UPDATE_COUNT = 180 / (2 * IDLE_ANIMATION_COUNT); // makes it cycle through an "idle" animation 2 times a second
