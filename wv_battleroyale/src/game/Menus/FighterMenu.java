@@ -253,7 +253,7 @@ public class FighterMenu extends Screen
 					p1Controls);
 			break;
 		case "HALANDER": 
-			p1 = new Halander(PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/halander-ingame.png"), null, true, p1Controls);
+			p1 = new Halander(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/halander-ingame.png"), null, true, p1Controls);
 			break;
 		case "WAY":
 			p1 = new Way(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Way-Ingame.png"), null, true,
@@ -295,7 +295,7 @@ public class FighterMenu extends Screen
 					false, p2Controls);
 			break;
 		case "HALANDER": 
-			p2 = new Halander(width - PLAYERX, PLAYERY, GUIUtils.self().loadImage("Images/halander-ingame.png"), null, false, p2Controls);
+			p2 = new Halander(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/halander-ingame.png"), null, false, p2Controls);
 			break;
 		case "WAY":
 			p2 = new Way(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Way-Ingame.png"), null,
