@@ -9,12 +9,13 @@ import game.Input.PlayerControls;
 
 import game.Button;
 import game.GameUtils;
+import game.Konami;
 import game.Fighters.*;
 
 // Menu to select which fighter each player wants to use
 public class FighterMenu extends Screen
 {
-	private boolean isSelected1, isSelected2;
+	private boolean isSelected1, isSelected2, displayNeuhaus;
 	private PlayerControls p1Controls, p2Controls;
 	private static final Color P1COLOR = Color.red;
 	private static final Color P2COLOR = Color.blue;
@@ -24,6 +25,8 @@ public class FighterMenu extends Screen
 	private static final Color NEXT = Color.GREEN;
 	private int p1Index, p2Index;
 	private Fighter p1, p2;
+	private Konami konami;
+	private Button neuhaus;
 
 	public FighterMenu(BufferedImage background, PlayerControls p1, PlayerControls p2)
 	{
@@ -43,6 +46,9 @@ public class FighterMenu extends Screen
 		buttonList.add(new Button(width * 1 / 8, height * 4 / 5, "BACK"));
 		// next button
 		buttonList.add(new Button(width * 11 / 16, height * 4 / 5, "NEXT"));
+		neuhaus = new Button(BUTTON_CENTER, height * 4 / 5, "NEUHAUS");
+		konami = new Konami();
+		displayNeuhaus = false;
 	}
 
 	@Override
@@ -52,11 +58,16 @@ public class FighterMenu extends Screen
 		p2Index = 0;
 		isSelected1 = false;
 		isSelected2 = false;
+		displayNeuhaus = false;
 	}
 
 	@Override
 	public void draw(Graphics g)
 	{
+		if (displayNeuhaus)
+		{
+			buttonList.add(10, neuhaus);
+		}
 		super.draw(g);
 
 		GameUtils.self().drawText(width / 10, height * 3 / 5,
@@ -147,6 +158,15 @@ public class FighterMenu extends Screen
 		return buttonList.get(9);
 	}
 
+	public Button getNeuhaus()
+	{
+		if (displayNeuhaus)
+		{
+			return buttonList.get(10);
+		}
+		return null;
+	}
+
 	public Button getSelectedP1()
 	{
 		return buttonList.get(p1Index);
@@ -160,9 +180,23 @@ public class FighterMenu extends Screen
 	public int p1Left()
 	{
 		p1Index--;
-		if (p1Index < 0)
+		if (displayNeuhaus)
 		{
-			p1Index = 7;
+			if (p1Index == -1)
+			{
+				p1Index = 10;
+			}
+			else if (p1Index == 10)
+			{
+				p1Index = 7;
+			}
+		}
+		else
+		{
+			if (p1Index < 0)
+			{
+				p1Index = 7;
+			}
 		}
 		return p1Index;
 	}
@@ -170,22 +204,54 @@ public class FighterMenu extends Screen
 	public int p1Right()
 	{
 		p1Index++;
-		if (p1Index > 7)
+		if (displayNeuhaus)
 		{
-			p1Index = 0;
+			if (p1Index == 8)
+			{
+				p1Index = 10;
+			}
+			else if (p1Index == 10)
+			{
+				p1Index = 0;
+			}
+		}
+		else
+		{
+			if (p1Index > 7)
+			{
+				p1Index = 0;
+			}
 		}
 		return p1Index;
 	}
 
 	public int p1Up()
 	{
-		if (p1Index > 3)
+		if (displayNeuhaus)
 		{
-			p1Index -= 4;
+			if (p1Index > 3 && p1Index != 10)
+			{
+				p1Index = 10;
+			}
+			else if (p1Index == 10)
+			{
+				p1Index = 0;
+			}
+			else
+			{
+				p1Index += 4;
+			}
 		}
 		else
 		{
-			p1Index += 4;
+			if (p1Index > 3)
+			{
+				p1Index -= 4;
+			}
+			else
+			{
+				p1Index += 4;
+			}
 		}
 		return p1Index;
 	}
@@ -193,9 +259,23 @@ public class FighterMenu extends Screen
 	public int p2Left()
 	{
 		p2Index--;
-		if (p2Index < 0)
+		if (displayNeuhaus)
 		{
-			p2Index = 7;
+			if (p2Index == -1)
+			{
+				p2Index = 10;
+			}
+			else if (p2Index == 10)
+			{
+				p2Index = 7;
+			}
+		}
+		else
+		{
+			if (p2Index < 0)
+			{
+				p2Index = 7;
+			}
 		}
 		return p2Index;
 	}
@@ -203,22 +283,54 @@ public class FighterMenu extends Screen
 	public int p2Right()
 	{
 		p2Index++;
-		if (p2Index > 7)
+		if (displayNeuhaus)
 		{
-			p2Index = 0;
+			if (p2Index == 8)
+			{
+				p2Index = 10;
+			}
+			if (p2Index == 10)
+			{
+				p2Index = 0;
+			}
+		}
+		else
+		{
+			if (p2Index > 7)
+			{
+				p2Index = 0;
+			}
 		}
 		return p2Index;
 	}
 
 	public int p2Up()
 	{
-		if (p2Index > 3)
+		if (displayNeuhaus)
 		{
-			p2Index -= 4;
+			if (p2Index > 3 && p1Index != 10)
+			{
+				p2Index = 10;
+			}
+			else if (p2Index == 10)
+			{
+				p2Index = 0;
+			}
+			else
+			{
+				p2Index += 4;
+			}
 		}
 		else
 		{
-			p2Index += 4;
+			if (p2Index > 3)
+			{
+				p2Index -= 4;
+			}
+			else
+			{
+				p2Index += 4;
+			}
 		}
 		return p2Index;
 	}
@@ -250,10 +362,7 @@ public class FighterMenu extends Screen
 					p1Controls);
 			break;
 		case "BOB":
-//			p1 = new Bob(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Bob-Ingame.png"), null, true, p1Controls);
-			p1 = new Neuhaus(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tammy.png"), null, true, 
-					p1Controls);
-			
+			p1 = new Bob(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Bob-Ingame.png"), null, true, p1Controls);
 			break;
 		case "NGUYEN":
 			p1 = new Nguyen(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Nguyen-Ingame.png"), null, true,
@@ -265,6 +374,9 @@ public class FighterMenu extends Screen
 			break;
 		case "WAY":
 			p1 = new Way(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Way-Ingame.png"), null, true, p1Controls);
+			break;
+		case "NEUHAUS":
+			p1 = new Neuhaus(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tammy.png"), null, true, p1Controls);
 			break;
 		default:
 			break;
@@ -313,6 +425,10 @@ public class FighterMenu extends Screen
 			p2 = new Way(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Way-Ingame.png"), null, false,
 					p2Controls);
 			break;
+		case "NEUHAUS":
+			p2 = new Way(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tammy.png"), null, false,
+					p2Controls);
+			break;
 		default:
 			break;
 		}
@@ -337,7 +453,10 @@ public class FighterMenu extends Screen
 	@Override
 	public void keyPressed(IScreen screen, int keyCode)
 	{
-
+		if (konami.checkKonami(keyCode))
+		{
+			displayNeuhaus = true;
+		}
 		if (!isSelected1)
 		{
 			if (keyCode == p1Controls.getLeft())
@@ -394,7 +513,6 @@ public class FighterMenu extends Screen
 				}
 			}
 		}
-
 		else if (keyCode == p2Controls.getKick())
 		{
 			isSelected2 = false;

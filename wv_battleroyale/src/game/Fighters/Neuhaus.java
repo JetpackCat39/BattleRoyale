@@ -1,7 +1,6 @@
 package game.Fighters;
 
 import game.GameUtils;
-import game.Fighters.Fighter.STATE;
 import game.Input.PlayerControls;
 
 import java.awt.image.BufferedImage;
@@ -13,27 +12,26 @@ public class Neuhaus extends Fighter
 	private static final int SRC_WIDTH = 95;
 	private static final int SRC_HEIGHT = 146;
 	
-	private static final int DRAW_WIDTH = (int) (146 * ((double)3/2));
+	private static final int DRAW_WIDTH = (int) (95 * ((double)3/2));
 	private static final int DRAW_HEIGHT = (int) (146 * ((double)3/2));
 	
 	// width of sprite while not attacking is 55ß
 	private static final int NON_ATTACK_WIDTH = (int) (95 * ((double)3/2));
 	
-	private static final int PUNCH = 20;
-	private static final int BLOCKED_PUNCH = 20;
-	private static final int KICK = 20;
-	private static final int BLOCKED_KICK = 20;
+	private static final int PUNCH = 1000;
+	private static final int BLOCKED_PUNCH = 2000;
+	private static final int KICK = 2000;
+	private static final int BLOCKED_KICK = 4000;
 	private static final int SPEED = 20;
 	
-	public static final int HEALTH = 10000000;
-	int hi = Integer.MAX_VALUE;
+	public static final int HEALTH = 100000;
 	
 	private static final int MAX_FRAMES = 0;
 	
 	// 180 = fps
 	private static final int ANIMATION_COUNT = 1;
 
-	private static final int UPDATES = 180;
+	private static final int UPDATES = 360;
 	
 	public Neuhaus(int newX, int newY, BufferedImage spriteSheet, BufferedImage worl, boolean isPlayer1, PlayerControls c)
 	{
@@ -161,20 +159,23 @@ public class Neuhaus extends Fighter
 	@Override
 	public String getEntranceQuote()
 	{
-		return "Sounds/Roblox Death Sound Effect.wav";
+		return "Sounds/NeuhausEntrance.wav";
 	}
 
 	@Override
 	public String getResponseQuote()
 	{
-		return "Sounds/Roblox Death Sound Effect.wav";
+		return "Sounds/NeuhausResponse.wav";
 	}
 
 	@Override
 	public String getGrunt()
 	{
 		List<String> temp = new ArrayList<String>();
-		temp.add("Sounds/Roblox Death Sound Effect.wav");
+		temp.add("Sounds/NeuhausGrunt1.wav");
+		temp.add("Sounds/NeuhausGrunt2.wav");
+		temp.add("Sounds/NeuhausGrunt3.wav");
+		temp.add("Sounds/NeuhausGrunt4.wav");
 		return temp.get(randomizer.nextInt(temp.size()));
 	}
 
