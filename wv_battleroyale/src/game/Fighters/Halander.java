@@ -18,13 +18,13 @@ public class Halander extends Fighter
 	// width of sprite while not attacking is 55ß
 	private static final int NON_ATTACK_WIDTH = 60 * 2;
 	
-	private static final int PUNCH = 23;
-	private static final int BLOCKED_PUNCH = 14;
-	private static final int KICK = 45;
-	private static final int BLOCKED_KICK = 33;
-	private static final int SPEED = 4;
+	private static final int PUNCH = 2;
+	private static final int BLOCKED_PUNCH = 1;
+	private static final int KICK = 3;
+	private static final int BLOCKED_KICK = 2;
+	private static final int SPEED = 9;
 	
-	public static final int HEALTH = 220;
+	public static final int HEALTH = 700;
 	
 	private static final int MAX_FRAMES = 4;
 	
