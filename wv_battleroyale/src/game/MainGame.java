@@ -3,6 +3,7 @@ package game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import javax.sound.sampled.*;
 
@@ -15,19 +16,21 @@ public class MainGame extends Screen
 	private Fighter p1, p2;
 	private int minVal, offset, maxVal, prevKeyCode;
 	private boolean lockKeys;
-	
+
 	enum STATE
 	{
 		p1Sound, p2Sound, Sound3, Sound2, Sound1, startSound, begin;
 	}
-	
+
 	private STATE state = STATE.p1Sound;
-	
+
+	Clip clip;
+
 	private STATE getState()
 	{
 		return state;
 	}
-	
+
 	public MainGame(BufferedImage background, Fighter player1, Fighter player2)
 	{
 		super(background);
@@ -39,76 +42,122 @@ public class MainGame extends Screen
 		p1.setLeft(p1.getLeft() - offset);
 		p2.setLeft(p2.getLeft() - offset);
 		lockKeys = true;
+		try
+		{
+			clip = AudioSystem.getClip();
+		}
+		catch (LineUnavailableException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void draw(Graphics g)
 	{
-		if (lockKeys)
-		{
-			entrance(g);
-		}
 		GameUtils.self().drawImg(bg, offset, 0, bg.getWidth(), bg.getHeight(), g);
 		p1.draw(g, offset);
 		p2.draw(g, offset);
-	}
-
-	private void entrance(Graphics g)
-	{
-		LineListener l = new LineListener()
-				{
-					@Override
-					public void update(LineEvent event)
-					{
-						if (event.getType() != LineEvent.Type.STOP)
-						{
-							return;
-						}
-						switch (getState())
-						{
-						case p1Sound:
-							state = STATE.p2Sound;
-							GameUtils.self().playSound(p1.getEntranceQuote());
-							break;
-						case p2Sound:
-							state = STATE.Sound3;
-							GameUtils.self().playSound(p2.getEntranceQuote());
-							break;
-						case Sound3:
-							state = STATE.Sound2;
-							GameUtils.self().playSound("Sounds/begincountdown.wav");
-							GameUtils.self().drawText(Color.MAGENTA, height/3, "3...", 100, g);
-							break;
-						case Sound2:
-							state = STATE.Sound1;
-							GameUtils.self().playSound("Sounds/begincountdown.wav");
-							GameUtils.self().drawText(Color.MAGENTA, height/3, "2...", 100, g);
-							break;
-						case Sound1:
-							state = STATE.startSound;
-							GameUtils.self().playSound("Sounds/begincountdown.wav");
-							GameUtils.self().drawText(Color.MAGENTA, height/3, "1...", 100, g);
-							break;
-						case startSound:
-							state = STATE.begin;
-							GameUtils.self().playSound("Sounds/fight.wav");
-							GameUtils.self().drawText(Color.MAGENTA, height/3, "FIGHT!", 100, g);
-							break;
-						default:
-							break;
-						}
-						
-					}
-				};
-		l.update(null);
-		if (getState() == STATE.begin)
+		switch (state)
 		{
-			p1.setIdle();
-			p2.setIdle();
-			lockKeys = false;
+		case Sound3:
+			GameUtils.self().drawText(Color.MAGENTA, height / 3, "3...", 100, g);
+			break;
+		case Sound2:
+			GameUtils.self().drawText(Color.MAGENTA, height / 3, "2...", 100, g);
+			break;
+		case Sound1:
+			GameUtils.self().drawText(Color.MAGENTA, height / 3, "1...", 100, g);
+			break;
+		case startSound:
+			GameUtils.self().drawText(Color.MAGENTA, height / 3, "FIGHT!", 100, g);
+			break;
+		default:
+			break;
+		}
+		if (lockKeys)
+		{
+			try
+			{
+				entrance();
+			}
+			catch (LineUnavailableException e)
+			{
+				e.printStackTrace();
+			}
 		}
 	}
-	
+
+	private void entrance() throws LineUnavailableException
+	{
+		LineListener l = new LineListener()
+		{
+			@Override
+			public void update(LineEvent event)
+			{
+				System.out.println("update " + event.getType() + " state " + getState());
+				if (event.getType() != LineEvent.Type.STOP)
+				{
+					return;
+				}
+				switch (getState())
+				{
+				case p1Sound:
+					play(p2.getEntranceQuote());
+					state = STATE.p2Sound;
+					break;
+				case p2Sound:
+					play("Sounds/begincountdown.wav");
+					state = STATE.Sound3;
+					break;
+				case Sound3:
+					play("Sounds/begincountdown.wav");
+					state = STATE.Sound2;
+					break;
+				case Sound2:
+					play("Sounds/begincountdown.wav");
+					state = STATE.Sound1;
+					break;
+				case Sound1:
+					play("Sounds/fight.wav");
+					state = STATE.startSound;
+					break;
+				case startSound:
+					state = STATE.begin;
+					break;
+				case begin:
+					p1.setIdle();
+					p2.setIdle();
+					break;
+				default:
+					break;
+				}
+			}
+
+		};
+		clip.addLineListener(l);
+		play(p1.getEntranceQuote());
+		lockKeys = false;
+	}
+
+	private void play(String path)
+	{
+		try
+		{
+			if (clip.isOpen())
+			{
+				clip.close();
+			}
+			AudioInputStream ais = AudioSystem.getAudioInputStream(getClass().getResource(path));
+			clip.open(ais);
+			clip.start();
+		}
+		catch (UnsupportedAudioFileException | IOException | LineUnavailableException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
 	public boolean move()
 	{
 		int p1Max = p2.getLeft() - p1.getWidth();
@@ -153,7 +202,7 @@ public class MainGame extends Screen
 				screen.setScreen(screen.getPause(), false);
 			}
 			keyReleased(prevKeyCode);
-		
+
 		}
 		else
 		{

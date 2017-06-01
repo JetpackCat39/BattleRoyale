@@ -115,11 +115,10 @@ public class GameUtils
 
 	public void playSound(String path)
 	{
-		AudioInputStream ais;
 		try
 		{
 			Clip clip = AudioSystem.getClip();
-			ais = AudioSystem.getAudioInputStream(getClass().getResource(path));
+			AudioInputStream ais = AudioSystem.getAudioInputStream(getClass().getResource(path));
 			clip.open(ais);
 			clip.start();
 		}
@@ -129,24 +128,4 @@ public class GameUtils
 		}
 
 	}
-
-	public long getSoundFileLength(String path) throws UnsupportedAudioFileException, IOException, LineUnavailableException
-	{
-		AudioInputStream stream;
-		stream = AudioSystem.getAudioInputStream(getClass().getResource(path));
-		AudioFormat format = stream.getFormat();
-		if (format.getEncoding() != AudioFormat.Encoding.PCM_SIGNED)
-		{
-			format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, format.getSampleRate(),
-					format.getSampleSizeInBits() * 2, format.getChannels(), format.getFrameSize() * 2,
-					format.getFrameRate(), true);
-			stream = AudioSystem.getAudioInputStream(format, stream);
-		}
-		DataLine.Info info = new DataLine.Info(Clip.class, stream.getFormat(),
-				((int) stream.getFrameLength() * format.getFrameSize()));
-		Clip clip = (Clip) AudioSystem.getLine(info);
-		clip.close();
-		return  (long) (clip.getBufferSize() / (clip.getFormat().getFrameSize() * clip.getFormat().getFrameRate()));
-	}
-
 }
