@@ -197,4 +197,18 @@ public class Way extends Fighter
 	{
 		return "WAY";
 	}
+
+	@Override
+	public void playKOAnimation()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void playVictoryAnimation()
+	{
+		// TODO Auto-generated method stub
+		
+	}
 }

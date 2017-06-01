@@ -159,6 +159,10 @@ public abstract class Fighter
 	public abstract int getBlockedKickDamage();
 
 	public abstract int getMaxHealth();
+	
+	public abstract void playKOAnimation();
+	
+	public abstract void playVictoryAnimation();
 
 	public abstract String getEntranceQuote();
 

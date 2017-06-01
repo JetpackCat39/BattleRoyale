@@ -200,4 +200,18 @@ public class Tomboc extends Fighter
 	{
 		return "TOMBOC";
 	}
+
+	@Override
+	public void playKOAnimation()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void playVictoryAnimation()
+	{
+		// TODO Auto-generated method stub
+		
+	}
 }
