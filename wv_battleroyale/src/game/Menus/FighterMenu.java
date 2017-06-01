@@ -295,7 +295,7 @@ public class FighterMenu extends Screen
 					false, p2Controls);
 			break;
 		case "BOB":
-			p2 = new Bob(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Bob-Ingame.png"), null, false,
+			p2 = new Bob(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Bob-Ingame.png"), null, false,
 					p2Controls);
 			break;
 		case "NGUYEN":
