@@ -17,13 +17,13 @@ public class Jamal extends Fighter
 	// width of sprite while not attacking is 55ß
 	private static final int NON_ATTACK_WIDTH = 55 * 2;
 	
-	private static final int PUNCH = 22;
-	private static final int BLOCKED_PUNCH = 13;
-	private static final int KICK = 34;
-	private static final int BLOCKED_KICK = 21;
+	private static final int PUNCH = 3;
+	private static final int BLOCKED_PUNCH = 2;
+	private static final int KICK = 4;
+	private static final int BLOCKED_KICK = 2;
 	private static final int SPEED = 6;
 	
-	public static final int HEALTH = 200;
+	public static final int HEALTH = 500;
 	
 	private static final int MAX_FRAMES = 6;
 
