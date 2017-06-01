@@ -234,30 +234,34 @@ public class FighterMenu extends Screen
 		switch (getSelectedP1().getText())
 		{
 		case "JAMAL":
-			p1 = new Jamal(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Jamal-Ingame.png"), GameUtils.self()
-					.loadImage("Images/Jamal-Victory.png"), true, p1Controls);
+			p1 = new Jamal(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Jamal-Ingame.png"),
+					GameUtils.self().loadImage("Images/Jamal-Victory.png"), true, p1Controls);
 			break;
 		case "CASSEN":
-			p1 = new Cassen(PLAYERX,PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame1.png"), null, true, p1Controls);
+			p1 = new Cassen(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame1.png"), null, true,
+					p1Controls);
 			break;
 		case "TOMBOC":
-			p1 = new Tomboc(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tomboc-ingame.png"), null, true, p1Controls);
+			p1 = new Tomboc(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tomboc-ingame.png"), null, true,
+					p1Controls);
 			break;
 		case "KURTH":
-			p1 = new Kurth(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Kurth-Ingame.png"), null, true, p1Controls);
+			p1 = new Kurth(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Kurth-Ingame.png"), null, true,
+					p1Controls);
 			break;
 		case "BOB":
+			p1 = new Bob(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Bob-Ingame.png"), null, true, p1Controls);
 			break;
 		case "NGUYEN":
 			p1 = new Nguyen(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Nguyen-Ingame.png"), null, true,
 					p1Controls);
 			break;
-		case "HALANDER": 
-			p1 = new Halander(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/halander-ingame.png"), null, true, p1Controls);
+		case "HALANDER":
+			p1 = new Halander(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/halander-ingame.png"), null, true,
+					p1Controls);
 			break;
 		case "WAY":
-			p1 = new Way(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Way-Ingame.png"), null, true,
-					p1Controls);
+			p1 = new Way(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Way-Ingame.png"), null, true, p1Controls);
 			break;
 		default:
 			break;
@@ -275,31 +279,36 @@ public class FighterMenu extends Screen
 		switch (getSelectedP2().getText())
 		{
 		case "JAMAL":
-			p2 = new Jamal(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Jamal-Ingame.png"), GameUtils
-					.self().loadImage("Images/Jamal-Victory.png"), false, p2Controls);
+			p2 = new Jamal(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Jamal-Ingame.png"),
+					GameUtils.self().loadImage("Images/Jamal-Victory.png"), false, p2Controls);
 			break;
 		case "CASSEN":
-			p2 = new Cassen(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame1.png"), null, false, p2Controls);
+			p2 = new Cassen(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame1.png"), null,
+					false, p2Controls);
 			break;
 		case "TOMBOC":
-			p2 = new Tomboc(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tomboc-ingame.png"), null, false, p2Controls);
+			p2 = new Tomboc(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tomboc-ingame.png"), null,
+					false, p2Controls);
 			break;
 		case "KURTH":
 			p2 = new Kurth(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Kurth-Ingame1.png"), null,
 					false, p2Controls);
 			break;
 		case "BOB":
+			p1 = new Bob(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Bob-Ingame.png"), null, false,
+					p2Controls);
 			break;
 		case "NGUYEN":
 			p2 = new Nguyen(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Nguyen-Ingame.png"), null,
 					false, p2Controls);
 			break;
-		case "HALANDER": 
-			p2 = new Halander(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/halander-ingame.png"), null, false, p2Controls);
+		case "HALANDER":
+			p2 = new Halander(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/halander-ingame.png"), null,
+					false, p2Controls);
 			break;
 		case "WAY":
-			p2 = new Way(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Way-Ingame.png"), null,
-					false, p2Controls);
+			p2 = new Way(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Way-Ingame.png"), null, false,
+					p2Controls);
 			break;
 		default:
 			break;

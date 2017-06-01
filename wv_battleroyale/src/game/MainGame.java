@@ -96,7 +96,6 @@ public class MainGame extends Screen
 			@Override
 			public void update(LineEvent event)
 			{
-				System.out.println("update " + event.getType() + " state " + getState());
 				if (event.getType() != LineEvent.Type.STOP)
 				{
 					return;

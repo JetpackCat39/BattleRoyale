@@ -70,7 +70,7 @@ public abstract class Fighter
 	{
 		return State == s;
 	}
-	
+
 	public void setIdle()
 	{
 		State = STATE.IDLE;
@@ -386,7 +386,7 @@ public abstract class Fighter
 
 	public void kick()
 	{
-		if (checkState(STATE.KICK))
+		if (checkState(STATE.KICK) || checkState(STATE.PUNCH))
 		{
 			return;
 		}
@@ -457,13 +457,13 @@ public abstract class Fighter
 	public void draw(Graphics g, int offset)
 	{
 		FontMetrics fontMetrics = new JFrame().getFontMetrics(new Font("arial", Font.BOLD, 36));
-		GameUtils.self().drawHP(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2, HP_BAR_Y, HP_BAR_WIDTH, fontMetrics.getAscent(), health,
-				getMaxHealth(), isP1 ? P1COLOR : P2COLOR, g);
+		GameUtils.self().drawHP(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2, HP_BAR_Y, HP_BAR_WIDTH, fontMetrics.getAscent(),
+				health, getMaxHealth(), isP1 ? P1COLOR : P2COLOR, g);
 		GameUtils.self().drawText(
 				isP1 ? HP_BAR_X_P1 - fontMetrics.stringWidth("P1") - 5 : HP_BAR_X_P2 + HP_BAR_WIDTH + 5,
 				HP_BAR_Y + fontMetrics.getAscent() - 5, Color.WHITE, isP1 ? "P1" : "P2", 36, g, Font.BOLD);
 		GameUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(), x + offset,
-				height-y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
+				height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
 		changeAnimation++;
 		if (isP1)
 		{
@@ -581,10 +581,12 @@ public abstract class Fighter
 	{
 		if (keyCode == controls.getLeft())
 		{
-			if(!walkingRight && walkingLeft) {
+			if (!walkingRight && walkingLeft)
+			{
 				stopWalking();
 			}
-			if(walkingRight && walkingLeft) {
+			if (walkingRight && walkingLeft)
+			{
 				walkRight();
 			}
 
@@ -593,10 +595,12 @@ public abstract class Fighter
 		else if (keyCode == controls.getRight())
 		{
 
-			if(!walkingLeft && walkingRight) {
+			if (!walkingLeft && walkingRight)
+			{
 				stopWalking();
 			}
-			if(walkingRight && walkingLeft) {
+			if (walkingRight && walkingLeft)
+			{
 				walkLeft();
 			}
 
