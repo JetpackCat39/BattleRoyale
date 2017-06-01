@@ -29,7 +29,7 @@ public class CreditsMenu extends Screen
 		GameUtils.self().drawText(width/13, height * 17 / 36, "Certain sound effects from: https://www.sounds-resource.com/arcade/sf2/", 20, g);
 		GameUtils.self().drawText(width/13, height * 19/36, "Unedited Roblox Death sound effect from: https://www.youtube.com/watch?v=f49ELvryhao", 20, g);
 		GameUtils.self().drawText(width /13, height * 21 / 36, "All pictures taken were at Westview High School", 20, g);
-		GameUtils.self().drawText(width /13, height * 23 / 36, "A huge thanks to all the teachers for letting us put them in the game!", 20, g);
+		GameUtils .self().drawText(width /13, height * 23 / 36, "A huge thanks to all the teachers for letting us put them in the game!", 20, g);
 		
 	}
 
