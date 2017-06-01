@@ -17,7 +17,7 @@ public class Jamal extends Fighter
 	// width of sprite while not attacking is 55ß
 	private static final int NON_ATTACK_WIDTH = 55 * 2;
 	
-	private static final int PUNCH = 3;
+	private static final int PUNCH = 4;
 	private static final int BLOCKED_PUNCH = 2;
 	private static final int KICK = 4;
 	private static final int BLOCKED_KICK = 2;
@@ -39,8 +39,8 @@ public class Jamal extends Fighter
 	private static final int BLOCK_UPDATE_COUNT = 180 / (5 * BLOCK_ANIMATION_COUNT); //goes to a block pose in a fifth of a second
 	private static final int CROUCH_UPDATE_COUNT = 180 / (5 * CROUCH_ANIMATION_COUNT);  //goes to a crouch pose in a fifth of a second
 	private static final int JUMP_UPDATE_COUNT = 180 / (1 * JUMP_ANIMATION_COUNT); // goes through a jump animation over 1 second
-	private static final int PUNCH_UPDATE_COUNT = 180 / (int) ((double) 3/2 * PUNCH_ANIMATION_COUNT); // makes it punch twice in a second
-	private static final int KICK_UPDATE_COUNT = 180 / (1 * KICK_ANIMATION_COUNT); // makes it kick twice in a second
+	private static final int PUNCH_UPDATE_COUNT = 180 / (int) ((double) 5/4 * PUNCH_ANIMATION_COUNT); // makes it punch twice in a second
+	private static final int KICK_UPDATE_COUNT = 180 / (int) ((double) 5/4 * KICK_ANIMATION_COUNT); // makes it kick twice in a second
 	private static final int WALK_UPDATE_COUNT = 180 / (2 * WALK_ANIMATION_COUNT); // walks 2 cycles in a second
 	private static final int IDLE_UPDATE_COUNT = 180 / (2 * IDLE_ANIMATION_COUNT); // makes it cycle through an "idle" animation 2 times a second
 	private static final int STAGE_ENTRANCE_UPDATE_COUNT = 20;
