@@ -43,12 +43,11 @@ public class FighterMenu extends Screen
 		buttonList.add(new Button(width / 2, height * 2 / 5, "HALANDER"));
 		buttonList.add(new Button(width * 11 / 16, height * 2 / 5, "WAY"));
 		// exit button
-		buttonList.add(new Button(width * 1 / 8, height * 4 / 5, "BACK"));
+		buttonList.add(new Button(width * 1 / 8, height * 4 / 5, "TITLE"));
 		// next button
 		buttonList.add(new Button(width * 11 / 16, height * 4 / 5, "NEXT"));
 		neuhaus = new Button(BUTTON_CENTER, height * 4 / 5, "NEUHAUS");
 		konami = new Konami();
-		displayNeuhaus = false;
 	}
 
 	@Override
@@ -426,7 +425,7 @@ public class FighterMenu extends Screen
 					p2Controls);
 			break;
 		case "NEUHAUS":
-			p2 = new Way(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tammy.png"), null, false,
+			p2 = new Neuhaus(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tammy.png"), null, false,
 					p2Controls);
 			break;
 		default:
@@ -446,7 +445,7 @@ public class FighterMenu extends Screen
 		}
 		if (getBack().contains(x, y))
 		{
-			screen.getPrevScreen();
+			screen.setScreen(screen.getMenu(), true);
 		}
 	}
 
