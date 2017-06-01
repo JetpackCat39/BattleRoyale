@@ -27,7 +27,7 @@ public abstract class Fighter
 	private static final Color P2COLOR = Color.blue;
 	private final int BASE;
 	private int x, y, xSpeed, ySpeed, changeAnimation, health, frame;
-	private boolean isP1, ko;
+	private boolean isP1, ko, crouchBlock;
 	private PlayerControls controls;
 	private Fighter opponent;
 	private BufferedImage sprites, winorloss;
@@ -99,6 +99,7 @@ public abstract class Fighter
 		health = getMaxHealth();
 		isP1 = isPlayer1;
 		ko = false;
+		crouchBlock = false;
 		controls = c;
 		changeAnimation = 0;
 		winorloss = worl;
@@ -339,7 +340,6 @@ public abstract class Fighter
 
 	private void crouch()
 	{
-		GameUtils.self().playSound(getGrunt());
 		setState(STATE.CROUCH);
 	}
 
@@ -355,12 +355,20 @@ public abstract class Fighter
 
 	public void block()
 	{
+		if (checkState(STATE.CROUCH))
+		{
+			crouchBlock = true;
+		}
+		else
+		{
+			crouchBlock = false;
+		}
 		setState(STATE.BLOCK);
 	}
 
 	public void punch()
 	{
-		if (checkState(STATE.PUNCH))
+		if (checkState(STATE.KICK) || checkState(STATE.PUNCH))
 		{
 			return;
 		}
@@ -483,6 +491,17 @@ public abstract class Fighter
 			frame++;
 			changeAnimation = 0;
 		}
+		if (checkState(STATE.BLOCK))
+		{
+			if (crouchBlock)
+			{
+				frame = getNumImages(STATE.BLOCK) - 1;
+			}
+			else
+			{
+				frame = 0;
+			}
+		}
 		if (frame >= getNumImages(State))
 		{
 			setIdles();
@@ -490,10 +509,6 @@ public abstract class Fighter
 			if (checkState(STATE.CROUCH))
 			{
 				frame = getNumImages(STATE.CROUCH) - 1;
-			}
-			if (checkState(STATE.BLOCK))
-			{
-				frame = getNumImages(STATE.BLOCK) - 1;
 			}
 		}
 		return 1;
@@ -506,6 +521,17 @@ public abstract class Fighter
 			frame--;
 			changeAnimation = 0;
 		}
+		if (checkState(STATE.BLOCK))
+		{
+			if (crouchBlock)
+			{
+				frame = getMaxFrames() - getNumImages(STATE.BLOCK) + 1;
+			}
+			else
+			{
+				frame = getMaxFrames();
+			}
+		}
 		if (frame <= (getMaxFrames() - getNumImages(State)))
 		{
 			setIdles();
@@ -513,10 +539,6 @@ public abstract class Fighter
 			if (checkState(STATE.CROUCH))
 			{
 				frame = getMaxFrames() - getNumImages(STATE.CROUCH) + 1;
-			}
-			if (checkState(STATE.BLOCK))
-			{
-				frame = getMaxFrames() - getNumImages(STATE.BLOCK) + 1;
 			}
 		}
 	}
