@@ -23,8 +23,9 @@ import game.Menus.Screen;
 public class VictoryScreen extends Screen
 {
 	IScreen itemToOverlay;
-	Fighter player1, player2;
+	Fighter p1, p2;
 	boolean isP1, playSounds;
+	int frameWin, frameLoss, changeWin, changeLoss;
 
 	enum STATE
 	{
@@ -40,13 +41,17 @@ public class VictoryScreen extends Screen
 		return state;
 	}
 	
-	public VictoryScreen(IScreen s, BufferedImage background, Fighter p1, Fighter p2, boolean b)
+	public VictoryScreen(IScreen s, BufferedImage background, Fighter player1, Fighter player2, boolean b)
 	{
 		super(background);
 		itemToOverlay = s;
-		player1 = p1;
-		player2 = p2;
+		p1 = player1;
+		p2 = player2;
 		isP1 = b;
+		frameWin = 0;
+		frameLoss = 0;
+		changeWin = 0;
+		changeLoss = 0;
 		playSounds = true;
 		buttonList.add(new Button(BUTTON_CENTER / 2, height * 7/10, "NEW GAME"));
 		buttonList.add(new Button(BUTTON_CENTER * 3/2, height * 7/10, "MAIN MENU"));
@@ -64,32 +69,45 @@ public class VictoryScreen extends Screen
 	{
 		if (getState() != STATE.end)
 		{
-			itemToOverlay.getGame().draw(g);
+			itemToOverlay.getGame().drawBase(g);
 		}
 		switch (state)
 		{
 		case playAnimation:
 			if (isP1)
 			{
-				player2.playKOAnimation(g);
+				System.out.println("isP1 " + changeLoss + " " + frameLoss + " " + p2.getLeft());
+
+				GameUtils.self().drawImg(p2.getWLAnimation(), 0, 
+						frameLoss * p2.getKOHeight(), p2.getLeft() + p2.getOffset(), height - p2.getY(), p2.getKOWidth(), p2.getKOHeight(), 
+						p2.getKOWidth() * 2, p2.getKOHeight() * 2, g);
+				changeLoss++;
+				if (changeLoss >= 360/p2.getKOFrames())
+				{
+					frameLoss++;
+					changeLoss = 0;
+				}
+				if (frameLoss >= p2.getKOFrames())
+				{
+					frameLoss = 0;
+				}
 			}
 			else
 			{
-				player1.playKOAnimation(g);
+				System.out.println("!isP1");
 			}
 			break;
 		case playQuote:
+			System.out.println("playQuote");
 			if (isP1)
 			{
-				player1.playVictoryAnimation(g);
 			}
 			else
 			{
-				player2.playVictoryAnimation(g);
 			}
 			break;
 		default:
-			String display = isP1 ? "P1 (" + player1.getName() + ") WINS" : "P2 (" + player2.getName() + ") WINS";
+			String display = isP1 ? "P1 (" + p1.getName() + ") WINS" : "P2 (" + p2.getName() + ") WINS";
 			Color color = isP1 ? Color.RED : Color.BLUE;
 			GameUtils.self().drawText(color, height * 1/3, display, 72, g);
 			super.draw(g);
@@ -122,7 +140,7 @@ public class VictoryScreen extends Screen
 				switch (getState())
 				{
 				case playAnimation:
-					play(isP1 ? player1.getResponseQuote() : player2.getResponseQuote());
+					play(isP1 ? p1.getResponseQuote() : p2.getResponseQuote());
 					state = STATE.playQuote;
 					break;
 				case playQuote:

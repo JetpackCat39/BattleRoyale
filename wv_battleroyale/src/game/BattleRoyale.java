@@ -336,10 +336,8 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	@Override
 	public Screen getChampSelect()
 	{
-		if (champ == null)
-		{
-			champ = new FighterMenu(menuBG, p1Controls, p2Controls);
-		}
+
+		champ = new FighterMenu(menuBG, p1Controls, p2Controls);
 		return champ;
 	}
 

@@ -58,4 +58,8 @@ public class Screen implements IDrawable, IMenu, IKeya
 	public void reset()
 	{	
 	}
+
+	public void drawBase(Graphics g)
+	{		
+	}
 }

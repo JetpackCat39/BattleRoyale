@@ -52,6 +52,11 @@ public class MainGame extends Screen
 			e.printStackTrace();
 		}
 	}
+	
+	public void drawBase(Graphics g)
+	{
+		GameUtils.self().drawImg(bg, offset, 0, bg.getWidth(), bg.getHeight(), g);
+	}
 
 	@Override
 	public void draw(Graphics g)
