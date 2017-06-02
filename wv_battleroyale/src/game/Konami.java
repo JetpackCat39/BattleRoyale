@@ -33,6 +33,7 @@ public class Konami
 	{
 
 		// Create map
+		@SuppressWarnings("unchecked")
 		Map<Integer, Integer>[] graph = new Map[sequence.length];
 		for (int i = 0; i < sequence.length; i++)
 		{

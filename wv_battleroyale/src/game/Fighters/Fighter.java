@@ -472,8 +472,11 @@ public abstract class Fighter
 		GameUtils.self().drawHP(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2, HP_BAR_Y, HP_BAR_WIDTH, fontMetrics.getAscent(),
 				health, getMaxHealth(), isP1 ? P1COLOR : P2COLOR, g);
 		GameUtils.self().drawText(
-				isP1 ? HP_BAR_X_P1 - fontMetrics.stringWidth("P1") - 5 : HP_BAR_X_P2 + HP_BAR_WIDTH + 5,
+				isP1 ? HP_BAR_X_P1 - fontMetrics.stringWidth(" P1") - 5 : HP_BAR_X_P2 + HP_BAR_WIDTH + fontMetrics.stringWidth(" ") + 5,
 				HP_BAR_Y + fontMetrics.getAscent() - 5, Color.WHITE, isP1 ? "P1" : "P2", 36, g, Font.BOLD);
+		GameUtils.self().drawText(
+				(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2) + (HP_BAR_WIDTH/2) - (fontMetrics.stringWidth(getName())/2),
+				HP_BAR_Y - 10, Color.WHITE, getName(), 36, g, Font.BOLD);
 		GameUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(), x + offset,
 				height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
 		changeAnimation++;

@@ -18,12 +18,11 @@ public class StageMenu extends Screen
 	public StageMenu(BufferedImage background)
 	{
 		super(background);
-		buttonList.add(new Button(width * 1 / 8, height / 5, "SCHOOL:FRONT", 20));
-		buttonList.add(new Button(BUTTON_CENTER, height / 5, "SCHOOL:QUAD", 20));
-		buttonList.add(new Button(width * 11 / 16, height / 5, "AMPITHEATER", 20));
-		buttonList.add(new Button(width * 1 / 8, height * 2 / 5, "THEATER:FRONT", 20));
-		buttonList.add(new Button(BUTTON_CENTER, height * 2 / 5, "POOL"));
-		buttonList.add(new Button(width * 11 / 16, height * 2 / 5, "FOOTBALL FIELD", 20));
+		int w = 350;
+		buttonList.add(new Button((width * 1/4) - w/2, height / 5, w, 80, "FRONT OF THE SCHOOL", 20));
+		buttonList.add(new Button((width * 3/4) - w/2, height / 5, w, 80, "FRONT OF THE THEATER", 20));
+		buttonList.add(new Button((width * 1/4) - w/2, height * 2 / 5, w, 80, "AMPITHEATER", 20));
+		buttonList.add(new Button((width * 3/4) - w/2, height * 2 / 5, w, 80, "THEATER", 20));
 		// return button
 		buttonList.add(new Button(width * 1 / 8, height * 4 / 5, "BACK"));
 		// cancel button
@@ -57,7 +56,7 @@ public class StageMenu extends Screen
 		return buttonList.get(0);
 	}
 
-	public Button getSchoolQuad()
+	public Button getTheaterFront()
 	{
 		return buttonList.get(1);
 	}
@@ -67,34 +66,24 @@ public class StageMenu extends Screen
 		return buttonList.get(2);
 	}
 
-	public Button getTheaterFront()
+	public Button getTheater()
 	{
 		return buttonList.get(3);
 	}
 
-	public Button getPool()
+	public Button getBack()
 	{
 		return buttonList.get(4);
 	}
 
-	public Button getFootballField()
-	{
-		return buttonList.get(5);
-	}
-
-	public Button getBack()
-	{
-		return buttonList.get(6);
-	}
-
 	public Button getCancel()
 	{
-		return buttonList.get(7);
+		return buttonList.get(5);
 	}
 	
 	public Button getPlay()
 	{
-		return buttonList.get(8);
+		return buttonList.get(6);
 	}
 
 	private void setSelected(Button newSelected)
@@ -108,37 +97,25 @@ public class StageMenu extends Screen
 		if (getSchoolFront().contains(x, y))
 		{
 			setSelected(getSchoolFront());
-			screen.setBackground(GameUtils.self().loadImage("Images/schoolfront.png"));
-			isSelected = true;
-		}
-		if (getSchoolQuad().contains(x, y))
-		{
-			setSelected(getSchoolQuad());
-			screen.setBackground(GameUtils.self().loadImage("Images/schoolquad.png"));
+			screen.setBackground(GameUtils.self().loadImage("Images/front.JPG"));
 			isSelected = true;
 		}
 		if (getAmpitheater().contains(x, y))
 		{
 			setSelected(getAmpitheater());
-			screen.setBackground(GameUtils.self().loadImage("Images/ampitheater.png"));
+			screen.setBackground(GameUtils.self().loadImage("Images/ampitheater.JPG"));
 			isSelected = true;
 		}
 		if (getTheaterFront().contains(x, y))
 		{
 			setSelected(getTheaterFront());
-			screen.setBackground(GameUtils.self().loadImage("Images/theaterfront.png"));
+			screen.setBackground(GameUtils.self().loadImage("Images/theater_front.JPG"));
 			isSelected = true;
 		}
-		if (getPool().contains(x, y))
+		if (getTheater().contains(x, y))
 		{
-			setSelected(getPool());
-			screen.setBackground(GameUtils.self().loadImage("Images/pool.png"));
-			isSelected = true;
-		}
-		if (getFootballField().contains(x, y))
-		{
-			setSelected(getFootballField());
-			screen.setBackground(GameUtils.self().loadImage("Images/footballfield.png"));
+			setSelected(getTheater());
+			screen.setBackground(GameUtils.self().loadImage("Images/theater.JPG"));
 			isSelected = true;
 		}
 
