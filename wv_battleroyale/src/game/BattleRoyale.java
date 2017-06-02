@@ -204,9 +204,11 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 				game.move();
 			}
 		}
-		if(getScreen() == getMenu() && !titleTheme.playing()) {
+		if(!titleTheme.playing() && game != null && getScreen() != getGame() && getScreen() != getVictory() && getScreen() != getPause()) {
 			titleTheme = new Sound("Sounds/cs-menu.wav");
 			titleTheme.play();
+		} else if(titleTheme.playing() && game != null && (getScreen() == getGame() || getScreen() == getVictory() || getScreen() == getPause())){
+			titleTheme.pause();
 		}
 	}
 
@@ -371,6 +373,11 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	public Screen getVictory(Fighter player)
 	{
 		victory = new VictoryScreen(this, victoryBG, p1, p2, player.getPlayerNum());
+		return victory;
+	}
+	
+	public Screen getVictory() 
+	{
 		return victory;
 	}
 
