@@ -25,6 +25,9 @@ public class Cassen extends Fighter
 	private static final int BLOCKED_KICK = 1;
 	private static final int SPEED = 7;
 	
+	private static final int KICK_HIT = 0;
+	private static final int PUNCH_HIT = 0;	
+	
 	public static final int HEALTH = 500;
 	
 	private static final int MAX_FRAMES = 6;

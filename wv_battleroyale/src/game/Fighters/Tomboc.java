@@ -25,6 +25,9 @@ public class Tomboc extends Fighter
 	private static final int BLOCKED_KICK = 2;
 	private static final int SPEED = 8;
 	
+	private static final int KICK_HIT = 0;
+	private static final int PUNCH_HIT = 0;	
+	
 	public static final int HEALTH = 300;
 	
 	private static final int MAX_FRAMES = 7;

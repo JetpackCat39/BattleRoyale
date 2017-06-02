@@ -35,7 +35,7 @@ public abstract class Fighter
 	private List<String> connectedPunch = new ArrayList<String>();
 	private List<String> connectedKick = new ArrayList<String>();
 	private int walkSpeed;
-	private boolean walkingLeft = false, walkingRight = false;
+	private boolean walkingLeft = false, walkingRight = false, punchConnected = false, kickConnected = false;
 
 	enum STATE
 	{
@@ -141,6 +141,10 @@ public abstract class Fighter
 		return winorloss;
 	}
 
+	protected abstract int getPunchHit();
+	
+	protected abstract int getKickHit();
+	
 	public abstract int getWidth();
 
 	public abstract int getSrcWidth();
@@ -358,6 +362,7 @@ public abstract class Fighter
 
 	private void crouch()
 	{
+		if(checkState(STATE.KICK) || checkState(STATE.PUNCH)) return;
 		setState(STATE.CROUCH);
 	}
 
@@ -373,6 +378,7 @@ public abstract class Fighter
 
 	public void block()
 	{
+		if(checkState(STATE.KICK) || checkState(STATE.PUNCH)) return;
 		if (checkState(STATE.CROUCH))
 		{
 			crouchBlock = true;
@@ -386,55 +392,18 @@ public abstract class Fighter
 
 	public void punch()
 	{
-		if (checkState(STATE.KICK) || checkState(STATE.PUNCH))
-		{
-			return;
-		}
+		if (checkState(STATE.KICK) || checkState(STATE.PUNCH) || checkState(STATE.CROUCH)) return;
 		setState(STATE.PUNCH);
+		
 		GameUtils.self().playSound(getGrunt());
-		if (isP1 ? (opponent.getLeft() < getLeft() + getDrawWidth())
-				: (opponent.getRight() > getRight() - getDrawWidth()))
-		{
-			if (!opponent.checkState(STATE.CROUCH))
-			{
-				GameUtils.self().playSound(getConnectedPunchSound());
-				if (opponent.checkState(STATE.BLOCK))
-				{
-					opponent.damage(getBlockedPunchDamage());
-				}
-				else
-				{
-					opponent.damage(getPunchDamage());
-				}
-			}
-		}
 	}
 
 	public void kick()
 	{
-		if (checkState(STATE.KICK) || checkState(STATE.PUNCH))
-		{
-			return;
-		}
+		if (checkState(STATE.KICK) || checkState(STATE.PUNCH)) return;
 		setState(STATE.KICK);
 
 		GameUtils.self().playSound(getGrunt());
-		if (isP1 ? (opponent.getLeft() < getLeft() + getDrawWidth())
-				: (opponent.getRight() > getRight() - getDrawWidth()))
-		{
-			if (!opponent.checkState(STATE.JUMP))
-			{
-				GameUtils.self().playSound(getConnectedKickSound());
-				if (opponent.checkState(STATE.BLOCK))
-				{
-					opponent.damage(getBlockedKickDamage());
-				}
-				else
-				{
-					opponent.damage(getKickDamage());
-				}
-			}
-		}
 	}
 
 	private void stopWalking()
@@ -495,14 +464,53 @@ public abstract class Fighter
 		GameUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(), x + o,
 				height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
 		changeAnimation++;
-		if (isP1)
-		{
-			drawP1();
+		
+		if (isP1) drawP1();
+		else drawP2();
+		
+		if(checkState(STATE.PUNCH) && !punchConnected) {
+			if(frame == getPunchHit()) {
+				if (isP1 ? (opponent.getLeft() < getLeft() + getDrawWidth()) : (opponent.getRight() > getRight() - getDrawWidth()))
+				{
+					if (!opponent.checkState(STATE.CROUCH))
+					{
+						GameUtils.self().playSound(getConnectedPunchSound());
+						if (opponent.checkState(STATE.BLOCK))
+						{
+							opponent.damage(getBlockedPunchDamage());
+						}
+						else
+						{
+							opponent.damage(getPunchDamage());
+						}
+						punchConnected = true;
+					}
+				}
+			}
 		}
-		else
-		{
-			drawP2();
+		if(checkState(STATE.KICK) && !kickConnected) {
+			if(frame == getKickHit()) {
+				if (isP1 ? (opponent.getLeft() < getLeft() + getDrawWidth()) : (opponent.getRight() > getRight() - getDrawWidth()))
+				{
+					if (!opponent.checkState(STATE.JUMP))
+					{
+						GameUtils.self().playSound(getConnectedKickSound());
+						if (opponent.checkState(STATE.BLOCK))
+						{
+							opponent.damage(getBlockedKickDamage());
+						}
+						else
+						{
+							opponent.damage(getKickDamage());
+						}
+						kickConnected = true;
+					}
+				}
+			}
 		}
+		
+		if(!checkState(STATE.PUNCH)) punchConnected = false;
+		if(!checkState(STATE.KICK)) kickConnected = false;
 
 	}
 
