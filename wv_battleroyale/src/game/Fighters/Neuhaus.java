@@ -200,11 +200,43 @@ public class Neuhaus extends Fighter
 		getOpponent().damage(getKickDamage());
 	}
 
-	public void playKOAnimation(Graphics g)
-	{		
+	public int getKOWidth()
+	{
+		return 0;
 	}
 
-	public void playVictoryAnimation(Graphics g)
-	{		
+	@Override
+	public int getKOHeight()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getKOFrames()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getVictoryWidth()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getVictoryHeight()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getVictoryFrames()
+	{
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

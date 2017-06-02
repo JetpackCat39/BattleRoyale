@@ -212,24 +212,44 @@ public class Kurth extends Fighter
 	}
 
 	@Override
-	public void playKOAnimation(Graphics g)
+	public int getKOWidth()
 	{
-		int i = 0;
-		while (i < KO_ANIMATION_COUNT)
-		{
-			GameUtils.self().drawImg(getWLAnimation(), 72, i * 105, x, y, 105, 73, 105 * 2, 73 * 2, g);
-			i++;
-		}
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
-	public void playVictoryAnimation(Graphics g)
+	public int getKOHeight()
 	{
-		int i = 0;
-		while (i < VICTORY_ANIMATION_COUNT)
-		{
-			GameUtils.self().drawImg(getWLAnimation(), 0, i * 113, x, y, 72, 113, 72 * 2, 113 * 2, g);
-			i++;
-		}
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getKOFrames()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getVictoryWidth()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getVictoryHeight()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getVictoryFrames()
+	{
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
