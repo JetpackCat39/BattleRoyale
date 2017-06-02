@@ -1,11 +1,9 @@
 package game.Fighters;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import game.GameUtils;
 import game.Input.PlayerControls;
 
 public class Bob extends Fighter
@@ -30,6 +28,13 @@ public class Bob extends Fighter
 	
 	private static final int MAX_FRAMES = 5;
 	
+	private static final int VICTORY_WIDTH = 123;
+	private static final int VICTORY_HEIGHT = 100;
+	private static final int VICTORY_ANIMATION_COUNT = 4;
+	private static final int KO_WIDTH = 88;
+	private static final int KO_HEIGHT = 55;
+	private static final int KO_ANIMATION_COUNT = 4;
+	
 	// 180 = fps
 	private static final int BLOCK_ANIMATION_COUNT = 2;
 	private static final int STAGE_ENTRANCE_ANIMATION_COUNT = 1;
@@ -48,8 +53,6 @@ public class Bob extends Fighter
 	private static final int WALK_UPDATE_COUNT = 180 / (2 * WALK_ANIMATION_COUNT); // walks 2 cycles in a second
 	private static final int IDLE_UPDATE_COUNT = 180 / (2 * IDLE_ANIMATION_COUNT); // makes it cycle through an "idle" animation 2 times a second
 	private static final int STAGE_ENTRANCE_UPDATE_COUNT = 20;
-	private static final int KO_ANIMATION_COUNT = 4;
-	private static final int VICTORY_ANIMATION_COUNT = 4;
 	
 	public Bob(int newX, int newY, BufferedImage spriteSheet, BufferedImage worl, boolean isPlayer1, PlayerControls c)
 	{
@@ -195,7 +198,7 @@ public class Bob extends Fighter
 		temp.add("Sounds/BobGrunt3.wav");
 		return temp.get(randomizer.nextInt(temp.size()));
 	}
-
+	
 	@Override
 	public String getName()
 	{
@@ -205,42 +208,37 @@ public class Bob extends Fighter
 	@Override
 	public int getKOWidth()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return KO_WIDTH;
 	}
 
 	@Override
 	public int getKOHeight()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return KO_HEIGHT;
 	}
 
 	@Override
 	public int getKOFrames()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return KO_ANIMATION_COUNT;
 	}
 
 	@Override
 	public int getVictoryWidth()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return VICTORY_WIDTH;
 	}
 
 	@Override
 	public int getVictoryHeight()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return VICTORY_HEIGHT;
 	}
 
 	@Override
 	public int getVictoryFrames()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return VICTORY_ANIMATION_COUNT;
 	}
+
 }

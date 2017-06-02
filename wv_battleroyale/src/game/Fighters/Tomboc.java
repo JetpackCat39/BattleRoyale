@@ -1,6 +1,5 @@
 package game.Fighters;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +27,13 @@ public class Tomboc extends Fighter
 	public static final int HEALTH = 300;
 	
 	private static final int MAX_FRAMES = 7;
+	
+	private static final int VICTORY_WIDTH = 49;
+	private static final int VICTORY_HEIGHT = 138;
+	private static final int VICTORY_ANIMATION_COUNT = 11;
+	private static final int KO_WIDTH = 80;
+	private static final int KO_HEIGHT = 63;
+	private static final int KO_ANIMATION_COUNT = 4;
 	
 	// 180 = fps
 	
@@ -195,52 +201,46 @@ public class Tomboc extends Fighter
 		temp.add("Sounds/TombocGrunt5.wav");
 		return temp.get(randomizer.nextInt(temp.size()));
 	}
-
-	@Override
+	
 	public String getName()
 	{
 		return "TOMBOC";
 	}
-	
+
 	@Override
 	public int getKOWidth()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return KO_WIDTH;
 	}
 
 	@Override
 	public int getKOHeight()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return KO_HEIGHT;
 	}
 
 	@Override
 	public int getKOFrames()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return KO_ANIMATION_COUNT;
 	}
 
 	@Override
 	public int getVictoryWidth()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return VICTORY_WIDTH;
 	}
 
 	@Override
 	public int getVictoryHeight()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return VICTORY_HEIGHT;
 	}
 
 	@Override
 	public int getVictoryFrames()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return VICTORY_ANIMATION_COUNT;
 	}
+
 }

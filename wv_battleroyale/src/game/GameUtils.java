@@ -126,6 +126,22 @@ public class GameUtils
 		{
 			e.printStackTrace();
 		}
-
+	}
+	
+	public double getSoundLength(String path)
+	{
+		AudioInputStream ais = null;
+		try
+		{
+			ais = AudioSystem.getAudioInputStream(getClass().getResource(path));
+		}
+		catch (UnsupportedAudioFileException | IOException e)
+		{
+			e.printStackTrace();
+		}
+		AudioFormat format = ais.getFormat();
+		long frames = ais.getFrameLength();
+		double durationInSeconds = (frames+0.0) / format.getFrameRate();  
+		return durationInSeconds;
 	}
 }

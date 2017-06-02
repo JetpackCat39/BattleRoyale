@@ -1,6 +1,5 @@
 package game.Fighters;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +27,13 @@ public class Halander extends Fighter
 	public static final int HEALTH = 640;
 	
 	private static final int MAX_FRAMES = 4;
+	
+	private static final int VICTORY_WIDTH = 62;
+	private static final int VICTORY_HEIGHT = 139;
+	private static final int VICTORY_ANIMATION_COUNT = 6;
+	private static final int KO_WIDTH = 90;
+	private static final int KO_HEIGHT = 69;
+	private static final int KO_ANIMATION_COUNT = 5;
 	
 	// 180 = fps
 	private static final int BLOCK_UPDATE_COUNT = 180/10; //goes to a block pose in a fifth of a second
@@ -200,47 +206,41 @@ public class Halander extends Fighter
 	{
 		return "HALANDER";
 	}
-
+	
 	@Override
 	public int getKOWidth()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return KO_WIDTH;
 	}
 
 	@Override
 	public int getKOHeight()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return KO_HEIGHT;
 	}
 
 	@Override
 	public int getKOFrames()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return KO_ANIMATION_COUNT;
 	}
 
 	@Override
 	public int getVictoryWidth()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return VICTORY_WIDTH;
 	}
 
 	@Override
 	public int getVictoryHeight()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return VICTORY_HEIGHT;
 	}
 
 	@Override
 	public int getVictoryFrames()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return VICTORY_ANIMATION_COUNT;
 	}
 
 }

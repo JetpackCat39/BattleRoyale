@@ -479,6 +479,83 @@ public abstract class Fighter
 	{
 		return ko;
 	}
+	
+	public void drawStill(Graphics g)
+	{
+		if (isP1)
+		{	
+			GameUtils.self().drawImg(getSpriteSheet(), 0, STATE.ENTER.getIndex() * getSrcHeight(), x + getOffset(),
+					height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
+		}
+		else
+		{
+			GameUtils.self().drawImg(getSpriteSheet(), getMaxFrames() * getSrcWidth(), STATE.ENTER.getIndex() * getSrcHeight(), x + getOffset(),
+					height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
+		}
+		
+	}
+	
+	public void drawLyingDown(Graphics g)
+	{
+		if (isP1)
+		{	
+			GameUtils.self().drawImg(getWLAnimation(), getVictoryWidth(), (getKOFrames() - 1) * getKOHeight(), getLeft() + getOffset(), 
+				height - BASE + getKOHeight() * 2, getKOWidth(), getKOHeight(), getKOWidth() * 2, getKOHeight() * 2, g);
+		}
+		else
+		{
+			GameUtils.self().drawImg(getWLAnimation(), 0, (getKOFrames() - 1) * getKOHeight(), getLeft() + getOffset(), 
+					height - BASE + getKOHeight() * 2, getKOWidth(), getKOHeight(), getKOWidth() * 2, getKOHeight() * 2, g);
+		}
+	}
+	
+	public void drawKO(Graphics g, double time)
+	{
+		if (isP1)
+		{
+			GameUtils.self().drawImg(getWLAnimation(), getVictoryWidth(), frame * getKOHeight(), getLeft() + getOffset(), 
+					height - BASE + getKOHeight() * 2, getKOWidth(), getKOHeight(), getKOWidth() * 2, getKOHeight() * 2, g);
+		}
+		else
+		{
+			GameUtils.self().drawImg(getWLAnimation(), 0, frame * getKOHeight(), getLeft() + getOffset(), 
+					height - BASE + getKOHeight() * 2, getKOWidth(), getKOHeight(), getKOWidth() * 2, getKOHeight() * 2, g);
+		}
+		changeAnimation++;
+		if (changeAnimation >= 180 * time/getKOFrames())
+		{
+			frame++;
+			changeAnimation = 0;
+		}
+		if (frame >= getKOFrames())
+		{
+			frame = 0;
+		}
+	}
+	
+	public void drawVictory(Graphics g, double time)
+	{
+		if (isP1)
+		{
+			GameUtils.self().drawImg(getWLAnimation(), 0, frame * getVictoryHeight(), getLeft() + getOffset(), 
+					height - getY(), getVictoryWidth(), getVictoryHeight(), getVictoryWidth() * 2, getVictoryHeight() * 2, g);
+		}
+		else
+		{
+			GameUtils.self().drawImg(getWLAnimation(), getKOWidth(), frame * getVictoryHeight(), getLeft() + getOffset(), 
+					height - getY(), getVictoryWidth(), getVictoryHeight(), getVictoryWidth() * 2, getVictoryHeight() * 2, g);
+		}
+		changeAnimation++;
+		if (changeAnimation >= 180 * time/getVictoryFrames())
+		{
+			frame++;
+			changeAnimation = 0;
+		}
+		if (frame >= getVictoryFrames())
+		{
+			frame = 0;
+		}
+	}
 
 	public void draw(Graphics g, int o)
 	{
