@@ -18,16 +18,16 @@ public class Halander extends Fighter
 	// width of sprite while not attacking is 55ß
 	private static final int NON_ATTACK_WIDTH = 60 * 2;
 	
-	private static final int PUNCH = 2;
-	private static final int BLOCKED_PUNCH = 1;
-	private static final int KICK = 3;
-	private static final int BLOCKED_KICK = 2;
+	private static final int PUNCH = 5;
+	private static final int BLOCKED_PUNCH = 2;
+	private static final int KICK = 6;
+	private static final int BLOCKED_KICK = 3;
 	private static final int SPEED = 9;
 	
 	private static final int KICK_HIT = 2;
 	private static final int PUNCH_HIT = 1;	
 	
-	public static final int HEALTH = 640;
+	public static final int HEALTH = 1400;
 	
 	private static final int MAX_FRAMES = 4;
 	
@@ -39,15 +39,6 @@ public class Halander extends Fighter
 	private static final int KO_ANIMATION_COUNT = 5;
 	
 	// 180 = fps
-	private static final int BLOCK_UPDATE_COUNT = 180/10; //goes to a block pose in a fifth of a second
-	private static final int STAGE_ENTRANCE_UPDATE_COUNT = 20;
-	private static final int CROUCH_UPDATE_COUNT = 180/10;  //goes to a crouch pose in a fifth of a second
-	private static final int JUMP_UPDATE_COUNT = 180/7; // goes through a jump animation over 1 second
-	private static final int PUNCH_UPDATE_COUNT = 180/6; // makes it punch twice in a second
-	private static final int KICK_UPDATE_COUNT = 180/8; // makes it kick twice in a second
-	private static final int WALK_UPDATE_COUNT = 180/10; // walks 2 cycles in a second
-	private static final int IDLE_UPDATE_COUNT = 180/8; // makes it cycle through an "idle" animation 2 times a second
-	
 	private static final int BLOCK_ANIMATION_COUNT = 2;
 	private static final int STAGE_ENTRANCE_ANIMATION_COUNT = 1;
 	private static final int CROUCH_ANIMATION_COUNT = 2;
@@ -56,6 +47,15 @@ public class Halander extends Fighter
 	private static final int KICK_ANIMATION_COUNT = 5;
 	private static final int WALK_ANIMATION_COUNT = 4;
 	private static final int IDLE_ANIMATION_COUNT = 3;
+
+	private static final int BLOCK_UPDATE_COUNT = 180 / (5 * BLOCK_ANIMATION_COUNT); //goes to a block pose in a fifth of a second
+	private static final int CROUCH_UPDATE_COUNT = 180 / (5 * CROUCH_ANIMATION_COUNT);  //goes to a crouch pose in a fifth of a second
+	private static final int JUMP_UPDATE_COUNT = 180 / (1 * JUMP_ANIMATION_COUNT); // goes through a jump animation over 1 second
+	private static final int PUNCH_UPDATE_COUNT = 180 / (int) ((((double) 6)/3) * PUNCH_ANIMATION_COUNT); // makes it punch twice in a second
+	private static final int KICK_UPDATE_COUNT = 180 / (int) ((((double) 5)/3) * KICK_ANIMATION_COUNT); // makes it kick twice in a second
+	private static final int WALK_UPDATE_COUNT = 180 / (2 * WALK_ANIMATION_COUNT); // walks 2 cycles in a second
+	private static final int IDLE_UPDATE_COUNT = 180 / (2 * IDLE_ANIMATION_COUNT); // makes it cycle through an "idle" animation 2 times a second
+	private static final int STAGE_ENTRANCE_UPDATE_COUNT = 20;
 	
 	public Halander(int newX, int newY, BufferedImage spriteSheet, BufferedImage worl, boolean isPlayer1, PlayerControls c)
 	{

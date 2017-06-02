@@ -18,16 +18,16 @@ public class Cassen extends Fighter
 	// width of sprite while not attacking is 55ß
 	private static final int NON_ATTACK_WIDTH = 50 * 2;
 	
-	private static final int PUNCH = 6;
+	private static final int PUNCH = 14;
 	private static final int BLOCKED_PUNCH = 1;
-	private static final int KICK = 6;
+	private static final int KICK = 14;
 	private static final int BLOCKED_KICK = 1;
 	private static final int SPEED = 7;
 	
 	private static final int KICK_HIT = 1;
 	private static final int PUNCH_HIT = 1;	
 	
-	public static final int HEALTH = 500;
+	public static final int HEALTH = 1000;
 	
 	private static final int MAX_FRAMES = 6;
 	

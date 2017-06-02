@@ -18,10 +18,10 @@ public class Neuhaus extends Fighter
 	// width of sprite while not attacking is 55ß
 	private static final int NON_ATTACK_WIDTH = 95 * 2;
 	
-	private static final int PUNCH = 1000;
-	private static final int BLOCKED_PUNCH = 2000;
-	private static final int KICK = 2000;
-	private static final int BLOCKED_KICK = 4000;
+	private static final int PUNCH = 9001;
+	private static final int BLOCKED_PUNCH = 9001;
+	private static final int KICK = 9001;
+	private static final int BLOCKED_KICK = 9001;
 	private static final int SPEED = 20;
 	
 	private static final int KICK_HIT = 0;

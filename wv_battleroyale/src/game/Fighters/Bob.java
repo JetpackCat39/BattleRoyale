@@ -18,16 +18,16 @@ public class Bob extends Fighter
 	// width of sprite while not attacking is 55ß
 	private static final int NON_ATTACK_WIDTH = 55 * 2;
 	
-	private static final int PUNCH = 7;
+	private static final int PUNCH = 9;
 	private static final int BLOCKED_PUNCH = 4;
-	private static final int KICK = 8;
-	private static final int BLOCKED_KICK = 5;
+	private static final int KICK = 13;
+	private static final int BLOCKED_KICK = 6;
 	private static final int SPEED = 5;
 	
 	private static final int KICK_HIT = 2;
 	private static final int PUNCH_HIT = 2;	
 	
-	public static final int HEALTH = 300;
+	public static final int HEALTH = 700;
 	
 	private static final int MAX_FRAMES = 5;
 	

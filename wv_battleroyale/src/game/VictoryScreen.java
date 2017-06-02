@@ -17,7 +17,7 @@ public class VictoryScreen extends Screen
 	Fighter p1, p2;
 	boolean isP1, playSounds;
 	Sound p1Sound, p2Sound, deathSound, victory;
-	int victoryPlays;
+	int victoryPlays, temp;
 
 	enum STATE
 	{
@@ -44,6 +44,7 @@ public class VictoryScreen extends Screen
 		buttonList.add(new Button(BUTTON_CENTER * 3/2, height * 7/10, "MAIN MENU"));
 		deathSound = new Sound("Sounds/Roblox Death Sound Effect.wav");
 		victory = new Sound(getVictoryMusic());
+		victory.play();
 		if (isP1)
 		{
 			p1Sound = new Sound (p1.getResponseQuote());
@@ -56,7 +57,6 @@ public class VictoryScreen extends Screen
 	
 	public void draw(Graphics g)
 	{
-		victory.play();
 		if (getState() != STATE.end)
 		{
 			itemToOverlay.getGame().drawBase(g);
