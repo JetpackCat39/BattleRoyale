@@ -24,6 +24,9 @@ public class Way extends Fighter
 	private static final int BLOCKED_KICK = 2;
 	private static final int SPEED = 6;
 	
+	private static final int KICK_HIT = 3;
+	private static final int PUNCH_HIT = 3;	
+	
 	public static final int HEALTH = 600;
 	
 	private static final int MAX_FRAMES = 5;
@@ -110,6 +113,14 @@ public class Way extends Fighter
 		default:
 			throw new IndexOutOfBoundsException();
 		}
+	}
+
+	public int getKickHit() {
+		return KICK_HIT;
+	}
+	
+	public int getPunchHit() {
+		return PUNCH_HIT;
 	}
 	
 	@Override

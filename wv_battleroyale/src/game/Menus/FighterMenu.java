@@ -174,11 +174,11 @@ public class FighterMenu extends Screen
 		p1Index--;
 		if (displayNeuhaus)
 		{
-			if (p1Index == -1)
+			if (p1Index < 0)
 			{
 				p1Index = 10;
 			}
-			else if (p1Index == 10)
+			else if (p1Index < 10 && p1Index > 7)
 			{
 				p1Index = 7;
 			}
@@ -198,11 +198,11 @@ public class FighterMenu extends Screen
 		p1Index++;
 		if (displayNeuhaus)
 		{
-			if (p1Index == 8)
+			if (p1Index > 7 && p1Index < 10)
 			{
 				p1Index = 10;
 			}
-			else if (p1Index == 10)
+			else if (p1Index > 10)
 			{
 				p1Index = 0;
 			}
@@ -217,7 +217,7 @@ public class FighterMenu extends Screen
 		return p1Index;
 	}
 
-	public int p1Up()
+	public int p1Down()
 	{
 		if (displayNeuhaus)
 		{
@@ -227,11 +227,42 @@ public class FighterMenu extends Screen
 			}
 			else if (p1Index == 10)
 			{
-				p1Index = 0;
+				p1Index = 1;
 			}
 			else
 			{
 				p1Index += 4;
+			}
+		}
+		else
+		{
+			if (p1Index > 3)
+			{
+				p1Index -= 4;
+			}
+			else
+			{
+				p1Index += 4;
+			}
+		}
+		return p1Index;
+	}
+	
+	public int p1Up()
+	{
+		if (displayNeuhaus)
+		{
+			if (p1Index < 4 && p1Index != 10)
+			{
+				p1Index = 10;
+			}
+			else if (p1Index == 10)
+			{
+				p1Index = 5;
+			}
+			else
+			{
+				p1Index -= 4;
 			}
 		}
 		else
@@ -253,11 +284,11 @@ public class FighterMenu extends Screen
 		p2Index--;
 		if (displayNeuhaus)
 		{
-			if (p2Index == -1)
+			if (p2Index < 0)
 			{
 				p2Index = 10;
 			}
-			else if (p2Index == 10)
+			else if (p2Index < 10 && p2Index > 7)
 			{
 				p2Index = 7;
 			}
@@ -277,11 +308,11 @@ public class FighterMenu extends Screen
 		p2Index++;
 		if (displayNeuhaus)
 		{
-			if (p2Index == 8)
+			if (p2Index > 7 && p2Index < 10)
 			{
 				p2Index = 10;
 			}
-			if (p2Index == 10)
+			else if (p2Index > 10)
 			{
 				p2Index = 0;
 			}
@@ -296,17 +327,17 @@ public class FighterMenu extends Screen
 		return p2Index;
 	}
 
-	public int p2Up()
+	public int p2Down()
 	{
 		if (displayNeuhaus)
 		{
-			if (p2Index > 3 && p1Index != 10)
+			if (p2Index > 3 && p2Index != 10)
 			{
 				p2Index = 10;
 			}
 			else if (p2Index == 10)
 			{
-				p2Index = 0;
+				p2Index = 1;
 			}
 			else
 			{
@@ -326,6 +357,38 @@ public class FighterMenu extends Screen
 		}
 		return p2Index;
 	}
+	
+	public int p2Up()
+	{
+		if (displayNeuhaus)
+		{
+			if (p2Index < 4 && p2Index != 10)
+			{
+				p2Index = 10;
+			}
+			else if (p2Index == 10)
+			{
+				p2Index = 5;
+			}
+			else
+			{
+				p2Index -= 4;
+			}
+		}
+		else
+		{
+			if (p2Index > 3)
+			{
+				p2Index -= 4;
+			}
+			else
+			{
+				p2Index += 4;
+			}
+		}
+		return p2Index;
+	}
+
 
 	public Fighter getP1()
 	{
@@ -342,7 +405,7 @@ public class FighterMenu extends Screen
 					GameUtils.self().loadImage("Images/Jamal-Victory-KO.png"), true, p1Controls);
 			break;
 		case "CASSEN":
-			p1 = new Cassen(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame1.png"), null, true,
+			p1 = new Cassen(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame.png"), null, true,
 					p1Controls);
 			break;
 		case "TOMBOC":
@@ -391,7 +454,7 @@ public class FighterMenu extends Screen
 					GameUtils.self().loadImage("Images/Jamal-Victory-KO.png"), false, p2Controls);
 			break;
 		case "CASSEN":
-			p2 = new Cassen(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame1.png"), null,
+			p2 = new Cassen(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame.png"), null,
 					false, p2Controls);
 			break;
 		case "TOMBOC":
@@ -461,9 +524,13 @@ public class FighterMenu extends Screen
 			{
 				p1Right();
 			}
-			else if (keyCode == p1Controls.getJump() || keyCode == p1Controls.getCrouch())
+			else if (keyCode == p1Controls.getJump())
 			{
 				p1Up();
+			}
+			else if(keyCode == p1Controls.getCrouch())
+			{
+				p1Down();
 			}
 			else if (keyCode == p1Controls.getPunch())
 			{
@@ -491,9 +558,13 @@ public class FighterMenu extends Screen
 			{
 				p2Right();
 			}
-			else if (keyCode == p2Controls.getJump() || keyCode == p2Controls.getCrouch())
+			else if (keyCode == p2Controls.getJump())
 			{
 				p2Up();
+			}
+			else if(keyCode == p2Controls.getCrouch())
+			{
+				p2Down();
 			}
 			else if (keyCode == p2Controls.getPunch())
 			{

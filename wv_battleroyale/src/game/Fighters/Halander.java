@@ -24,6 +24,9 @@ public class Halander extends Fighter
 	private static final int BLOCKED_KICK = 2;
 	private static final int SPEED = 9;
 	
+	private static final int KICK_HIT = 3;
+	private static final int PUNCH_HIT = 2;	
+	
 	public static final int HEALTH = 640;
 	
 	private static final int MAX_FRAMES = 4;
@@ -109,6 +112,14 @@ public class Halander extends Fighter
 		default:
 			throw new IndexOutOfBoundsException();
 		}
+	}
+
+	public int getKickHit() {
+		return KICK_HIT;
+	}
+	
+	public int getPunchHit() {
+		return PUNCH_HIT;
 	}
 	
 	@Override

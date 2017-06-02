@@ -24,6 +24,9 @@ public class Bob extends Fighter
 	private static final int BLOCKED_KICK = 5;
 	private static final int SPEED = 5;
 	
+	private static final int KICK_HIT = 3;
+	private static final int PUNCH_HIT = 3;	
+	
 	public static final int HEALTH = 300;
 	
 	private static final int MAX_FRAMES = 5;
@@ -109,6 +112,14 @@ public class Bob extends Fighter
 		default:
 			throw new IndexOutOfBoundsException();
 		}
+	}
+
+	public int getKickHit() {
+		return KICK_HIT;
+	}
+	
+	public int getPunchHit() {
+		return PUNCH_HIT;
 	}
 	
 	@Override
