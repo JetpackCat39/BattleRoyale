@@ -25,8 +25,8 @@ public class Cassen extends Fighter
 	private static final int BLOCKED_KICK = 1;
 	private static final int SPEED = 7;
 	
-	private static final int KICK_HIT = 0;
-	private static final int PUNCH_HIT = 0;	
+	private static final int KICK_HIT = 2;
+	private static final int PUNCH_HIT = 2;	
 	
 	public static final int HEALTH = 500;
 	
@@ -106,6 +106,14 @@ public class Cassen extends Fighter
 		default:
 			throw new IndexOutOfBoundsException();
 		}
+	}
+
+	public int getKickHit() {
+		return KICK_HIT;
+	}
+	
+	public int getPunchHit() {
+		return PUNCH_HIT;
 	}
 	
 	@Override

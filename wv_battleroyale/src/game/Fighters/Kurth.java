@@ -26,8 +26,8 @@ public class Kurth extends Fighter
 	private static final int BLOCKED_KICK = 4;
 	private static final int SPEED = 4;
 	
-	private static final int KICK_HIT = 0;
-	private static final int PUNCH_HIT = 0;	
+	private static final int KICK_HIT = 2;
+	private static final int PUNCH_HIT = 3;	
 	
 	public static final int HEALTH = 600;
 	
@@ -110,6 +110,14 @@ public class Kurth extends Fighter
 		default:
 			throw new IndexOutOfBoundsException();
 		}
+	}
+
+	public int getKickHit() {
+		return KICK_HIT;
+	}
+	
+	public int getPunchHit() {
+		return PUNCH_HIT;
 	}
 	
 	@Override

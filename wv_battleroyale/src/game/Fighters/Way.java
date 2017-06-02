@@ -25,8 +25,8 @@ public class Way extends Fighter
 	private static final int BLOCKED_KICK = 2;
 	private static final int SPEED = 6;
 	
-	private static final int KICK_HIT = 0;
-	private static final int PUNCH_HIT = 0;	
+	private static final int KICK_HIT = 3;
+	private static final int PUNCH_HIT = 3;	
 	
 	public static final int HEALTH = 600;
 	
