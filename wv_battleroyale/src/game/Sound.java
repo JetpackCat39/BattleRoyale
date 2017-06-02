@@ -10,12 +10,14 @@ import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class Sound {
+public class Sound 
+{
 
 	private Clip clip;
 	private AudioInputStream ais;
 	
-	public Sound(String path) {
+	public Sound(String path) 
+	{
 
 		try
 		{
@@ -63,11 +65,13 @@ public class Sound {
 		return durationInSeconds;
 	}
 	
-	public void pause() {
+	public void pause() 
+	{
 		clip.stop();
 	}
 	
-	public boolean playing() {
+	public boolean playing() 
+	{
 		return clip.isActive();
 	}
 }

@@ -15,6 +15,11 @@ import game.Fighters.*;
 // Menu to select which fighter each player wants to use
 public class FighterMenu extends Screen
 {
+	private static final int SECOND_ROW_START = 4;
+	private static final int FIRST_ROW_END = 3;
+	private static final int SECOND_ROW_END = 7;
+	private static final int NEUHAUS = 10;
+	private static final int FIRST_ROW_START = 0;
 	private boolean isSelected1, isSelected2, displayNeuhaus;
 	private PlayerControls p1Controls, p2Controls;
 	private static final Color P1COLOR = Color.red;
@@ -37,7 +42,8 @@ public class FighterMenu extends Screen
 		p2Index = 0;
 		isSelected1 = false;
 		isSelected2 = false;
-		displayNeuhaus = false;		buttonList.add(new Button(width * 1 / 8, height / 5, "JAMAL"));
+		displayNeuhaus = false;		
+		buttonList.add(new Button(width * 1 / 8, height / 5, "JAMAL"));
 		buttonList.add(new Button(width * 5 / 16, height / 5, "CASSEN"));
 		buttonList.add(new Button(width / 2, height / 5, "TOMBOC"));
 		buttonList.add(new Button(width * 11 / 16, height / 5, "KURTH"));
@@ -66,37 +72,47 @@ public class FighterMenu extends Screen
 				"Movement to select, Punch to lock in, kick to cancel, block to view character description", 25, g);
 		if (p1Index == p2Index)
 		{
-			if (!(isSelected1 && isSelected2))
-			{
-				GameUtils.self().drawSelector(g, buttonList.get(p1Index), BOTH);
-			}
-			else
-			{
-				getSelectedP1().fill(g, BOTH);
-			}
+			drawBothSelectors(g);
 		}
 		else
 		{
-			if (!isSelected1)
-			{
-				GameUtils.self().drawSelector(g, buttonList.get(p1Index), P1COLOR);
-			}
-			else
-			{
-				getSelectedP1().fill(g, P1COLOR);
-			}
-			if (!isSelected2)
-			{
-				GameUtils.self().drawSelector(g, buttonList.get(p2Index), P2COLOR);
-			}
-			else
-			{
-				getSelectedP2().fill(g, P2COLOR);
-			}
+			drawOneSelector(g);
 		}
 		if (isSelected1 && isSelected2)
 		{
 			getNext().fill(g, NEXT);
+		}
+	}
+
+	private void drawOneSelector(Graphics g) 
+	{
+		if (!isSelected1)
+		{
+			GameUtils.self().drawSelector(g, buttonList.get(p1Index), P1COLOR);
+		}
+		else
+		{
+			getSelectedP1().fill(g, P1COLOR);
+		}
+		if (!isSelected2)
+		{
+			GameUtils.self().drawSelector(g, buttonList.get(p2Index), P2COLOR);
+		}
+		else
+		{
+			getSelectedP2().fill(g, P2COLOR);
+		}
+	}
+
+	private void drawBothSelectors(Graphics g) 
+	{
+		if (!(isSelected1 && isSelected2))
+		{
+			GameUtils.self().drawSelector(g, buttonList.get(p1Index), BOTH);
+		}
+		else
+		{
+			getSelectedP1().fill(g, BOTH);
 		}
 	}
 
@@ -154,7 +170,7 @@ public class FighterMenu extends Screen
 	{
 		if (displayNeuhaus)
 		{
-			return buttonList.get(10);
+			return buttonList.get(NEUHAUS);
 		}
 		return null;
 	}
@@ -174,20 +190,20 @@ public class FighterMenu extends Screen
 		p1Index--;
 		if (displayNeuhaus)
 		{
-			if (p1Index < 0)
+			if (p1Index < FIRST_ROW_START)
 			{
-				p1Index = 10;
+				p1Index = NEUHAUS;
 			}
-			else if (p1Index < 10 && p1Index > 7)
+			else if (p1Index < NEUHAUS && p1Index > SECOND_ROW_END)
 			{
-				p1Index = 7;
+				p1Index = SECOND_ROW_END;
 			}
 		}
 		else
 		{
-			if (p1Index < 0)
+			if (p1Index < FIRST_ROW_START)
 			{
-				p1Index = 7;
+				p1Index = SECOND_ROW_END;
 			}
 		}
 		return p1Index;
@@ -198,20 +214,20 @@ public class FighterMenu extends Screen
 		p1Index++;
 		if (displayNeuhaus)
 		{
-			if (p1Index > 7 && p1Index < 10)
+			if (p1Index > SECOND_ROW_END && p1Index < NEUHAUS)
 			{
-				p1Index = 10;
+				p1Index = NEUHAUS;
 			}
-			else if (p1Index > 10)
+			else if (p1Index > NEUHAUS)
 			{
-				p1Index = 0;
+				p1Index = FIRST_ROW_START;
 			}
 		}
 		else
 		{
-			if (p1Index > 7)
+			if (p1Index > SECOND_ROW_END)
 			{
-				p1Index = 0;
+				p1Index = FIRST_ROW_START;
 			}
 		}
 		return p1Index;
@@ -221,28 +237,28 @@ public class FighterMenu extends Screen
 	{
 		if (displayNeuhaus)
 		{
-			if (p1Index > 3 && p1Index != 10)
+			if (p1Index > FIRST_ROW_END && p1Index != NEUHAUS)
 			{
-				p1Index = 10;
+				p1Index = NEUHAUS;
 			}
-			else if (p1Index == 10)
+			else if (p1Index == NEUHAUS)
 			{
 				p1Index = 1;
 			}
 			else
 			{
-				p1Index += 4;
+				p1Index += SECOND_ROW_START;
 			}
 		}
 		else
 		{
-			if (p1Index > 3)
+			if (p1Index > FIRST_ROW_END)
 			{
-				p1Index -= 4;
+				p1Index -= SECOND_ROW_START;
 			}
 			else
 			{
-				p1Index += 4;
+				p1Index += SECOND_ROW_START;
 			}
 		}
 		return p1Index;
@@ -252,28 +268,28 @@ public class FighterMenu extends Screen
 	{
 		if (displayNeuhaus)
 		{
-			if (p1Index < 4 && p1Index != 10)
+			if (p1Index < SECOND_ROW_START && p1Index != NEUHAUS)
 			{
-				p1Index = 10;
+				p1Index = NEUHAUS;
 			}
-			else if (p1Index == 10)
+			else if (p1Index == NEUHAUS)
 			{
 				p1Index = 5;
 			}
 			else
 			{
-				p1Index -= 4;
+				p1Index -= SECOND_ROW_START;
 			}
 		}
 		else
 		{
-			if (p1Index > 3)
+			if (p1Index > FIRST_ROW_END)
 			{
-				p1Index -= 4;
+				p1Index -= SECOND_ROW_START;
 			}
 			else
 			{
-				p1Index += 4;
+				p1Index += SECOND_ROW_START;
 			}
 		}
 		return p1Index;
@@ -284,20 +300,20 @@ public class FighterMenu extends Screen
 		p2Index--;
 		if (displayNeuhaus)
 		{
-			if (p2Index < 0)
+			if (p2Index < FIRST_ROW_START)
 			{
-				p2Index = 10;
+				p2Index = NEUHAUS;
 			}
-			else if (p2Index < 10 && p2Index > 7)
+			else if (p2Index < NEUHAUS && p2Index > SECOND_ROW_END)
 			{
-				p2Index = 7;
+				p2Index = SECOND_ROW_END;
 			}
 		}
 		else
 		{
-			if (p2Index < 0)
+			if (p2Index < FIRST_ROW_START)
 			{
-				p2Index = 7;
+				p2Index = SECOND_ROW_END;
 			}
 		}
 		return p2Index;
@@ -308,20 +324,20 @@ public class FighterMenu extends Screen
 		p2Index++;
 		if (displayNeuhaus)
 		{
-			if (p2Index > 7 && p2Index < 10)
+			if (p2Index > SECOND_ROW_END && p2Index < NEUHAUS)
 			{
-				p2Index = 10;
+				p2Index = NEUHAUS;
 			}
-			else if (p2Index > 10)
+			else if (p2Index > NEUHAUS)
 			{
-				p2Index = 0;
+				p2Index = FIRST_ROW_START;
 			}
 		}
 		else
 		{
-			if (p2Index > 7)
+			if (p2Index > SECOND_ROW_END)
 			{
-				p2Index = 0;
+				p2Index = FIRST_ROW_START;
 			}
 		}
 		return p2Index;
@@ -331,28 +347,28 @@ public class FighterMenu extends Screen
 	{
 		if (displayNeuhaus)
 		{
-			if (p2Index > 3 && p2Index != 10)
+			if (p2Index > FIRST_ROW_END && p2Index != NEUHAUS)
 			{
-				p2Index = 10;
+				p2Index = NEUHAUS;
 			}
-			else if (p2Index == 10)
+			else if (p2Index == NEUHAUS)
 			{
 				p2Index = 1;
 			}
 			else
 			{
-				p2Index += 4;
+				p2Index += SECOND_ROW_START;
 			}
 		}
 		else
 		{
-			if (p2Index > 3)
+			if (p2Index > FIRST_ROW_END)
 			{
-				p2Index -= 4;
+				p2Index -= SECOND_ROW_START;
 			}
 			else
 			{
-				p2Index += 4;
+				p2Index += SECOND_ROW_START;
 			}
 		}
 		return p2Index;
@@ -362,28 +378,28 @@ public class FighterMenu extends Screen
 	{
 		if (displayNeuhaus)
 		{
-			if (p2Index < 4 && p2Index != 10)
+			if (p2Index < SECOND_ROW_START && p2Index != NEUHAUS)
 			{
-				p2Index = 10;
+				p2Index = NEUHAUS;
 			}
-			else if (p2Index == 10)
+			else if (p2Index == NEUHAUS)
 			{
 				p2Index = 5;
 			}
 			else
 			{
-				p2Index -= 4;
+				p2Index -= SECOND_ROW_START;
 			}
 		}
 		else
 		{
-			if (p2Index > 3)
+			if (p2Index > FIRST_ROW_END)
 			{
-				p2Index -= 4;
+				p2Index -= SECOND_ROW_START;
 			}
 			else
 			{
-				p2Index += 4;
+				p2Index += SECOND_ROW_START;
 			}
 		}
 		return p2Index;
