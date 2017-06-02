@@ -32,8 +32,7 @@ public class CassenMenu extends Screen
 		GameUtils.self().drawText(width * 5 / 12, 275, "Mr. Cassen is the principal of Westview", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 315, "High School and has lead it to become", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 355, "one of the top schools in California.", 30, g);
-		GameUtils.self().drawText(width * 5 / 12, 475, "Punch Power: 6", 30, g);
-		GameUtils.self().drawText(width * 5 / 12, 515, "Kick Power: 6", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 475, "Attack: 11", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 555, "Speed: 7", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 595, "Health: 500", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 675, "This character can massively hurt the", 30, g);
