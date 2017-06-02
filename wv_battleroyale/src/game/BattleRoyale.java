@@ -204,7 +204,8 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 				game.move();
 			}
 		}
-		if(getScreen() == getMenu() && !titleTheme.playing()) {
+		if(getScreen() == getMenu() && !titleTheme.playing()) 
+		{
 			titleTheme = new Sound("Sounds/cs-menu.wav");
 			titleTheme.play();
 		}

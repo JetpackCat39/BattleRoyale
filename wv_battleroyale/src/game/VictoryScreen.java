@@ -67,26 +67,38 @@ public class VictoryScreen extends Screen
 			if (isP1)
 			{
 				p1.drawStill(g);
-				if(p2.drawKO(g, deathSound)) state = STATE.playQuote;
+				if(p2.drawKO(g, deathSound))
+				{ 
+					state = STATE.playQuote;
+				}
 			}
 			else
 			{
 				p2.drawStill(g);
-				if(p1.drawKO(g, deathSound)) state = STATE.playQuote;
+				if(p1.drawKO(g, deathSound))
+				{
+					state = STATE.playQuote;
+				}
 			}
 			break;
 		case playQuote:
 			if (isP1)
 			{
 				p2.drawLyingDown(g);
-				if(p1.drawVictory(g, p1Sound))victoryPlays++;
+				if(p1.drawVictory(g, p1Sound))
+				{
+					victoryPlays++;
+				}
 			}
 			else
 			{
 				p1.drawLyingDown(g);
-				if(p2.drawVictory(g, p2Sound))victoryPlays++;
+				if(p2.drawVictory(g, p2Sound))
+				{
+					victoryPlays++;
+				}
 			}
-			if(victoryPlays > 2) 
+			if(victoryPlays > 0) 
 			{
 				state = STATE.end;
 			}

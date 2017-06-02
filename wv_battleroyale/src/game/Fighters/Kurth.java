@@ -18,10 +18,10 @@ public class Kurth extends Fighter
 	// width of sprite while not attacking is 70ß
 	private static final int NON_ATTACK_WIDTH = 70 * 2;
 	
-	private static final int PUNCH = 10;
-	private static final int BLOCKED_PUNCH = 5;
-	private static final int KICK = 10;
-	private static final int BLOCKED_KICK = 5;
+	private static final int PUNCH = 40;
+	private static final int BLOCKED_PUNCH = 20;
+	private static final int KICK = 50;
+	private static final int BLOCKED_KICK = 20;
 	private static final int SPEED = 4;
 	
 	private static final int KICK_HIT = 1;
