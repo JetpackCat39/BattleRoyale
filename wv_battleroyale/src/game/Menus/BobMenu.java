@@ -33,10 +33,9 @@ public class BobMenu extends Screen
 		GameUtils.self().drawText(width * 5 / 12, 315, "High School.  He focuses on making students", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 355, "enjoy writing instead of worrying about formats", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 395, "or requirements. ", 30, g);
-		GameUtils.self().drawText(width * 5 / 12, 475, "Punch Power: 7", 30, g);
-		GameUtils.self().drawText(width * 5 / 12, 515, "Kick Power: 8", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 475, "Attack: 13", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 555, "Speed: 5", 30, g);
-		GameUtils.self().drawText(width * 5 / 12, 595, "Health: 300", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 595, "Health: 3", 30, g);
 		
 
 

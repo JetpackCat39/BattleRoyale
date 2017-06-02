@@ -34,10 +34,9 @@ public class TombocMenu extends Screen
 		GameUtils.self().drawText(width * 5 / 12, 275, "Ms. Tomboc is the Head Librarian at Westview.", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 315, "She has made the library a place for students", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 355, "to hang out and study.", 30, g);
-		GameUtils.self().drawText(width * 5 / 12, 475, "Punch Power: 2", 30, g);
-		GameUtils.self().drawText(width * 5 / 12, 515, "Kick Power: 3", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 475, "Attack:14", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 555, "Speed: 8", 30, g);
-		GameUtils.self().drawText(width * 5 / 12, 595, "Health: 300", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 595, "Health: 6", 30, g);
 	}
 	
 

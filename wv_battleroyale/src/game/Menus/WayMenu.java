@@ -34,10 +34,9 @@ public class WayMenu extends Screen
 		GameUtils.self().drawText(width * 5 / 12, 275, "Mr. Way is a music teacher at Westview. He", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 315, "teaches students how to play and perform in", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 355, "a concert band and a marching band.", 30, g);
-		GameUtils.self().drawText(width * 5 / 12, 475, "Punch Power: 2", 30, g);
-		GameUtils.self().drawText(width * 5 / 12, 515, "Kick Power: 2", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 475, "Attack: 8", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 555, "Speed: 6", 30, g);
-		GameUtils.self().drawText(width * 5 / 12, 595, "Health: 600", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 595, "Health: 12", 30, g);
 
 	}
 

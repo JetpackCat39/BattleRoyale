@@ -34,10 +34,9 @@ public class KurthMenu extends Screen
 		GameUtils.self().drawText(width * 5 / 12, 275, "Mr. Kurth is a science teacher at Westview.", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 315, "He is a student-favorite due to his down", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 355, "to earth personality and knowledge.", 30, g);
-		GameUtils.self().drawText(width * 5 / 12, 475, "Punch Power: 7", 30, g);
-		GameUtils.self().drawText(width * 5 / 12, 515, "Kick Power: 7", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 475, "Attack: 4", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 555, "Speed: 4", 30, g);
-		GameUtils.self().drawText(width * 5 / 12, 595, "Health: 600", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 595, "Health: 16", 30, g);
 	}
 	
 
