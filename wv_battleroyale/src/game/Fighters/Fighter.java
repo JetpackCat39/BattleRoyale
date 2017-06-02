@@ -349,6 +349,8 @@ public abstract class Fighter
 
 	private void walkRight()
 	{
+		if (checkState(STATE.KICK) || checkState(STATE.PUNCH))
+			return;
 		setState(STATE.WALK);
 		setXSpeed(walkSpeed);
 		walkingRight = true;
@@ -356,6 +358,8 @@ public abstract class Fighter
 
 	private void walkLeft()
 	{
+		if (checkState(STATE.KICK) || checkState(STATE.PUNCH))
+			return;
 		setState(STATE.WALK);
 		setXSpeed(-walkSpeed);
 		walkingLeft = true;
@@ -365,6 +369,7 @@ public abstract class Fighter
 	{
 		if (checkState(STATE.KICK) || checkState(STATE.PUNCH))
 			return;
+		stopWalking();
 		setState(STATE.CROUCH);
 	}
 
@@ -376,30 +381,35 @@ public abstract class Fighter
 			return;
 		}
 		setYSpeed(MAX_Y_SPEED);
+		frame = 0;
 	}
 
 	public void block()
 	{
 		if (checkState(STATE.KICK) || checkState(STATE.PUNCH))
 			return;
-		if (checkState(STATE.CROUCH))
-		{
-			crouchBlock = true;
-		}
-		else
-		{
-			crouchBlock = false;
-		}
+		stopWalking();
+//		if (checkState(STATE.CROUCH))
+//		{
+//			crouchBlock = true;
+//		}
+//		else
+//		{
+//			crouchBlock = false;
+//		}
 		setState(STATE.BLOCK);
 	}
 
 	public void punch()
 	{
-		if (checkState(STATE.KICK) || checkState(STATE.PUNCH) || checkState(STATE.CROUCH))
+		if (checkState(STATE.KICK) || checkState(STATE.PUNCH))
 		{
 			return;
 		}
+		stopWalking();
 		setState(STATE.PUNCH);
+		frame = 0;
+		punchConnected=false;
 
 		new Sound(getGrunt()).play();
 	}
@@ -410,7 +420,10 @@ public abstract class Fighter
 		{
 			return;
 		}
+		stopWalking();
 		setState(STATE.KICK);
+		frame = 0;
+		kickConnected=false;
 
 		new Sound(getGrunt()).play();
 	}
@@ -560,18 +573,56 @@ public abstract class Fighter
 		GameUtils.self().drawText(
 				(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2) + (HP_BAR_WIDTH / 2) - (fontMetrics.stringWidth(getName()) / 2),
 				HP_BAR_Y - 10, Color.WHITE, getName(), 36, g, Font.BOLD);
-		GameUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(), x + o,
-				height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
 		changeAnimation++;
 
-		if (isP1)
+
+		if (changeAnimation >= getAnimationSpeed(State))
 		{
-			drawP1();
+			frame++;
+			changeAnimation = 0;
 		}
+		if (checkState(STATE.BLOCK))
+		{
+			if (crouchBlock)
+			{
+				frame = getNumImages(STATE.BLOCK) - 1;
+			}
+			else
+			{
+				frame = 0;
+			}
+		}
+		if (frame >= getNumImages(State))
+		{
+			if (checkState(STATE.PUNCH))
+			{
+				setState(STATE.IDLE);
+				frame = 0;
+			}
+			
+			if (checkState(STATE.KICK))
+			{
+				setState(STATE.IDLE);
+				frame = 0;
+			}
+			frame = 0;
+			if (checkState(STATE.CROUCH))
+			{
+				frame = getNumImages(STATE.CROUCH) - 1;
+			}
+		}
+		
+		if (checkState(STATE.JUMP) && y == BASE)
+		{
+			setState(STATE.IDLE);
+		}
+		
+		if(isP1)  
+			GameUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(), x + o,
+				height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
 		else
-		{
-			drawP2();
-		}
+			GameUtils.self().drawImg(getSpriteSheet(), (getMaxFrames() - frame) * getSrcWidth(), State.getIndex() * getSrcHeight(), x + o,
+				height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
 
 		if (checkState(STATE.PUNCH) && !punchConnected)
 		{
@@ -629,81 +680,6 @@ public abstract class Fighter
 			kickConnected = false;
 		}
 
-	}
-
-	private int drawP1()
-	{
-		if (changeAnimation >= getAnimationSpeed(State))
-		{
-			frame++;
-			changeAnimation = 0;
-		}
-		if (checkState(STATE.BLOCK))
-		{
-			if (crouchBlock)
-			{
-				frame = getNumImages(STATE.BLOCK) - 1;
-			}
-			else
-			{
-				frame = 0;
-			}
-		}
-		if (frame >= getNumImages(State))
-		{
-			setIdles();
-			frame = 0;
-			if (checkState(STATE.CROUCH))
-			{
-				frame = getNumImages(STATE.CROUCH) - 1;
-			}
-		}
-		return 1;
-	}
-
-	private void drawP2()
-	{
-		if (changeAnimation >= getAnimationSpeed(State))
-		{
-			frame--;
-			changeAnimation = 0;
-		}
-		if (checkState(STATE.BLOCK))
-		{
-			if (crouchBlock)
-			{
-				frame = getMaxFrames() - getNumImages(STATE.BLOCK) + 1;
-			}
-			else
-			{
-				frame = getMaxFrames();
-			}
-		}
-		if (frame <= (getMaxFrames() - getNumImages(State)))
-		{
-			setIdles();
-			frame = getMaxFrames();
-			if (checkState(STATE.CROUCH))
-			{
-				frame = getMaxFrames() - getNumImages(STATE.CROUCH) + 1;
-			}
-		}
-	}
-
-	private void setIdles()
-	{
-		if (checkState(STATE.PUNCH))
-		{
-			setState(STATE.IDLE);
-		}
-		if (checkState(STATE.KICK))
-		{
-			setState(STATE.IDLE);
-		}
-		if (checkState(STATE.JUMP) && y == BASE)
-		{
-			setState(STATE.IDLE);
-		}
 	}
 
 	public void setOpponent(Fighter fighter)

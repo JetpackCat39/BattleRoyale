@@ -25,8 +25,8 @@ public class Neuhaus extends Fighter
 	private static final int BLOCKED_KICK = 4000;
 	private static final int SPEED = 20;
 	
-	private static final int KICK_HIT = 1;
-	private static final int PUNCH_HIT = 1;	
+	private static final int KICK_HIT = 0;
+	private static final int PUNCH_HIT = 0;	
 	
 	public static final int HEALTH = 100000;
 	

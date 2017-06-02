@@ -23,8 +23,8 @@ public class Nguyen extends Fighter
 	private static final int BLOCKED_KICK = 2;
 	private static final int SPEED = 5;
 	
-	private static final int KICK_HIT = 3;
-	private static final int PUNCH_HIT = 2;	
+	private static final int KICK_HIT = 2;
+	private static final int PUNCH_HIT = 1;	
 	
 	public static final int HEALTH = 500;
 	

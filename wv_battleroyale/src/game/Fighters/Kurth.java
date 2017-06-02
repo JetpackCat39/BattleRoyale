@@ -24,8 +24,8 @@ public class Kurth extends Fighter
 	private static final int BLOCKED_KICK = 4;
 	private static final int SPEED = 4;
 	
-	private static final int KICK_HIT = 2;
-	private static final int PUNCH_HIT = 3;	
+	private static final int KICK_HIT = 1;
+	private static final int PUNCH_HIT = 2;	
 	
 	public static final int HEALTH = 600;
 	
