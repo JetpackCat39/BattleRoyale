@@ -168,10 +168,10 @@ public class MainGame extends Screen
 	{
 		int p1Max = p2.getLeft() - p1.getWidth();
 		int p1Min = Math.max(0, p2.getRight() - width);
+		boolean p1Moved = p1.move(p1Min, p1Max);
+		
 		int p2Min = p1.getRight();
 		int p2Max = Math.min(bg.getWidth() - p2.getWidth(), p1.getLeft() + width - p2.getWidth());
-
-		boolean p1Moved = p1.move(p1Min, p1Max);
 		boolean p2Moved = p2.move(p2Min, p2Max);
 
 		if (p1.getLeft() + offset < 0)
