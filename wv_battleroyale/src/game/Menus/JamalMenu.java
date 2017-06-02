@@ -35,7 +35,7 @@ public class JamalMenu extends Screen
 		GameUtils.self().drawText(width * 5 / 12, 355, "and is friendly to all students.", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 475, "Attack: 10", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 555, "Speed: 6", 30, g);
-		GameUtils.self().drawText(width * 5 / 12, 595, "Health: 500", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 595, "Health: 10", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 675, "A good all around character", 30, g);
 	}
 

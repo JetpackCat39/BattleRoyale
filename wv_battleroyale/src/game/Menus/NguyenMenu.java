@@ -36,7 +36,7 @@ public class NguyenMenu extends Screen
 		GameUtils.self().drawText(width * 5 / 12, 355, "sure they understand the content.", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 475, "Attack:12", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 555, "Speed: 5", 30, g);
-		GameUtils.self().drawText(width * 5 / 12, 595, "Health: 500", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 595, "Health: 8", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 675, "This character is a fast, all-around attacker", 30, g);
 	}
 

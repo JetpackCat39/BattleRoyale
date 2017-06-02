@@ -34,7 +34,7 @@ public class CassenMenu extends Screen
 		GameUtils.self().drawText(width * 5 / 12, 355, "one of the top schools in California.", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 475, "Attack: 11", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 555, "Speed: 7", 30, g);
-		GameUtils.self().drawText(width * 5 / 12, 595, "Health: 500", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 595, "Health: 10", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 675, "This character can massively hurt the", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 675, "opponent if they don't block", 30, g);
 	}
