@@ -3,6 +3,7 @@ package game.Fighters;
 import game.GameUtils;
 import game.Input.PlayerControls;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -192,23 +193,18 @@ public class Neuhaus extends Fighter
 		getOpponent().damage(getPunchDamage());
 	}
 
+	@Override
 	public void kick()
 	{
 		GameUtils.self().playSound(getGrunt());
 		getOpponent().damage(getKickDamage());
 	}
 
-	@Override
-	public void playKOAnimation()
-	{
-		// TODO Auto-generated method stub
-		
+	public void playKOAnimation(Graphics g)
+	{		
 	}
 
-	@Override
-	public void playVictoryAnimation()
-	{
-		// TODO Auto-generated method stub
-		
+	public void playVictoryAnimation(Graphics g)
+	{		
 	}
 }

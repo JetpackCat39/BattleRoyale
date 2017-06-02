@@ -26,7 +26,7 @@ public abstract class Fighter
 	private static final Color P1COLOR = Color.red;
 	private static final Color P2COLOR = Color.blue;
 	private final int BASE;
-	private int x, y, xSpeed, ySpeed, changeAnimation, health, frame;
+	protected int x, y, xSpeed, ySpeed, changeAnimation, health, frame;
 	private boolean isP1, ko, crouchBlock;
 	private PlayerControls controls;
 	private Fighter opponent;
@@ -160,9 +160,9 @@ public abstract class Fighter
 
 	public abstract int getMaxHealth();
 	
-	public abstract void playKOAnimation();
+	public abstract void playKOAnimation(Graphics g);
 	
-	public abstract void playVictoryAnimation();
+	public abstract void playVictoryAnimation(Graphics g);
 
 	public abstract String getEntranceQuote();
 

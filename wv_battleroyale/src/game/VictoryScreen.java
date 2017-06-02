@@ -69,9 +69,24 @@ public class VictoryScreen extends Screen
 		switch (state)
 		{
 		case playAnimation:
-			GameUtils.self().drawText(Color.MAGENTA, height / 3, "ANIMATION", 100, g);
+			if (isP1)
+			{
+				player2.playKOAnimation(g);
+			}
+			else
+			{
+				player1.playKOAnimation(g);
+			}
 			break;
 		case playQuote:
+			if (isP1)
+			{
+				player1.playVictoryAnimation(g);
+			}
+			else
+			{
+				player2.playVictoryAnimation(g);
+			}
 			break;
 		default:
 			String display = isP1 ? "P1 (" + player1.getName() + ") WINS" : "P2 (" + player2.getName() + ") WINS";

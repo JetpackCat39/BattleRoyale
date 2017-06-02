@@ -346,7 +346,7 @@ public class FighterMenu extends Screen
 		{
 		case "JAMAL":
 			p1 = new Jamal(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Jamal-Ingame.png"),
-					GameUtils.self().loadImage("Images/Jamal-Victory.png"), true, p1Controls);
+					GameUtils.self().loadImage("Images/Jamal-Victory-KO.png"), true, p1Controls);
 			break;
 		case "CASSEN":
 			p1 = new Cassen(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame.png"), null, true,
@@ -357,15 +357,16 @@ public class FighterMenu extends Screen
 					p1Controls);
 			break;
 		case "KURTH":
-			p1 = new Kurth(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Kurth-Ingame.png"), null, true,
-					p1Controls);
+			p1 = new Kurth(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Kurth-Ingame.png"), 
+					GameUtils.self().loadImage("Images/Kurth-Victory-KO.png"), true,p1Controls);
 			break;
 		case "BOB":
-			p1 = new Bob(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Bob-Ingame.png"), null, true, p1Controls);
+			p1 = new Bob(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Bob-Ingame.png"), 
+					GameUtils.self().loadImage("Images/Bob-Victory-KO.png"), true, p1Controls);
 			break;
 		case "NGUYEN":
-			p1 = new Nguyen(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Nguyen-Ingame.png"), null, true,
-					p1Controls);
+			p1 = new Nguyen(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Nguyen-Ingame.png"), 
+					GameUtils.self().loadImage("Images/Nguyen-Victory-KO.png"), true, p1Controls);
 			break;
 		case "HALANDER":
 			p1 = new Halander(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/halander-ingame.png"), null, true,
@@ -394,7 +395,7 @@ public class FighterMenu extends Screen
 		{
 		case "JAMAL":
 			p2 = new Jamal(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Jamal-Ingame.png"),
-					GameUtils.self().loadImage("Images/Jamal-Victory.png"), false, p2Controls);
+					GameUtils.self().loadImage("Images/Jamal-Victory-KO.png"), false, p2Controls);
 			break;
 		case "CASSEN":
 			p2 = new Cassen(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame.png"), null,
@@ -405,16 +406,17 @@ public class FighterMenu extends Screen
 					false, p2Controls);
 			break;
 		case "KURTH":
-			p2 = new Kurth(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Kurth-Ingame1.png"), null,
-					false, p2Controls);
+			p2 = new Kurth(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Kurth-Ingame1.png"), 
+					GameUtils.self().loadImage("Images/Kurth-Victory-KO.png"), false, p2Controls);
 			break;
 		case "BOB":
-			p2 = new Bob(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Bob-Ingame.png"), null, false,
+			p2 = new Bob(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Bob-Ingame.png"), 
+					GameUtils.self().loadImage("Images/Bob-Victory-KO.png"), false,
 					p2Controls);
 			break;
 		case "NGUYEN":
-			p2 = new Nguyen(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Nguyen-Ingame.png"), null,
-					false, p2Controls);
+			p2 = new Nguyen(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Nguyen-Ingame.png"), 
+					GameUtils.self().loadImage("Images/Nguyen-Victory-KO.png"), false, p2Controls);
 			break;
 		case "HALANDER":
 			p2 = new Halander(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/halander-ingame.png"), null,

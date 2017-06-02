@@ -1,5 +1,6 @@
 package game.Fighters;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -202,14 +203,14 @@ public class Tomboc extends Fighter
 	}
 
 	@Override
-	public void playKOAnimation()
+	public void playKOAnimation(Graphics g)
 	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void playVictoryAnimation()
+	public void playVictoryAnimation(Graphics g)
 	{
 		// TODO Auto-generated method stub
 		

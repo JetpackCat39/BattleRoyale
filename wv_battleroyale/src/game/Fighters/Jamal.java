@@ -1,9 +1,11 @@
 package game.Fighters;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+import game.GameUtils;
 import game.Input.PlayerControls;
 
 public class Jamal extends Fighter
@@ -17,7 +19,7 @@ public class Jamal extends Fighter
 	// width of sprite while not attacking is 55ß
 	private static final int NON_ATTACK_WIDTH = 55 * 2;
 	
-	private static final int PUNCH = 4;
+	private static final int PUNCH = 4000;
 	private static final int BLOCKED_PUNCH = 2;
 	private static final int KICK = 4;
 	private static final int BLOCKED_KICK = 2;
@@ -27,6 +29,9 @@ public class Jamal extends Fighter
 	
 	private static final int MAX_FRAMES = 6;
 
+	
+	private static final int VICTORY_ANIMATION_COUNT = 8;
+	private static final int KO_ANIMATION_COUNT = 5;
 	private static final int BLOCK_ANIMATION_COUNT = 2;
 	private static final int STAGE_ENTRANCE_ANIMATION_COUNT = 1;
 	private static final int CROUCH_ANIMATION_COUNT = 2;
@@ -198,16 +203,24 @@ public class Jamal extends Fighter
 	}
 
 	@Override
-	public void playKOAnimation()
+	public void playKOAnimation(Graphics g)
 	{
-		// TODO Auto-generated method stub
-		
+		int i = 0;
+		while (i < KO_ANIMATION_COUNT)
+		{
+			GameUtils.self().drawImg(getWLAnimation(), 51, i * 71, x, y, 95, 71, 95 * 2, 71 * 2, g);
+			i++;
+		}
 	}
 
 	@Override
-	public void playVictoryAnimation()
+	public void playVictoryAnimation(Graphics g)
 	{
-		// TODO Auto-generated method stub
-		
+		int i = 0;
+		while (i < VICTORY_ANIMATION_COUNT)
+		{
+			GameUtils.self().drawImg(getWLAnimation(), 0, i * 112, x, y, 51, 112, 51 * 2, 112 * 2, g);
+			i++;
+		}
 	}
 }
