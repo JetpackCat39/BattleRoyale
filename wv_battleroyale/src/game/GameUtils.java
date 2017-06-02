@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.*;
 import javax.swing.JFrame;
 
 public class GameUtils

@@ -1,6 +1,5 @@
 package game.Fighters;
 
-import game.GameUtils;
 import game.Sound;
 import game.Input.PlayerControls;
 
