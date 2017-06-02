@@ -15,7 +15,9 @@ import java.util.Stack;
 
 public class BattleRoyale extends Canvas implements MouseListener, KeyListener, IScreen, Runnable
 {
-	// game constants
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	public static final int HEIGHT = 720;
 	public static final int WIDTH = HEIGHT * 16 / 9; // 1280
@@ -25,9 +27,11 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	private boolean running;
 	private Thread thread;
 
-	// Images to load in various screens
-	public static BufferedImage menuBG;
-	public static BufferedImage arena;
+	// buffer the window to reduce lag
+	// private BufferedImage image = new BufferedImage(WIDTH, HEIGHT,
+	// BufferedImage.TYPE_INT_RGB);
+	private static BufferedImage menuBG;
+	private static BufferedImage arena;
 	public static BufferedImage controlsBG;
 	public static BufferedImage pauseBG;
 	public static BufferedImage bobHead;
@@ -42,7 +46,6 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	public static BufferedImage creditsBG;
 	public static BufferedImage victoryBG;
 
-	// Instance variables 
 	private Fighter p1, p2;
 	private PlayerControls p1Controls;
 	private PlayerControls p2Controls;
@@ -62,8 +65,11 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	private TombocMenu tomboc;
 	private WayMenu way;
 	private VictoryScreen victory;
+	
 	private Sound titleTheme;
+
 	private Graphics g;
+
 	private Screen stop;
 	private Stack<Screen> screens;
 
@@ -72,12 +78,6 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		p1Controls = new PlayerControls(true);
 		p2Controls = new PlayerControls(false);
 		running = false;
-		initializeImages();
-		screens = new Stack<Screen>();
-	}
-
-	private void initializeImages() 
-	{
 		try
 		{
 			controlsBG = GameUtils.self().loadImage("Images/controlsBG.jpg");
@@ -94,12 +94,14 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		catch (IOException e)
 		{
 			e.printStackTrace();
-		};
+		}
+		;
 		pauseBG = GameUtils.self().createOverlay(WIDTH, HEIGHT, 0.85f);
 		profileBG = GameUtils.self().createOverlay(WIDTH, HEIGHT, 1f);
 		creditsBG = GameUtils.self().createOverlay(WIDTH, HEIGHT, 1f);
 		victoryBG = GameUtils.self().createOverlay(WIDTH, HEIGHT, 0f);
 		arena = null;
+		screens = new Stack<Screen>();
 	}
 
 	private void initialize()
@@ -138,7 +140,8 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 
 		if (strat == null)
 		{
-			createBufferStrategy(3); // its a triple buffer, so the system thinks 2 steps ahead
+			createBufferStrategy(3); // its a triple buffer, so the system
+										// thinks 2 steps ahead
 			return;
 		}
 
@@ -172,14 +175,12 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 			lastTime = currentTime;
 			if (delta >= 1)
 			{
-				// Ticks happen 60 times a second
 				tick();
 				updates++;
 				delta--;
 			}
 			if (delta2 >= 1)
 			{
-				// This changes the frames per second, setting at 180
 				render();
 				frames++;
 				delta2--;
@@ -203,14 +204,9 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 				game.move();
 			}
 		}
-		if(!titleTheme.playing() && game != null && getScreen() != getGame() && getScreen() != getVictory() && getScreen() != getPause() && getScreen() != getControls()) 
-		{
+		if(getScreen() == getMenu() && !titleTheme.playing()) {
 			titleTheme = new Sound("Sounds/cs-menu.wav");
 			titleTheme.play();
-		} 
-		else if(titleTheme.playing() && game != null && (getScreen() == getGame() || getScreen() == getVictory() || getScreen() == getPause() || getScreen() == getControls()))
-		{
-			titleTheme.pause();
 		}
 	}
 
@@ -350,6 +346,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	@Override
 	public Screen getChampSelect()
 	{
+
 		champ = new FighterMenu(menuBG, p1Controls, p2Controls);
 		return champ;
 	}
@@ -374,11 +371,6 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	public Screen getVictory(Fighter player)
 	{
 		victory = new VictoryScreen(this, victoryBG, p1, p2, player.getPlayerNum());
-		return victory;
-	}
-	
-	public Screen getVictory() 
-	{
 		return victory;
 	}
 
@@ -435,6 +427,13 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		screens.pop();
 		return getScreen();
 	}
+
+//	@Override
+//	public void setPlayer(Fighter p)
+//	{
+//		// TODO Auto-generated method stub
+//
+//	}
 
 	@Override
 	public void setBackground(BufferedImage b)
