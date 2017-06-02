@@ -18,11 +18,11 @@ public class StageMenu extends Screen
 	public StageMenu(BufferedImage background)
 	{
 		super(background);
-		int w = 350;
-		buttonList.add(new Button((width * 1/4) - w/2, height / 5, w, 80, "FRONT OF THE SCHOOL", 20));
-		buttonList.add(new Button((width * 3/4) - w/2, height / 5, w, 80, "FRONT OF THE THEATER", 20));
-		buttonList.add(new Button((width * 1/4) - w/2, height * 2 / 5, w, 80, "AMPITHEATER", 20));
-		buttonList.add(new Button((width * 3/4) - w/2, height * 2 / 5, w, 80, "THEATER", 20));
+		int w = 280;
+		buttonList.add(new Button((width * 1/5) - w/2, height / 5, w, 80, "FRONT OF THE SCHOOL", 20));
+		buttonList.add(new Button((width * 4/5) - w/2, height / 5, w, 80, "FRONT OF THE THEATER", 20));
+		buttonList.add(new Button((width * 1/5) - w/2, height * 2 / 5, w, 80, "AMPITHEATER", 20));
+		buttonList.add(new Button((width * 4/5) - w/2, height * 2 / 5, w, 80, "THEATER", 20));
 		// return button
 		buttonList.add(new Button(width * 1 / 8, height * 4 / 5, "BACK"));
 		// cancel button
