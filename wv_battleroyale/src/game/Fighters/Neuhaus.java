@@ -3,7 +3,6 @@ package game.Fighters;
 import game.GameUtils;
 import game.Input.PlayerControls;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -211,43 +210,39 @@ public class Neuhaus extends Fighter
 		getOpponent().damage(getKickDamage());
 	}
 
+	@Override
 	public int getKOWidth()
 	{
-		return 0;
+		return SRC_WIDTH;
 	}
 
 	@Override
 	public int getKOHeight()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return SRC_HEIGHT;
 	}
 
 	@Override
 	public int getKOFrames()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	@Override
 	public int getVictoryWidth()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return SRC_WIDTH;
 	}
 
 	@Override
 	public int getVictoryHeight()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return SRC_HEIGHT;
 	}
 
 	@Override
 	public int getVictoryFrames()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 }

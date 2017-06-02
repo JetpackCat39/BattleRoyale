@@ -405,12 +405,12 @@ public class FighterMenu extends Screen
 					GameUtils.self().loadImage("Images/Jamal-Victory-KO.png"), true, p1Controls);
 			break;
 		case "CASSEN":
-			p1 = new Cassen(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame.png"), null, true,
-					p1Controls);
+			p1 = new Cassen(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame.png"), 
+					GameUtils.self().loadImage("Images/Cassen-Victory-KO.png"), true,p1Controls);
 			break;
 		case "TOMBOC":
-			p1 = new Tomboc(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tomboc-ingame.png"), null, true,
-					p1Controls);
+			p1 = new Tomboc(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tomboc-ingame.png"), 
+					GameUtils.self().loadImage("Images/Tomboc-Victory-KO.png"), true, p1Controls);
 			break;
 		case "KURTH":
 			p1 = new Kurth(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Kurth-Ingame.png"), 
@@ -425,14 +425,16 @@ public class FighterMenu extends Screen
 					GameUtils.self().loadImage("Images/Nguyen-Victory-KO.png"), true, p1Controls);
 			break;
 		case "HALANDER":
-			p1 = new Halander(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/halander-ingame.png"), null, true,
-					p1Controls);
+			p1 = new Halander(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/halander-ingame.png"), 
+					GameUtils.self().loadImage("Images/Halander-Victory-KO.png"), true, p1Controls);
 			break;
 		case "WAY":
-			p1 = new Way(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Way-Ingame.png"), null, true, p1Controls);
+			p1 = new Way(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Way-Ingame.png"), 
+					GameUtils.self().loadImage("Images/Way-Victory-KO.png"), true, p1Controls);
 			break;
 		case "NEUHAUS":
-			p1 = new Neuhaus(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tammy.png"), null, true, p1Controls);
+			p1 = new Neuhaus(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tammy.png"), 
+					GameUtils.self().loadImage("Images/tammy2.png"), true, p1Controls);
 			break;
 		default:
 			break;
@@ -454,12 +456,12 @@ public class FighterMenu extends Screen
 					GameUtils.self().loadImage("Images/Jamal-Victory-KO.png"), false, p2Controls);
 			break;
 		case "CASSEN":
-			p2 = new Cassen(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame.png"), null,
-					false, p2Controls);
+			p2 = new Cassen(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame.png"), 
+					GameUtils.self().loadImage("Images/Cassen-Victory-KO.png"),false, p2Controls);
 			break;
 		case "TOMBOC":
-			p2 = new Tomboc(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tomboc-ingame.png"), null,
-					false, p2Controls);
+			p2 = new Tomboc(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tomboc-ingame.png"), 
+					GameUtils.self().loadImage("Images/Tomboc-Victory-KO.png"), false, p2Controls);
 			break;
 		case "KURTH":
 			p2 = new Kurth(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Kurth-Ingame1.png"), 
@@ -475,16 +477,16 @@ public class FighterMenu extends Screen
 					GameUtils.self().loadImage("Images/Nguyen-Victory-KO.png"), false, p2Controls);
 			break;
 		case "HALANDER":
-			p2 = new Halander(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/halander-ingame.png"), null,
-					false, p2Controls);
+			p2 = new Halander(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/halander-ingame.png"), 
+					GameUtils.self().loadImage("Images/Halander-Victory-KO.png"), false, p2Controls);
 			break;
 		case "WAY":
-			p2 = new Way(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Way-Ingame.png"), null, false,
-					p2Controls);
+			p2 = new Way(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Way-Ingame.png"), 
+					GameUtils.self().loadImage("Images/Way-Victory-KO.png"), false, p2Controls);
 			break;
 		case "NEUHAUS":
-			p2 = new Neuhaus(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tammy.png"), null, false,
-					p2Controls);
+			p2 = new Neuhaus(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tammy.png"), 
+					GameUtils.self().loadImage("Images/tammy2.png"), false,p2Controls);
 			break;
 		default:
 			break;

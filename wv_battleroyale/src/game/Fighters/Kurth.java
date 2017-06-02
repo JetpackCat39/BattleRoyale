@@ -1,11 +1,9 @@
 package game.Fighters;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import game.GameUtils;
 import game.Input.PlayerControls;
 
 public class Kurth extends Fighter
@@ -33,6 +31,13 @@ public class Kurth extends Fighter
 	
 	private static final int MAX_FRAMES = 7;
 	
+	private static final int VICTORY_WIDTH = 72;
+	private static final int VICTORY_HEIGHT = 113;
+	private static final int VICTORY_ANIMATION_COUNT = 5;
+	private static final int KO_WIDTH = 105;
+	private static final int KO_HEIGHT = 73;
+	private static final int KO_ANIMATION_COUNT = 5;
+	
 	// 180 = fps
 	
 	private static final int BLOCK_ANIMATION_COUNT = 2;
@@ -52,8 +57,6 @@ public class Kurth extends Fighter
 	private static final int WALK_UPDATE_COUNT = 180 / (2 * WALK_ANIMATION_COUNT); // walks 2 cycles in a second
 	private static final int IDLE_UPDATE_COUNT = 180 / (2 * IDLE_ANIMATION_COUNT); // makes it cycle through an "idle" animation 2 times a second
 	private static final int STAGE_ENTRANCE_UPDATE_COUNT = 20;
-	private static final int KO_ANIMATION_COUNT = 5;
-	private static final int VICTORY_ANIMATION_COUNT = 5;
 	
 	public Kurth(int newX, int newY, BufferedImage spriteSheet, BufferedImage worl, boolean isPlayer1, PlayerControls c)
 	{
@@ -221,46 +224,40 @@ public class Kurth extends Fighter
 	{
 		return "KURTH";
 	}
-
 	@Override
 	public int getKOWidth()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return KO_WIDTH;
 	}
 
 	@Override
 	public int getKOHeight()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return KO_HEIGHT;
 	}
 
 	@Override
 	public int getKOFrames()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return KO_ANIMATION_COUNT;
 	}
 
 	@Override
 	public int getVictoryWidth()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return VICTORY_WIDTH;
 	}
 
 	@Override
 	public int getVictoryHeight()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return VICTORY_HEIGHT;
 	}
 
 	@Override
 	public int getVictoryFrames()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return VICTORY_ANIMATION_COUNT;
 	}
+
 }

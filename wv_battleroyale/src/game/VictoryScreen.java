@@ -25,7 +25,7 @@ public class VictoryScreen extends Screen
 	IScreen itemToOverlay;
 	Fighter p1, p2;
 	boolean isP1, playSounds;
-	int frameWin, frameLoss, changeWin, changeLoss;
+	double p1Sound, p2Sound, deathSound;
 
 	enum STATE
 	{
@@ -48,13 +48,18 @@ public class VictoryScreen extends Screen
 		p1 = player1;
 		p2 = player2;
 		isP1 = b;
-		frameWin = 0;
-		frameLoss = 0;
-		changeWin = 0;
-		changeLoss = 0;
 		playSounds = true;
 		buttonList.add(new Button(BUTTON_CENTER / 2, height * 7/10, "NEW GAME"));
 		buttonList.add(new Button(BUTTON_CENTER * 3/2, height * 7/10, "MAIN MENU"));
+		deathSound = GameUtils.self().getSoundLength("Sounds/Roblox Death Sound Effect.wav");
+		if (isP1)
+		{
+			p1Sound = GameUtils.self().getSoundLength(p1.getResponseQuote());
+		}
+		else
+		{
+			p2Sound = GameUtils.self().getSoundLength(p2.getResponseQuote());
+		}
 		try
 		{
 			clip = AudioSystem.getClip();
@@ -76,37 +81,38 @@ public class VictoryScreen extends Screen
 		case playAnimation:
 			if (isP1)
 			{
-				System.out.println("isP1 " + changeLoss + " " + frameLoss + " " + p2.getLeft());
-
-				GameUtils.self().drawImg(p2.getWLAnimation(), 0, 
-						frameLoss * p2.getKOHeight(), p2.getLeft() + p2.getOffset(), height - p2.getY(), p2.getKOWidth(), p2.getKOHeight(), 
-						p2.getKOWidth() * 2, p2.getKOHeight() * 2, g);
-				changeLoss++;
-				if (changeLoss >= 360/p2.getKOFrames())
-				{
-					frameLoss++;
-					changeLoss = 0;
-				}
-				if (frameLoss >= p2.getKOFrames())
-				{
-					frameLoss = 0;
-				}
+				p1.drawStill(g);
+				p2.drawKO(g, deathSound);
 			}
 			else
 			{
-				System.out.println("!isP1");
+				p1.drawKO(g, deathSound);
+				p2.drawStill(g);
 			}
 			break;
 		case playQuote:
-			System.out.println("playQuote");
 			if (isP1)
 			{
+				p1.drawVictory(g, p1Sound);
+				p2.drawLyingDown(g);
 			}
 			else
 			{
+				p1.drawLyingDown(g);
+				p2.drawVictory(g, p2Sound);
 			}
 			break;
 		default:
+			if (isP1)
+			{
+				p1.drawStill(g);
+				p2.drawLyingDown(g);
+			}
+			else
+			{
+				p1.drawLyingDown(g);
+				p2.drawStill(g);
+			}
 			String display = isP1 ? "P1 (" + p1.getName() + ") WINS" : "P2 (" + p2.getName() + ") WINS";
 			Color color = isP1 ? Color.RED : Color.BLUE;
 			GameUtils.self().drawText(color, height * 1/3, display, 72, g);
