@@ -34,6 +34,10 @@ public class HalanderMenu extends Screen
 		GameUtils.self().drawText(width * 5 / 12, 275, "Mr. Halander is the only AP Chemistry teacher", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 315, "at Westview. His teaching methods make", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 355, "chemistry intuitive to students.", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 475, "Punch Power: 2", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 515, "Kick Power: 3", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 555, "Speed: 9", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 595, "Health: 640", 30, g);
 	}
 
 	public Button getBack()
