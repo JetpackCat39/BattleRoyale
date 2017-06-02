@@ -405,7 +405,7 @@ public class FighterMenu extends Screen
 					GameUtils.self().loadImage("Images/Jamal-Victory-KO.png"), true, p1Controls);
 			break;
 		case "CASSEN":
-			p1 = new Cassen(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame.png"), 
+			p1 = new Cassen(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame1.png"), 
 					GameUtils.self().loadImage("Images/Cassen-Victory-KO.png"), true, p1Controls);
 			break;
 		case "TOMBOC":
