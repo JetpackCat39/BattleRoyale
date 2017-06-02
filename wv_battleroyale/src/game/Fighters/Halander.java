@@ -25,7 +25,7 @@ public class Halander extends Fighter
 	private static final int BLOCKED_KICK = 2;
 	private static final int SPEED = 9;
 	
-	public static final int HEALTH = 600;
+	public static final int HEALTH = 640;
 	
 	private static final int MAX_FRAMES = 4;
 	
