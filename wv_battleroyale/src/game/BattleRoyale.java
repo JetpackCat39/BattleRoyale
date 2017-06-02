@@ -65,6 +65,8 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	private TombocMenu tomboc;
 	private WayMenu way;
 	private VictoryScreen victory;
+	
+	private Sound titleTheme;
 
 	private Graphics g;
 
@@ -107,7 +109,8 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		setScreen(getMenu(), false);
 		this.addMouseListener(this);
 		this.addKeyListener(this);
-		GameUtils.self().playSound("Sounds/cs-menu.wav");
+		titleTheme = new Sound("Sounds/cs-menu.wav");
+		titleTheme.play();
 	}
 
 	private synchronized void start()
@@ -201,6 +204,10 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 				game.move();
 			}
 		}
+		if(getScreen() == getMenu() && !titleTheme.playing()) {
+			titleTheme = new Sound("Sounds/cs-menu.wav");
+			titleTheme.play();
+		}
 	}
 
 	private MainGame createGame() throws IOException
@@ -213,6 +220,8 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 
 		tempGame = new MainGame(arena, p1, p2);
 
+		titleTheme.pause();
+		
 		return tempGame;
 	}
 

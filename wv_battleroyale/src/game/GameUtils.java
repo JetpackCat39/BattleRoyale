@@ -112,36 +112,4 @@ public class GameUtils
 		g2d.fill(r);
 		b.draw(g2d);
 	}
-
-	public void playSound(String path)
-	{
-		try
-		{
-			Clip clip = AudioSystem.getClip();
-			AudioInputStream ais = AudioSystem.getAudioInputStream(getClass().getResource(path));
-			clip.open(ais);
-			clip.start();
-		}
-		catch (UnsupportedAudioFileException | IOException | LineUnavailableException e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
-	public double getSoundLength(String path)
-	{
-		AudioInputStream ais = null;
-		try
-		{
-			ais = AudioSystem.getAudioInputStream(getClass().getResource(path));
-		}
-		catch (UnsupportedAudioFileException | IOException e)
-		{
-			e.printStackTrace();
-		}
-		AudioFormat format = ais.getFormat();
-		long frames = ais.getFrameLength();
-		double durationInSeconds = (frames+0.0) / format.getFrameRate();  
-		return durationInSeconds;
-	}
 }

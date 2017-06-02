@@ -1,6 +1,7 @@
 package game.Fighters;
 
 import game.GameUtils;
+import game.Sound;
 import game.Input.PlayerControls;
 
 import java.awt.image.BufferedImage;
@@ -199,14 +200,14 @@ public class Neuhaus extends Fighter
 	@Override
 	public void punch()
 	{
-		GameUtils.self().playSound(getGrunt());
+		new Sound(getGrunt()).play();
 		getOpponent().damage(getPunchDamage());
 	}
 
 	@Override
 	public void kick()
 	{
-		GameUtils.self().playSound(getGrunt());
+		new Sound(getGrunt()).play();
 		getOpponent().damage(getKickDamage());
 	}
 

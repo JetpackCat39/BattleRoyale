@@ -25,7 +25,8 @@ public class VictoryScreen extends Screen
 	IScreen itemToOverlay;
 	Fighter p1, p2;
 	boolean isP1, playSounds;
-	double p1Sound, p2Sound, deathSound;
+	Sound p1Sound, p2Sound, deathSound, victory;
+	int victoryPlays;
 
 	enum STATE
 	{
@@ -33,8 +34,6 @@ public class VictoryScreen extends Screen
 	}
 
 	private STATE state = STATE.playAnimation;
-
-	Clip clip;
 
 	private STATE getState()
 	{
@@ -44,6 +43,7 @@ public class VictoryScreen extends Screen
 	public VictoryScreen(IScreen s, BufferedImage background, Fighter player1, Fighter player2, boolean b)
 	{
 		super(background);
+		victoryPlays = 0;
 		itemToOverlay = s;
 		p1 = player1;
 		p2 = player2;
@@ -51,27 +51,21 @@ public class VictoryScreen extends Screen
 		playSounds = true;
 		buttonList.add(new Button(BUTTON_CENTER / 2, height * 7/10, "NEW GAME"));
 		buttonList.add(new Button(BUTTON_CENTER * 3/2, height * 7/10, "MAIN MENU"));
-		deathSound = GameUtils.self().getSoundLength("Sounds/Roblox Death Sound Effect.wav");
+		deathSound = new Sound("Sounds/Roblox Death Sound Effect.wav");
+		victory = new Sound(getVictoryMusic());
 		if (isP1)
 		{
-			p1Sound = GameUtils.self().getSoundLength(p1.getResponseQuote());
+			p1Sound = new Sound (p1.getResponseQuote());
 		}
 		else
 		{
-			p2Sound = GameUtils.self().getSoundLength(p2.getResponseQuote());
-		}
-		try
-		{
-			clip = AudioSystem.getClip();
-		}
-		catch (LineUnavailableException e)
-		{
-			e.printStackTrace();
+			p2Sound = new Sound (p2.getResponseQuote());
 		}
 	}
 	
 	public void draw(Graphics g)
 	{
+		victory.play();
 		if (getState() != STATE.end)
 		{
 			itemToOverlay.getGame().drawBase(g);
@@ -82,36 +76,37 @@ public class VictoryScreen extends Screen
 			if (isP1)
 			{
 				p1.drawStill(g);
-				p2.drawKO(g, deathSound);
+				if(p2.drawKO(g, deathSound)) state = STATE.playQuote;
 			}
 			else
 			{
-				p1.drawKO(g, deathSound);
 				p2.drawStill(g);
+				if(p1.drawKO(g, deathSound)) state = STATE.playQuote;
 			}
 			break;
 		case playQuote:
 			if (isP1)
 			{
-				p1.drawVictory(g, p1Sound);
 				p2.drawLyingDown(g);
+				if(p1.drawVictory(g, p1Sound))victoryPlays++;
 			}
 			else
 			{
 				p1.drawLyingDown(g);
-				p2.drawVictory(g, p2Sound);
+				if(p2.drawVictory(g, p2Sound))victoryPlays++;
 			}
+			if(victoryPlays>2) state = STATE.end;
 			break;
 		default:
 			if (isP1)
 			{
-				p1.drawStill(g);
+//				p1.drawStill(g);
 				p2.drawLyingDown(g);
 			}
 			else
 			{
 				p1.drawLyingDown(g);
-				p2.drawStill(g);
+//				p2.drawStill(g);
 			}
 			String display = isP1 ? "P1 (" + p1.getName() + ") WINS" : "P2 (" + p2.getName() + ") WINS";
 			Color color = isP1 ? Color.RED : Color.BLUE;
@@ -119,71 +114,71 @@ public class VictoryScreen extends Screen
 			super.draw(g);
 			break;
 		}
-		if (playSounds)
-		{
-			try
-			{
-				exit();
-			}
-			catch (LineUnavailableException e)
-			{
-				e.printStackTrace();
-			}
-		}
+//		if (playSounds)
+//		{
+//			try
+//			{
+//				exit();
+//			}
+//			catch (LineUnavailableException e)
+//			{
+//				e.printStackTrace();
+//			}
+//		}
 	}
 	
-	private void exit() throws LineUnavailableException
-	{
-		LineListener l = new LineListener()
-		{
-			@Override
-			public void update(LineEvent event)
-			{
-				if (event.getType() != LineEvent.Type.STOP)
-				{
-					return;
-				}
-				switch (getState())
-				{
-				case playAnimation:
-					play(isP1 ? p1.getResponseQuote() : p2.getResponseQuote());
-					state = STATE.playQuote;
-					break;
-				case playQuote:
-					play(getVictoryMusic());
-					state = STATE.playVictory;
-					break;
-				case playVictory:
-					state = STATE.end;
-					break;
-				default:
-					break;
-				}
-			}
-
-		};
-		clip.addLineListener(l);
-		play("Sounds/Roblox Death Sound Effect.wav");
-		playSounds = false;
-	}
+//	private void exit() throws LineUnavailableException
+//	{
+//		LineListener l = new LineListener()
+//		{
+//			@Override
+//			public void update(LineEvent event)
+//			{
+//				if (event.getType() != LineEvent.Type.STOP)
+//				{
+//					return;
+//				}
+//				switch (getState())
+//				{
+//				case playAnimation:
+//					play(isP1 ? p1.getResponseQuote() : p2.getResponseQuote());
+//					state = STATE.playQuote;
+//					break;
+//				case playQuote:
+//					play(getVictoryMusic());
+//					state = STATE.playVictory;
+//					break;
+//				case playVictory:
+//					state = STATE.end;
+//					break;
+//				default:
+//					break;
+//				}
+//			}
+//
+//		};
+//		clip.addLineListener(l);
+//		play("Sounds/Roblox Death Sound Effect.wav");
+//		playSounds = false;
+//	}
 	
-	private void play(String path)
-	{
-		try
-		{
-			if (clip.isOpen())
-			{
-				clip.close();
-			}
-			AudioInputStream ais = AudioSystem.getAudioInputStream(getClass().getResource(path));
-			clip.open(ais);
-			clip.start();
-		}
-		catch (UnsupportedAudioFileException | IOException | LineUnavailableException e)
-		{
-			e.printStackTrace();
-		}
-	}
+//	private void play(String path)
+//	{
+//		try
+//		{
+//			if (clip.isOpen())
+//			{
+//				clip.close();
+//			}
+//			AudioInputStream ais = AudioSystem.getAudioInputStream(getClass().getResource(path));
+//			clip.open(ais);
+//			clip.start();
+//		}
+//		catch (UnsupportedAudioFileException | IOException | LineUnavailableException e)
+//		{
+//			e.printStackTrace();
+//		}
+//	}
 	
 	public String getVictoryMusic()
 	{

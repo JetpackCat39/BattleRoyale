@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 
 import game.BattleRoyale;
 import game.GameUtils;
+import game.Sound;
 import game.Input.PlayerControls;
 import game.Menus.IScreen;
 
@@ -394,8 +395,8 @@ public abstract class Fighter
 	{
 		if (checkState(STATE.KICK) || checkState(STATE.PUNCH) || checkState(STATE.CROUCH)) return;
 		setState(STATE.PUNCH);
-		
-		GameUtils.self().playSound(getGrunt());
+
+		new Sound(getGrunt()).play();
 	}
 
 	public void kick()
@@ -403,7 +404,7 @@ public abstract class Fighter
 		if (checkState(STATE.KICK) || checkState(STATE.PUNCH)) return;
 		setState(STATE.KICK);
 
-		GameUtils.self().playSound(getGrunt());
+		new Sound(getGrunt()).play();
 	}
 
 	private void stopWalking()
@@ -478,7 +479,7 @@ public abstract class Fighter
 		}
 	}
 	
-	public void drawKO(Graphics g, double time)
+	public boolean drawKO(Graphics g, Sound sound)
 	{
 		if (isP1)
 		{
@@ -491,7 +492,7 @@ public abstract class Fighter
 					height - BASE + getKOHeight() * 2, getKOWidth(), getKOHeight(), getKOWidth() * 2, getKOHeight() * 2, g);
 		}
 		changeAnimation++;
-		if (changeAnimation >= 180 * time/getKOFrames())
+		if (changeAnimation >= 180 * sound.length()/getKOFrames())
 		{
 			frame++;
 			changeAnimation = 0;
@@ -499,10 +500,13 @@ public abstract class Fighter
 		if (frame >= getKOFrames())
 		{
 			frame = 0;
+			return true;
 		}
+		sound.play();
+		return false;
 	}
 	
-	public void drawVictory(Graphics g, double time)
+	public boolean drawVictory(Graphics g, Sound sound)
 	{
 		if (isP1)
 		{
@@ -515,7 +519,7 @@ public abstract class Fighter
 					height - getY(), getVictoryWidth(), getVictoryHeight(), getVictoryWidth() * 2, getVictoryHeight() * 2, g);
 		}
 		changeAnimation++;
-		if (changeAnimation >= 180 * time/getVictoryFrames())
+		if (changeAnimation >= 180 * sound.length()/getVictoryFrames())
 		{
 			frame++;
 			changeAnimation = 0;
@@ -523,7 +527,10 @@ public abstract class Fighter
 		if (frame >= getVictoryFrames())
 		{
 			frame = 0;
+			return true;
 		}
+		sound.play();
+		return false;
 	}
 
 	public void draw(Graphics g, int o)
@@ -551,7 +558,7 @@ public abstract class Fighter
 				{
 					if (!opponent.checkState(STATE.CROUCH))
 					{
-						GameUtils.self().playSound(getConnectedPunchSound());
+						new Sound(getConnectedPunchSound()).play();
 						if (opponent.checkState(STATE.BLOCK))
 						{
 							opponent.damage(getBlockedPunchDamage());
@@ -571,7 +578,7 @@ public abstract class Fighter
 				{
 					if (!opponent.checkState(STATE.JUMP))
 					{
-						GameUtils.self().playSound(getConnectedKickSound());
+						new Sound(getConnectedPunchSound()).play();
 						if (opponent.checkState(STATE.BLOCK))
 						{
 							opponent.damage(getBlockedKickDamage());
