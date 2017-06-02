@@ -20,8 +20,10 @@ public class StageMenu extends Screen
 		super(background);
 		int w = 280;
 		buttonList.add(new Button((width * 1/5) - w/2, height / 5, w, 80, "FRONT OF THE SCHOOL", 20));
+		buttonList.add(new Button((width * 1/2) - w/2, height / 5, w, 80, "QUAD", 20));
 		buttonList.add(new Button((width * 4/5) - w/2, height / 5, w, 80, "FRONT OF THE THEATER", 20));
 		buttonList.add(new Button((width * 1/5) - w/2, height * 2 / 5, w, 80, "AMPITHEATER", 20));
+		buttonList.add(new Button((width * 1/2) - w/2, height * 2 / 5, w, 80, "POOL", 20));
 		buttonList.add(new Button((width * 4/5) - w/2, height * 2 / 5, w, 80, "THEATER", 20));
 		// return button
 		buttonList.add(new Button(width * 1 / 8, height * 4 / 5, "BACK"));
@@ -55,35 +57,43 @@ public class StageMenu extends Screen
 	{
 		return buttonList.get(0);
 	}
-
-	public Button getTheaterFront()
-	{
+	
+	public Button getQuad() {
 		return buttonList.get(1);
 	}
 
-	public Button getAmpitheater()
+	public Button getTheaterFront()
 	{
 		return buttonList.get(2);
 	}
 
-	public Button getTheater()
+	public Button getAmpitheater()
 	{
 		return buttonList.get(3);
+	}
+	
+	public Button getPool() {
+		return buttonList.get(4);
+	}
+
+	public Button getTheater()
+	{
+		return buttonList.get(5);
 	}
 
 	public Button getBack()
 	{
-		return buttonList.get(4);
+		return buttonList.get(6);
 	}
 
 	public Button getCancel()
 	{
-		return buttonList.get(5);
+		return buttonList.get(7);
 	}
 	
 	public Button getPlay()
 	{
-		return buttonList.get(6);
+		return buttonList.get(8);
 	}
 
 	private void setSelected(Button newSelected)
@@ -116,6 +126,18 @@ public class StageMenu extends Screen
 		{
 			setSelected(getTheater());
 			screen.setBackground(GameUtils.self().loadImage("Images/theater.JPG"));
+			isSelected = true;
+		}
+		if (getQuad().contains(x, y))
+		{
+			setSelected(getQuad());
+			screen.setBackground(GameUtils.self().loadImage("Images/quad.jpg"));
+			isSelected = true;
+		}
+		if (getPool().contains(x, y))
+		{
+			setSelected(getPool());
+			screen.setBackground(GameUtils.self().loadImage("Images/pool.jpg"));
 			isSelected = true;
 		}
 
