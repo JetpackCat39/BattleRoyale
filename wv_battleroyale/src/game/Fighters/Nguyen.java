@@ -203,25 +203,45 @@ public class Nguyen extends Fighter
 	}
 
 	@Override
-	public void playKOAnimation(Graphics g)
+	public int getKOWidth()
 	{
-		int i = 0;
-		while (i < KO_ANIMATION_COUNT)
-		{
-			GameUtils.self().drawImg(getWLAnimation(), 57, i * 68, x, y, 82, 68, 82 * 2, 68 * 2, g);
-			i++;
-		}
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
-	public void playVictoryAnimation(Graphics g)
+	public int getKOHeight()
 	{
-		int i = 0;
-		while (i < VICTORY_ANIMATION_COUNT)
-		{
-			GameUtils.self().drawImg(getWLAnimation(), 0, i * 96, x, y, 57, 96, 57 * 2, 96 * 2, g);
-			i++;
-		}
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getKOFrames()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getVictoryWidth()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getVictoryHeight()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getVictoryFrames()
+	{
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

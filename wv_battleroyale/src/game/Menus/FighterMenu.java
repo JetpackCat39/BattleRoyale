@@ -33,8 +33,11 @@ public class FighterMenu extends Screen
 		super(background);
 		p1Controls = p1;
 		p2Controls = p2;
-		reset();
-		buttonList.add(new Button(width * 1 / 8, height / 5, "JAMAL"));
+		p1Index = 0;
+		p2Index = 0;
+		isSelected1 = false;
+		isSelected2 = false;
+		displayNeuhaus = false;		buttonList.add(new Button(width * 1 / 8, height / 5, "JAMAL"));
 		buttonList.add(new Button(width * 5 / 16, height / 5, "CASSEN"));
 		buttonList.add(new Button(width / 2, height / 5, "TOMBOC"));
 		buttonList.add(new Button(width * 11 / 16, height / 5, "KURTH"));
@@ -48,16 +51,6 @@ public class FighterMenu extends Screen
 		buttonList.add(new Button(width * 11 / 16, height * 4 / 5, "NEXT"));
 		neuhaus = new Button(BUTTON_CENTER, height * 4 / 5, "NEUHAUS");
 		konami = new Konami();
-	}
-
-	@Override
-	public void reset()
-	{
-		p1Index = 0;
-		p2Index = 0;
-		isSelected1 = false;
-		isSelected2 = false;
-		displayNeuhaus = false;
 	}
 
 	@Override

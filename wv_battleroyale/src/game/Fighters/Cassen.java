@@ -19,10 +19,10 @@ public class Cassen extends Fighter
 	// width of sprite while not attacking is 55ß
 	private static final int NON_ATTACK_WIDTH = 50 * 2;
 	
-	private static final int PUNCH = 4;
+	private static final int PUNCH = 6;
 	private static final int BLOCKED_PUNCH = 1;
-	private static final int KICK = 5;
-	private static final int BLOCKED_KICK = 2;
+	private static final int KICK = 6;
+	private static final int BLOCKED_KICK = 1;
 	private static final int SPEED = 7;
 	
 	public static final int HEALTH = 500;
@@ -201,16 +201,44 @@ public class Cassen extends Fighter
 	}
 
 	@Override
-	public void playKOAnimation(Graphics g)
+	public int getKOWidth()
 	{
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
 
 	@Override
-	public void playVictoryAnimation(Graphics g)
+	public int getKOHeight()
 	{
 		// TODO Auto-generated method stub
-		
+		return 0;
+	}
+
+	@Override
+	public int getKOFrames()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getVictoryWidth()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getVictoryHeight()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getVictoryFrames()
+	{
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

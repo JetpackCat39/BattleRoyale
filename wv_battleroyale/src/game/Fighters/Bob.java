@@ -203,24 +203,44 @@ public class Bob extends Fighter
 	}
 
 	@Override
-	public void playKOAnimation(Graphics g)
+	public int getKOWidth()
 	{
-		int i = 0;
-		while (i < KO_ANIMATION_COUNT)
-		{
-			GameUtils.self().drawImg(getWLAnimation(), 123, i * 55, x, y, 88, 55, 88 * 2, 55 * 2, g);
-			i++;
-		}
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
-	public void playVictoryAnimation(Graphics g)
+	public int getKOHeight()
 	{
-		int i = 0;
-		while (i < VICTORY_ANIMATION_COUNT)
-		{
-			GameUtils.self().drawImg(getWLAnimation(), 0, i * 100, x, y, 123, 100, 123 * 2, 100 * 2, g);
-			i++;
-		}
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getKOFrames()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getVictoryWidth()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getVictoryHeight()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getVictoryFrames()
+	{
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

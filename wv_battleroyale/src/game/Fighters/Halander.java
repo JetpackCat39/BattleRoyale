@@ -25,7 +25,7 @@ public class Halander extends Fighter
 	private static final int BLOCKED_KICK = 2;
 	private static final int SPEED = 9;
 	
-	public static final int HEALTH = 600;
+	public static final int HEALTH = 640;
 	
 	private static final int MAX_FRAMES = 4;
 	
@@ -202,17 +202,45 @@ public class Halander extends Fighter
 	}
 
 	@Override
-	public void playKOAnimation(Graphics g)
+	public int getKOWidth()
 	{
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
 
 	@Override
-	public void playVictoryAnimation(Graphics g)
+	public int getKOHeight()
 	{
 		// TODO Auto-generated method stub
-		
+		return 0;
+	}
+
+	@Override
+	public int getKOFrames()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getVictoryWidth()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getVictoryHeight()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getVictoryFrames()
+	{
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

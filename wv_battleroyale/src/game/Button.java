@@ -42,6 +42,12 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 		this(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, text, fontSize, DEFAULT_FONT_STYLE, 
 				ARC_WIDTH, DEFAULT_BACKGROUND, DEFAULT_TCOLOR);
 	}
+	
+	public Button(int x, int y, int w, int h, String text, int fontSize)
+	{
+		this(x, y, w, h, text, fontSize, DEFAULT_FONT_STYLE, 
+				ARC_WIDTH, DEFAULT_BACKGROUND, DEFAULT_TCOLOR);
+	}
 
 	// Button with customized font size and font style
 	public Button(int x, int y, String text, int size, int style)

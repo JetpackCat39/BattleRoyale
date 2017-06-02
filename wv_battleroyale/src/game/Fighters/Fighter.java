@@ -26,7 +26,7 @@ public abstract class Fighter
 	private static final Color P1COLOR = Color.red;
 	private static final Color P2COLOR = Color.blue;
 	private final int BASE;
-	protected int x, y, xSpeed, ySpeed, changeAnimation, health, frame;
+	protected int x, y, xSpeed, ySpeed, changeAnimation, health, frame, offset;
 	private boolean isP1, ko, crouchBlock;
 	private PlayerControls controls;
 	private Fighter opponent;
@@ -82,12 +82,14 @@ public abstract class Fighter
 		if (isPlayer1)
 		{
 			sprites = spriteSheet;
+			winorloss = worl;
 			frame = 0;
 			x = newX;
 		}
 		else
 		{
 			sprites = GameUtils.self().flipImage(spriteSheet);
+			winorloss = GameUtils.self().flipImage(worl);
 			frame = getMaxFrames();
 			x = newX - getDrawWidth();
 		}
@@ -102,7 +104,6 @@ public abstract class Fighter
 		crouchBlock = false;
 		controls = c;
 		changeAnimation = 0;
-		winorloss = worl;
 		createConnectedPunchList();
 		createConnectedKickList();
 		this.walkSpeed = walkSpeed;
@@ -135,7 +136,7 @@ public abstract class Fighter
 		return sprites;
 	}
 
-	protected BufferedImage getWLAnimation()
+	public BufferedImage getWLAnimation()
 	{
 		return winorloss;
 	}
@@ -160,9 +161,17 @@ public abstract class Fighter
 
 	public abstract int getMaxHealth();
 	
-	public abstract void playKOAnimation(Graphics g);
+	public abstract int getKOWidth();
 	
-	public abstract void playVictoryAnimation(Graphics g);
+	public abstract int getKOHeight();
+
+	public abstract int getKOFrames();
+	
+	public abstract int getVictoryWidth();
+	
+	public abstract int getVictoryHeight();
+	
+	public abstract int getVictoryFrames();
 
 	public abstract String getEntranceQuote();
 
@@ -299,6 +308,11 @@ public abstract class Fighter
 	public void setY(int val)
 	{
 		y = val;
+	}
+	
+	public int getOffset()
+	{
+		return offset;
 	}
 
 	public int getLeft()
@@ -466,15 +480,19 @@ public abstract class Fighter
 		return ko;
 	}
 
-	public void draw(Graphics g, int offset)
+	public void draw(Graphics g, int o)
 	{
+		offset = o;
 		FontMetrics fontMetrics = new JFrame().getFontMetrics(new Font("arial", Font.BOLD, 36));
 		GameUtils.self().drawHP(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2, HP_BAR_Y, HP_BAR_WIDTH, fontMetrics.getAscent(),
 				health, getMaxHealth(), isP1 ? P1COLOR : P2COLOR, g);
 		GameUtils.self().drawText(
-				isP1 ? HP_BAR_X_P1 - fontMetrics.stringWidth("P1") - 5 : HP_BAR_X_P2 + HP_BAR_WIDTH + 5,
+				isP1 ? HP_BAR_X_P1 - fontMetrics.stringWidth(" P1") - 5 : HP_BAR_X_P2 + HP_BAR_WIDTH + fontMetrics.stringWidth(" ") + 5,
 				HP_BAR_Y + fontMetrics.getAscent() - 5, Color.WHITE, isP1 ? "P1" : "P2", 36, g, Font.BOLD);
-		GameUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(), x + offset,
+		GameUtils.self().drawText(
+				(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2) + (HP_BAR_WIDTH/2) - (fontMetrics.stringWidth(getName())/2),
+				HP_BAR_Y - 10, Color.WHITE, getName(), 36, g, Font.BOLD);
+		GameUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(), x + o,
 				height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
 		changeAnimation++;
 		if (isP1)
