@@ -389,14 +389,6 @@ public abstract class Fighter
 		if (checkState(STATE.KICK) || checkState(STATE.PUNCH))
 			return;
 		stopWalking();
-//		if (checkState(STATE.CROUCH))
-//		{
-//			crouchBlock = true;
-//		}
-//		else
-//		{
-//			crouchBlock = false;
-//		}
 		setState(STATE.BLOCK);
 	}
 
@@ -574,8 +566,40 @@ public abstract class Fighter
 				(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2) + (HP_BAR_WIDTH / 2) - (fontMetrics.stringWidth(getName()) / 2),
 				HP_BAR_Y - 10, Color.WHITE, getName(), 36, g, Font.BOLD);
 		changeAnimation++;
+		update();
+		
+		if (checkState(STATE.JUMP) && y == BASE)
+		{
+			setState(STATE.IDLE);
+		}
+		
+		if(isP1)  
+		{
+			GameUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(), x + o,
+				height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
+		}
+		else
+		{
+			GameUtils.self().drawImg(getSpriteSheet(), (getMaxFrames() - frame) * getSrcWidth(), State.getIndex() * getSrcHeight(), x + o,
+				height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
+		}
 
+		drawPunch();
+		drawKick();
 
+		if (!checkState(STATE.PUNCH))
+		{
+			punchConnected = false;
+		}
+		if (!checkState(STATE.KICK))
+		{
+			kickConnected = false;
+		}
+
+	}
+
+	private void update()
+	{
 		if (changeAnimation >= getAnimationSpeed(State))
 		{
 			frame++;
@@ -611,19 +635,10 @@ public abstract class Fighter
 				frame = getNumImages(STATE.CROUCH) - 1;
 			}
 		}
-		
-		if (checkState(STATE.JUMP) && y == BASE)
-		{
-			setState(STATE.IDLE);
-		}
-		
-		if(isP1)  
-			GameUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(), x + o,
-				height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
-		else
-			GameUtils.self().drawImg(getSpriteSheet(), (getMaxFrames() - frame) * getSrcWidth(), State.getIndex() * getSrcHeight(), x + o,
-				height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
+	}
 
+	private void drawPunch()
+	{
 		if (checkState(STATE.PUNCH) && !punchConnected)
 		{
 			if (frame == getPunchHit())
@@ -647,6 +662,10 @@ public abstract class Fighter
 				}
 			}
 		}
+	}
+
+	private void drawKick()
+	{
 		if (checkState(STATE.KICK) && !kickConnected)
 		{
 			if (frame == getKickHit())
@@ -670,16 +689,6 @@ public abstract class Fighter
 				}
 			}
 		}
-
-		if (!checkState(STATE.PUNCH))
-		{
-			punchConnected = false;
-		}
-		if (!checkState(STATE.KICK))
-		{
-			kickConnected = false;
-		}
-
 	}
 
 	public void setOpponent(Fighter fighter)
