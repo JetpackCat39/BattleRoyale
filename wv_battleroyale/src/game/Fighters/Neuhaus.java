@@ -12,11 +12,11 @@ public class Neuhaus extends Fighter
 	private static final int SRC_WIDTH = 95;
 	private static final int SRC_HEIGHT = 146;
 	
-	private static final int DRAW_WIDTH = (int) (95 * ((double)3/2));
-	private static final int DRAW_HEIGHT = (int) (146 * ((double)3/2));
+	private static final int DRAW_WIDTH = 95 * 2;
+	private static final int DRAW_HEIGHT = 146 * 2;
 	
 	// width of sprite while not attacking is 55ß
-	private static final int NON_ATTACK_WIDTH = (int) (95 * ((double)3/2));
+	private static final int NON_ATTACK_WIDTH = 95 * 2;
 	
 	private static final int PUNCH = 1000;
 	private static final int BLOCKED_PUNCH = 2000;

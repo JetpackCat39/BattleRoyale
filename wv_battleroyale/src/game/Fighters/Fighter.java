@@ -142,9 +142,9 @@ public abstract class Fighter
 	}
 
 	protected abstract int getPunchHit();
-	
+
 	protected abstract int getKickHit();
-	
+
 	public abstract int getWidth();
 
 	public abstract int getSrcWidth();
@@ -164,17 +164,17 @@ public abstract class Fighter
 	public abstract int getBlockedKickDamage();
 
 	public abstract int getMaxHealth();
-	
+
 	public abstract int getKOWidth();
-	
+
 	public abstract int getKOHeight();
 
 	public abstract int getKOFrames();
-	
+
 	public abstract int getVictoryWidth();
-	
+
 	public abstract int getVictoryHeight();
-	
+
 	public abstract int getVictoryFrames();
 
 	public abstract String getEntranceQuote();
@@ -313,7 +313,7 @@ public abstract class Fighter
 	{
 		y = val;
 	}
-	
+
 	public int getOffset()
 	{
 		return offset;
@@ -362,7 +362,8 @@ public abstract class Fighter
 
 	private void crouch()
 	{
-		if(checkState(STATE.KICK) || checkState(STATE.PUNCH)) return;
+		if (checkState(STATE.KICK) || checkState(STATE.PUNCH))
+			return;
 		setState(STATE.CROUCH);
 	}
 
@@ -378,7 +379,8 @@ public abstract class Fighter
 
 	public void block()
 	{
-		if(checkState(STATE.KICK) || checkState(STATE.PUNCH)) return;
+		if (checkState(STATE.KICK) || checkState(STATE.PUNCH))
+			return;
 		if (checkState(STATE.CROUCH))
 		{
 			crouchBlock = true;
@@ -392,15 +394,21 @@ public abstract class Fighter
 
 	public void punch()
 	{
-		if (checkState(STATE.KICK) || checkState(STATE.PUNCH) || checkState(STATE.CROUCH)) return;
+		if (checkState(STATE.KICK) || checkState(STATE.PUNCH) || checkState(STATE.CROUCH))
+		{
+			return;
+		}
 		setState(STATE.PUNCH);
-		
+
 		GameUtils.self().playSound(getGrunt());
 	}
 
 	public void kick()
 	{
-		if (checkState(STATE.KICK) || checkState(STATE.PUNCH)) return;
+		if (checkState(STATE.KICK) || checkState(STATE.PUNCH))
+		{
+			return;
+		}
 		setState(STATE.KICK);
 
 		GameUtils.self().playSound(getGrunt());
@@ -448,50 +456,55 @@ public abstract class Fighter
 	{
 		return ko;
 	}
-	
+
 	public void drawStill(Graphics g)
 	{
 		if (isP1)
-		{	
+		{
 			GameUtils.self().drawImg(getSpriteSheet(), 0, STATE.ENTER.getIndex() * getSrcHeight(), x + getOffset(),
 					height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
 		}
 		else
 		{
-			GameUtils.self().drawImg(getSpriteSheet(), getMaxFrames() * getSrcWidth(), STATE.ENTER.getIndex() * getSrcHeight(), x + getOffset(),
-					height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
+			GameUtils.self().drawImg(getSpriteSheet(), getMaxFrames() * getSrcWidth(),
+					STATE.ENTER.getIndex() * getSrcHeight(), x + getOffset(), height - y, getSrcWidth(), getSrcHeight(),
+					getDrawWidth(), getDrawHeight(), g);
 		}
-		
+
 	}
-	
+
 	public void drawLyingDown(Graphics g)
 	{
 		if (isP1)
-		{	
-			GameUtils.self().drawImg(getWLAnimation(), getVictoryWidth(), (getKOFrames() - 1) * getKOHeight(), getLeft() + getOffset(), 
-				height - BASE + getKOHeight() * 2, getKOWidth(), getKOHeight(), getKOWidth() * 2, getKOHeight() * 2, g);
+		{
+			GameUtils.self().drawImg(getWLAnimation(), getVictoryWidth(), (getKOFrames() - 1) * getKOHeight(),
+					getLeft() + getOffset(), height - BASE + getKOHeight() * 2, getKOWidth(), getKOHeight(),
+					getKOWidth() * 2, getKOHeight() * 2, g);
 		}
 		else
 		{
-			GameUtils.self().drawImg(getWLAnimation(), 0, (getKOFrames() - 1) * getKOHeight(), getLeft() + getOffset(), 
-					height - BASE + getKOHeight() * 2, getKOWidth(), getKOHeight(), getKOWidth() * 2, getKOHeight() * 2, g);
+			GameUtils.self().drawImg(getWLAnimation(), 0, (getKOFrames() - 1) * getKOHeight(), getLeft() + getOffset(),
+					height - BASE + getKOHeight() * 2, getKOWidth(), getKOHeight(), getKOWidth() * 2, getKOHeight() * 2,
+					g);
 		}
 	}
-	
+
 	public void drawKO(Graphics g, double time)
 	{
 		if (isP1)
 		{
-			GameUtils.self().drawImg(getWLAnimation(), getVictoryWidth(), frame * getKOHeight(), getLeft() + getOffset(), 
-					height - BASE + getKOHeight() * 2, getKOWidth(), getKOHeight(), getKOWidth() * 2, getKOHeight() * 2, g);
+			GameUtils.self().drawImg(getWLAnimation(), getVictoryWidth(), frame * getKOHeight(),
+					getLeft() + getOffset(), height - BASE + getKOHeight() * 2, getKOWidth(), getKOHeight(),
+					getKOWidth() * 2, getKOHeight() * 2, g);
 		}
 		else
 		{
-			GameUtils.self().drawImg(getWLAnimation(), 0, frame * getKOHeight(), getLeft() + getOffset(), 
-					height - BASE + getKOHeight() * 2, getKOWidth(), getKOHeight(), getKOWidth() * 2, getKOHeight() * 2, g);
+			GameUtils.self().drawImg(getWLAnimation(), 0, frame * getKOHeight(), getLeft() + getOffset(),
+					height - BASE + getKOHeight() * 2, getKOWidth(), getKOHeight(), getKOWidth() * 2, getKOHeight() * 2,
+					g);
 		}
 		changeAnimation++;
-		if (changeAnimation >= 180 * time/getKOFrames())
+		if (changeAnimation >= 180 * time / getKOFrames())
 		{
 			frame++;
 			changeAnimation = 0;
@@ -501,21 +514,23 @@ public abstract class Fighter
 			frame = 0;
 		}
 	}
-	
+
 	public void drawVictory(Graphics g, double time)
 	{
 		if (isP1)
 		{
-			GameUtils.self().drawImg(getWLAnimation(), 0, frame * getVictoryHeight(), getLeft() + getOffset(), 
-					height - getY(), getVictoryWidth(), getVictoryHeight(), getVictoryWidth() * 2, getVictoryHeight() * 2, g);
+			GameUtils.self().drawImg(getWLAnimation(), 0, frame * getVictoryHeight(), getLeft() + getOffset(),
+					height - getY(), getVictoryWidth(), getVictoryHeight(), getVictoryWidth() * 2,
+					getVictoryHeight() * 2, g);
 		}
 		else
 		{
-			GameUtils.self().drawImg(getWLAnimation(), getKOWidth(), frame * getVictoryHeight(), getLeft() + getOffset(), 
-					height - getY(), getVictoryWidth(), getVictoryHeight(), getVictoryWidth() * 2, getVictoryHeight() * 2, g);
+			GameUtils.self().drawImg(getWLAnimation(), getKOWidth(), frame * getVictoryHeight(),
+					getLeft() + getOffset(), height - getY(), getVictoryWidth(), getVictoryHeight(),
+					getVictoryWidth() * 2, getVictoryHeight() * 2, g);
 		}
 		changeAnimation++;
-		if (changeAnimation >= 180 * time/getVictoryFrames())
+		if (changeAnimation >= 180 * time / getVictoryFrames())
 		{
 			frame++;
 			changeAnimation = 0;
@@ -533,21 +548,31 @@ public abstract class Fighter
 		GameUtils.self().drawHP(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2, HP_BAR_Y, HP_BAR_WIDTH, fontMetrics.getAscent(),
 				health, getMaxHealth(), isP1 ? P1COLOR : P2COLOR, g);
 		GameUtils.self().drawText(
-				isP1 ? HP_BAR_X_P1 - fontMetrics.stringWidth(" P1") - 5 : HP_BAR_X_P2 + HP_BAR_WIDTH + fontMetrics.stringWidth(" ") + 5,
+				isP1 ? HP_BAR_X_P1 - fontMetrics.stringWidth(" P1") - 5
+						: HP_BAR_X_P2 + HP_BAR_WIDTH + fontMetrics.stringWidth(" ") + 5,
 				HP_BAR_Y + fontMetrics.getAscent() - 5, Color.WHITE, isP1 ? "P1" : "P2", 36, g, Font.BOLD);
 		GameUtils.self().drawText(
-				(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2) + (HP_BAR_WIDTH/2) - (fontMetrics.stringWidth(getName())/2),
+				(isP1 ? HP_BAR_X_P1 : HP_BAR_X_P2) + (HP_BAR_WIDTH / 2) - (fontMetrics.stringWidth(getName()) / 2),
 				HP_BAR_Y - 10, Color.WHITE, getName(), 36, g, Font.BOLD);
 		GameUtils.self().drawImg(getSpriteSheet(), frame * getSrcWidth(), State.getIndex() * getSrcHeight(), x + o,
 				height - y, getSrcWidth(), getSrcHeight(), getDrawWidth(), getDrawHeight(), g);
 		changeAnimation++;
-		
-		if (isP1) drawP1();
-		else drawP2();
-		
-		if(checkState(STATE.PUNCH) && !punchConnected) {
-			if(frame == getPunchHit()) {
-				if (isP1 ? (opponent.getLeft() < getLeft() + getDrawWidth()) : (opponent.getRight() > getRight() - getDrawWidth()))
+
+		if (isP1)
+		{
+			drawP1();
+		}
+		else
+		{
+			drawP2();
+		}
+
+		if (checkState(STATE.PUNCH) && !punchConnected)
+		{
+			if (frame == getPunchHit())
+			{
+				if (isP1 ? (opponent.getLeft() < getLeft() + getDrawWidth())
+						: (opponent.getRight() > getRight() - getDrawWidth()))
 				{
 					if (!opponent.checkState(STATE.CROUCH))
 					{
@@ -565,9 +590,12 @@ public abstract class Fighter
 				}
 			}
 		}
-		if(checkState(STATE.KICK) && !kickConnected) {
-			if(frame == getKickHit()) {
-				if (isP1 ? (opponent.getLeft() < getLeft() + getDrawWidth()) : (opponent.getRight() > getRight() - getDrawWidth()))
+		if (checkState(STATE.KICK) && !kickConnected)
+		{
+			if (frame == getKickHit())
+			{
+				if (isP1 ? (opponent.getLeft() < getLeft() + getDrawWidth())
+						: (opponent.getRight() > getRight() - getDrawWidth()))
 				{
 					if (!opponent.checkState(STATE.JUMP))
 					{
@@ -585,9 +613,15 @@ public abstract class Fighter
 				}
 			}
 		}
-		
-		if(!checkState(STATE.PUNCH)) punchConnected = false;
-		if(!checkState(STATE.KICK)) kickConnected = false;
+
+		if (!checkState(STATE.PUNCH))
+		{
+			punchConnected = false;
+		}
+		if (!checkState(STATE.KICK))
+		{
+			kickConnected = false;
+		}
 
 	}
 
@@ -744,12 +778,14 @@ public abstract class Fighter
 			setState(STATE.IDLE);
 		}
 	}
-	
-	public Fighter getOpponent() {
+
+	public Fighter getOpponent()
+	{
 		return opponent;
 	}
-	
-	public boolean p1() {
+
+	public boolean p1()
+	{
 		return isP1;
 	}
 }
