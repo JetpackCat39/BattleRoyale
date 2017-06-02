@@ -38,6 +38,7 @@ public class KurthMenu extends Screen
 		GameUtils.self().drawText(width * 5 / 12, 515, "Kick Power: 7", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 555, "Speed: 4", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 595, "Health: 600", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 675, "This character is very slow but hits just as hard", 30, g);
 	}
 	
 

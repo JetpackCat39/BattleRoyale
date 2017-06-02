@@ -38,6 +38,7 @@ public class TombocMenu extends Screen
 		GameUtils.self().drawText(width * 5 / 12, 515, "Kick Power: 3", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 555, "Speed: 8", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 595, "Health: 300", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 675, "This character's virtue comes in her rapid speed", 30, g);
 	}
 	
 

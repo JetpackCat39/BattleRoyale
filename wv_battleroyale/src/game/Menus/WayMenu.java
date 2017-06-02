@@ -38,6 +38,8 @@ public class WayMenu extends Screen
 		GameUtils.self().drawText(width * 5 / 12, 515, "Kick Power: 2", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 555, "Speed: 6", 30, g);
 		GameUtils.self().drawText(width * 5 / 12, 595, "Health: 600", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 675, "This character is an average fighter that can", 30, g);
+		GameUtils.self().drawText(width * 5 / 12, 715, "find his way around blocked attacks", 30, g);
 
 	}
 
