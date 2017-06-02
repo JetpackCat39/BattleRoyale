@@ -47,9 +47,7 @@ public interface IScreen
 	public Screen getPrevScreen();
 
 	public void setScreen(Screen screen, boolean doReset);
-	
-	public void setPlayer(Fighter p);
-	
+		
 	public void setBackground(BufferedImage b);
 	
 	

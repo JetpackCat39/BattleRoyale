@@ -125,13 +125,7 @@ public abstract class Fighter
 		connectedKick.add("Sounds/kick3.wav");
 		connectedKick.add("Sounds/kick4.wav");
 	}
-
-	protected abstract int getNumImages(STATE s);
-
-	protected abstract int getAnimationSpeed(STATE s);
-
-	protected abstract int getMaxFrames();
-
+	
 	protected BufferedImage getSpriteSheet()
 	{
 		return sprites;
@@ -141,6 +135,12 @@ public abstract class Fighter
 	{
 		return winorloss;
 	}
+
+	protected abstract int getNumImages(STATE s);
+
+	protected abstract int getAnimationSpeed(STATE s);
+
+	protected abstract int getMaxFrames();
 
 	protected abstract int getPunchHit();
 
@@ -350,7 +350,9 @@ public abstract class Fighter
 	private void walkRight()
 	{
 		if (checkState(STATE.KICK) || checkState(STATE.PUNCH))
+		{
 			return;
+		}
 		setState(STATE.WALK);
 		setXSpeed(walkSpeed);
 		walkingRight = true;
@@ -359,7 +361,9 @@ public abstract class Fighter
 	private void walkLeft()
 	{
 		if (checkState(STATE.KICK) || checkState(STATE.PUNCH))
+		{
 			return;
+		}
 		setState(STATE.WALK);
 		setXSpeed(-walkSpeed);
 		walkingLeft = true;
@@ -368,7 +372,9 @@ public abstract class Fighter
 	private void crouch()
 	{
 		if (checkState(STATE.KICK) || checkState(STATE.PUNCH))
+		{
 			return;
+		}
 		stopWalking();
 		setState(STATE.CROUCH);
 	}
@@ -381,13 +387,14 @@ public abstract class Fighter
 			return;
 		}
 		setYSpeed(MAX_Y_SPEED);
-		frame = 0;
 	}
 
 	public void block()
 	{
 		if (checkState(STATE.KICK) || checkState(STATE.PUNCH))
+		{
 			return;
+		}
 		stopWalking();
 		setState(STATE.BLOCK);
 	}
@@ -567,11 +574,6 @@ public abstract class Fighter
 				HP_BAR_Y - 10, Color.WHITE, getName(), 36, g, Font.BOLD);
 		changeAnimation++;
 		update();
-		
-		if (checkState(STATE.JUMP) && y == BASE)
-		{
-			setState(STATE.IDLE);
-		}
 		
 		if(isP1)  
 		{

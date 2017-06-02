@@ -43,10 +43,10 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 				ARC_WIDTH, DEFAULT_BACKGROUND, DEFAULT_TCOLOR);
 	}
 	
+	// Button with custom width and height
 	public Button(int x, int y, int w, int h, String text, int fontSize)
 	{
-		this(x, y, w, h, text, fontSize, DEFAULT_FONT_STYLE, 
-				ARC_WIDTH, DEFAULT_BACKGROUND, DEFAULT_TCOLOR);
+		this(x, y, w, h, text, fontSize, DEFAULT_FONT_STYLE, ARC_WIDTH, DEFAULT_BACKGROUND, DEFAULT_TCOLOR);
 	}
 
 	// Button with customized font size and font style
@@ -140,10 +140,6 @@ public class Button extends RoundRectangle2D.Double implements IDrawable
 		
 		GameUtils.self().drawText((int) (this.getX() + this.getWidth() / 2 - metric.stringWidth(buttonText) / 2),
 				(int) (this.getY() + this.getHeight() / 2 + metric.getAscent() / 2), textColor, buttonText, fontSize, g, fontStyle);
-		
-//		GUIUtils.self().drawText((int) this.getX() + ((int) this.getWidth() - width) / 2,
-//				(int) this.getY() + (int) this.getHeight() - ((int) this.getHeight() - fontSize) / 2, textColor,
-//				buttonText, fontSize, g, fontStyle);
 	}
 
 	public void fill(Graphics g, Color c)
