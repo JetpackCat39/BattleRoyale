@@ -406,7 +406,7 @@ public class FighterMenu extends Screen
 			break;
 		case "CASSEN":
 			p1 = new Cassen(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame.png"), 
-					GameUtils.self().loadImage("Images/Cassen-Victory-KO.png"), true,p1Controls);
+					GameUtils.self().loadImage("Images/Cassen-Victory-KO.png"), true, p1Controls);
 			break;
 		case "TOMBOC":
 			p1 = new Tomboc(PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tomboc-ingame.png"), 
@@ -456,8 +456,8 @@ public class FighterMenu extends Screen
 					GameUtils.self().loadImage("Images/Jamal-Victory-KO.png"), false, p2Controls);
 			break;
 		case "CASSEN":
-			p2 = new Cassen(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame.png"), 
-					GameUtils.self().loadImage("Images/Cassen-Victory-KO.png"),false, p2Controls);
+			p2 = new Cassen(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/Cassen-Ingame1.png"), 
+					GameUtils.self().loadImage("Images/Cassen-Victory-KO.png"), false, p2Controls);
 			break;
 		case "TOMBOC":
 			p2 = new Tomboc(width - PLAYERX, PLAYERY, GameUtils.self().loadImage("Images/tomboc-ingame.png"), 
