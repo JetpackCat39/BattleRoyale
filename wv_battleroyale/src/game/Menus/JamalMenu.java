@@ -2,6 +2,7 @@ package game.Menus;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import game.Button;
 import game.GameUtils;
@@ -10,11 +11,16 @@ public class JamalMenu extends Screen
 {
 	private BufferedImage character;
 
-	public JamalMenu(BufferedImage background, BufferedImage characterImage)
+	public JamalMenu(BufferedImage background)
 	{
 
 		super(background);
-		character = characterImage;
+		try {
+			character = GameUtils.self().loadImage("Images/Jamal-Head.JPG");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		buttonList.add(new Button(width * 1 / 13, height * 3 / 19, "BACK"));
 
 	}

@@ -34,14 +34,6 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	private static BufferedImage arena;
 	public static BufferedImage controlsBG;
 	public static BufferedImage pauseBG;
-	public static BufferedImage bobHead;
-	public static BufferedImage cassenHead;
-	public static BufferedImage halanderHead;
-	public static BufferedImage jamalHead;
-	public static BufferedImage kurthHead;
-	public static BufferedImage nguyenHead;
-	public static BufferedImage tombocHead;
-	public static BufferedImage wayHead;
 	public static BufferedImage profileBG;
 	public static BufferedImage creditsBG;
 	public static BufferedImage victoryBG;
@@ -82,14 +74,6 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 		{
 			controlsBG = GameUtils.self().loadImage("Images/controlsBG.jpg");
 			menuBG = GameUtils.self().loadImage("Images/menuBG.png");
-			bobHead = GameUtils.self().loadImage("Images/Bob-Head.JPG");
-			cassenHead = GameUtils.self().loadImage("Images/Cassen-Head.JPG");
-			halanderHead = GameUtils.self().loadImage("Images/Halander-Head.JPG");
-			jamalHead = GameUtils.self().loadImage("Images/Jamal-Head.JPG");
-			kurthHead = GameUtils.self().loadImage("Images/Kurth-Head.JPG");
-			nguyenHead = GameUtils.self().loadImage("Images/Nguyen-Head.JPG");
-			tombocHead = GameUtils.self().loadImage("Images/Tomboc-Head.JPG");
-			wayHead = GameUtils.self().loadImage("Images/Way-Head.JPG");
 		}
 		catch (IOException e)
 		{
@@ -446,7 +430,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (bob == null)
 		{
-			bob = new BobMenu(profileBG, bobHead);
+			bob = new BobMenu(profileBG);
 		}
 		return bob;
 	}
@@ -456,7 +440,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (cassen == null)
 		{
-			cassen = new CassenMenu(profileBG, cassenHead);
+			cassen = new CassenMenu(profileBG);
 		}
 		return cassen;
 	}
@@ -466,7 +450,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (halander == null)
 		{
-			halander = new HalanderMenu(profileBG, halanderHead);
+			halander = new HalanderMenu(profileBG);
 		}
 		return halander;
 	}
@@ -476,7 +460,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (jamal == null)
 		{
-			jamal = new JamalMenu(profileBG, jamalHead);
+			jamal = new JamalMenu(profileBG);
 		}
 		return jamal;
 	}
@@ -486,7 +470,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (kurth == null)
 		{
-			kurth = new KurthMenu(profileBG, kurthHead);
+			kurth = new KurthMenu(profileBG);
 		}
 		return kurth;
 	}
@@ -496,7 +480,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (nguyen == null)
 		{
-			nguyen = new NguyenMenu(profileBG, nguyenHead);
+			nguyen = new NguyenMenu(profileBG);
 		}
 		return nguyen;
 	}
@@ -506,7 +490,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (tomboc == null)
 		{
-			tomboc = new TombocMenu(profileBG, tombocHead);
+			tomboc = new TombocMenu(profileBG);
 		}
 		return tomboc;
 	}
@@ -516,7 +500,7 @@ public class BattleRoyale extends Canvas implements MouseListener, KeyListener, 
 	{
 		if (way == null)
 		{
-			way = new WayMenu(profileBG, wayHead);
+			way = new WayMenu(profileBG);
 		}
 		return way;
 	}
