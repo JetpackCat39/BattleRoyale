@@ -98,7 +98,7 @@ public class VictoryScreen extends Screen
 					victoryPlays++;
 				}
 			}
-			if(victoryPlays > 0) 
+			if(victoryPlays > 2) 
 			{
 				state = STATE.end;
 			}
